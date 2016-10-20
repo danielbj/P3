@@ -5,7 +5,7 @@ class Citizen
   public string CPR {
     get;
     set {
-          if(value.Length == 10); 
+          if(value.Length == 10) 
             CPR = value;
           else
           {
@@ -28,7 +28,7 @@ class Citizen
   public int Classification {
     get; 
     set {
-          if(0 <= value && value <= 5); 
+          if(0 <= value && value <= 5)
             Classification = value;
           else
           {
@@ -48,7 +48,7 @@ class Citizen
     Address = address;
     Classification = classification;
 
-    Tasks = new list<Task>;
+    Tasks = new list<Task>();
     if(tasks != null) {
       for (int i = 0; i < tasks.Length; i++)
       {
