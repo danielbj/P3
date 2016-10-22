@@ -1,0 +1,14 @@
+c:\users\nicol\onedrive\dokumenter\visual studio 2015\Projects\HiFiPrototype1\HiFiPrototype1\bin\Debug\HiFiPrototype1.exe.config
+c:\users\nicol\onedrive\dokumenter\visual studio 2015\Projects\HiFiPrototype1\HiFiPrototype1\bin\Debug\HiFiPrototype1.exe
+c:\users\nicol\onedrive\dokumenter\visual studio 2015\Projects\HiFiPrototype1\HiFiPrototype1\bin\Debug\HiFiPrototype1.pdb
+c:\users\nicol\onedrive\dokumenter\visual studio 2015\Projects\HiFiPrototype1\HiFiPrototype1\obj\Debug\HiFiPrototype1.csprojResolveAssemblyReference.cache
+c:\users\nicol\onedrive\dokumenter\visual studio 2015\Projects\HiFiPrototype1\HiFiPrototype1\obj\Debug\MainWindow.g.cs
+c:\users\nicol\onedrive\dokumenter\visual studio 2015\Projects\HiFiPrototype1\HiFiPrototype1\obj\Debug\App.g.cs
+c:\users\nicol\onedrive\dokumenter\visual studio 2015\Projects\HiFiPrototype1\HiFiPrototype1\obj\Debug\HiFiPrototype1_MarkupCompile.cache
+c:\users\nicol\onedrive\dokumenter\visual studio 2015\Projects\HiFiPrototype1\HiFiPrototype1\obj\Debug\HiFiPrototype1_MarkupCompile.lref
+c:\users\nicol\onedrive\dokumenter\visual studio 2015\Projects\HiFiPrototype1\HiFiPrototype1\obj\Debug\MainWindow.baml
+c:\users\nicol\onedrive\dokumenter\visual studio 2015\Projects\HiFiPrototype1\HiFiPrototype1\obj\Debug\HiFiPrototype1.g.resources
+c:\users\nicol\onedrive\dokumenter\visual studio 2015\Projects\HiFiPrototype1\HiFiPrototype1\obj\Debug\HiFiPrototype1.Properties.Resources.resources
+c:\users\nicol\onedrive\dokumenter\visual studio 2015\Projects\HiFiPrototype1\HiFiPrototype1\obj\Debug\HiFiPrototype1.csproj.GenerateResource.Cache
+c:\users\nicol\onedrive\dokumenter\visual studio 2015\Projects\HiFiPrototype1\HiFiPrototype1\obj\Debug\HiFiPrototype1.exe
+c:\users\nicol\onedrive\dokumenter\visual studio 2015\Projects\HiFiPrototype1\HiFiPrototype1\obj\Debug\HiFiPrototype1.pdb
