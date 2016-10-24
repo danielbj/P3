@@ -6,7 +6,7 @@ namespace Planner
     {
         public string Name { get; }                                                 // Name or title
         public string Description { get; set; }                                     // Might be a method to collect data from container element
-
+       
         public virtual bool Approved { get; private set; }                          // Shows state of aproval
         public virtual bool IsSaved { get; private set; } = false;                  // Shows if saved or not
 
@@ -58,7 +58,7 @@ namespace Planner
         {
             // Update PDA
 
-            // Set save state to false
+            // Set save state to true
         }
 
         /// <summary>
