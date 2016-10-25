@@ -1,0 +1,8 @@
+c:\users\kamil\onedrive\dokumenter\visual studio 2015\Projects\MapTool\MapTool\bin\Debug\MapTool.exe.config
+c:\users\kamil\onedrive\dokumenter\visual studio 2015\Projects\MapTool\MapTool\bin\Debug\MapTool.exe
+c:\users\kamil\onedrive\dokumenter\visual studio 2015\Projects\MapTool\MapTool\bin\Debug\MapTool.pdb
+c:\users\kamil\onedrive\dokumenter\visual studio 2015\Projects\MapTool\MapTool\bin\Debug\Newtonsoft.Json.dll
+c:\users\kamil\onedrive\dokumenter\visual studio 2015\Projects\MapTool\MapTool\bin\Debug\Newtonsoft.Json.xml
+c:\users\kamil\onedrive\dokumenter\visual studio 2015\Projects\MapTool\MapTool\obj\Debug\MapTool.csprojResolveAssemblyReference.cache
+c:\users\kamil\onedrive\dokumenter\visual studio 2015\Projects\MapTool\MapTool\obj\Debug\MapTool.exe
+c:\users\kamil\onedrive\dokumenter\visual studio 2015\Projects\MapTool\MapTool\obj\Debug\MapTool.pdb
