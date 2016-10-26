@@ -34,17 +34,13 @@ namespace HiFiPrototype1
 
             if (rectangle != null && e.LeftButton == MouseButtonState.Pressed)
             {
-
                 r = rectangle;
                 DragDrop.DoDragDrop(rectangle, rectangle, DragDropEffects.Move);
-
             }
 
         }
 
-
-
-        private void Grid_Drop(object sender, DragEventArgs e)
+        private void gridGrupper_Drop(object sender, DragEventArgs e)
         {
             Grid g = sender as Grid;
 
@@ -54,23 +50,21 @@ namespace HiFiPrototype1
             }
         }
 
-        private void gridGrupper_DragEnter(object sender, DragEventArgs e)
+        private void button_Click(object sender, RoutedEventArgs e)
         {
-       
+            Button b = sender as Button;
 
+            b.Content = "Hej";
         }
-     
-        private void gridGrupper_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+
+        private void gridGrupper_DragOver(object sender, DragEventArgs e)
         {
-            Rectangle r = new Rectangle();
-            r.Height = 20;
-            r.Width = 40;
+            //Grid g = sender as Grid;
 
-            Grid.SetColumn(r, 0);
-            Grid.SetRow(r, 0);
-
-            gridGrupper.Children.Add(r);
-
+            //if (r != null && g != null)
+            //{
+            //    r.Margin = new Thickness(e.GetPosition(g).X, e.GetPosition(g).Y, 0, 0);
+            //}
         }
     }
 }

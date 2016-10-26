@@ -9,10 +9,12 @@
     <Grid>
         <TabControl x:Name="tabControl" Margin="0,38,0,0" TabStripPlacement="Left">
             <TabItem Header="Postkasse" Margin="-2,-2,0,-2">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <Button x:Name="button" Content="knap" HorizontalAlignment="Left" Margin="163,0,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Grupper" Margin="-2,-2,0,-2">
-                <Grid x:Name="gridGrupper" Background="#FFE5E5E5" AllowDrop="True" Drop="Grid_Drop" DragEnter="gridGrupper_DragEnter" MouseLeftButtonDown="gridGrupper_MouseLeftButtonDown">
+                <Grid x:Name="gridGrupper" Background="#FFE5E5E5" AllowDrop="True" Drop="gridGrupper_Drop" Margin="4,0,-4,0" DragOver="gridGrupper_DragOver">
                     <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="18" Margin="55,51,0,0" Stroke="Black" VerticalAlignment="Top" Width="39" RadiusY="3.447" RadiusX="3.447" AllowDrop="False" MouseMove="Rectangle_MouseMove"/>
                 </Grid>
             </TabItem>
