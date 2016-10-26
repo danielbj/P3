@@ -31,10 +31,27 @@ namespace Planning.Modules
         }
         #endregion
 
-
-        public Route(params string[] waypoints)
+        private static string GetWaypoints(string[] waypoints)
         {
-            this.Waypoints = waypoints;            
+            string name = string.Empty;
+
+            for (int i = 0; i < waypoints.Length; i++)
+            {
+                if (i + 1 == waypoints.Length)
+                    name += waypoints[i];
+                else if (i + 2 == waypoints.Length)
+                    name += waypoints[i] + " & ";
+                else
+                    name += waypoints[i] + ", ";
+            }
+
+            return name;
+        } 
+
+        public Route(int startTime, params string[] waypoints) 
+            : base(startTime, GetWaypoints(waypoints))
+        {
+           Waypoints = waypoints;            
         }
 
         public void CalculateRoute()
@@ -47,8 +64,6 @@ namespace Planning.Modules
             Console.WriteLine("deserialize ok");
         }      
         
-          
-
         private WebResponse MakeRequest(string requestURL)
         {
             //creating a web request with the url
@@ -92,6 +107,16 @@ namespace Planning.Modules
             }            
 
             return _startURL + substring + _endURL + _bingKey;
+        }
+
+        public override int CalculateSize()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string Description()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -6,7 +6,31 @@ using System.Threading.Tasks;
 
 namespace Planning.Modules
 {
-    class Task
+    class Task : Module
     {
+        public Citizen _citizen;
+        public string assignment;
+
+        public Task(int startTime, string name) : base(startTime, name)
+        {
+        }
+
+        public override string Duration
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public override int CalculateSize()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string Description()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
