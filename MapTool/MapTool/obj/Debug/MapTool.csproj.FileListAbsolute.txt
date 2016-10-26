@@ -9,3 +9,6 @@ c:\users\kamil\onedrive\dokumenter\visual studio 2015\Projects\MapTool\MapTool\o
 C:\P3\P3\MapTool\MapTool\bin\Debug\MapTool.exe.config
 C:\P3\P3\MapTool\MapTool\obj\Debug\MapTool.exe
 C:\P3\P3\MapTool\MapTool\obj\Debug\MapTool.pdb
+D:\Git\P3\MapTool\MapTool\bin\Debug\MapTool.exe.config
+D:\Git\P3\MapTool\MapTool\obj\Debug\MapTool.exe
+D:\Git\P3\MapTool\MapTool\obj\Debug\MapTool.pdb
