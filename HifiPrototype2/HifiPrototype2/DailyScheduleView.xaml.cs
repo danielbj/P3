@@ -28,6 +28,17 @@ namespace HifiPrototype2
             InitializeComponent();
             Presenter = new DailySchedulePresenter();
             Presenter.SetView(this);
+            
+            
+            ScheduleGrid.Height = 6600;
+            for (int i = 0; i < 660; i++) {
+                RowDefinition rowdef = new RowDefinition();
+                rowdef.Height = new GridLength(1, GridUnitType.Star);
+
+                ScheduleGrid.RowDefinitions.Add(rowdef);
+            }
+            
+            
         }
 
         public DailyScheduleView(Employee employee) : this()
@@ -38,12 +49,16 @@ namespace HifiPrototype2
 
         public void AddAssignment(AssignmentView assignment)
         {
-            DailySchedulePanel.Children.Add(assignment);
+            //DailySchedulePanel.Children.Add(assignment);
         }
+
+        //public void AddEmployee(Employee employee) {
+        //    DailySchedulePanel.Children.Add(employee);
+        //}
 
         public void Clear()
         {
-            DailySchedulePanel.Children.Clear();
+            //DailySchedulePanel.Children.Clear();
         }
 
 

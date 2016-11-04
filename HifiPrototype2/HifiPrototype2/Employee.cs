@@ -12,7 +12,7 @@ namespace HifiPrototype2
         public List<Assignment> Assignments { get; private set; } = new List<Assignment>();
 
         public delegate void AssignmentsPropertyChangedEventHandler();
-        public AssignmentsPropertyChangedEventHandler AssignmentsChanged;
+        public event AssignmentsPropertyChangedEventHandler AssignmentsChanged;
 
         public void AddRandomAssignments(int number)
         {
@@ -47,10 +47,7 @@ namespace HifiPrototype2
 
         public void RaiseAssignmentsChanged()
         {
-            if (AssignmentsChanged != null)
-            {
-                AssignmentsChanged();
-            }
+                AssignmentsChanged?.Invoke();           
         }
 
     }

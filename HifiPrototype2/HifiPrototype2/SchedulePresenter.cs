@@ -22,7 +22,7 @@ namespace HifiPrototype2
 
         public void AddDailySchedule(Employee employee)
         {
-            var dailyScheduleView = new DailyScheduleView(employee);
+            DailyScheduleView dailyScheduleView = new DailyScheduleView(employee);
             _view.AddDailySchedule(dailyScheduleView);
         }
 

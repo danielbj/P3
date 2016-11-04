@@ -8,15 +8,33 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel x:Name="HeaderPanel" Grid.Row="0" Orientation="Horizontal">
-            
+        <StackPanel x:Name="GroupOverviewStackPanel" Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
+            <ComboBox Margin="3" Text="Grupper" FlowDirection="RightToLeft">Grupper</ComboBox>
+            <ComboBox Margin="3" Text="Kalenderplan" FlowDirection="RightToLeft">Kalenderplan</ComboBox>
+            <Button Padding="2" Margin="2">&lt;</Button>
+            <TextBlock Padding="2" Margin="2">Dato</TextBlock>
+            <Button Padding="2" Margin="2">&gt;</Button>
+            <Button Padding="2" Margin="2">Kalender</Button>
         </StackPanel>
-        <StackPanel x:Name="SchedulePanel" Grid.Row="1" Orientation="Horizontal">
-            
-            
+        <StackPanel x:Name="ButtonStackPanel" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
+            <Button Padding="2" Margin="2">Opret</Button>
+            <Button Padding="2" Margin="2">Åben</Button>
         </StackPanel>
+        <ScrollViewer Grid.Row="2" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel x:Name="NamePanel" Grid.Row="0" HorizontalAlignment="Left"></StackPanel>
+                <StackPanel x:Name ="SchedulePanel" Grid.Row="1" HorizontalAlignment="Left">
+                    <local:DailyScheduleView></local:DailyScheduleView>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>

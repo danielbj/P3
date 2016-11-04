@@ -33,12 +33,14 @@ namespace HifiPrototype2
         public void AddDailySchedule(DailyScheduleView dailySchedule)
         {
             dailySchedule.Width = DailyScheduleWidth;
-            SchedulePanel.Children.Add(dailySchedule);
+            //SchedulePanel.Children.Add(dailySchedule);
+            //DailySchedule.DailySchedulePanel.Children.Add(dailySchedule);
 
             var label = new Label();
             label.Content = dailySchedule.Presenter.Name;
             label.Width = DailyScheduleWidth;
-            HeaderPanel.Children.Add(label);
+            //DailySchedule.HeaderPanel.Children.Add(label);
+            //HeaderPanel.Children.Add(label);
         }
 
         public void AddDailySchedule(Employee employee)
@@ -51,17 +53,18 @@ namespace HifiPrototype2
                 var btn = new Button();
                 btn.Content = Assignment.Description;
                 btn.Height = Assignment.Duration;
-                dailySchedule.DailySchedulePanel.Children.Add(btn);
+                //dailySchedule.DailySchedulePanel.Children.Add(btn);
             }
-
-            SchedulePanel.Children.Add(dailySchedule);
+            //DailySchedule.DailySchedulePanel.Children.Add(dailySchedule);
+            //SchedulePanel.Children.Add(dailySchedule);
 
             var label = new Label();
             label.Content = employee.Name;
             label.Width = DailyScheduleWidth;
-            HeaderPanel.Children.Add(label);
+            //DailySchedule.HeaderPanel.Children.Add(label);
+            //HeaderPanel.Children.Add(label);
 
-            
+
         }
 
 

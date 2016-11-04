@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:HifiPrototype2"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel x:Name="DailySchedulePanel" Orientation="Vertical" >
-            
-    </StackPanel>
+    <Grid x:Name="ScheduleGrid">
+    </Grid>
 </UserControl>

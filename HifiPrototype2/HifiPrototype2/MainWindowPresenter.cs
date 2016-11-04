@@ -31,7 +31,7 @@ namespace HifiPrototype2
             var employee = Employee.CreateRandomEmployee("Navn");
             Employees.Add(employee);
             var dailySchedule = new DailyScheduleView(employee);
-            _view.Schedule.AddDailySchedule(dailySchedule);
+           // _view.Schedule.AddDailySchedule(dailySchedule);
         }
 
         public void AddRandomAssignment()
