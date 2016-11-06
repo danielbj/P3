@@ -67,6 +67,16 @@ namespace HifiPrototype2
 
         }
 
+        private void TestButton_Click(object sender, RoutedEventArgs e)
+        {
+            Employee testemployee = Employee.CreateRandomEmployee("TEST");
 
+            TextBox empBox = new TextBox();
+            empBox.Text = testemployee.Name;
+
+            testemployee.AddRandomAssignments(3);
+
+            NamePanel.Children.Add(empBox);
+        }
     }
 }

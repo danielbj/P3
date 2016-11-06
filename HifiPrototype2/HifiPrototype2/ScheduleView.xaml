@@ -21,8 +21,9 @@
             <Button Padding="2" Margin="2">Kalender</Button>
         </StackPanel>
         <StackPanel x:Name="ButtonStackPanel" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
-            <Button Padding="2" Margin="2">Opret</Button>
-            <Button Padding="2" Margin="2">Åben</Button>
+            <Button Name="CreateButton" Content="Opret" Padding="2" Margin="2"></Button>
+            <Button Name="OpenButton" Content="Åben" Padding="2" Margin="2"></Button>
+            <Button Name="TestButton" Content="MakeEmployeeTest" Padding="2" Margin="2" Click="TestButton_Click"></Button>
         </StackPanel>
         <ScrollViewer Grid.Row="2" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
             <Grid>
@@ -30,8 +31,9 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <StackPanel x:Name="NamePanel" Grid.Row="0" HorizontalAlignment="Left"></StackPanel>
-                <StackPanel x:Name ="SchedulePanel" Grid.Row="1" HorizontalAlignment="Left">
+                
+                <StackPanel x:Name="NamePanel" Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left"></StackPanel>
+                <StackPanel x:Name ="SchedulePanel" Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left">
                     <local:DailyScheduleView></local:DailyScheduleView>
                 </StackPanel>
             </Grid>
