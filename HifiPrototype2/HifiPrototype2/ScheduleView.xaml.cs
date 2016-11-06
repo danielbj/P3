@@ -21,6 +21,8 @@ namespace HifiPrototype2
     public partial class ScheduleView : UserControl
     {
         private SchedulePresenter _presenter;
+        public int DailyScheduleWidth { get; set; } = 100;
+
         public ScheduleView()
         {
             InitializeComponent();
@@ -28,70 +30,60 @@ namespace HifiPrototype2
             _presenter.SetView(this);
         }
 
-        public int DailyScheduleWidth { get; set; } = 100;
+        
 
-        public void AddDailySchedule(DailyScheduleView dailySchedule)
-        {
-            dailySchedule.Width = DailyScheduleWidth;
-            //SchedulePanel.Children.Add(dailySchedule);
-            //DailySchedule.DailySchedulePanel.Children.Add(dailySchedule);
+        //public void AddDailySchedule(DailyScheduleView dailySchedule)
+        //{
+        //    dailySchedule.Width = DailyScheduleWidth;
+        //    //SchedulePanel.Children.Add(dailySchedule);
+        //    //DailySchedule.DailySchedulePanel.Children.Add(dailySchedule);
 
-            var label = new Label();
-            label.Content = dailySchedule.Presenter.Name;
-            label.Width = DailyScheduleWidth;
-            //DailySchedule.HeaderPanel.Children.Add(label);
-            //HeaderPanel.Children.Add(label);
-        }
+        //    var label = new Label();
+        //    label.Content = dailySchedule.Presenter.Name;
+        //    label.Width = DailyScheduleWidth;
+        //    //DailySchedule.HeaderPanel.Children.Add(label);
+        //    //HeaderPanel.Children.Add(label);
+        //}
 
-        public void AddDailySchedule(Employee employee)
-        {
-            var dailySchedule = new DailyScheduleView();
-            dailySchedule.Width = DailyScheduleWidth;
+        //public void AddDailySchedule(Employee employee)
+        //{
+        //    var dailySchedule = new DailyScheduleView();
+        //    dailySchedule.Width = DailyScheduleWidth;
 
-            foreach (var Assignment in employee.Assignments)
-            {
-                var btn = new Button();
-                btn.Content = Assignment.Description;
-                btn.Height = Assignment.Duration;
-                //dailySchedule.DailySchedulePanel.Children.Add(btn);
-            }
-            //DailySchedule.DailySchedulePanel.Children.Add(dailySchedule);
-            //SchedulePanel.Children.Add(dailySchedule);
+        //    foreach (var Assignment in employee.Assignments)
+        //    {
+        //        var btn = new Button();
+        //        btn.Content = Assignment.Description;
+        //        btn.Height = Assignment.Duration;
+        //        //dailySchedule.DailySchedulePanel.Children.Add(btn);
+        //    }
+        //    //DailySchedule.DailySchedulePanel.Children.Add(dailySchedule);
+        //    //SchedulePanel.Children.Add(dailySchedule);
 
-            var label = new Label();
-            label.Content = employee.Name;
-            label.Width = DailyScheduleWidth;
-            //DailySchedule.HeaderPanel.Children.Add(label);
-            //HeaderPanel.Children.Add(label);
+        //    var label = new Label();
+        //    label.Content = employee.Name;
+        //    label.Width = DailyScheduleWidth;
+        //    //DailySchedule.HeaderPanel.Children.Add(label);
+        //    //HeaderPanel.Children.Add(label);
 
 
-        }
+        //}
 
         private void TestButton_Click(object sender, RoutedEventArgs e)
         {
             Employee testemployee = Employee.CreateRandomEmployee("TEST");
+            List<Assignment> listOfAssignments = testemployee.Assignments;
 
-            TextBlock empTextBlock = new TextBlock();
-            empTextBlock.Text = testemployee.Name;
-            empTextBlock.Width = 200;
+            DailyScheduleView DailyView = new DailyScheduleView(testemployee);
+            SchedulePanel.Children.Add(DailyView);
+            DailyView.Width = DailyScheduleWidth;
 
-            Grid ScheduleGrid = new Grid();
+            Label empLabel = new Label();
+            empLabel.Content = testemployee.Name;
+            empLabel.Width = DailyScheduleWidth;
 
-            ScheduleGrid.Width = 200;
-            ScheduleGrid.Height = 660;
-            for (int i = 0; i < 660; i++)
-            {
-                RowDefinition rowdef = new RowDefinition();
-                rowdef.Height = new GridLength(1, GridUnitType.Star);
-
-                ScheduleGrid.RowDefinitions.Add(rowdef);
-            }
-
-            testemployee.AddRandomAssignments(3);
+            NamePanel.Children.Add(empLabel);
             
-
-            NamePanel.Children.Add(empTextBlock);
-            SchedulePanel.Children.Add(ScheduleGrid);
         }
     }
 }

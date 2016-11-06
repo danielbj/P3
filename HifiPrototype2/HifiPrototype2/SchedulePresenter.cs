@@ -20,11 +20,11 @@ namespace HifiPrototype2
             _view = view;
         }
 
-        public void AddDailySchedule(Employee employee)
-        {
-            DailyScheduleView dailyScheduleView = new DailyScheduleView(employee);
-            _view.AddDailySchedule(dailyScheduleView);
-        }
+        //public void AddDailySchedule(Employee employee)
+        //{
+        //    DailyScheduleView dailyScheduleView = new DailyScheduleView(employee);
+        //    _view.AddDailySchedule(dailyScheduleView);
+        //}
 
     }
 }

@@ -26,14 +26,17 @@
             <Button Name="TestButton" Content="MakeEmployeeTest" Padding="2" Margin="2" Click="TestButton_Click"></Button>
         </StackPanel>
         <ScrollViewer Grid.Row="2" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
-            <Grid>
+            <Grid ScrollViewer.CanContentScroll="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                
-                <StackPanel x:Name="NamePanel" Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left"></StackPanel>
-                <StackPanel x:Name ="SchedulePanel" Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="True"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                        <StackPanel x:Name="NamePanel" Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.IsSharedSizeScope="True" HorizontalAlignment="Left"></StackPanel>
+                        <StackPanel x:Name ="SchedulePanel" Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.IsSharedSizeScope="True" HorizontalAlignment="Left">
                     <!--<local:DailyScheduleView></local:DailyScheduleView>-->
                 </StackPanel>
             </Grid>

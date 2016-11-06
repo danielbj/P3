@@ -29,9 +29,8 @@ namespace HifiPrototype2
             Presenter = new DailySchedulePresenter();
             Presenter.SetView(this);
             
-            
+
             ScheduleGrid.Height = 660;
-            ScheduleGrid.ShowGridLines = true;
             for (int i = 0; i < 660; i++) {
                 RowDefinition rowdef = new RowDefinition();
                 rowdef.Height = new GridLength(1, GridUnitType.Star);
@@ -50,7 +49,8 @@ namespace HifiPrototype2
 
         public void AddAssignment(AssignmentView assignment)
         {
-            //DailySchedulePanel.Children.Add(assignment);
+            ScheduleGrid.Children.Add(assignment);
+            Grid.SetRowSpan(assignment, (int)assignment.Height); //Problem with grid and placement.
         }
 
         //public void AddEmployee(Employee employee) {
