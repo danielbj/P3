@@ -31,6 +31,7 @@ namespace HifiPrototype2
             
             
             ScheduleGrid.Height = 660;
+            ScheduleGrid.ShowGridLines = true;
             for (int i = 0; i < 660; i++) {
                 RowDefinition rowdef = new RowDefinition();
                 rowdef.Height = new GridLength(1, GridUnitType.Star);
@@ -47,10 +48,10 @@ namespace HifiPrototype2
             Presenter.LoadAssignments();
         }
 
-        //public void AddAssignment(AssignmentView assignment)
-        //{
-        //    DailySchedulePanel.Children.Add(assignment);
-        //}
+        public void AddAssignment(AssignmentView assignment)
+        {
+            //DailySchedulePanel.Children.Add(assignment);
+        }
 
         //public void AddEmployee(Employee employee) {
         //    DailySchedulePanel.Children.Add(employee);

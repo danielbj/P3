@@ -34,7 +34,7 @@
                 
                 <StackPanel x:Name="NamePanel" Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left"></StackPanel>
                 <StackPanel x:Name ="SchedulePanel" Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left">
-                    <local:DailyScheduleView></local:DailyScheduleView>
+                    <!--<local:DailyScheduleView></local:DailyScheduleView>-->
                 </StackPanel>
             </Grid>
         </ScrollViewer>

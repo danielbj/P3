@@ -71,12 +71,27 @@ namespace HifiPrototype2
         {
             Employee testemployee = Employee.CreateRandomEmployee("TEST");
 
-            TextBox empBox = new TextBox();
-            empBox.Text = testemployee.Name;
+            TextBlock empTextBlock = new TextBlock();
+            empTextBlock.Text = testemployee.Name;
+            empTextBlock.Width = 200;
+
+            Grid ScheduleGrid = new Grid();
+
+            ScheduleGrid.Width = 200;
+            ScheduleGrid.Height = 660;
+            for (int i = 0; i < 660; i++)
+            {
+                RowDefinition rowdef = new RowDefinition();
+                rowdef.Height = new GridLength(1, GridUnitType.Star);
+
+                ScheduleGrid.RowDefinitions.Add(rowdef);
+            }
 
             testemployee.AddRandomAssignments(3);
+            
 
-            NamePanel.Children.Add(empBox);
+            NamePanel.Children.Add(empTextBlock);
+            SchedulePanel.Children.Add(ScheduleGrid);
         }
     }
 }

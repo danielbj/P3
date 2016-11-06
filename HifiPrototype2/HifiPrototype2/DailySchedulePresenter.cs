@@ -33,7 +33,7 @@ namespace HifiPrototype2
             _view.Clear();
             foreach (Assignment assignment in _employee.Assignments)
             {
-                var assignmentView = new AssignmentView(assignment);
+                AssignmentView assignmentView = new AssignmentView(assignment);
                 _view.AddAssignment(assignmentView);
             }
         }
