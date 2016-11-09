@@ -18,7 +18,7 @@ namespace HifiPrototype2
         {
             for (int i = 0; i < number; i++)
             {
-                AddAssignment(Assignment.CreateRandomAssignment());
+                AddAssignment(Assignment.CreateRandomAssignment(i+1));
             }
         }
 

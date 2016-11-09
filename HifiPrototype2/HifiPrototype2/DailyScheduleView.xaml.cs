@@ -49,8 +49,13 @@ namespace HifiPrototype2
 
         public void AddAssignment(AssignmentView assignment)
         {
+            
+
             ScheduleGrid.Children.Add(assignment);
+            Grid.SetRow(assignment, assignment.Presenter.Assignment.StarTime);
             Grid.SetRowSpan(assignment, (int)assignment.Height); //Problem with grid and placement.
+
+
         }
 
         //public void AddEmployee(Employee employee) {
@@ -59,23 +64,31 @@ namespace HifiPrototype2
 
         public void Clear()
         {
-            //DailySchedulePanel.Children.Clear();
+            ScheduleGrid.Children.Clear();
         }
 
 
-
-        private void DailySchedulePanel_Drop(object sender, DragEventArgs e)
-        {
+        //TODO WHAT IS THIS???
+        private void DailySchedulePanel_Drop(object sender, DragEventArgs e) {
             StackPanel sp = sender as StackPanel;
             Button btn = e.Data.GetData(typeof(Button)) as Button;
 
-            if (sp != null)
-            {
+            if (sp != null) {
                 StackPanel parent = btn.Parent as StackPanel;
                 parent.Children.Remove(btn);
                 sp.Children.Add(btn);
             }
         }
 
+        //private void ScheduleGrid_Drop(object sender, DragEventArgs e) {
+        //    Grid grid = sender as Grid;
+        //    Button btn = e.Data.etData(typeof(Button)) as Button;
+
+        //    if (grid != null) {
+        //        Grid parent = btn.Parent as Grid;
+        //        parent.Children.Remove(btn);
+        //        grid.Children.Add(btn);
+        //    }
+        //}
     }
 }

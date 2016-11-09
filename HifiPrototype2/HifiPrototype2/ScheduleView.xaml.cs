@@ -85,5 +85,14 @@ namespace HifiPrototype2
             NamePanel.Children.Add(empLabel);
             
         }
+
+        private void AddJobButton_Click(object sender, RoutedEventArgs e) {
+            PopupWindow popup = new PopupWindow();
+            PopupChooseEmployee pce = new PopupChooseEmployee();
+
+            popup.PopupGrid.Children.Add(pce);
+
+            popup.Show();
+        }
     }
 }

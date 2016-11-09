@@ -35,6 +35,7 @@ namespace HifiPrototype2
         private void AssignmentView_MouseDown(object sender, MouseButtonEventArgs e)
         {
             AssignmentView dragSource = sender as AssignmentView;
+            
 
             if (dragSource!= null)
             {

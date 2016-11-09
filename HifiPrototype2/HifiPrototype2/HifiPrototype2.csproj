@@ -56,6 +56,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DailySchedulePresenter.cs" />
+    <Compile Include="PopupChooseEmployee.xaml.cs">
+      <DependentUpon>PopupChooseEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopupWindow.xaml.cs">
+      <DependentUpon>PopupWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SchedulePresenter.cs" />
     <Compile Include="ViewModel.cs" />
     <Page Include="AssignmentView.xaml">
@@ -63,6 +69,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DailyScheduleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PopupChooseEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PopupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

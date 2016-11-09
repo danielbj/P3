@@ -28,9 +28,24 @@ namespace HifiPrototype2
             _employee.AssignmentsChanged += LoadAssignments;
         }
 
+        private void SortAssignments() {
+            _employee.Assignments.OrderByDescending((a) => a.StarTime).ThenByDescending((a) => a.Duration);
+
+            for (int i = 1; i < _employee.Assignments.Count; i++) {
+                    if (_employee.Assignments[i].StarTime < _employee.Assignments[i - 1].EndTime) {
+                        _employee.Assignments[i].StarTime = _employee.Assignments[i - 1].EndTime + 1;
+                        _employee.Assignments[i].EndTime = (_employee.Assignments[i].StarTime + _employee.Assignments[i].Duration);
+                    }
+
+            }
+            
+        }
+
         public void LoadAssignments()
         {
             _view.Clear();
+            SortAssignments();
+
             foreach (Assignment assignment in _employee.Assignments)
             {
                 AssignmentView assignmentView = new AssignmentView(assignment);
