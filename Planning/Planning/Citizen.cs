@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Planning
 {
-    class Citizen
+    public class Citizen
     {
 
         private string _cpr;
@@ -44,9 +44,9 @@ namespace Planning
                         throw new ArgumentException("Classification is invalid");
                 }
         }
-        public List<Task> Tasks;
+        public List<JobModule> Tasks;
 
-        public Citizen (string cpr, int age, string firstname, string lastname, string address, int classification, params Task[] tasks)
+        public Citizen (string cpr, int age, string firstname, string lastname, string address, int classification, params JobModule[] tasks)
         {
             CPR = cpr;
             _age = age;
@@ -55,7 +55,7 @@ namespace Planning
             Address = address;
             Classification = classification;
 
-            Tasks = new List<Task>();
+            Tasks = new List<JobModule>();
             if(tasks.Length != 0)
             {
                 for (int i = 0; i < tasks.Length; i++)

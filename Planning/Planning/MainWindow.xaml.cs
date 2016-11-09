@@ -17,7 +17,7 @@ namespace Planning
 
         public void start()
         {
-            Route route = new Route(10, "aalborg", "odense", "århus", "vodskov");
+            RouteModule route = new RouteModule(10, "aalborg", "odense", "århus", "vodskov");
             route.CalculateRoute();
 
 

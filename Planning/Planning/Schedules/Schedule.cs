@@ -4,60 +4,91 @@ using System.Collections.Generic;
 
 namespace Planning.Schedules
 {
-    public abstract class Schedule
+
+    public class Schedule
     {
-        public abstract string Name { get; }                                        // Name or title
-        public abstract string Description { get; set; }                            // Might be a method to collect data from container element
-       
-        public virtual bool Approved { get; private set; }                          // Shows state of aproval
-        public virtual bool IsSaved { get; private set; } = false;                  // Shows if saved or not
+        public Group EmployeeGroup { get; set; }
+        public DateTime StartTime { get; set; }    //start på arbejdsdag
+        public DateTime EndTime { get; set; }
+        public string Name { get; set; }
 
-        private List<Module> _module = new List<Module>();                          // List of all elements in schedule
+        public List<JobModule> JobModules { get; set; } = new List<JobModule>();
 
-        /// <summary>
-        /// Initialises a schedule
-        /// </summary>
-        public Schedule()
-        { }
 
-        /// <summary>
-        /// Moves element
-        /// </summary>
-        public abstract void MoveModule();
 
-        /// <summary>
-        /// Adds an element to list
-        /// </summary>
-        /// <param name="module">Used to add to schedule</param>
-        public virtual void AddModule(Module module)
-        { }
-
-        /// <summary>
-        /// Deletes an element
-        /// </summary>
-        /// <param name="module">Used to remove correct element</param>
-        public virtual void DeleteElement(Module module)
+        public Schedule(string name, DateTime startTime, DateTime endTime, Group employeeGroup)
         {
-            _module.Remove(module);
-
-            IsSaved = false;
+            Name = name;
+            StartTime = startTime;
+            EndTime = endTime;
+            EmployeeGroup = employeeGroup;
         }
 
-        /// <summary>
-        /// Clears all data from schedule
-        /// </summary>
-        public abstract void DeleteSchedule();
+        public void AddJob(JobModule job)
+        {
+            if (JobModules.Count != 0)
+            {
+                JobModule previousJob = JobModules[JobModules.Count];
+                job.CalculateRoute(previousJob.Reciever.Address);
+                job.Route.StartTime = previousJob.EndTime;
+                job.StartTime = job.Route.EndTime;
 
-        /// <summary>
-        /// Saves data and updates
-        /// </summary>
-        public abstract void Save();
+               
+            }
+            else
+            {
+                job.CalculateRoute(EmployeeGroup.GroupAddress);  // TODO, GroupAddress skal implementeres i Group klassen
+                job.Route.StartTime = StartTime;
+                job.StartTime = job.Route.EndTime;
+            }
 
-        /// <summary>
-        /// Set state of Approved variable
-        /// </summary>
-        /// <param name="state">Indicate approve status</param>
-        public abstract void Approve(bool state);
+            
+            JobModules.Add(job);
+            // raise event
+        }
+
+        public void RemoveJob(JobModule job)
+        {
+            int index = JobModules.IndexOf(job);   //TODO håndter index = 0
+            JobModule previous = JobModules[index - 1];
+            JobModule next = JobModules[index + 1];
+
+            next.CalculateRoute(previous.Reciever.Address);
+
+            JobModules.Remove(job);
+
+            AdjustTime(index);
+
+            //raise event
+        }
+
+        public void InsertJob(int index, JobModule job)
+        {
+            JobModules.Insert(index, job);
+            JobModule previous = JobModules[index - 1];
+            JobModule next = JobModules[index + 1];
+
+            job.CalculateRoute(previous.Reciever.Address);
+            next.CalculateRoute(job.Reciever.Address);
+            AdjustTime(index);
+
+            //raise event
+        }
+
+        private void AdjustTime(int startIndex)
+        {
+            for (int i = startIndex; i < JobModules.Count; i++) //TODO, håndter startindex = 0
+            {
+                JobModules[i].Route.StartTime = JobModules[i - 1].EndTime;
+                JobModules[i].StartTime = JobModules[i].Route.EndTime;
+
+            }
+        }
+
+
+
     }
+
+    
 }
 

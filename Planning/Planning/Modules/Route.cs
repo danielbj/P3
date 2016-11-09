@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Planning.Modules
 {
-    class Route : Module
+    public class RouteModule : Module
     {
         #region
 
@@ -16,12 +16,12 @@ namespace Planning.Modules
         private string _bingKey = "ApHwnCobuvyzfVShxnVZ7_PV8Cf7Ok-zySgYQBd1liGGJU_GpPaCAw6kZmHJF9i4";        
         private BingMapsRESTService.Common.JSON.Route _route;
 
-        public override string Duration
+        public override int Duration
         {
             get
             {
                 TimeSpan time = TimeSpan.FromSeconds(_route.TravelDuration);
-                return time.ToString();
+                return (int)time.TotalMinutes;
             }                        
         }
 
@@ -48,20 +48,18 @@ namespace Planning.Modules
             return name;
         } 
 
-        public Route(int startTime, params string[] waypoints) 
-            : base(startTime, GetWaypoints(waypoints))
+        public RouteModule(params string[] waypoints)          
         {
-           Waypoints = waypoints;            
+           Waypoints = waypoints;
+            CalculateRoute();         
         }
 
         public void CalculateRoute()
         {
             WebResponse response =  MakeRequest(CreateRequestURL());
-            Console.WriteLine("response ok");
             JObject jsonFile = ProcessRequest(response);
-            Console.WriteLine("jobject ok");
             DeserializeJSONObjects(jsonFile);
-            Console.WriteLine("deserialize ok");
+            
         }      
         
         private WebResponse MakeRequest(string requestURL)
@@ -109,14 +107,6 @@ namespace Planning.Modules
             return _startURL + substring + _endURL + _bingKey;
         }
 
-        public override int CalculateSize()
-        {
-            throw new NotImplementedException();
-        }
 
-        public override string Description()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
