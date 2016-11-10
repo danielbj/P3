@@ -19,10 +19,6 @@ namespace Planning.Modules
 
         }
         public virtual int Duration { get; set; }
-        
-
-
-
 
     }
 }

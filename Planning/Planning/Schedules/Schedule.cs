@@ -29,11 +29,9 @@ namespace Planning.Schedules
             if (JobModules.Count != 0)
             {
                 JobModule previousJob = JobModules[JobModules.Count];
-                job.CalculateRoute(previousJob.Reciever.Address);
+                job.CalculateRoute(previousJob.Reciever.Address); // Todo: gør noget når det er den samme adresse
                 job.Route.StartTime = previousJob.EndTime;
-                job.StartTime = job.Route.EndTime;
-
-               
+                job.StartTime = job.Route.EndTime; 
             }
             else
             {
@@ -42,14 +40,13 @@ namespace Planning.Schedules
                 job.StartTime = job.Route.EndTime;
             }
 
-            
             JobModules.Add(job);
             // raise event
         }
 
         public void RemoveJob(JobModule job)
         {
-            int index = JobModules.IndexOf(job);   //TODO håndter index = 0
+            int index = JobModules.IndexOf(job);   //TODO håndter index = 0 / = count
             JobModule previous = JobModules[index - 1];
             JobModule next = JobModules[index + 1];
 
@@ -62,7 +59,7 @@ namespace Planning.Schedules
             //raise event
         }
 
-        public void InsertJob(int index, JobModule job)
+        public void InsertJob(int index, JobModule job) 
         {
             JobModules.Insert(index, job);
             JobModule previous = JobModules[index - 1];

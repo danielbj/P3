@@ -27,7 +27,7 @@ namespace Planning.Modules
             Nurse
         }
 
-        public Status status { get; set; } = Status.Unplanned;
+        public Status State { get; set; } = Status.Unplanned;
         public EmployeeType Requirement { get; set; }
 
         public JobModule(Citizen citizen, string description, int duration, EmployeeType requirement)
