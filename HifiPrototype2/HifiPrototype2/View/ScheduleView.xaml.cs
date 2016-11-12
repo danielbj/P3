@@ -78,11 +78,12 @@ namespace HifiPrototype2
             SchedulePanel.Children.Add(DailyView);
             DailyView.Width = DailyScheduleWidth;
 
-            Label empLabel = new Label();
-            empLabel.Content = testemployee.Name;
-            empLabel.Width = DailyScheduleWidth;
+            DailyView.NameLabel.Content = testemployee.Name;
+            //Label empLabel = new Label();
+            //empLabel.Content = testemployee.Name;
+            //empLabel.Width = DailyScheduleWidth;
 
-            NamePanel.Children.Add(empLabel);
+            //NamePanel.Children.Add(empLabel);
             
         }
 

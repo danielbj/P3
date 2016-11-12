@@ -24,6 +24,15 @@ namespace HifiPrototype2
 
         public void AddAssignment(Assignment assignment)
         {
+            if (Assignments.Count > 0)
+            {
+                assignment.StartTime = Assignments[Assignments.Count - 1].EndTime;
+            }
+            else
+            {
+                assignment.StartTime = 0;
+            }
+
             Assignments.Add(assignment);
             assignment.Provider = this;
             RaiseAssignmentsChanged();
@@ -33,6 +42,23 @@ namespace HifiPrototype2
         {
             Assignments.Remove(assignment);
             assignment.Provider = null;
+            AdjustTime();
+            RaiseAssignmentsChanged();
+        }
+
+        public void AdjustTime()
+        {
+            for (int i = 1; i < Assignments.Count; i++)
+            {
+                Assignments[i].StartTime = Assignments[i - 1].EndTime;
+            }
+        }
+
+        public void InsertAssignment(int index, Assignment assignment)
+        {
+            Assignments.Insert(index, assignment);
+            assignment.Provider = this;
+            AdjustTime();
             RaiseAssignmentsChanged();
         }
 

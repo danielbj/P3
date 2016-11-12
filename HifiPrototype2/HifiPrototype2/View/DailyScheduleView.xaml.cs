@@ -28,7 +28,6 @@ namespace HifiPrototype2
             InitializeComponent();
             Presenter = new DailySchedulePresenter();
             Presenter.SetView(this);
-            
 
             ScheduleGrid.Height = 660;
             for (int i = 0; i < 660; i++) {
@@ -52,7 +51,7 @@ namespace HifiPrototype2
             
 
             ScheduleGrid.Children.Add(assignment);
-            Grid.SetRow(assignment, assignment.Presenter.Assignment.StarTime);
+            Grid.SetRow(assignment, assignment.Presenter.Assignment.StartTime);
             Grid.SetRowSpan(assignment, (int)assignment.Height); //Problem with grid and placement.
 
 
@@ -67,18 +66,46 @@ namespace HifiPrototype2
             ScheduleGrid.Children.Clear();
         }
 
+        private void ScheduleGrid_Drop(object sender, DragEventArgs e)
+        {
+            AssignmentView sourceAV = e.Data.GetData(typeof(AssignmentView)) as AssignmentView;
+            Grid sg = sender as Grid;
 
-        //TODO WHAT IS THIS???
-        private void DailySchedulePanel_Drop(object sender, DragEventArgs e) {
-            StackPanel sp = sender as StackPanel;
-            Button btn = e.Data.GetData(typeof(Button)) as Button;
 
-            if (sp != null) {
-                StackPanel parent = btn.Parent as StackPanel;
-                parent.Children.Remove(btn);
-                sp.Children.Add(btn);
+            if (sg != null && sourceAV != null)
+            {
+                var source = sourceAV.Presenter.Assignment;
+                sourceAV.Presenter.Assignment.Provider.RemoveAssignment(source);
+                Presenter._employee.AddAssignment(source);
+                //AssignmentMovedEvent(target, source);
             }
         }
+
+        private void ScheduleGrid_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Contextmenu.IsOpen = true;
+            
+            
+        }
+
+        private void MenuItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            DailyScheduleView dsv = sender as DailyScheduleView;
+
+            if (dsv != null)
+            {
+                StackPanel sp = dsv.Parent as StackPanel;
+                sp.Children.Remove(dsv);
+            }
+
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            StackPanel sp = this.Parent as StackPanel;
+            sp.Children.Remove(this);
+        }
+
 
         //private void ScheduleGrid_Drop(object sender, DragEventArgs e) {
         //    Grid grid = sender as Grid;

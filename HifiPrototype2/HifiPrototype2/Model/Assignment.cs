@@ -12,8 +12,14 @@ namespace HifiPrototype2
         public int Location { get; set; }
         public string Description { get; set; }
         public Employee Provider { get; set; }
-        public int StarTime { get; set; }
-        public int EndTime { get; set; }
+        public int StartTime { get; set; }
+        public int EndTime
+        {
+            get
+            {
+                return StartTime + Duration;
+            }
+        }
 
         public static Assignment CreateRandomAssignment(int number)
         {
@@ -52,14 +58,7 @@ namespace HifiPrototype2
                     break;
             }
 
-            assignment.CalculateEndTime();
-
             return assignment;
-        }
-
-        public void CalculateEndTime() {
-            EndTime = StarTime + Duration;
-
         }
     }
 }
