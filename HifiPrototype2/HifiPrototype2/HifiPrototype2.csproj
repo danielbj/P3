@@ -55,32 +55,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DailySchedulePresenter.cs" />
-    <Compile Include="PopupChooseEmployee.xaml.cs">
+    <Compile Include="Functions\DailySchedulePresenter.cs" />
+    <Compile Include="View\PopupChooseEmployee.xaml.cs">
       <DependentUpon>PopupChooseEmployee.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PopupWindow.xaml.cs">
+    <Compile Include="View\PopupWindow.xaml.cs">
       <DependentUpon>PopupWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SchedulePresenter.cs" />
-    <Compile Include="ViewModel.cs" />
-    <Page Include="AssignmentView.xaml">
+    <Compile Include="Functions\SchedulePresenter.cs" />
+    <Compile Include="Functions\ViewModel.cs" />
+    <Page Include="View\AssignmentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DailyScheduleView.xaml">
+    <Page Include="View\DailyScheduleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PopupChooseEmployee.xaml">
+    <Page Include="View\PopupChooseEmployee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PopupWindow.xaml">
+    <Page Include="View\PopupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ScheduleView.xaml">
+    <Page Include="View\ScheduleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -92,17 +92,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Assignment.cs" />
-    <Compile Include="AssignmentPresenter.cs" />
-    <Compile Include="AssignmentView.xaml.cs">
+    <Compile Include="Model\Assignment.cs" />
+    <Compile Include="Functions\AssignmentPresenter.cs" />
+    <Compile Include="View\AssignmentView.xaml.cs">
       <DependentUpon>AssignmentView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DailyScheduleView.xaml.cs">
+    <Compile Include="View\DailyScheduleView.xaml.cs">
       <DependentUpon>DailyScheduleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Employee.cs" />
-    <Compile Include="MainWindowPresenter.cs" />
-    <Compile Include="ScheduleView.xaml.cs">
+    <Compile Include="Model\Employee.cs" />
+    <Compile Include="Functions\MainWindowPresenter.cs" />
+    <Compile Include="View\ScheduleView.xaml.cs">
       <DependentUpon>ScheduleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
