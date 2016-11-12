@@ -7,7 +7,7 @@
              
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Button Width="auto">
+    <Button Width="auto" Margin="1">
         <Button.DataContext>
             <local:AssignmentPresenter/>
         </Button.DataContext>

@@ -69,10 +69,11 @@ namespace HifiPrototype2
         {
             Employee targetEmployee = target.Provider;
             Employee sourceEmployee = source.Provider;
-
+            
+            // TODO sørg for at target != source 
+            int index = targetEmployee.Assignments.IndexOf(target);
             sourceEmployee.RemoveAssignment(source);
-
-            targetEmployee.AddAssignment(source);
+            targetEmployee.InsertAssignment(index, source);
         }
     }
 }

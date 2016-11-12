@@ -5,6 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HifiPrototype2"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid x:Name="ScheduleGrid"/>
+             d:DesignHeight="300" d:DesignWidth="300" MouseRightButtonUp="ScheduleGrid_MouseRightButtonUp">
+    <Grid>
+        <Grid.ContextMenu>
+            <ContextMenu x:Name="Contextmenu">
+                <MenuItem Header="Slet" Click="Delete_Click"/>
+            </ContextMenu>
+        </Grid.ContextMenu>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="NameLabel"></Label>
+        <Grid Grid.Row="1" x:Name="ScheduleGrid" AllowDrop="True" PreviewDrop="ScheduleGrid_Drop" Background="Transparent" />
+    </Grid>
 </UserControl>
