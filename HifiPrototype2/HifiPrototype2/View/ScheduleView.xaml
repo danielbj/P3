@@ -14,12 +14,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel x:Name="GroupOverviewStackPanel" Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
-            <ComboBox Margin="3" Text="Grupper" FlowDirection="RightToLeft">
-                <System:String>Grupper</System:String>
-                <System:String>1</System:String>
+            <ComboBox x:Name="ScheduleComboBox" Margin="3" FlowDirection="RightToLeft">
+                <ComboBoxItem x:Name="CalenderScheduleComboBoxItem" Content="Kalender Plan" Selected="CalenderScheduleComboBoxItem_Selected" Selector.IsSelected="True"/>
+                <ComboBoxItem x:Name="TemplateScheduleComboBoxItem" Content="Template Plan" Selected="TemplateScheduleComboBoxItem_Selected"/>
             </ComboBox>
-            <ComboBox Margin="3" Text="Kalenderplan" FlowDirection="RightToLeft">
-                <System:String>Kalenderplan</System:String>
+            <ComboBox Margin="3" FlowDirection="RightToLeft">
+                <ComboBoxItem x:Name="Group1ComboBoxItem" Content="Gruppe 1" Selected="GroupComboBoxItem_Selected" Selector.IsSelected="True"></ComboBoxItem>
             </ComboBox>
             <Button Padding="2" Margin="2" Content="&lt;"/>
             <TextBlock Padding="2" Margin="2"><Run Text="Dato"/></TextBlock>
@@ -29,7 +29,7 @@
         <StackPanel x:Name="ButtonStackPanel" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
             <Button x:Name="CreateButton" Content="Opret" Padding="2" Margin="2"/>
             <Button x:Name="OpenButton" Content="Åben" Padding="2" Margin="2"/>
-            <Button x:Name="TestButton" Content="Tilføj Medarbejder" Padding="2" Margin="2" Click="TestButton_Click"/>
+            <Button x:Name="AddEmployeeButton" Content="Tilføj Medarbejder" Padding="2" Margin="2" Click="AddEmployeeButton_Click"/>
             <Button x:Name="AddJobButton" Content="Tilføj opgave" Padding="2" Margin="2" Click="AddJobButton_Click"></Button>
         </StackPanel>
         <ScrollViewer Grid.Row="2" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">

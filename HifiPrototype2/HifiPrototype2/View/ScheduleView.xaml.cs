@@ -1,17 +1,7 @@
-﻿using System;
+﻿using HifiPrototype2.Model;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HifiPrototype2
 {
@@ -23,11 +13,16 @@ namespace HifiPrototype2
         private SchedulePresenter _presenter;
         public int DailyScheduleWidth { get; set; } = 100;
 
+        Dictionary<string, Group> _groups = new Dictionary<string, Group>() { { "Gruppe 1", new Group() } };
+        //TemplateSchedule;
+        //CalenderSchedule;
+
         public ScheduleView()
         {
             InitializeComponent();
             _presenter = new SchedulePresenter();
             _presenter.SetView(this);
+
         }
 
         
@@ -69,22 +64,22 @@ namespace HifiPrototype2
 
         //}
 
-        private void TestButton_Click(object sender, RoutedEventArgs e)
+        private void AddEmployeeButton_Click(object sender, RoutedEventArgs e)
         {
             Employee testemployee = Employee.CreateRandomEmployee("TEST");
-            List<Assignment> listOfAssignments = testemployee.Assignments;
 
             DailyScheduleView DailyView = new DailyScheduleView(testemployee);
             SchedulePanel.Children.Add(DailyView);
             DailyView.Width = DailyScheduleWidth;
 
             DailyView.NameLabel.Content = testemployee.Name;
-            //Label empLabel = new Label();
-            //empLabel.Content = testemployee.Name;
-            //empLabel.Width = DailyScheduleWidth;
 
-            //NamePanel.Children.Add(empLabel);
-            
+            // Add to list            
+        }
+
+        private void AddToGroupList()
+        {
+
         }
 
         private void AddJobButton_Click(object sender, RoutedEventArgs e) {
@@ -94,6 +89,26 @@ namespace HifiPrototype2
             //popup.PopupGrid.Children.Add(pce);
 
             //popup.Show();
+        }
+
+        private void CalenderScheduleComboBoxItem_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TemplateScheduleComboBoxItem_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GroupComboBoxItem_Selected(object sender, RoutedEventArgs e)
+        {
+            ComboBoxItem item = sender as ComboBoxItem;
+
+            if (sender != null)
+            {
+                Group group = _groups[item.Content.ToString()];
+            } 
         }
     }
 }

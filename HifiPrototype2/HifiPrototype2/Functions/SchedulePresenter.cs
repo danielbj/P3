@@ -10,8 +10,6 @@ namespace HifiPrototype2
     {
         
         private ScheduleView _view;
-        
-
 
         public SchedulePresenter() { }
 
