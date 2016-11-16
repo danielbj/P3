@@ -1,25 +1,53 @@
 ﻿using HifiPrototype2.Model;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
-namespace HifiPrototype2
+namespace HifiPrototype2 
 {
     /// <summary>
     /// Interaction logic for CalendarView.xaml
     /// </summary>
-    public partial class ScheduleView : UserControl
+    public partial class ScheduleView : UserControl, INotifyPropertyChanged
     {
         private SchedulePresenter _presenter;
         public int DailyScheduleWidth { get; set; } = 100;
 
-        Dictionary<string, Group> _groups = new Dictionary<string, Group>() { { "Gruppe 1", new Group() } };
-        //TemplateSchedule;
-        //CalenderSchedule;
+        private DateTime _date = DateTime.Today;
+
+        public DateTime Dato
+        {
+            get
+            {
+                return this._date.Date;
+            }
+            set
+            {
+                if (value == this._date)
+                    return;
+
+                this._date = value;
+                this.OnPropertyChanged(nameof(this.Dato));
+            }
+        }
+
+
+        //Dictionary<string, Group> _groups = new Dictionary<string, Group>() { { "Gruppe 1", new Group() } };
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public ScheduleView()
         {
             InitializeComponent();
+            this.DataContext = this;
             _presenter = new SchedulePresenter();
             _presenter.SetView(this);
 
@@ -103,12 +131,17 @@ namespace HifiPrototype2
 
         private void GroupComboBoxItem_Selected(object sender, RoutedEventArgs e)
         {
-            ComboBoxItem item = sender as ComboBoxItem;
+            //ComboBoxItem item = sender as ComboBoxItem;
 
-            if (sender != null)
-            {
-                Group group = _groups[item.Content.ToString()];
-            } 
+            //if (sender != null)
+            //{
+            //    Group group = _groups[item.Content.ToString()];
+            //} 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Dato = _date.AddDays(1);
         }
     }
 }

@@ -1,12 +1,16 @@
-﻿<UserControl
+﻿<UserControl x:Class="HifiPrototype2.ScheduleView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:HifiPrototype2"
-             xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="HifiPrototype2.ScheduleView"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:viewModels="clr-namespace:HifiPrototype2"
+             xmlns:converters="clr-namespace:HifiPrototype2.Functions"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500">
+    <UserControl.Resources>
+        <converters:ScheduleToDateConverter x:Key="ScheduleToDateConverter"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -22,8 +26,8 @@
                 <ComboBoxItem x:Name="Group1ComboBoxItem" Content="Gruppe 1" Selected="GroupComboBoxItem_Selected" Selector.IsSelected="True"></ComboBoxItem>
             </ComboBox>
             <Button Padding="2" Margin="2" Content="&lt;"/>
-            <TextBlock Padding="2" Margin="2"><Run Text="Dato"/></TextBlock>
-            <Button Padding="2" Margin="2" Content="&gt;"/>
+            <TextBlock Padding="2" Margin="2" Text="{Binding Dato}"/>
+            <Button Padding="2" Margin="2" Content="&gt;" Click="Button_Click"/>
             <Button Padding="2" Margin="2" Content="Kalender"/>
         </StackPanel>
         <StackPanel x:Name="ButtonStackPanel" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
