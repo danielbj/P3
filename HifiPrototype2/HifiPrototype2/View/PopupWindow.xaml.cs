@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace HifiPrototype2
+namespace HifiPrototype2.View
 {
     /// <summary>
     /// Interaction logic for PopupWindow.xaml

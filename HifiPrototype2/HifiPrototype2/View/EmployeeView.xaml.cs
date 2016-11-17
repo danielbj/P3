@@ -16,11 +16,12 @@ using System.Windows.Shapes;
 namespace HifiPrototype2.View
 {
     /// <summary>
-    /// Interaction logic for PopupChooseEmployee.xaml
+    /// Interaction logic for EmployeeView.xaml
     /// </summary>
-    public partial class PopupChooseEmployee : Page
+    public partial class EmployeeView : Page
     {
-        public PopupChooseEmployee() {
+        public EmployeeView()
+        {
             InitializeComponent();
         }
     }

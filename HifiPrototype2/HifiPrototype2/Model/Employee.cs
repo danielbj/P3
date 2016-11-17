@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace HifiPrototype2
+namespace HifiPrototype2.Model
 {
     public class Employee
     {

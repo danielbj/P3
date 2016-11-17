@@ -5,8 +5,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using HifiPrototype2.Functions;
 
-namespace HifiPrototype2 
+namespace HifiPrototype2.View
 {
     /// <summary>
     /// Interaction logic for CalendarView.xaml
@@ -22,7 +23,7 @@ namespace HifiPrototype2
         {
             get
             {
-                return this._date.Date;
+                return this._date;
             }
             set
             {
@@ -142,6 +143,11 @@ namespace HifiPrototype2
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Dato = _date.AddDays(1);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Dato = _date.AddDays(-1);
         }
     }
 }

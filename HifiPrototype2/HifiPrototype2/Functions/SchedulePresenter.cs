@@ -1,10 +1,11 @@
-﻿using System;
+﻿using HifiPrototype2.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HifiPrototype2
+namespace HifiPrototype2.Functions
 {
     public class SchedulePresenter
     {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HifiPrototype2.Functions;
+using HifiPrototype2.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HifiPrototype2
+namespace HifiPrototype2.View
 {
     /// <summary>
     /// Interaction logic for DailyScheduleView.xaml

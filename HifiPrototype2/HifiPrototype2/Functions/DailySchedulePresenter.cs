@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HifiPrototype2.View;
+using HifiPrototype2.Model;
 
-namespace HifiPrototype2
+namespace HifiPrototype2.Functions
 {
     public class DailySchedulePresenter
     {

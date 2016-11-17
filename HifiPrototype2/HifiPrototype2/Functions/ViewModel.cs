@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HifiPrototype2
+namespace HifiPrototype2.Functions
 {
     public abstract class ViewModel : INotifyPropertyChanged
     {

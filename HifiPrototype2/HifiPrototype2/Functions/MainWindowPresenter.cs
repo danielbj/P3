@@ -1,12 +1,9 @@
-﻿using System;
+﻿using HifiPrototype2.Model;
+using HifiPrototype2.View;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
-namespace HifiPrototype2
+namespace HifiPrototype2.Functions
 {
     public class MainWindowPresenter
     {
@@ -28,7 +25,7 @@ namespace HifiPrototype2
 
         public void AddRandomEmployee()
         {
-            var employee = Employee.CreateRandomEmployee("Navn");
+            Employee employee = Employee.CreateRandomEmployee("Navn");
             Employees.Add(employee);
             var dailySchedule = new DailyScheduleView(employee);
            // _view.Schedule.AddDailySchedule(dailySchedule);

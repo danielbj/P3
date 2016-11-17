@@ -8,11 +8,12 @@ using System.Windows.Data;
 
 namespace HifiPrototype2.Functions
 {
-    class ScheduleToDateConverter : IValueConverter
+    class DateTimeToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (value as ScheduleView)?.Dato.ToShortDateString();
+
+            return (value is DateTime) ? ((DateTime)value).ToShortDateString() : string.Empty;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

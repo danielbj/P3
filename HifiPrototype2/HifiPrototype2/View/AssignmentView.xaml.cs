@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HifiPrototype2.Functions;
+using HifiPrototype2.Model;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace HifiPrototype2
+namespace HifiPrototype2.View
 {
     public delegate void AssignmentMovedEventHandler(Assignment target, Assignment source);
     /// <summary>

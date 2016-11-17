@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HifiPrototype2.Model;
+using HifiPrototype2.View;
 
-namespace HifiPrototype2
+namespace HifiPrototype2.Functions
 {
     public class AssignmentPresenter
     {
