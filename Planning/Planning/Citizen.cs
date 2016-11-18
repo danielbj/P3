@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Planning
 {
-    class Citizen
+    public class Citizen
     {
 
         private string _cpr;

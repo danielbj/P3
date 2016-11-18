@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Planning.Modules
 {
-    class Task : Module
+    public class Task : Module
     {
         public Citizen _citizen;
         public string assignment;

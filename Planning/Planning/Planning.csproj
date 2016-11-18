@@ -65,6 +65,10 @@
     </ApplicationDefinition>
     <Compile Include="Citizen.cs" />
     <Compile Include="Employees\Employee.cs" />
+    <Compile Include="Employees\HomeHelper.cs" />
+    <Compile Include="Employees\Nurse.cs" />
+    <Compile Include="Employees\Sosu.cs" />
+    <Compile Include="Group.cs" />
     <Compile Include="JSONDataContracts.cs" />
     <Compile Include="Modules\Module.cs" />
     <Compile Include="Modules\Route.cs" />

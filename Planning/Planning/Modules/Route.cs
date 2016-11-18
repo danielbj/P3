@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Planning.Modules
 {
-    class Route : Module
+    public class Route : Module
     {
         #region
 
