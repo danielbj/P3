@@ -9,7 +9,7 @@ namespace Planning
     {
 
         private string _cpr;
-        public string CPR {
+        public string CPR {//TODO validate that it is string?
             get { return _cpr; }
             set {
                 if(value.Length == 10) 
@@ -24,7 +24,7 @@ namespace Planning
         public string _lastname;
 
         private string _address;
-        public string Address {
+        public string Address { //TODO validate that it is string?
             get { return _address; }
             set {
                 if(value.Contains(" "))
@@ -35,7 +35,7 @@ namespace Planning
         }
 
         private int _classification;
-        public int Classification {
+        public int Classification { //TODO validate that it is int?
             get { return _classification; }
             set {
                     if(0 <= value && value <= 5)

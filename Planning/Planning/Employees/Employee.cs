@@ -33,7 +33,7 @@ namespace Planning.Employees
             this.Qualification = qualification;
         }
 
-        //Input is now delegate function etc. t => "t.startTime > 12.00"
+        //Input is delegate function etc. t => "t.startTime > 12.00"
         public List<Modules.Task> GetTasks(Predicate<Modules.Task> Filter) {
             List<Modules.Task> result = new List<Modules.Task>();
 
@@ -42,6 +42,13 @@ namespace Planning.Employees
                     result.Add(t);
             }
             return result;
+        }
+
+        public bool AssignTask(Modules.Task task) {
+            if (task == null)
+                return false;
+            Tasks.Add(task);
+            return Tasks.Contains(task);
         }
     }
 }

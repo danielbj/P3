@@ -32,5 +32,7 @@ namespace Planning.Modules
         {
             throw new NotImplementedException();
         }
+
+        //Impleement equals method
     }
 }
