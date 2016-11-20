@@ -14,6 +14,9 @@ namespace HifiPrototype2.View
     /// </summary>
     public partial class ScheduleView : UserControl, INotifyPropertyChanged
     {
+        // Test feature 
+        private static int _id = 0;
+
         private SchedulePresenter _presenter;
         public int DailyScheduleWidth { get; set; } = 100;
 
@@ -35,9 +38,6 @@ namespace HifiPrototype2.View
             }
         }
 
-
-        //Dictionary<string, Group> _groups = new Dictionary<string, Group>() { { "Gruppe 1", new Group() } };
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
@@ -53,8 +53,6 @@ namespace HifiPrototype2.View
             _presenter.SetView(this);
 
         }
-
-        
 
         //public void AddDailySchedule(DailyScheduleView dailySchedule)
         //{
@@ -95,13 +93,14 @@ namespace HifiPrototype2.View
 
         private void AddEmployeeButton_Click(object sender, RoutedEventArgs e)
         {
-            Employee testemployee = Employee.CreateRandomEmployee("TEST");
+            Employee testemployee = Employee.CreateRandomEmployee("TEST" + _id);
+            _id++;
 
             DailyScheduleView DailyView = new DailyScheduleView(testemployee);
             SchedulePanel.Children.Add(DailyView);
             DailyView.Width = DailyScheduleWidth;
 
-            DailyView.NameLabel.Content = testemployee.Name;
+            DailyView.NameLabel.Text = testemployee.Name;
 
             // Add to list            
         }
@@ -140,12 +139,12 @@ namespace HifiPrototype2.View
             //} 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void DateForwardButton_Click(object sender, RoutedEventArgs e)
         {
             Dato = _date.AddDays(1);
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void DateBackButton_Click(object sender, RoutedEventArgs e)
         {
             Dato = _date.AddDays(-1);
         }

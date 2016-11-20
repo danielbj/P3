@@ -2,6 +2,7 @@
 using HifiPrototype2.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,6 @@ namespace HifiPrototype2.View
     public partial class DailyScheduleView : UserControl
     {
         public DailySchedulePresenter Presenter;
-        
 
         public DailyScheduleView()
         {
@@ -31,15 +31,13 @@ namespace HifiPrototype2.View
             Presenter = new DailySchedulePresenter();
             Presenter.SetView(this);
 
-            ScheduleGrid.Height = 660;
+            //ScheduleGrid.Height = 660;
             for (int i = 0; i < 660; i++) {
                 RowDefinition rowdef = new RowDefinition();
                 rowdef.Height = new GridLength(1, GridUnitType.Star);
 
                 ScheduleGrid.RowDefinitions.Add(rowdef);
             }
-            
-            
         }
 
         public DailyScheduleView(Employee employee) : this()
@@ -50,13 +48,9 @@ namespace HifiPrototype2.View
 
         public void AddAssignment(AssignmentView assignment)
         {
-            
-
             ScheduleGrid.Children.Add(assignment);
             Grid.SetRow(assignment, assignment.Presenter.Assignment.StartTime);
             Grid.SetRowSpan(assignment, (int)assignment.Height); //Problem with grid and placement.
-
-
         }
 
         //public void AddEmployee(Employee employee) {
