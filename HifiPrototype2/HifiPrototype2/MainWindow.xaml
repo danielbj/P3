@@ -13,35 +13,19 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <!--<StackPanel Grid.Column="0" Margin="3">
-            <Button x:Name="addEmployeeButton" Padding="3" Margin="3" Click="addEmployeeButton_Click">
-                Add employee
-            </Button>
-            <Button x:Name="addTask" Padding="3" Margin="3" Click="addTask_Click" >
-                Add Task
-            </Button>
-            <StackPanel x:Name="taskHolder">
-
-            </StackPanel>
-
-        </StackPanel>-->
-        <!--<GridSplitter ResizeDirection="Columns" ShowsPreview="True" Background="LightGray" Width="3"/>-->
         <StackPanel Grid.Column="0">
-            <Button Margin="3,4,3,3">Postkasse</Button>
+            <Button x:Name="MailBoxButton" Margin="3" Click="MailBoxButton_Click">Postkasse</Button>
         </StackPanel>
-        <ScrollViewer Grid.Column="1" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <TabControl>
-                <TabItem Header ="Planer">
-                    <local:ScheduleView></local:ScheduleView>
-                </TabItem>
-                <TabItem Header ="Medarbejdere">
-                    <!--<local:EmployeeView></local:EmployeeView>-->
-                </TabItem>
-                <TabItem Header ="Opgaver"></TabItem>
-            </TabControl>
-        </ScrollViewer>
-
-
-
+        <TabControl Grid.Column="1" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TabItem Header ="Planer">
+                <local:ScheduleView></local:ScheduleView>
+            </TabItem>
+            <TabItem Header ="Medarbejdere">
+                <local:GroupView/>
+            </TabItem>
+            <TabItem Header ="Opgaver">
+                <local:CitizenView/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

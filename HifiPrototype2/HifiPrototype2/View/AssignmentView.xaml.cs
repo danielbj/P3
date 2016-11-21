@@ -23,10 +23,10 @@ namespace HifiPrototype2.View
             PreviewMouseDown += AssignmentView_MouseDown;
         }
 
+
         private void AssignmentView_MouseDown(object sender, MouseButtonEventArgs e)
         {
             AssignmentView dragSource = sender as AssignmentView;
-            
 
             if (dragSource!= null)
             {
@@ -55,7 +55,6 @@ namespace HifiPrototype2.View
         {
             Presenter.SetAssignment(assignment);
             LoadAssignment();
-            Height = Presenter.Duration;
         }
 
         public void LoadAssignment()
@@ -63,6 +62,12 @@ namespace HifiPrototype2.View
             Description.Text = Presenter.Description;
             Duration.Text = Presenter.Duration.ToString();
             Location.Text = Presenter.Location.ToString();
+        }
+
+        private void UserControl_ToolTipOpening(object sender, ToolTipEventArgs e)
+        {
+            var b = sender as AssignmentView;
+            b.ToolTip = b.Description.Text + "\n" + b.Duration.Text + "\n" + b.Location.Text;
         }
     }
 }

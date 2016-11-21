@@ -1,0 +1,42 @@
+﻿<Window x:Class="HifiPrototype2.View.EditEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HifiPrototype2.View"
+        mc:Ignorable="d"
+        Title="EditEmployeeWindow" Height="280" Width="300">
+    <Grid VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="5">
+            <Label Content="Navn:"/>
+            <TextBox x:Name="EmployeeNameTextBox" Margin="20,0,20,0"  Text="Navn"/>
+            <Label Content="Telefonnummer:"/>
+            <TextBox x:Name="EmployeePhoneTextBox" Margin="20,0,20,0" Text="12345678"/>
+            <Label Content="Gruppe:"/>
+            <ComboBox x:Name="EmployeeGroupComboBox" Margin="20,0,20,0" SelectedItem="Gruppe1">
+                <ComboBoxItem x:Name="Gruppe1" Selector.IsSelected="True">Gruppe 1</ComboBoxItem>
+                <ComboBoxItem x:Name="Gruppe2">Gruppe 2</ComboBoxItem>
+                <ComboBoxItem x:Name="Gruppe3">Gruppe 3</ComboBoxItem>
+                <ComboBoxItem x:Name="Gruppe4">Gruppe 4</ComboBoxItem>
+            </ComboBox>
+
+            <Label Content="Stilling"/>
+            <ComboBox x:Name="EmployeePositionComboBox" Margin="20,0,20,0">
+                <ComboBoxItem Selector.IsSelected="True">Sygeplejerske</ComboBoxItem>
+                <ComboBoxItem>SOSU</ComboBoxItem>
+                <ComboBoxItem>Hjælper</ComboBoxItem>
+                <ComboBoxItem>Dansekat</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+        <DockPanel Grid.Row="1" HorizontalAlignment="Right">
+            <StackPanel Margin="0,0,20,5"  DockPanel.Dock="Bottom" Orientation="Horizontal">
+                <Button x:Name="SaveEmployeeButton" Margin="3" Padding="3" Click="SaveEmployeeButton_Click">Gem Ændringer</Button>
+                <Button x:Name="CloseButton" Margin="3" Padding="3" Click="CloseButton_Click">Luk</Button>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Window>

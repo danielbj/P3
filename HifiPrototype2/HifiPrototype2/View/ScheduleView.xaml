@@ -6,6 +6,7 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:viewModels="clr-namespace:HifiPrototype2.View"
              xmlns:converters="clr-namespace:HifiPrototype2.Functions"
+             xmlns:views="clr-namespace:HifiPrototype2.View"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500">
     <UserControl.Resources>
@@ -32,22 +33,26 @@
         </StackPanel>
         <StackPanel x:Name="ButtonStackPanel" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
             <Button x:Name="CreateButton" Content="Opret" Padding="2" Margin="2"/>
-            <Button x:Name="OpenButton" Content="Åben" Padding="2" Margin="2"/>
-            <Button x:Name="AddEmployeeButton" Content="Tilføj Medarbejder" Padding="2" Margin="2" Click="AddEmployeeButton_Click"/>
-            <Button x:Name="AddJobButton" Content="Tilføj opgave" Padding="2" Margin="2" Click="AddJobButton_Click"></Button>
+            <Button x:Name="LoadButton" Content="Indlæs Grundplan" Padding="2" Margin="2" Click="LoadButton_Click"/>
+            <Button x:Name="AddEmployeeButton" Content="Tilføj Kolonne" Padding="2" Margin="2" Click="AddEmployeeButton_Click"/>
+            <Button x:Name="JobButton" Content="Opgaver" Padding="2" Margin="2" Click="JobButton_Click"></Button>
+            <Slider x:Name="Slider" Margin="2" Padding="2" Maximum="6600" Minimum="330" Orientation="Horizontal" Width="200" Value="660"/>
         </StackPanel>
-        <ScrollViewer Grid.Row="2" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
-            <Grid VerticalAlignment="Stretch" ShowGridLines="True" ScrollViewer.CanContentScroll="True">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width ="50"/>
-                    <ColumnDefinition SharedSizeGroup="True"/>
-                </Grid.ColumnDefinitions>
-
-                <StackPanel VerticalAlignment="Stretch" x:Name="TimePanel" Orientation="Vertical" Grid.Row="0" Grid.Column="0">
-                    <Grid VerticalAlignment="Stretch">
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <ScrollViewer Grid.Column="0" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                <Grid VerticalAlignment="Top" ScrollViewer.CanContentScroll="True" Height="{Binding ElementName=Slider,Path=Value}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width ="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid VerticalAlignment="Stretch" x:Name="TimePanel" Grid.Row="0" Grid.Column="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
@@ -77,10 +82,13 @@
                         <Label Grid.Row="11" Content="16.00" />
                         <!--#endregion-->
                     </Grid>
-                </StackPanel>
-                <!--StackPanel x:Name="NamePanel" Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Grid.IsSharedSizeScope="True" HorizontalAlignment="Left"/>-->
-                <StackPanel x:Name ="SchedulePanel" Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Grid.IsSharedSizeScope="True" HorizontalAlignment="Left" />
-            </Grid>
-        </ScrollViewer>
+                    <!--StackPanel x:Name="NamePanel" Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Grid.IsSharedSizeScope="True" HorizontalAlignment="Left"/>-->
+                    <StackPanel x:Name ="SchedulePanel" Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" />
+                </Grid>
+            </ScrollViewer>
+            <StackPanel x:Name="JobPanel" Grid.Column="1"  Width="auto" Visibility="Collapsed">
+
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

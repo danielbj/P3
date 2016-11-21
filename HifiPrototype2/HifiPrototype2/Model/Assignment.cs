@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace HifiPrototype2.Model
 {
-    public class Assignment
+    public class Route
     {
         public int Duration { get; set; }
-        public int Location { get; set; }
-        public string Description { get; set; }
-        public Employee Provider { get; set; }
         public int StartTime { get; set; }
         public int EndTime
         {
@@ -20,6 +17,29 @@ namespace HifiPrototype2.Model
                 return StartTime + Duration;
             }
         }
+    }
+
+    public class Assignment
+    {
+        public int Duration { get; set; }
+        public int Location { get; set; }
+        public string Description { get; set; }
+        public Employee Provider { get; set; }
+        public int StartTime
+        {
+            get
+            {
+                return route.EndTime;
+            }
+        }
+        public int EndTime
+        {
+            get
+            {
+                return StartTime + Duration;
+            }
+        }
+        public Route route { get; set; } = new Route();
 
         public static Assignment CreateRandomAssignment(int number)
         {
@@ -34,22 +54,22 @@ namespace HifiPrototype2.Model
                 case 2:
                     assignment.Description = "Job 2";
                     assignment.Duration = 10;
-                    assignment.Location = 10;
+                    assignment.Location = 25;
                     break;
                 case 3:
                     assignment.Description = "Job 3";
                     assignment.Duration = 59;
-                    assignment.Location = 15;
+                    assignment.Location = 55;
                     break;
                 case 4:
                     assignment.Description = "Job 4";
                     assignment.Duration = 60;
-                    assignment.Location = 20;
+                    assignment.Location = 40;
                     break;
                 case 5:
                     assignment.Description = "Job 5";
                     assignment.Duration = 70;
-                    assignment.Location = 25;
+                    assignment.Location = 70;
                     break;
                 default:
                     assignment.Description = "Description";

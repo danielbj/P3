@@ -50,7 +50,14 @@ namespace HifiPrototype2.View
         {
             ScheduleGrid.Children.Add(assignment);
             Grid.SetRow(assignment, assignment.Presenter.Assignment.StartTime);
-            Grid.SetRowSpan(assignment, (int)assignment.Height); //Problem with grid and placement.
+            Grid.SetRowSpan(assignment, assignment.Presenter.Assignment.Duration); //Problem with grid and placement.
+        }
+
+        public void AddRoute(RouteView route)
+        {
+            ScheduleGrid.Children.Add(route);
+            Grid.SetRow(route, route.Route.StartTime);
+            Grid.SetRowSpan(route, route.Route.Duration);
         }
 
         //public void AddEmployee(Employee employee) {
@@ -71,7 +78,11 @@ namespace HifiPrototype2.View
             if (sg != null && sourceAV != null)
             {
                 var source = sourceAV.Presenter.Assignment;
-                sourceAV.Presenter.Assignment.Provider.RemoveAssignment(source);
+                if (source.Provider != null)
+                {
+                    source.Provider.RemoveAssignment(source);
+                }
+
                 Presenter._employee.AddAssignment(source);
                 //AssignmentMovedEvent(target, source);
             }

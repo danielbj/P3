@@ -52,44 +52,9 @@ namespace HifiPrototype2.View
             _presenter = new SchedulePresenter();
             _presenter.SetView(this);
 
+            SecretAssignments(); // hush hush
+
         }
-
-        //public void AddDailySchedule(DailyScheduleView dailySchedule)
-        //{
-        //    dailySchedule.Width = DailyScheduleWidth;
-        //    //SchedulePanel.Children.Add(dailySchedule);
-        //    //DailySchedule.DailySchedulePanel.Children.Add(dailySchedule);
-
-        //    var label = new Label();
-        //    label.Content = dailySchedule.Presenter.Name;
-        //    label.Width = DailyScheduleWidth;
-        //    //DailySchedule.HeaderPanel.Children.Add(label);
-        //    //HeaderPanel.Children.Add(label);
-        //}
-
-        //public void AddDailySchedule(Employee employee)
-        //{
-        //    var dailySchedule = new DailyScheduleView();
-        //    dailySchedule.Width = DailyScheduleWidth;
-
-        //    foreach (var Assignment in employee.Assignments)
-        //    {
-        //        var btn = new Button();
-        //        btn.Content = Assignment.Description;
-        //        btn.Height = Assignment.Duration;
-        //        //dailySchedule.DailySchedulePanel.Children.Add(btn);
-        //    }
-        //    //DailySchedule.DailySchedulePanel.Children.Add(dailySchedule);
-        //    //SchedulePanel.Children.Add(dailySchedule);
-
-        //    var label = new Label();
-        //    label.Content = employee.Name;
-        //    label.Width = DailyScheduleWidth;
-        //    //DailySchedule.HeaderPanel.Children.Add(label);
-        //    //HeaderPanel.Children.Add(label);
-
-
-        //}
 
         private void AddEmployeeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -108,15 +73,6 @@ namespace HifiPrototype2.View
         private void AddToGroupList()
         {
 
-        }
-
-        private void AddJobButton_Click(object sender, RoutedEventArgs e) {
-            //PopupWindow popup = new PopupWindow();
-            //PopupChooseEmployee pce = new PopupChooseEmployee();
-
-            //popup.PopupGrid.Children.Add(pce);
-
-            //popup.Show();
         }
 
         private void CalenderScheduleComboBoxItem_Selected(object sender, RoutedEventArgs e)
@@ -147,6 +103,52 @@ namespace HifiPrototype2.View
         private void DateBackButton_Click(object sender, RoutedEventArgs e)
         {
             Dato = _date.AddDays(-1);
+        }
+
+        private void JobButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (JobPanel.Visibility == Visibility.Visible)
+            {
+                JobPanel.Visibility = Visibility.Collapsed;
+            }
+            else
+	        {
+                JobPanel.Visibility = Visibility.Visible;
+            }  
+        }
+
+        private void SecretAssignments()
+        {
+            var a = new Assignment();
+            a.Description = "Bad";
+            a.Duration = 25;
+            a.Location = 20;
+            var av = new AssignmentView(a);
+            av.LoadAssignment();
+
+            var b = new Assignment();
+            b.Description = "Rengøring";
+            b.Duration = 40;
+            b.Location = 15;
+            var bv = new AssignmentView(b);
+            bv.LoadAssignment();
+
+            var c = new Assignment();
+            c.Description = "Trimning af næsehår";
+            c.Duration = 10;
+            c.Location = 2;
+            var cv = new AssignmentView(c);
+            cv.LoadAssignment();
+
+            JobPanel.Children.Add(av);
+            JobPanel.Children.Add(bv);
+            JobPanel.Children.Add(cv);
+
+        }
+
+        private void LoadButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace HifiPrototype2.Model
 {
@@ -18,15 +22,26 @@ namespace HifiPrototype2.Model
             }
         }
 
+        public void AddRandomAssignments()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                AddAssignment(Assignment.CreateRandomAssignment(0));
+            }
+        }
+
         public void AddAssignment(Assignment assignment)
         {
             if (Assignments.Count > 0)
             {
-                assignment.StartTime = Assignments[Assignments.Count - 1].EndTime;
+                assignment.route.StartTime = Assignments[Assignments.Count - 1].EndTime;
+                assignment.route.Duration = Math.Abs( assignment.Location - Assignments[Assignments.Count - 1].Location);
+
             }
             else
             {
-                assignment.StartTime = 0;
+                assignment.route.StartTime = 0;
+                assignment.route.Duration = assignment.Location;
             }
 
             Assignments.Add(assignment);
@@ -38,15 +53,19 @@ namespace HifiPrototype2.Model
         {
             Assignments.Remove(assignment);
             assignment.Provider = null;
-            AdjustTime();
+            if (Assignments.Count != 0)
+                AdjustTime();
             RaiseAssignmentsChanged();
         }
 
         public void AdjustTime()
         {
+            Assignments[0].route.StartTime = 0;
+            Assignments[0].route.Duration = Assignments[0].Location;
             for (int i = 1; i < Assignments.Count; i++)
             {
-                Assignments[i].StartTime = Assignments[i - 1].EndTime;
+                Assignments[i].route.StartTime = Assignments[i - 1].EndTime;
+                Assignments[i].route.Duration = Math.Abs(Assignments[i].Location - Assignments[i - 1].Location);
             }
         }
 
@@ -62,7 +81,7 @@ namespace HifiPrototype2.Model
         {
             var employee = new Employee();
             employee.Name = name;
-            employee.AddRandomAssignments(3);
+            employee.AddRandomAssignments(5);
 
             return employee;
         }

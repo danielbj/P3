@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HifiPrototype2.View;
 
 namespace HifiPrototype2
 {
@@ -52,5 +53,10 @@ namespace HifiPrototype2
 
         }
 
+        private void MailBoxButton_Click(object sender, RoutedEventArgs e)
+        {
+            var MailWindow = new MailBoxWindow();
+            MailWindow.Show();
+        }
     }
 }

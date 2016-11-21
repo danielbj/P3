@@ -46,10 +46,16 @@ namespace HifiPrototype2.Functions
         public void LoadAssignments()
         {
             _view.Clear();
-            SortAssignments();
+            //SortAssignments();
 
             foreach (Assignment assignment in _employee.Assignments)
             {
+                if (assignment.route.Duration > 0)
+                {
+                    RouteView routeView = new RouteView(assignment.route);
+                    _view.AddRoute(routeView);
+                }
+                
                 AssignmentView assignmentView = new AssignmentView(assignment);
                 _view.AddAssignment(assignmentView);
             }
