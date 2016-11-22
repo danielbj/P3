@@ -41,6 +41,15 @@ namespace HifiPrototype2.Model
         }
         public Route route { get; set; } = new Route();
 
+        public Assignment() { }
+
+        public Assignment(string desc, int dur, int loc)
+        {
+            Description = desc;
+            Duration = dur;
+            Location = loc;
+        }
+
         public static Assignment CreateRandomAssignment(int number)
         {
             var random = new Random();

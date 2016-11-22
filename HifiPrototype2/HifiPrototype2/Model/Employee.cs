@@ -9,10 +9,21 @@ namespace HifiPrototype2.Model
     public class Employee
     {
         public string Name { get; set; }
+        public string PhoneNumber {get; set;}
         public List<Assignment> Assignments { get; private set; } = new List<Assignment>();
 
         public delegate void AssignmentsPropertyChangedEventHandler();
         public event AssignmentsPropertyChangedEventHandler AssignmentsChanged;
+
+
+
+        public Employee() { }
+
+        public Employee(string name, string phoneNumber)
+        {
+            Name = name;
+            PhoneNumber = phoneNumber;
+        }
 
         public void AddRandomAssignments(int number)
         {

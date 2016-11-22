@@ -150,5 +150,22 @@ namespace HifiPrototype2.View
         {
 
         }
+
+        private void MagicButton_Click(object sender, RoutedEventArgs e)
+        {
+            var f = new ProtoScheduleFactory(500);
+            List<Employee> EmployeeList =  f.MakeEmployees(5);
+
+            foreach (var empl in EmployeeList)
+            {
+                DailyScheduleView DailyView = new DailyScheduleView(empl);
+                SchedulePanel.Children.Add(DailyView);
+                DailyView.Width = DailyScheduleWidth;
+
+                DailyView.NameLabel.Text = empl.Name;
+            }
+
+            
+        }
     }
 }

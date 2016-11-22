@@ -58,6 +58,7 @@
     <Compile Include="Functions\DailySchedulePresenter.cs" />
     <Compile Include="Functions\DateTimeToStringConverter.cs" />
     <Compile Include="Model\Group.cs" />
+    <Compile Include="Model\ProtoScheduleFactory.cs" />
     <Compile Include="View\AreYouSureWindow.xaml.cs">
       <DependentUpon>AreYouSureWindow.xaml</DependentUpon>
     </Compile>
