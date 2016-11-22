@@ -1,5 +1,6 @@
 ﻿using HifiPrototype2.Functions;
 using HifiPrototype2.Model;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,6 +14,10 @@ namespace HifiPrototype2.View
     public partial class AssignmentView : UserControl
     {
         public AssignmentPresenter Presenter;
+        private Point _startPoint;
+        public AssignmentMovedEventHandler AssignmentMovedEvent;
+        private bool IsDragging = false;        
+
         private AssignmentView()
         {
             InitializeComponent();
@@ -20,21 +25,40 @@ namespace HifiPrototype2.View
             Presenter.SetView(this);
             AllowDrop = true;
             Drop += AssignmentView_Drop;
-            PreviewMouseDown += AssignmentView_MouseDown;
+            PreviewMouseLeftButtonDown += AssignmentView_MouseDown;
+            PreviewMouseMove += AssignmentView_PreviewMouseMove;
         }
 
-
-        private void AssignmentView_MouseDown(object sender, MouseButtonEventArgs e)
+        private void AssignmentView_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            AssignmentView dragSource = sender as AssignmentView;
-
-            if (dragSource!= null)
+            if (e.LeftButton == MouseButtonState.Pressed && !IsDragging)
             {
-                DragDrop.DoDragDrop(dragSource, dragSource, DragDropEffects.Move);
+                Point position = e.GetPosition(null);
+
+                if (Math.Abs(position.X - _startPoint.X) > SystemParameters.MinimumHorizontalDragDistance ||
+                        Math.Abs(position.Y - _startPoint.Y) > SystemParameters.MinimumVerticalDragDistance)
+                {
+                    StartDrag(sender, e);
+                }
             }
         }
 
-        public AssignmentMovedEventHandler AssignmentMovedEvent;
+        private void StartDrag(object sender, MouseEventArgs e)
+        {
+            IsDragging = true;
+            AssignmentView dragSource = sender as AssignmentView;
+
+            if (dragSource != null)
+            {
+                DragDrop.DoDragDrop(dragSource, dragSource, DragDropEffects.Move);
+            }
+            IsDragging = false;
+        }
+
+        private void AssignmentView_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            _startPoint = e.GetPosition(null);
+        }
 
         private void AssignmentView_Drop(object sender, DragEventArgs e)
         {
@@ -68,6 +92,12 @@ namespace HifiPrototype2.View
         {
             var b = sender as AssignmentView;
             b.ToolTip = b.Description.Text + "\n" + b.Duration.Text + "\n" + b.Location.Text;
+        }
+
+        private void JobButton_Click(object sender, RoutedEventArgs e)
+        {
+            EditJobWindow jobWindow = new EditJobWindow(this);
+            jobWindow.ShowDialog();
         }
     }
 }

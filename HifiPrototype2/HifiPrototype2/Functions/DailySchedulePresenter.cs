@@ -22,6 +22,7 @@ namespace HifiPrototype2.Functions
         public void SetView(DailyScheduleView view)
         {
             _view = view;
+
         }
 
         public void SetEmployee(Employee employee)

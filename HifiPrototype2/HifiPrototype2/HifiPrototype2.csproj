@@ -58,6 +58,9 @@
     <Compile Include="Functions\DailySchedulePresenter.cs" />
     <Compile Include="Functions\DateTimeToStringConverter.cs" />
     <Compile Include="Model\Group.cs" />
+    <Compile Include="View\AreYouSureWindow.xaml.cs">
+      <DependentUpon>AreYouSureWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CitizenView.xaml.cs">
       <DependentUpon>CitizenView.xaml</DependentUpon>
     </Compile>
@@ -76,11 +79,15 @@
     <Compile Include="View\PopupChooseEmployee.xaml.cs">
       <DependentUpon>PopupChooseEmployee.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PopupWindow.xaml.cs">
-      <DependentUpon>PopupWindow.xaml</DependentUpon>
+    <Compile Include="View\EditJobWindow.xaml.cs">
+      <DependentUpon>EditJobWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Functions\SchedulePresenter.cs" />
     <Compile Include="Functions\ViewModel.cs" />
+    <Page Include="View\AreYouSureWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AssignmentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -113,7 +120,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PopupWindow.xaml">
+    <Page Include="View\EditJobWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
