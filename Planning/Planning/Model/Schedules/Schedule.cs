@@ -1,10 +1,11 @@
-﻿using Planning.Modules;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Planning.Model.Modules;
+using Planning.Model.Schedules;
 
-namespace Planning.Schedules
+namespace Planning.Model.Schedules
 {
-    public abstract class Schedule
+    public abstract class Schedule : ISchedule
     {
         public abstract string Name { get; }                                        // Name or title
         public abstract string Description { get; set; }                            // Might be a method to collect data from container element
@@ -12,7 +13,7 @@ namespace Planning.Schedules
         public virtual bool Approved { get; private set; }                          // Shows state of aproval
         public virtual bool IsSaved { get; private set; } = false;                  // Shows if saved or not
 
-        private List<Module> _module = new List<Module>();                          // List of all elements in schedule
+        private List<Module> _module { get; set; } = new List<Module>();                          // List of all elements in schedule
 
         /// <summary>
         /// Initialises a schedule

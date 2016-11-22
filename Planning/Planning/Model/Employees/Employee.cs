@@ -25,7 +25,7 @@ namespace Planning.Employees
 
         //Group and schedule links?
         // PDA
-        private List<Modules.Task> Tasks { get; set; }
+        private List<Model.Modules.Task> Tasks { get; set; }
 
         public Employee(string firstname, string lastname, int qualification) {
             this.Firstname = firstname;
@@ -34,17 +34,17 @@ namespace Planning.Employees
         }
 
         //Input is delegate function etc. t => "t.startTime > 12.00"
-        public List<Modules.Task> GetTasks(Predicate<Modules.Task> Filter) {
-            List<Modules.Task> result = new List<Modules.Task>();
+        public List<Model.Modules.Task> GetTasks(Predicate<Model.Modules.Task> Filter) {
+            List<Model.Modules.Task> result = new List<Model.Modules.Task>();
 
-            foreach (Modules.Task t in Tasks) {
+            foreach (Model.Modules.Task t in Tasks) {
                 if (Filter(t))
                     result.Add(t);
             }
             return result;
         }
 
-        public bool AssignTask(Modules.Task task) {
+        public bool AssignTask(Model.Modules.Task task) {
             if (task == null)
                 return false;
             Tasks.Add(task);

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Planning.Modules
+namespace Planning.Model.Modules
 {
     public abstract class Module
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-using Planning.Modules;
+using Planning.Model.Modules;
 
 namespace Planning
 {

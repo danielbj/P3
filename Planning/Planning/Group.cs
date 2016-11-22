@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Planning.Employees;
-using Planning.Schedules;
+using Planning.Model.Schedules;
 
 namespace Planning
 {

@@ -4,7 +4,7 @@ using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Planning.Modules
+namespace Planning.Model.Modules
 {
     public class Route : Module
     {

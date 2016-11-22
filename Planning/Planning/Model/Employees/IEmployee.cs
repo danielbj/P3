@@ -17,7 +17,7 @@ namespace Planning.Model.Employees
         //List<Modules.Task> Tasks { get; set; }//Might be unecessary since we have method.
 
 
-        List<Modules.Task> GetTasks(Predicate<Modules.Task> Filter);
-        bool AssignTask(Task task);
+        List<Model.Modules.Task> GetTasks(Predicate<Model.Modules.Task> Filter);
+        bool AssignTask(Model.Modules.Task task);
     }
 }

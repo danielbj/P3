@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Planning.Model.Modules;
 
-namespace Planning.Modules
+namespace Planning.Model.Modules
 {
     public class Task : Module, ITask
     {

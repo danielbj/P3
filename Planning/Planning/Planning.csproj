@@ -74,6 +74,7 @@
     <Compile Include="Model\Modules\ITask.cs" />
     <Compile Include="Model\Modules\Module.cs" />
     <Compile Include="Model\Modules\Route.cs" />
+    <Compile Include="Model\Schedules\ISchedule.cs" />
     <Compile Include="Model\Schedules\Schedule.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\ScheduleViewModel.cs" />

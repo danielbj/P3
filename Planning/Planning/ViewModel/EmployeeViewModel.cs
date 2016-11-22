@@ -12,6 +12,7 @@ namespace Planning.ViewModel
         IEmployee Employee;
         public EmployeeViewModel(IEmployee employee) {
             Employee = employee;
+            
         }
     }
 }
