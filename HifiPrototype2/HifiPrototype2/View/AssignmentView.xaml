@@ -5,11 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HifiPrototype2" 
              xmlns:presenters="clr-namespace:HifiPrototype2.Functions"
-             
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              ToolTip=".." ToolTipOpening="UserControl_ToolTipOpening">
-    <Button Width="auto" Height="auto" HorizontalAlignment="Stretch" Margin="1">
+    <Button x:Name="AssignmentButton" Width="auto" Height="auto" HorizontalAlignment="Stretch" Margin="1" Click="JobButton_Click">
         <StackPanel>
             <TextBlock x:Name="Description" HorizontalAlignment="Center"/>
             <TextBlock x:Name="Duration" HorizontalAlignment="Center"/>

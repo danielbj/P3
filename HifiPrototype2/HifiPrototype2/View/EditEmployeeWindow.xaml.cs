@@ -20,8 +20,6 @@ namespace HifiPrototype2.View
     /// </summary>
     public partial class EditEmployeeWindow : Window
     {
-        private Employee _employee;
-
         public EditEmployeeWindow() //Employee empl
         {
             InitializeComponent();
