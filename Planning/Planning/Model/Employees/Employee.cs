@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using Planning.Modules;
+using Planning.Model.Employees;
+using Planning.Model.Modules;
 
 namespace Planning.Employees
 {
-    public abstract class Employee
+    public abstract class Employee : IEmployee
     {
-        public string Firstname;
-        public string Lastname;
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
         private int _qualification;
         public int Qualification {
             get { return _qualification; }

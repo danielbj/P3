@@ -64,15 +64,20 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Citizen.cs" />
-    <Compile Include="Employees\Employee.cs" />
-    <Compile Include="Employees\HomeHelper.cs" />
-    <Compile Include="Employees\Nurse.cs" />
-    <Compile Include="Employees\Sosu.cs" />
+    <Compile Include="Model\Employees\Employee.cs" />
+    <Compile Include="Model\Employees\HomeHelper.cs" />
+    <Compile Include="Model\Employees\IEmployee.cs" />
+    <Compile Include="Model\Employees\Nurse.cs" />
+    <Compile Include="Model\Employees\Sosu.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="JSONDataContracts.cs" />
-    <Compile Include="Modules\Module.cs" />
-    <Compile Include="Modules\Route.cs" />
-    <Compile Include="Schedules\Schedule.cs" />
+    <Compile Include="Model\Modules\ITask.cs" />
+    <Compile Include="Model\Modules\Module.cs" />
+    <Compile Include="Model\Modules\Route.cs" />
+    <Compile Include="Model\Schedules\Schedule.cs" />
+    <Compile Include="ViewModel\EmployeeViewModel.cs" />
+    <Compile Include="ViewModel\ScheduleViewModel.cs" />
+    <Compile Include="ViewModel\TaskViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -87,7 +92,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modules\Task.cs" />
+    <Compile Include="Model\Modules\Task.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -116,7 +121,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Exceptions\" />
+    <Folder Include="Model\Exceptions\" />
+    <Folder Include="View\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
