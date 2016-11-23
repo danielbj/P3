@@ -49,7 +49,7 @@ namespace HifiPrototype2.Model
 
             string description = descriptions[MAGICNUMBER.Next(descriptions.Count)];
             int duration = MAGICNUMBER.Next(5, 40);
-            int location = MAGICNUMBER.Next(101);
+            int location = MAGICNUMBER.Next(51);
             
             return new Assignment(description, duration, location);
         }

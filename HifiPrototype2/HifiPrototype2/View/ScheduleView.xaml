@@ -30,11 +30,10 @@
             <TextBlock Padding="2" Margin="2" Width="65" TextAlignment="Center" Text="{Binding Dato, Converter={StaticResource DateTimeToStringConverter}}"/>
             <Button Name="DateForwardButton" Padding="2" Margin="2" Content="&gt;" Click="DateForwardButton_Click"/>
             <Button Padding="2" Margin="2" Content="Kalender"/>
-            <Button x:Name="MagicButton" Padding="2" Margin="2" Content="Magic" Click="MagicButton_Click"/>
         </StackPanel>
         <StackPanel x:Name="ButtonStackPanel" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
             <Button x:Name="CreateScheduleButton" Content="Opret Plan" Padding="2" Margin="2"/>
-            <Button x:Name="LoadButton" Content="Indlæs Grundplan" Padding="2" Margin="2" Click="LoadButton_Click"/>
+            <Button x:Name="LoadButton" Content="Indlæs Grundplan" Padding="2" Margin="2" Click="MagicButton_Click"/>
             <Button x:Name="AddEmployeeButton" Content="Tilføj Kolonne" Padding="2" Margin="2" Click="AddEmployeeButton_Click"/>
             <Button x:Name="JobButton" Content="Opgaver" Padding="2" Margin="2" Click="JobButton_Click"></Button>
             <Slider x:Name="Slider" Margin="2" Padding="2" Maximum="6600" Minimum="330" Orientation="Horizontal" Width="200" Value="660"/>

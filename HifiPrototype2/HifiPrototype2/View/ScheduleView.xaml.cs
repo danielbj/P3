@@ -154,7 +154,7 @@ namespace HifiPrototype2.View
         private void MagicButton_Click(object sender, RoutedEventArgs e)
         {
             var f = new ProtoScheduleFactory(500);
-            List<Employee> EmployeeList =  f.MakeEmployees(5);
+            List<Employee> EmployeeList =  f.MakeEmployees(12);
 
             foreach (var empl in EmployeeList)
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Planning;
 using NUnit.Framework;
 using Planning.Employees;
-using Planning.Modules;
+using Planning.Model.Modules;
 
 namespace Planning_Test
 {
@@ -33,7 +33,7 @@ namespace Planning_Test
         [Test]
         public void AssignTask_NullTask_False() {
             //Arrange
-            Planning.Modules.Task task = null;
+            Model.Modules.Task task = null;
             Employee em = new Nurse("Mc", "Buttface");
 
             Assert.False(em.AssignTask(task));
