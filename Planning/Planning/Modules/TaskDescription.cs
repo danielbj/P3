@@ -7,19 +7,20 @@ using Planning.Model.Modules;
 
 namespace Planning.Model.Modules
 {
-    public class Task : ITask
+    public class TaskDescription : ITask
     {
-        public DateTime DateCreated;
-        public DateTime DateDeleted;
-        
+        public DateTime DateCreated { get; set; }
+        public DateTime DateDeleted { get; set; }
+
         public Citizen Citizen { get; set; }
         public string assignment { get; set; }
         public string Description { get; protected set; }
         public List<TaskItem> TaskItems { get; set; }
-
+        public int Duration { get; private set; }
      
 
-        public Task(string description) {
+        public TaskDescription(int duration, string description) {
+            Duration = duration;
             Description = description;
             DateCreated = DateTime.Now;
         }
@@ -27,14 +28,14 @@ namespace Planning.Model.Modules
         public void EditTask() {
 
         }
-        
+       
+        public TaskItem MakeNewTaskItem() {
+            TaskItem tempTask = new TaskItem(Duration);
+            TaskItems.Add(tempTask);
 
-        public int CalculateSize()
-        {
-            throw new NotImplementedException();
+
+            return tempTask;
         }
-
-
         //Impleement equals method
     }
 }

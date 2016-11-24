@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Planning.Model.Modules;
 using Planning.Model.Schedules;
+using Planning.Model.Employees;
 
 namespace Planning.Model.Schedules
 {
@@ -13,7 +14,7 @@ namespace Planning.Model.Schedules
         public virtual bool Approved { get; private set; }                          // Shows state of aproval
         public virtual bool IsSaved { get; private set; } = false;                  // Shows if saved or not
 
-        private List<Module> _module { get; set; } = new List<Module>();                          // List of all elements in schedule
+        public Dictionary<Employee, PersonalSchedule> EmployeeSchedules { get; set; } = new Dictionary<Employee, PersonalSchedule>();
 
         /// <summary>
         /// Initialises a schedule
@@ -30,16 +31,16 @@ namespace Planning.Model.Schedules
         /// Adds an element to list
         /// </summary>
         /// <param name="module">Used to add to schedule</param>
-        public virtual void AddModule(Module module)
+        public virtual void AddModule(TaskItem taskItem)
         { }
 
         /// <summary>
         /// Deletes an element
         /// </summary>
         /// <param name="module">Used to remove correct element</param>
-        public virtual void DeleteElement(Module module)
+        public virtual void DeleteElement(TaskItem taskItem) //TODO
         {
-            _module.Remove(module);
+            //_module.Remove(module);
 
             IsSaved = false;
         }

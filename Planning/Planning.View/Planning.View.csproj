@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FD6A781E-68CC-4C89-A4FD-3826259FB001}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{CEF70E56-3EEB-456A-B2D2-86F69E88BF28}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Planning</RootNamespace>
-    <AssemblyName>Planning</AssemblyName>
+    <RootNamespace>Planning.View</RootNamespace>
+    <AssemblyName>Planning.View</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -34,17 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -59,45 +51,24 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="View\App.xaml">
+    <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\Address.cs" />
-    <Compile Include="Model\Citizen.cs" />
-    <Compile Include="Model\CitizenContainer.cs" />
-    <Compile Include="Model\Employees\Employee.cs" />
-    <Compile Include="Model\Employees\HomeHelper.cs" />
-    <Compile Include="Model\Employees\IEmployee.cs" />
-    <Compile Include="Model\Employees\Nurse.cs" />
-    <Compile Include="Model\Employees\Sosu.cs" />
-    <Compile Include="Model\Group.cs" />
-    <Compile Include="JSONDataContracts.cs" />
-    <Compile Include="Model\Modules\IModule.cs" />
-    <Compile Include="Model\Modules\ITask.cs" />
-    <Compile Include="Model\Modules\Module.cs" />
-    <Compile Include="Model\Modules\Route.cs" />
-    <Compile Include="Model\Modules\TaskItem.cs" />
-    <Compile Include="Model\Schedules\ISchedule.cs" />
-    <Compile Include="Model\Schedules\Schedule.cs" />
-    <Compile Include="ViewModel\EmployeeViewModel.cs" />
-    <Compile Include="ViewModel\ScheduleViewModel.cs" />
-    <Compile Include="ViewModel\TaskViewModel.cs" />
-    <Page Include="View\MainWindow.xaml">
+    <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="View\App.xaml.cs">
+    <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\MainWindow.xaml.cs">
+    <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Modules\Task.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -115,7 +86,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -123,10 +93,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="View\App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\Exceptions\" />
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

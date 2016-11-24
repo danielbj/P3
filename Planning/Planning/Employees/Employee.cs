@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 using Planning.Model.Employees;
 using Planning.Model.Modules;
 
-namespace Planning.Employees
+namespace Planning.Model.Employees
 {
-    public abstract class Employee : IEmployee
+    public class Employee : IEmployee
     {
+        public DateTime DateHired { get; set; }
+        public DateTime DateResigned { get; set; }
+
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         private int _qualification;
@@ -25,7 +28,7 @@ namespace Planning.Employees
 
         //Group and schedule links?
         // PDA
-        private List<Model.Modules.Task> Tasks { get; set; }
+        
 
         public Employee(string firstname, string lastname, int qualification) {
             this.Firstname = firstname;
@@ -33,23 +36,10 @@ namespace Planning.Employees
             this.Qualification = qualification;
         }
 
-        //Input is delegate function etc. t => "t.startTime > 12.00"
-        public List<Model.Modules.Task> GetTasks(Predicate<Model.Modules.Task> Filter) {
-            List<Model.Modules.Task> result = new List<Model.Modules.Task>();
+        public void EditEmployee() {
 
-            foreach (Model.Modules.Task t in Tasks) {
-                if (Filter(t))
-                    result.Add(t);
-            }
-            return result;
         }
-
-        public bool AssignTask(Model.Modules.Task task) {
-            if (task == null)
-                return false;
-            Tasks.Add(task);
-            return Tasks.Contains(task);
-        }
+        
     }
 }
 

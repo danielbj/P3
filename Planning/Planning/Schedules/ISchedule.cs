@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Planning.Model.Modules;
+using Planning.Model.Employees;
 
 namespace Planning.Model.Schedules
 {
@@ -13,10 +14,10 @@ namespace Planning.Model.Schedules
         string Description { get; set; }
         bool Approved { get; }
         bool IsSaved { get; }
-        //List<Module> _module { get; set; } private in class = unecessary in interface.
+        Dictionary<Employee, PersonalSchedule> EmployeeSchedules { get; set; }
         void MoveModule();
-        void AddModule(Module module);
-        void DeleteElement(Module module);
+        void AddModule(TaskItem taskItem);
+        void DeleteElement(TaskItem taskItem);
         void DeleteSchedule();
         void Save();
         void Approve(bool state);

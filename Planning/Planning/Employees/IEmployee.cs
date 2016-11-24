@@ -11,13 +11,15 @@ namespace Planning.Model.Employees
 {
     public interface IEmployee
     {
+        DateTime DateHired { get; set; }
+        DateTime DateResigned { get; set; }
         string Firstname { get; set; }
         string Lastname { get; set; }
         int Qualification { get; set; }
-        //List<Modules.Task> Tasks { get; set; }//Might be unecessary since we have method.
 
 
-        List<Model.Modules.Task> GetTasks(Predicate<Model.Modules.Task> Filter);
-        bool AssignTask(Model.Modules.Task task);
+        void EditEmployee();
+
+
     }
 }

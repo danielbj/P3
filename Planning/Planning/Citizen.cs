@@ -37,9 +37,9 @@ namespace Planning
                         throw new ArgumentException("Classification is invalid");
                 }
         }
-        public List<Task> Tasks;
+        public List<TaskDescription> Tasks;
 
-        public Citizen (string cpr, int age, string firstname, string lastname, string address, int classification, params Task[] tasks)
+        public Citizen (string cpr, int age, string firstname, string lastname, string address, int classification, params TaskDescription[] tasks)
         {
             CPR = cpr;
             _age = age;
@@ -49,7 +49,7 @@ namespace Planning
             _address.StartDate = DateTime.Now;
             Classification = classification;
 
-            Tasks = new List<Task>();
+            Tasks = new List<TaskDescription>();
             if(tasks.Length != 0)
             {
                 for (int i = 0; i < tasks.Length; i++)
@@ -62,8 +62,8 @@ namespace Planning
         //    public Citizen(string cpr, int age, string firstname, string lastname, string address, int classification)
         //                    : this(cpr, age, firstname, lastname, classification, null) { }
 
-        public void CreateTask(int startTime, string description) {
-            Tasks.Add(new Task(description));
+        public void CreateTask(int duration, string description) {
+            Tasks.Add(new TaskDescription(duration, description));
 
         }
 

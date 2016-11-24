@@ -8,15 +8,17 @@ namespace Planning.Model.Modules
 {
     public interface ITask
     {
+        DateTime DateCreated { get; set; }
+        DateTime DateDeleted { get; set; }
         string Description { get; }
 
-        //string Duration { get; }
-        //int StartTime { get; set; }
-        //int EndTime { get; set; }
-        int CalculateSize();
+        int Duration { get; }
         Citizen Citizen { get; set; }
         string assignment { get; set; }
-        void EditTask();
         List<TaskItem> TaskItems { get; set; }
+
+
+        void EditTask();
+        TaskItem MakeNewTaskItem();
     }
 }
