@@ -1,12 +1,17 @@
-using Planning.Model.Modules;
 using System;
 using System.Collections.Generic;
-
+using Planning.Model.Modules;
+using Planning.Model;
 
 namespace Planning
 {
     public class Citizen
     {
+        public int _age;
+        public string _firstname;
+        public string _lastname;
+        public DateTime DateAdmitted;
+        public DateTime DateDischarged;
 
         private string _cpr;
         public string CPR {//TODO validate that it is string?
@@ -19,20 +24,8 @@ namespace Planning
             }
         }
 
-        public int _age;
-        public string _firstname;
-        public string _lastname;
 
-        private string _address;
-        public string Address { //TODO validate that it is string?
-            get { return _address; }
-            set {
-                if(value.Contains(" "))
-                    _address = value;
-                else
-                    throw new ArgumentException("Address must contain space and number");
-            }
-        }
+        private Address _address = new Address();       
 
         private int _classification;
         public int Classification { //TODO validate that it is int?
@@ -52,7 +45,8 @@ namespace Planning
             _age = age;
             _firstname = firstname;
             _lastname = lastname;
-            Address = address;
+            _address.AddressName = address;
+            _address.StartDate = DateTime.Now;
             Classification = classification;
 
             Tasks = new List<Task>();
@@ -67,5 +61,11 @@ namespace Planning
 
         //    public Citizen(string cpr, int age, string firstname, string lastname, string address, int classification)
         //                    : this(cpr, age, firstname, lastname, classification, null) { }
+
+        public void CreateTask(int startTime, string description) {
+            Tasks.Add(new Task(description));
+
+        }
+
     }
 }    

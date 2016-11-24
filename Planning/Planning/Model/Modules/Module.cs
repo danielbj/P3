@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Planning.Model.Modules
 {
-    public abstract class Module
+    public abstract class Module : IModule
     {
-        public int _startTime; // Maybe DateTime
-        public int _endTime; //Maybe DateTime
-        public string _name; // May be prop
+        public int _startTime { get; set; } // Maybe DateTime
+        public int _endTime { get; set; } //Maybe DateTime
+        public string _name { get; set; } // May be prop
+        public abstract string Description { get; }
+        public abstract string Duration { get; }
 
         public Module(int startTime, string name)
         {
@@ -21,7 +23,6 @@ namespace Planning.Model.Modules
         /// <summary>
         /// Gets the duration of the Module
         /// </summary>
-        public abstract string Duration { get; }
 
         /// <summary>
         /// Calculates the size of the module
@@ -33,7 +34,7 @@ namespace Planning.Model.Modules
         /// Returns a relevent description of the module
         /// </summary>
         /// <returns>Description</returns>
-        public abstract string Description();
+        
 
     }
 }

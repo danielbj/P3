@@ -15,21 +15,27 @@ namespace Planning.Model.Modules
         private string _endURL = "&optimize=distance&avoid=minimizeTolls&key=";
         private string _bingKey = "ApHwnCobuvyzfVShxnVZ7_PV8Cf7Ok-zySgYQBd1liGGJU_GpPaCAw6kZmHJF9i4";        
         private BingMapsRESTService.Common.JSON.Route _route;
-
+        #endregion
         public override string Duration
         {
-            get
-            {
+            get {
                 TimeSpan time = TimeSpan.FromSeconds(_route.TravelDuration);
                 return time.ToString();
-            }                        
+            }
         }
 
         public double Distance
         {
             get { return _route.TravelDistance; }
         }
-        #endregion
+
+        public override string Description {
+            get {
+                return _name;
+            }
+        }
+
+        
 
         private static string GetWaypoints(string[] waypoints)
         {
@@ -110,11 +116,6 @@ namespace Planning.Model.Modules
         }
 
         public override int CalculateSize()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string Description()
         {
             throw new NotImplementedException();
         }

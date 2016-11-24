@@ -24,7 +24,7 @@ namespace Planning_Test
         [TestCase(null, "Bath")]
         public void AssignTask_Correctinput_True(int st, string name) {//Fails bc not methods are not implemented in Task
             //Arrange
-            Planning.Modules.Task task = new Planning.Modules.Task(st, name);
+            Planning.Model.Modules.Task task = new Planning.Model.Modules.Task(st, name);
             Employee em = new Nurse("Mc", "Buttface");
 
             Assert.True(em.AssignTask(task));
@@ -33,7 +33,7 @@ namespace Planning_Test
         [Test]
         public void AssignTask_NullTask_False() {
             //Arrange
-            Model.Modules.Task task = null;
+            Planning.Model.Modules.Task task = null;
             Employee em = new Nurse("Mc", "Buttface");
 
             Assert.False(em.AssignTask(task));
@@ -43,16 +43,16 @@ namespace Planning_Test
         public void GetTasks_CorrectInput_AreEqual() {//Fails bc not methods are not implemented in Task
             //Arrange
             Employee em = new Nurse("Dora", "Exlporer");
-            List<Planning.Modules.Task> taskListExpected = new List<Planning.Modules.Task>();
+            List<Planning.Model.Modules.Task> taskListExpected = new List<Planning.Model.Modules.Task>();
 
             for (int i = 0; i < 5; i++) {
-                em.AssignTask(new Planning.Modules.Task(i, $"Bath {i}"));
+                em.AssignTask(new Planning.Model.Modules.Task(i, $"Bath {i}"));
 
-                taskListExpected.Add(new Planning.Modules.Task(i, $"Bath {i}"));
+                taskListExpected.Add(new Planning.Model.Modules.Task(i, $"Bath {i}"));
             }
 
             //Act
-            List<Planning.Modules.Task> taskListActual = em.GetTasks(t => t._startTime >= 0);
+            List<Planning.Model.Modules.Task> taskListActual = em.GetTasks(t => t.StartTime >= 0);
 
             //Assert
             Assert.AreEqual(taskListActual, taskListExpected);

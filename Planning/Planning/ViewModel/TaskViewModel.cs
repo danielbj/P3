@@ -10,8 +10,8 @@ namespace Planning.ViewModel
 {
     class TaskViewModel
     {
-        ITask Task; 
-        public TaskViewModel(ITask task) {
+        IModule Task; 
+        public TaskViewModel(IModule task) {
             Task = task;
         }
     }

@@ -7,32 +7,33 @@ using Planning.Model.Modules;
 
 namespace Planning.Model.Modules
 {
-    public class Task : Module, ITask
+    public class Task : ITask
     {
+        public DateTime DateCreated;
+        public DateTime DateDeleted;
+        
         public Citizen Citizen { get; set; }
         public string assignment { get; set; }
+        public string Description { get; protected set; }
+        public List<TaskItem> TaskItems { get; set; }
 
-        public Task(int startTime, string name) : base(startTime, name)
-        {
+     
+
+        public Task(string description) {
+            Description = description;
+            DateCreated = DateTime.Now;
         }
 
-        public override string Duration
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public void EditTask() {
 
-        public override int CalculateSize()
-        {
-            throw new NotImplementedException();
         }
+        
 
-        public override string Description()
+        public int CalculateSize()
         {
             throw new NotImplementedException();
         }
+
 
         //Impleement equals method
     }

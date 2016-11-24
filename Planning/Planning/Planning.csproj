@@ -59,35 +59,39 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="View\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Citizen.cs" />
+    <Compile Include="Model\Address.cs" />
+    <Compile Include="Model\Citizen.cs" />
+    <Compile Include="Model\CitizenContainer.cs" />
     <Compile Include="Model\Employees\Employee.cs" />
     <Compile Include="Model\Employees\HomeHelper.cs" />
     <Compile Include="Model\Employees\IEmployee.cs" />
     <Compile Include="Model\Employees\Nurse.cs" />
     <Compile Include="Model\Employees\Sosu.cs" />
-    <Compile Include="Group.cs" />
+    <Compile Include="Model\Group.cs" />
     <Compile Include="JSONDataContracts.cs" />
+    <Compile Include="Model\Modules\IModule.cs" />
     <Compile Include="Model\Modules\ITask.cs" />
     <Compile Include="Model\Modules\Module.cs" />
     <Compile Include="Model\Modules\Route.cs" />
+    <Compile Include="Model\Modules\TaskItem.cs" />
     <Compile Include="Model\Schedules\ISchedule.cs" />
     <Compile Include="Model\Schedules\Schedule.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\ScheduleViewModel.cs" />
     <Compile Include="ViewModel\TaskViewModel.cs" />
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
+    <Compile Include="View\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -119,11 +123,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="View\App.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\Exceptions\" />
-    <Folder Include="View\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
