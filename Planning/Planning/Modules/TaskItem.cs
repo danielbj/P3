@@ -10,8 +10,15 @@ namespace Planning.Model.Modules
     {
         public int StartTime { get; set; }
         public int EndTime { get { return StartTime + Duration; } }
+        public enum Status
+        {
+            Unplanned,
+            Expired,
+            Cancelled,
+            Planned
+        }
 
-        public bool Planned;
+        public Status State { get; set; } = Status.Unplanned;
         public bool Locked;
         public int Duration { get; private set; }
         public Route Route;
@@ -19,9 +26,12 @@ namespace Planning.Model.Modules
 
 
 
-        public TaskItem(int duration) {
+        public TaskItem(int duration, Route route, Citizen citizen) {
             Duration = duration;
             StartTime = 0;
         }
+
+
+        
     }
 }

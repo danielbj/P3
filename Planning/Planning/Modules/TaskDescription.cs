@@ -15,11 +15,12 @@ namespace Planning.Model.Modules
         public Citizen Citizen { get; set; }
         public string assignment { get; set; }
         public string Description { get; protected set; }
-        public List<TaskItem> TaskItems { get; set; }
+        public List<TaskItem> TaskItems { get; set; } = new List<TaskItem>();
         public int Duration { get; private set; }
-     
+        public Route Route;
 
-        public TaskDescription(int duration, string description) {
+
+        public TaskDescription(int duration, string description) {//Maybe citizen input TODO
             Duration = duration;
             Description = description;
             DateCreated = DateTime.Now;
@@ -30,11 +31,17 @@ namespace Planning.Model.Modules
         }
        
         public TaskItem MakeNewTaskItem() {
-            TaskItem tempTask = new TaskItem(Duration);
+            TaskItem tempTask = new TaskItem(Duration, Route, Citizen);
             TaskItems.Add(tempTask);
 
 
             return tempTask;
+        }
+
+        public void CalculateRoute(string startPoint)
+        {
+            Route = new Route(startPoint, Citizen._address.AddressName);
+
         }
         //Impleement equals method
     }

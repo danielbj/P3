@@ -25,7 +25,7 @@ namespace Planning
         }
 
 
-        private Address _address = new Address();       
+        public Address _address { get; private set; } = new Address();       
 
         private int _classification;
         public int Classification { //TODO validate that it is int?

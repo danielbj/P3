@@ -22,39 +22,41 @@ namespace Planning_Test
             TaskItem taskItem = task.MakeNewTaskItem();
 
 
-            Employee em = new Employee("Mc", "Buttface", 1);
+            PersonalSchedule ps = new PersonalSchedule(DateTime.Now);
 
             //Assert
-            Assert.True(em.AssignTask(task));
+            Assert.True(ps.AssignTask(taskItem));
         }
 
         [Test]
         public void AssignTask_NullTask_False() {
             //Arrange
-            TaskDescription task = null;
-            TaskItem taskItem = task.MakeNewTaskItem();
-
-
-            Employee em = new Employee("Mc", "Buttface", 1);
-
-            Assert.False(em.AssignTask(task));
+            TaskItem taskItem = null;
+            
+            PersonalSchedule ps = new PersonalSchedule(DateTime.Now);
+            
+            Assert.False(ps.AssignTask(taskItem));
         }
 
         [Test]
         public void GetTasks_CorrectInput_AreEqual() {//Fails bc not methods are not implemented in Task
             //Arrange
-            Employee em = new Employee("Dora", "Exlporer", 1);
+            DateTime Now = DateTime.Now;
+            PersonalSchedule ps = new PersonalSchedule(Now);
+            TaskDescription td = new TaskDescription(30, "Bath");
 
-            List<TaskDescription> taskListExpected = new List<TaskDescription>();
+            List<TaskItem> taskListExpected = new List<TaskItem>();
 
             for (int i = 0; i < 5; i++) {
-                em.AssignTask(new TaskDescription(i, $"Bath {i}"));
+                TaskItem tempTI = td.MakeNewTaskItem();
+                tempTI.StartTime = i;
+                ps.AssignTask(tempTI);
 
-                taskListExpected.Add(new TaskDescription(i, $"Bath {i}"));
+                taskListExpected.Add(tempTI);
             }
 
             //Act
-            List<TaskDescription> taskListActual = em.GetTasks(t => t is TaskDescription);
+            List<TaskItem> taskListActual = ps.GetTasks(t => t is TaskItem);
 
             //Assert
             Assert.AreEqual(taskListActual, taskListExpected);

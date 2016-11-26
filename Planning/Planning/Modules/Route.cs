@@ -33,8 +33,8 @@ namespace Planning.Model.Modules
 
 
 
-        public Route(int startTime, params string[] waypoints) {
-            StartTime = startTime;
+        public Route(params string[] waypoints) {
+            //StartTime = startTime;
             Name = GetWaypoints(waypoints);
             Waypoints = waypoints;
         }
@@ -55,11 +55,8 @@ namespace Planning.Model.Modules
         }
         public void CalculateRoute() {
             WebResponse response = MakeRequest(CreateRequestURL());
-            Console.WriteLine("response ok");
             JObject jsonFile = ProcessRequest(response);
-            Console.WriteLine("jobject ok");
             DeserializeJSONObjects(jsonFile);
-            Console.WriteLine("deserialize ok");
         }
 
         private WebResponse MakeRequest(string requestURL) {

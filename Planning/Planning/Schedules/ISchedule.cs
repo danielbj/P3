@@ -15,10 +15,11 @@ namespace Planning.Model.Schedules
         bool Approved { get; }
         bool IsSaved { get; }
         Dictionary<Employee, PersonalSchedule> EmployeeSchedules { get; set; }
-        void MoveModule();
-        void AddModule(TaskItem taskItem);
-        void DeleteElement(TaskItem taskItem);
+        void AddTaskItem(TaskItem taskItem, Employee targetEmployee);
+        void DeleteTaskItem(TaskItem taskItem);
         void DeleteSchedule();
+        void InsertTaskItem(int index, TaskItem taskItem);
+        //void AdjustTime(int startIndex);
         void Save();
         void Approve(bool state);
     }
