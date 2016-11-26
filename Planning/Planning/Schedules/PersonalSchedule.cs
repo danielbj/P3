@@ -17,7 +17,10 @@ namespace Planning.Model.Schedules
 
 
 
-
+        public PersonalSchedule(DateTime effectiveFrom) {
+            DateCreated = DateTime.Now;
+            EffectiveDate = effectiveFrom;
+        }
 
         //Input is delegate function etc. t => "t.startTime > 12.00"
         public List<TaskItem> GetTasks(Predicate<TaskItem> Filter) {

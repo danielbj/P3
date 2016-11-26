@@ -15,7 +15,7 @@ namespace Planning.Model.Modules
         public Citizen Citizen { get; set; }
         public string assignment { get; set; }
         public string Description { get; protected set; }
-        public List<TaskItem> TaskItems { get; set; }
+        public List<TaskItem> TaskItems { get; set; } = new List<TaskItem>();
         public int Duration { get; private set; }
      
 
