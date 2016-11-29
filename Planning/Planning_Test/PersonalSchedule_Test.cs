@@ -22,7 +22,7 @@ namespace Planning_Test
             TaskItem taskItem = task.MakeNewTaskItem();
 
 
-            PersonalSchedule ps = new PersonalSchedule(DateTime.Now);
+            EmployeeSchedule ps = new EmployeeSchedule(DateTime.Now);
 
             //Assert
             Assert.True(ps.AssignTask(taskItem));
@@ -33,7 +33,7 @@ namespace Planning_Test
             //Arrange
             TaskItem taskItem = null;
             
-            PersonalSchedule ps = new PersonalSchedule(DateTime.Now);
+            EmployeeSchedule ps = new EmployeeSchedule(DateTime.Now);
             
             Assert.False(ps.AssignTask(taskItem));
         }
@@ -42,7 +42,7 @@ namespace Planning_Test
         public void GetTasks_CorrectInput_AreEqual() {//Fails bc not methods are not implemented in Task
             //Arrange
             DateTime Now = DateTime.Now;
-            PersonalSchedule ps = new PersonalSchedule(Now);
+            EmployeeSchedule ps = new EmployeeSchedule(Now);
             TaskDescription td = new TaskDescription(30, "Bath");
 
             List<TaskItem> taskListExpected = new List<TaskItem>();

@@ -12,7 +12,7 @@ namespace Planning.Model.Employees
     {
         public DateTime DateHired { get; set; }
         public DateTime DateResigned { get; set; }
-
+        //Dictionary with date and worktime.
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         private int _qualification;

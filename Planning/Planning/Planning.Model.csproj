@@ -71,11 +71,12 @@
     <Compile Include="Modules\IModule.cs" />
     <Compile Include="Modules\ITask.cs" />
     <Compile Include="Modules\Route.cs" />
+    <Compile Include="Modules\TaskChanged.cs" />
     <Compile Include="Modules\TaskItem.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Schedules\ISchedule.cs" />
-    <Compile Include="Schedules\PersonalSchedule.cs" />
-    <Compile Include="Schedules\Schedule.cs" />
+    <Compile Include="Schedules\IGroupSchedule.cs" />
+    <Compile Include="Schedules\EmployeeSchedule.cs" />
+    <Compile Include="Schedules\GroupSchedule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modules\TaskDescription.cs" />

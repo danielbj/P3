@@ -10,8 +10,8 @@ namespace Planning.ViewModel
 {
     class ScheduleViewModel
     {
-        ISchedule Schedule;
-        public ScheduleViewModel(ISchedule schedule) {
+        IGroupSchedule Schedule;
+        public ScheduleViewModel(IGroupSchedule schedule) {
             Schedule = schedule;
         }
     }

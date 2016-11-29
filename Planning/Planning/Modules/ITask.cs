@@ -18,7 +18,7 @@ namespace Planning.Model.Modules
         List<TaskItem> TaskItems { get; set; }
 
 
-        void EditTask();
+        void AddNote();
         TaskItem MakeNewTaskItem();
     }
 }

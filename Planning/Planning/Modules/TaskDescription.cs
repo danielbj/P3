@@ -11,13 +11,15 @@ namespace Planning.Model.Modules
     {
         public DateTime DateCreated { get; set; }
         public DateTime DateDeleted { get; set; }
-
+        //TODO Add frequency if needed.
         public Citizen Citizen { get; set; }
         public string assignment { get; set; }
         public string Description { get; protected set; }
+        public string Note { get; private set; }
         public List<TaskItem> TaskItems { get; set; } = new List<TaskItem>();
         public int Duration { get; private set; }
         public Route Route;
+        public TimeSpan TimeFrame;
 
 
         public TaskDescription(int duration, string description) {//Maybe citizen input TODO
@@ -26,7 +28,7 @@ namespace Planning.Model.Modules
             DateCreated = DateTime.Now;
         }
 
-        public void EditTask() {
+        public void AddNote() {
 
         }
        
@@ -38,11 +40,7 @@ namespace Planning.Model.Modules
             return tempTask;
         }
 
-        public void CalculateRoute(string startPoint)
-        {
-            Route = new Route(startPoint, Citizen._address.AddressName);
-
-        }
+      
         //Impleement equals method
     }
 }

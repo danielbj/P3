@@ -13,7 +13,7 @@ namespace Planning
     public interface IGroup
     {
         List<Employee> Employees { get; set; }
-        Dictionary<DateTime, Schedule> DailySchedules { get; set; }
-        Dictionary<string, Schedule> TemplateSchedules { get; set; }
+        Dictionary<DateTime, GroupSchedule> DailySchedules { get; set; }
+        Dictionary<string, GroupSchedule> TemplateSchedules { get; set; }
     }
 }

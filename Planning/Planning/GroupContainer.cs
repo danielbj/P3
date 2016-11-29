@@ -9,5 +9,15 @@ namespace Planning
     public class GroupContainer
     {
         List<Group> Groups = new List<Group>();
+
+        public void AddGroup(Group group)
+        {
+
+        }
+
+        public void RemoveGroup(Group group)
+        {
+
+        }
     }
 }

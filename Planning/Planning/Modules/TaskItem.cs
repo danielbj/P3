@@ -22,12 +22,15 @@ namespace Planning.Model.Modules
         public bool Locked;
         public int Duration { get; private set; }
         public Route Route;
+        public Citizen Citizen;
 
 
 
 
         public TaskItem(int duration, Route route, Citizen citizen) {
             Duration = duration;
+            Route = route;
+            Citizen = citizen;
             StartTime = 0;
         }
 

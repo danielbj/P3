@@ -67,5 +67,15 @@ namespace Planning
 
         }
 
+
+        public void RemoveTask(TaskDescription task)
+        {
+
+        }
+
+        public void EditAddress()
+        {
+
+        }
     }
 }    
