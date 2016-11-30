@@ -7,6 +7,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <Button x:Name="MailBoxButton" Margin="3">Postkasse</Button>
+        </StackPanel>
+        <TabControl Grid.Column="1" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TabItem Header ="Planer">
+                <local:ScheduleView/>
+            </TabItem>
+            <TabItem Header ="Overblik">
+                <local:OverviewView/>
+            </TabItem>
+            <TabItem Header ="Borger">
+               <!--CitizenView-->
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

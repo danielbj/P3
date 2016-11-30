@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Planning.Model.Employees;
+using Planning.Model.Modules;
 
 namespace Planning.ViewModel
 {
-    class EmployeeViewModel
+    class CitizenViewModel
     {
-        IEmployee Employee;
-        public EmployeeViewModel(IEmployee employee) {
-            Employee = employee;
-            
+        IModule Task; 
+        public CitizenViewModel(IModule task) {
+            Task = task;
         }
     }
 }
