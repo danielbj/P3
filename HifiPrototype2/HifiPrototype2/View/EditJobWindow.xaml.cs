@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using HifiPrototype2.Model;
 
 namespace HifiPrototype2.View
 {
@@ -97,13 +98,20 @@ namespace HifiPrototype2.View
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            AreYouSureWindow newWindow = new AreYouSureWindow("Er du sikker på at du vil slette opgaven?");
+            AreYouSureWindow newWindow = new AreYouSureWindow("Er du sikker på at du vil fjerne opgaven?");
 
             newWindow.ShowDialog(this);
 
             if (newWindow.IsAccepted)
             {
-                Job.Presenter.Assignment.Provider.RemoveAssignment(Job.Presenter.Assignment);
+                Assignment a = Job.Presenter.Assignment;
+                EmployeeSchedule es = a.EmployeeSchedule;
+                GroupSchedule g = es.GroupSchedule;
+
+                es.RemoveAssignment(a);
+                g.UnplanAssignment(a);
+                
+                
                 Close();
             }
 

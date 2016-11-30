@@ -14,6 +14,8 @@ namespace HifiPrototype2.Functions
         public Employee _employee;
         public string Name { get { return _employee.Name; } }
 
+        public EmployeeSchedule EmployeeSchedule { get; set; }
+
         public delegate void ScheduleChangedHandler();
         public ScheduleChangedHandler ScheduleChangedEvent;
 
@@ -25,31 +27,17 @@ namespace HifiPrototype2.Functions
 
         }
 
-        public void SetEmployee(Employee employee)
+        public void SetEmployeeSchedule(EmployeeSchedule schedule)
         {
-            _employee = employee;
-            _employee.AssignmentsChanged += LoadAssignments;
-        }
-
-        private void SortAssignments() {
-            _employee.Assignments.OrderByDescending((a) => a.StartTime).ThenByDescending((a) => a.Duration);
-
-            //for (int i = 1; i < _employee.Assignments.Count; i++) {
-            //        if (_employee.Assignments[i].StartTime < _employee.Assignments[i - 1].EndTime) {
-            //            _employee.Assignments[i].StartTime = _employee.Assignments[i - 1].EndTime + 1;
-            //            _employee.Assignments[i].EndTime = (_employee.Assignments[i].StartTime + _employee.Assignments[i].Duration);
-            //        }
-
-            //}
-            
+            EmployeeSchedule = schedule;
+            EmployeeSchedule.AssignmentsChanged += LoadAssignments;
         }
 
         public void LoadAssignments()
         {
             _view.Clear();
-            //SortAssignments();
 
-            foreach (Assignment assignment in _employee.Assignments)
+            foreach (Assignment assignment in EmployeeSchedule.Assignments)
             {
                 if (assignment.route.Duration > 0)
                 {
@@ -61,7 +49,5 @@ namespace HifiPrototype2.Functions
                 _view.AddAssignment(assignmentView);
             }
         }
-
-
     }
 }

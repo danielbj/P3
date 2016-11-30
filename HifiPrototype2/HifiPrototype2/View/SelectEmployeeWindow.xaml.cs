@@ -15,17 +15,23 @@ using System.Windows.Shapes;
 namespace HifiPrototype2.View
 {
     /// <summary>
-    /// Interaction logic for MailBoxWindow.xaml
+    /// Interaction logic for SelectEmployeeWindow.xaml
     /// </summary>
-    public partial class MailBoxWindow : Window
+    public partial class SelectEmployeeWindow : Window
     {
-        public MailBoxWindow()
+        private DailyScheduleView _dailySchedule;
+
+        public SelectEmployeeWindow(DailyScheduleView dailySchedule)
         {
             InitializeComponent();
+            _dailySchedule = dailySchedule;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void EmployeeListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var item = EmployeeListBox.SelectedItem as ListBoxItem;
+
+            _dailySchedule.NameLabel.Text = item.Content as string;
             this.Close();
         }
     }

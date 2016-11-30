@@ -25,6 +25,8 @@ namespace HifiPrototype2.Model
         public int Location { get; set; }
         public string Description { get; set; }
         public Employee Provider { get; set; }
+        public EmployeeSchedule EmployeeSchedule { get; set; }
+
         public int StartTime
         {
             get

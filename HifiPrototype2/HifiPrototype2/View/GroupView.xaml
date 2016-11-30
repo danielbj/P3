@@ -29,12 +29,20 @@
             </StackPanel>
             <ScrollViewer Grid.Row="1" Margin="3">
                 <StackPanel x:Name="EmployeePanel" Height="auto" Orientation="Vertical" Width="auto" HorizontalAlignment="Stretch" Grid.RowSpan="2">
-                    <Expander Margin="3" Header="GruppeNavn" IsExpanded="True" >
+                    <Expander Margin="3" Header="Snedsted Aften" IsExpanded="True" >
                         <ListBox>
-                            <ListBoxItem>MedarbejderNavn (12345678)  sygeplejerske</ListBoxItem>
-                            <ListBoxItem>MedarbejderNavn (12345678)  sygeplejerske</ListBoxItem>
-                            <ListBoxItem>MedarbejderNavn (12345678)  sygeplejerske</ListBoxItem>
-                            <ListBoxItem>MedarbejderNavn (12345678)  sygeplejerske</ListBoxItem>
+                            <ListBoxItem Content="Anne Andersen"/>
+                            <ListBoxItem Content="Britt Bruun"/>
+                            <ListBoxItem Content="Clara Christensen"/>
+                            <ListBoxItem Content="Ditte Dinesen"/>
+                            <ListBoxItem Content="Else Eriksen"/>
+                            <ListBoxItem Content="Freja Friisgaard"/>
+                            <ListBoxItem Content="Gurli Gris"/>
+                            <ListBoxItem Content="Helle Hansen"/>
+                            <ListBoxItem Content="Inge Iversen"/>
+                            <ListBoxItem Content="Jane Jensen"/>
+                            <ListBoxItem Content="Karen Kofoed"/>
+                            <ListBoxItem Content="Lene Larsen"/>
                         </ListBox>
                     </Expander>
                     <Expander Margin="3" Header="GruppeNavn" IsExpanded="True" >

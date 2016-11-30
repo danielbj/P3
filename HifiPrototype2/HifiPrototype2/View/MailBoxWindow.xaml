@@ -14,12 +14,9 @@
         </Grid.ColumnDefinitions>
         <ScrollViewer Grid.Column="0" Margin="3" VerticalScrollBarVisibility="Auto" >
             <ListBox Width="auto" VerticalAlignment="Stretch">
-                <ListBoxItem>Besked 1</ListBoxItem>
-                <ListBoxItem>Besked 1</ListBoxItem>
-                <ListBoxItem>Besked 1</ListBoxItem>
-                <ListBoxItem>Besked 1</ListBoxItem>
-                <ListBoxItem>Besked 1</ListBoxItem>
-                <ListBoxItem>Besked 1</ListBoxItem>
+                <ListBoxItem>Madsen 28-11-16</ListBoxItem>
+                <ListBoxItem>Keldsen 28-11-16</ListBoxItem>
+                <ListBoxItem>Pedersen 27-11-16</ListBoxItem>
             </ListBox>
         </ScrollViewer>
         <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Center" Background="Gray" Width="4" ShowsPreview="False"/>
@@ -30,29 +27,29 @@
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="3">
-                <Button Margin="3" Content="Godkend"/>
+                <Button Margin="3" Content="Godkend" Click="Button_Click"/>
             </StackPanel>
             <TextBlock Grid.Row="1" Height="auto" Width="auto" TextWrapping="Wrap" Margin="3">
-                yadayadayaadayadayadayadayadayadayadayadayadayadayadayadayadayadayadayadayadayadayadayadayadayadayadayadayadayadayada
+                Mads Madsen Har fået forlænget tid til bad.
             </TextBlock>
             <ScrollViewer Grid.Row="2" Margin="3">
                 <StackPanel>
                     <Label Content="Service:"/>
                     <Label Margin="20,0,0,0"  Content="Bad"/>
                     <Label Content="Borger:"/>
-                    <Label Margin="20,0,0,0"  Content="Navn"/>
+                    <Label Margin="20,0,0,0"  Content="Mads Madsen"/>
                     <Label Content="Addresse"/>
-                    <Label Margin="20,0,0,0" Content="Vej nr, by"/>
+                    <Label Margin="20,0,0,0" Content="Badevej 10, 7752 Snedsted"/>
                     <Label Content="Type"/>
-                    <Label Margin="20,0,0,0" Content="Personlig pleje"/>
+                    <Label Margin="20,0,0,0" Content="Personlig hygiejne"/>
                     <Label Foreground="red" Content="Tid"/>
                     <Label Margin="20,0,0,0" Foreground="Red" Content="25 minutter"/>
                     <Label Content="Hyppighed"/>
-                    <Label Margin="20,0,0,0" Content="3 ganger pr 7 dage"/>
+                    <Label Margin="20,0,0,0" Content="3 gange pr 7 dage"/>
                     <Label Content="Beskrivelse"/>
-                    <TextBlock Margin="20,0,0,0"  TextWrapping="Wrap" Text="Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla" />
+                    <TextBlock Margin="20,0,0,0"  TextWrapping="Wrap" Text="Brusebad" />
                     <Label Content="Noter"/>
-                    <TextBlock Margin="20,0,0,0" TextWrapping="Wrap" Text="Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla"/>
+                    <TextBlock Margin="20,0,0,0" TextWrapping="Wrap" Text="Shampoo og sæbe står i skabet til venstre."/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

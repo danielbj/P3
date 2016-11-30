@@ -19,21 +19,23 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel x:Name="GroupOverviewStackPanel" Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
-            <ComboBox x:Name="ScheduleComboBox" Margin="3" FlowDirection="RightToLeft">
+            <ComboBox x:Name="GroupComboBox" Margin="3" FlowDirection="RightToLeft" SelectionChanged="GroupComboBox_SelectionChanged"/>
+            <ComboBox x:Name="ScheduleComboBox" Margin="3" FlowDirection="RightToLeft" >
                 <ComboBoxItem x:Name="CalenderScheduleComboBoxItem" Content="Kalender Plan" Selected="CalenderScheduleComboBoxItem_Selected" Selector.IsSelected="True"/>
                 <ComboBoxItem x:Name="TemplateScheduleComboBoxItem" Content="Template Plan" Selected="TemplateScheduleComboBoxItem_Selected"/>
             </ComboBox>
-            <ComboBox Margin="3" FlowDirection="RightToLeft">
-                <ComboBoxItem x:Name="Group1ComboBoxItem" Content="Gruppe 1" Selected="GroupComboBoxItem_Selected" Selector.IsSelected="True"></ComboBoxItem>
-            </ComboBox>
-            <Button Name="DateBackButton" Padding="2" Margin="2" Content="&lt;" Click="DateBackButton_Click"/>
+           <!-- <Button Name="DateBackButton" Padding="2" Margin="2" Content="&lt;" Click="DateBackButton_Click"/>
             <TextBlock Padding="2" Margin="2" Width="65" TextAlignment="Center" Text="{Binding Dato, Converter={StaticResource DateTimeToStringConverter}}"/>
             <Button Name="DateForwardButton" Padding="2" Margin="2" Content="&gt;" Click="DateForwardButton_Click"/>
-            <Button Padding="2" Margin="2" Content="Kalender"/>
+            <Button Padding="2" Margin="2" Content="Kalender"/> -->
+            <Grid x:Name="DateGrid">
+                <DatePicker x:Name="CurrentDatePicker" Margin="3" SelectedDateChanged="CurrentDatePicker_SelectedDateChanged"/>
+            </Grid>
+            <ComboBox x:Name="TemplateComboBox" Margin="3" Visibility="Collapsed" SelectionChanged="TemplateComboBox_SelectionChanged"/>
         </StackPanel>
         <StackPanel x:Name="ButtonStackPanel" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
-            <Button x:Name="CreateScheduleButton" Content="Opret Plan" Padding="2" Margin="2"/>
-            <Button x:Name="LoadButton" Content="Indlæs Grundplan" Padding="2" Margin="2" Click="MagicButton_Click"/>
+            <Button x:Name="CreateScheduleButton" Content="Opret Plan" Padding="2" Margin="2" Click="CreateScheduleButton_Click"/>
+            <Button x:Name="LoadButton" Content="Indlæs Grundplan" Padding="2" Margin="2" Click="LoadButton_Click"/>
             <Button x:Name="AddEmployeeButton" Content="Tilføj Kolonne" Padding="2" Margin="2" Click="AddEmployeeButton_Click"/>
             <Button x:Name="JobButton" Content="Opgaver" Padding="2" Margin="2" Click="JobButton_Click"></Button>
             <Slider x:Name="Slider" Margin="2" Padding="2" Maximum="6600" Minimum="330" Orientation="Horizontal" Width="200" Value="660"/>
@@ -86,7 +88,7 @@
                     <StackPanel x:Name ="SchedulePanel" Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" />
                 </Grid>
             </ScrollViewer>
-            <StackPanel x:Name="JobPanel" Grid.Column="1"  Width="auto" Visibility="Collapsed">
+            <StackPanel x:Name="JobPanel" Grid.Column="1"  Width="auto" MinWidth="100" Visibility="Collapsed">
 
             </StackPanel>
         </Grid>

@@ -63,8 +63,8 @@ namespace HifiPrototype2.Functions
 
         internal void MoveAssignment(Assignment target, Assignment source)
         {
-            Employee targetEmployee = target.Provider;
-            Employee sourceEmployee = source.Provider;
+            EmployeeSchedule targetEmployee = target.EmployeeSchedule;
+            EmployeeSchedule sourceEmployee = source.EmployeeSchedule;
             
             // TODO sørg for at target != source 
             int targetIndex = targetEmployee.Assignments.IndexOf(target);

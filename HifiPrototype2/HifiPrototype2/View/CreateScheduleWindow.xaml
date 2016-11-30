@@ -1,0 +1,41 @@
+﻿<Window x:Class="HifiPrototype2.View.CreateScheduleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HifiPrototype2.View"
+        mc:Ignorable="d"
+        Title="CreateScheduleWindow" Height="300" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="3">
+            <Label Margin="3">
+                Type:
+            </Label>
+            <ComboBox Margin="3" SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBoxItem Content="Kalenderplan" IsSelected="True"/>
+                <ComboBoxItem Content="Grundplan"/>
+            </ComboBox>
+            <Grid x:Name="TemplateGrid" Visibility="Collapsed">
+                <StackPanel>
+                    <Label Margin="3" Content="Navn:"/>
+                    <TextBox x:Name="NameTextBox" Margin="3" Text="Skriv navn her"/>
+                </StackPanel>
+            </Grid>
+            <Grid x:Name="ScheduleGrid">
+                <StackPanel>
+                    <Label Margin="3" Content="Dato:"/>
+                    <DatePicker x:Name="DatePicker" Margin="3"/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="Create_Button" Margin="3" Content="Opret" Click="Create_Button_Click"/>
+            <Button x:Name="Cancel_Button" Margin="3" Content="Annuller" Click="Cancel_Button_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

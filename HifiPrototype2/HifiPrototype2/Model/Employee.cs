@@ -12,10 +12,8 @@ namespace HifiPrototype2.Model
         public string PhoneNumber {get; set;}
         public List<Assignment> Assignments { get; private set; } = new List<Assignment>();
 
-        public delegate void AssignmentsPropertyChangedEventHandler();
-        public event AssignmentsPropertyChangedEventHandler AssignmentsChanged;
-
-
+        public delegate void AssignmentsPropertyChangedEventHandler(); // moved
+        public event AssignmentsPropertyChangedEventHandler AssignmentsChanged; // moved
 
         public Employee() { }
 
@@ -23,6 +21,11 @@ namespace HifiPrototype2.Model
         {
             Name = name;
             PhoneNumber = phoneNumber;
+        }
+
+        public override string ToString()
+        {
+            return Name + " " + PhoneNumber;
         }
 
         public void AddRandomAssignments(int number)
@@ -41,7 +44,7 @@ namespace HifiPrototype2.Model
             }
         }
 
-        public void AddAssignment(Assignment assignment)
+        public void AddAssignment(Assignment assignment) // moved
         {
             if (Assignments.Count > 0)
             {
@@ -60,7 +63,7 @@ namespace HifiPrototype2.Model
             RaiseAssignmentsChanged();
         }
 
-        public void RemoveAssignment(Assignment assignment)
+        public void RemoveAssignment(Assignment assignment) // moved
         {
             Assignments.Remove(assignment);
             assignment.Provider = null;
@@ -69,7 +72,7 @@ namespace HifiPrototype2.Model
             RaiseAssignmentsChanged();
         }
 
-        public void AdjustTime()
+        public void AdjustTime() // moved
         {
             Assignments[0].route.StartTime = 0;
             Assignments[0].route.Duration = Assignments[0].Location;
@@ -80,7 +83,7 @@ namespace HifiPrototype2.Model
             }
         }
 
-        public void InsertAssignment(int index, Assignment assignment)
+        public void InsertAssignment(int index, Assignment assignment)// moved 
         {
             Assignments.Insert(index, assignment);
             assignment.Provider = this;
@@ -97,7 +100,7 @@ namespace HifiPrototype2.Model
             return employee;
         }
 
-        public void RaiseAssignmentsChanged()
+        public void RaiseAssignmentsChanged()// moved
         {
                 AssignmentsChanged?.Invoke();           
         }

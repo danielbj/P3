@@ -24,6 +24,7 @@ namespace HifiPrototype2.View
     public partial class DailyScheduleView : UserControl
     {
         public DailySchedulePresenter Presenter;
+        //private EmployeeSchedule _employeeSchedule;
 
         public DailyScheduleView()
         {
@@ -31,7 +32,6 @@ namespace HifiPrototype2.View
             Presenter = new DailySchedulePresenter();
             Presenter.SetView(this);
 
-            //ScheduleGrid.Height = 660;
             for (int i = 0; i < 660; i++) {
                 RowDefinition rowdef = new RowDefinition();
                 rowdef.Height = new GridLength(1, GridUnitType.Star);
@@ -40,9 +40,10 @@ namespace HifiPrototype2.View
             }
         }
 
-        public DailyScheduleView(Employee employee) : this()
+
+        public DailyScheduleView(EmployeeSchedule schedule) : this()
         {
-            Presenter.SetEmployee(employee);
+            Presenter.SetEmployeeSchedule(schedule);
             Presenter.LoadAssignments();
         }
 
@@ -50,7 +51,7 @@ namespace HifiPrototype2.View
         {
             ScheduleGrid.Children.Add(assignment);
             Grid.SetRow(assignment, assignment.Presenter.Assignment.StartTime);
-            Grid.SetRowSpan(assignment, assignment.Presenter.Assignment.Duration); //Problem with grid and placement.
+            Grid.SetRowSpan(assignment, assignment.Presenter.Assignment.Duration);
         }
 
         public void AddRoute(RouteView route)
@@ -59,10 +60,6 @@ namespace HifiPrototype2.View
             Grid.SetRow(route, route.Route.StartTime);
             Grid.SetRowSpan(route, route.Route.Duration);
         }
-
-        //public void AddEmployee(Employee employee) {
-        //    DailySchedulePanel.Children.Add(employee);
-        //}
 
         public void Clear()
         {
@@ -78,21 +75,18 @@ namespace HifiPrototype2.View
             if (sg != null && sourceAV != null)
             {
                 var source = sourceAV.Presenter.Assignment;
-                if (source.Provider != null)
+                if (source.EmployeeSchedule != null)
                 {
-                    source.Provider.RemoveAssignment(source);
+                    source.EmployeeSchedule.RemoveAssignment(source);
                 }
 
-                Presenter._employee.AddAssignment(source);
-                //AssignmentMovedEvent(target, source);
+                Presenter.EmployeeSchedule.AddAssignment(source);
             }
         }
 
         private void ScheduleGrid_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Contextmenu.IsOpen = true;
-            
-            
+            Contextmenu.IsOpen = true;   
         }
 
         private void MenuItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -113,16 +107,16 @@ namespace HifiPrototype2.View
             sp.Children.Remove(this);
         }
 
+        private void AddEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            new SelectEmployeeWindow(this).Show();
+        }
 
-        //private void ScheduleGrid_Drop(object sender, DragEventArgs e) {
-        //    Grid grid = sender as Grid;
-        //    Button btn = e.Data.etData(typeof(Button)) as Button;
+        private void RemoveEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            this.Presenter.EmployeeSchedule.Employee = null;
+            NameLabel.Text = "( TOM )";
+        }
 
-        //    if (grid != null) {
-        //        Grid parent = btn.Parent as Grid;
-        //        parent.Children.Remove(btn);
-        //        grid.Children.Add(btn);
-        //    }
-        //}
     }
 }

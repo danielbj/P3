@@ -33,7 +33,7 @@ namespace HifiPrototype2
 
         private void addEmployeeButton_Click(object sender, RoutedEventArgs e)
         {
-            _presenter.AddRandomEmployee();
+            //_presenter.AddRandomEmployee();
 
             
 

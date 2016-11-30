@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HifiPrototype2.Model;
 
 namespace HifiPrototype2.View
 {
@@ -20,10 +21,35 @@ namespace HifiPrototype2.View
     /// </summary>
     public partial class GroupView : UserControl
     {
+        private GroupContainer _groups;
+
         public GroupView()
         {
             InitializeComponent();
+            _groups = new GroupContainer();
+            LoadGroups();
         }
+
+        public void LoadGroups()
+        {
+            EmployeePanel.Children.Clear();
+
+            foreach (Group group in _groups.GroupList)
+            {
+                Expander e = new Expander();
+                e.Header = group.Name;
+                e.Margin = new Thickness(3);
+                e.IsExpanded = true;
+                ListBox list = new ListBox();
+                foreach (Employee employee in group.EmployeeList)
+                {
+                    list.Items.Add(employee);
+                }
+                e.Content = list;
+                EmployeePanel.Children.Add(e);
+            }
+        }
+
 
         private void EditEmployeeButton_Click(object sender, RoutedEventArgs e)
         {

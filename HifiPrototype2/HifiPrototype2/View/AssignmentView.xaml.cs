@@ -29,6 +29,12 @@ namespace HifiPrototype2.View
             PreviewMouseMove += AssignmentView_PreviewMouseMove;
         }
 
+        public AssignmentView(Assignment assignment) : this()
+        {
+            Presenter.SetAssignment(assignment);
+            LoadAssignment();
+        }
+
         private void AssignmentView_PreviewMouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed && !IsDragging)
@@ -75,11 +81,7 @@ namespace HifiPrototype2.View
             }
         }
 
-        public AssignmentView(Assignment assignment): this()
-        {
-            Presenter.SetAssignment(assignment);
-            LoadAssignment();
-        }
+
 
         public void LoadAssignment()
         {

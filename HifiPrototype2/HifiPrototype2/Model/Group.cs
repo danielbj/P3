@@ -6,9 +6,21 @@ using System.Threading.Tasks;
 
 namespace HifiPrototype2.Model
 {
-    class Group
+    public class Group
     {
-        List<Tuple<DateTime, Employee>> Template = new List<Tuple<DateTime, Employee>>();
-        List<Tuple<DateTime, Employee>> Calender = new List<Tuple<DateTime, Employee>>();
+        public string Name { get; set; }
+        public List<Employee> EmployeeList { get; set; }
+        public Dictionary<DateTime?, GroupSchedule> Shedules { get; set; } = new Dictionary<DateTime?, GroupSchedule>();
+        public List<GroupSchedule> Templates { get; set; } = new List<GroupSchedule>();
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
+
+
+
+
     }
 }

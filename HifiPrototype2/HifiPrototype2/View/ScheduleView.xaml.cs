@@ -15,7 +15,7 @@ namespace HifiPrototype2.View
     public partial class ScheduleView : UserControl, INotifyPropertyChanged
     {
         // Test feature 
-        private static int _id = 0;
+        //private static int _id = 0;
 
         private SchedulePresenter _presenter;
         public int DailyScheduleWidth { get; set; } = 100;
@@ -38,134 +38,153 @@ namespace HifiPrototype2.View
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
+
+        private GroupContainer _groups = new GroupContainer(); // TODO skal være den samme som i group view
+
+        public Group SelectedGroup;
+        public Dictionary<DateTime?, GroupSchedule> GroupSchedules { get { return SelectedGroup.Shedules; } }
+        public List<GroupSchedule> Templates { get { return SelectedGroup.Templates; } }
+        public GroupSchedule SelectedGroupSchedule;
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public ScheduleView()
+        public ScheduleView() //todo
         {
             InitializeComponent();
-            this.DataContext = this;
+            this.DataContext = this;  // WTF?
             _presenter = new SchedulePresenter();
             _presenter.SetView(this);
 
-            SecretAssignments(); // hush hush
+            LoadGroups();
+
+            LoadUnplannedAssignments();
+        }
+
+        private void LoadGroups()
+        {
+            foreach (Group item in _groups.GroupList)
+            {
+                GroupComboBox.Items.Add(item);
+            }
+            GroupComboBox.SelectedIndex = 0;
+            SelectedGroup = GroupComboBox.Items[0] as Group;
 
         }
 
-        private void AddEmployeeButton_Click(object sender, RoutedEventArgs e)
+        private void AddEmployeeButton_Click(object sender, RoutedEventArgs e) // TODO
         {
-            Employee testemployee = Employee.CreateRandomEmployee("TEST" + _id);
-            _id++;
-
-            DailyScheduleView DailyView = new DailyScheduleView(testemployee);
+            DailyScheduleView DailyView = new DailyScheduleView();
             SchedulePanel.Children.Add(DailyView);
-            DailyView.Width = DailyScheduleWidth;
-
-            DailyView.NameLabel.Text = testemployee.Name;
-
-            // Add to list            
+            DailyView.NameLabel.Text = "( TOM )";
+           
         }
 
-        private void AddToGroupList()
-        {
-
-        }
 
         private void CalenderScheduleComboBoxItem_Selected(object sender, RoutedEventArgs e)
         {
-
+            if (this.IsLoaded)
+            {
+                DateGrid.Visibility = Visibility.Visible;
+                TemplateComboBox.Visibility = Visibility.Collapsed;
+            } 
         }
 
         private void TemplateScheduleComboBoxItem_Selected(object sender, RoutedEventArgs e)
         {
-
+            if (this.IsLoaded)
+            {
+                DateGrid.Visibility = Visibility.Collapsed;
+                TemplateComboBox.Visibility = Visibility.Visible;
+            }
         }
 
-        private void GroupComboBoxItem_Selected(object sender, RoutedEventArgs e)
-        {
-            //ComboBoxItem item = sender as ComboBoxItem;
-
-            //if (sender != null)
-            //{
-            //    Group group = _groups[item.Content.ToString()];
-            //} 
-        }
-
-        private void DateForwardButton_Click(object sender, RoutedEventArgs e)
-        {
-            Dato = _date.AddDays(1);
-        }
-
-        private void DateBackButton_Click(object sender, RoutedEventArgs e)
-        {
-            Dato = _date.AddDays(-1);
-        }
-
-        private void JobButton_Click(object sender, RoutedEventArgs e)
+        private void JobButton_Click(object sender, RoutedEventArgs e) // todo
         {
             if (JobPanel.Visibility == Visibility.Visible)
             {
                 JobPanel.Visibility = Visibility.Collapsed;
+                LoadUnplannedAssignments();
             }
             else
 	        {
                 JobPanel.Visibility = Visibility.Visible;
+                LoadUnplannedAssignments();
             }  
         }
 
-        private void SecretAssignments()
+        public void LoadUnplannedAssignments()
         {
-            var a = new Assignment();
-            a.Description = "Bad";
-            a.Duration = 25;
-            a.Location = 20;
-            var av = new AssignmentView(a);
-            av.LoadAssignment();
-
-            var b = new Assignment();
-            b.Description = "Rengøring";
-            b.Duration = 40;
-            b.Location = 15;
-            var bv = new AssignmentView(b);
-            bv.LoadAssignment();
-
-            var c = new Assignment();
-            c.Description = "Trimning af næsehår";
-            c.Duration = 10;
-            c.Location = 2;
-            var cv = new AssignmentView(c);
-            cv.LoadAssignment();
-
-            JobPanel.Children.Add(av);
-            JobPanel.Children.Add(bv);
-            JobPanel.Children.Add(cv);
-
-        }
+            JobPanel.Children.Clear();
+            if (SelectedGroupSchedule != null)
+            {
+                foreach (Assignment a in SelectedGroupSchedule.Unplanned)
+                {
+                    JobPanel.Children.Add(new AssignmentView(a));
+                }
+            }
+        } 
 
         private void LoadButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var window = new SelectTemplateWindow(this);
+            window.Show();
         }
 
-        private void MagicButton_Click(object sender, RoutedEventArgs e)
+        private void GroupComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var f = new ProtoScheduleFactory(500);
-            List<Employee> EmployeeList =  f.MakeEmployees(12);
+            SelectedGroup = GroupComboBox.SelectedItem as Group;
 
-            foreach (var empl in EmployeeList)
+            foreach (GroupSchedule item in SelectedGroup.Templates)
             {
-                DailyScheduleView DailyView = new DailyScheduleView(empl);
+                TemplateComboBox.Items.Add(item);
+            }
+        }
+
+        private void CurrentDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DateTime? date = CurrentDatePicker.SelectedDate;
+
+            if (date != null && GroupSchedules.ContainsKey(date))
+            {
+                SelectedGroupSchedule = GroupSchedules[date];
+                LoadSchedule();
+            }
+            else if (date != null)
+            {
+                SchedulePanel.Children.Clear();
+            }
+        }
+
+        private void TemplateComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedGroupSchedule = TemplateComboBox.SelectedItem as GroupSchedule;
+            LoadSchedule();
+        }
+
+        public void LoadSchedule()
+        {
+            SelectedGroupSchedule.SubscribeToEvent(LoadUnplannedAssignments);
+
+            SchedulePanel.Children.Clear();
+            foreach (EmployeeSchedule item in SelectedGroupSchedule.EmployeeScheduleList)
+            {
+                DailyScheduleView DailyView = new DailyScheduleView(item);
                 SchedulePanel.Children.Add(DailyView);
                 DailyView.Width = DailyScheduleWidth;
 
-                DailyView.NameLabel.Text = empl.Name;
+                DailyView.NameLabel.Text = item.Name;
             }
+        }
 
-            
+        private void CreateScheduleButton_Click(object sender, RoutedEventArgs e)
+        {
+            new CreateScheduleWindow(SelectedGroup).Show();
         }
     }
 }

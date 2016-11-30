@@ -57,13 +57,19 @@
     </ApplicationDefinition>
     <Compile Include="Functions\DailySchedulePresenter.cs" />
     <Compile Include="Functions\DateTimeToStringConverter.cs" />
+    <Compile Include="Model\EmployeeSchedule.cs" />
     <Compile Include="Model\Group.cs" />
+    <Compile Include="Model\GroupContainer.cs" />
+    <Compile Include="Model\GroupSchedule.cs" />
     <Compile Include="Model\ProtoScheduleFactory.cs" />
     <Compile Include="View\AreYouSureWindow.xaml.cs">
       <DependentUpon>AreYouSureWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CitizenView.xaml.cs">
       <DependentUpon>CitizenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreateScheduleWindow.xaml.cs">
+      <DependentUpon>CreateScheduleWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditEmployeeWindow.xaml.cs">
       <DependentUpon>EditEmployeeWindow.xaml</DependentUpon>
@@ -85,6 +91,12 @@
     </Compile>
     <Compile Include="Functions\SchedulePresenter.cs" />
     <Compile Include="Functions\ViewModel.cs" />
+    <Compile Include="View\SelectEmployeeWindow.xaml.cs">
+      <DependentUpon>SelectEmployeeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SelectTemplateWindow.xaml.cs">
+      <DependentUpon>SelectTemplateWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\AreYouSureWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -94,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CitizenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CreateScheduleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -161,6 +177,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\SelectEmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SelectTemplateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
