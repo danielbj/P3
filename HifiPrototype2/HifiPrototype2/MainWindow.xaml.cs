@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HifiPrototype2.Functions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HifiPrototype2.View;
 
 namespace HifiPrototype2
 {
@@ -31,7 +33,7 @@ namespace HifiPrototype2
 
         private void addEmployeeButton_Click(object sender, RoutedEventArgs e)
         {
-            _presenter.AddRandomEmployee();
+            //_presenter.AddRandomEmployee();
 
             
 
@@ -51,5 +53,10 @@ namespace HifiPrototype2
 
         }
 
+        private void MailBoxButton_Click(object sender, RoutedEventArgs e)
+        {
+            var MailWindow = new MailBoxWindow();
+            MailWindow.Show();
+        }
     }
 }

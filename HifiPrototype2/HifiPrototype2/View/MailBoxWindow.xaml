@@ -1,0 +1,57 @@
+﻿<Window x:Class="HifiPrototype2.View.MailBoxWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HifiPrototype2.View"
+        mc:Ignorable="d"
+        Title="MailBoxWindow" Height="400" Width="500">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Column="0" Margin="3" VerticalScrollBarVisibility="Auto" >
+            <ListBox Width="auto" VerticalAlignment="Stretch">
+                <ListBoxItem>Madsen 28-11-16</ListBoxItem>
+                <ListBoxItem>Keldsen 28-11-16</ListBoxItem>
+                <ListBoxItem>Pedersen 27-11-16</ListBoxItem>
+            </ListBox>
+        </ScrollViewer>
+        <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Center" Background="Gray" Width="4" ShowsPreview="False"/>
+        <Grid Grid.Column="2" Margin="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="3">
+                <Button Margin="3" Content="Godkend" Click="Button_Click"/>
+            </StackPanel>
+            <TextBlock Grid.Row="1" Height="auto" Width="auto" TextWrapping="Wrap" Margin="3">
+                Mads Madsen Har fået forlænget tid til bad.
+            </TextBlock>
+            <ScrollViewer Grid.Row="2" Margin="3">
+                <StackPanel>
+                    <Label Content="Service:"/>
+                    <Label Margin="20,0,0,0"  Content="Bad"/>
+                    <Label Content="Borger:"/>
+                    <Label Margin="20,0,0,0"  Content="Mads Madsen"/>
+                    <Label Content="Addresse"/>
+                    <Label Margin="20,0,0,0" Content="Badevej 10, 7752 Snedsted"/>
+                    <Label Content="Type"/>
+                    <Label Margin="20,0,0,0" Content="Personlig hygiejne"/>
+                    <Label Foreground="red" Content="Tid"/>
+                    <Label Margin="20,0,0,0" Foreground="Red" Content="25 minutter"/>
+                    <Label Content="Hyppighed"/>
+                    <Label Margin="20,0,0,0" Content="3 gange pr 7 dage"/>
+                    <Label Content="Beskrivelse"/>
+                    <TextBlock Margin="20,0,0,0"  TextWrapping="Wrap" Text="Brusebad" />
+                    <Label Content="Noter"/>
+                    <TextBlock Margin="20,0,0,0" TextWrapping="Wrap" Text="Shampoo og sæbe står i skabet til venstre."/>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>

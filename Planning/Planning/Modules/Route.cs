@@ -4,7 +4,7 @@ using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Planning.Modules
+namespace Planning.Model.Modules
 {
     public class RouteModule : Module
     {
@@ -13,7 +13,7 @@ namespace Planning.Modules
         public string[] Waypoints { get; set; }
         private string _startURL = "http://dev.virtualearth.net/REST/V1/Routes/Driving?o=json";
         private string _endURL = "&optimize=distance&avoid=minimizeTolls&key=";
-        private string _bingKey = "ApHwnCobuvyzfVShxnVZ7_PV8Cf7Ok-zySgYQBd1liGGJU_GpPaCAw6kZmHJF9i4";        
+        private string _bingKey = "ApHwnCobuvyzfVShxnVZ7_PV8Cf7Ok-zySgYQBd1liGGJU_GpPaCAw6kZmHJF9i4";
         private BingMapsRESTService.Common.JSON.Route _route;
 
         public override int Duration
@@ -25,18 +25,27 @@ namespace Planning.Modules
             }                        
         }
 
-        public double Distance
-        {
+        public double Distance {
             get { return _route.TravelDistance; }
         }
-        #endregion
 
-        private static string GetWaypoints(string[] waypoints)
-        {
+        public string Name;
+        public int StartTime;
+        public int Endtime { get { return StartTime + Duration; } }
+
+
+
+
+        public Route(params string[] waypoints) {
+            //StartTime = startTime;
+            Name = GetWaypoints(waypoints);
+            Waypoints = waypoints;
+        }
+
+        private static string GetWaypoints(string[] waypoints) {
             string name = string.Empty;
 
-            for (int i = 0; i < waypoints.Length; i++)
-            {
+            for (int i = 0; i < waypoints.Length; i++) {
                 if (i + 1 == waypoints.Length)
                     name += waypoints[i];
                 else if (i + 2 == waypoints.Length)
@@ -68,45 +77,39 @@ namespace Planning.Modules
             var request = WebRequest.Create(requestURL);
             //get response 
             var response = request.GetResponse();
-            
+
             return response;
         }
 
-        private JObject ProcessRequest(WebResponse response)
-        {
+        private JObject ProcessRequest(WebResponse response) {
             //read response in json, returns raw json string
             string rawJson = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
             //Turns raw string into a key value lookup
             var json = JObject.Parse(rawJson);
 
-            return json;                  
+            return json;
         }
 
-        private void DeserializeJSONObjects(JObject jsonFile)
-        {
+        private void DeserializeJSONObjects(JObject jsonFile) {
             //is only returning distance&duration between first two waypoints
             //JToken resourceToken = jsonFile["resourceSets"][0]["resources"][0]["routeLegs"][0];
             //routeLegs = JsonConvert.DeserializeObject<RouteLeg>(resourceToken.ToString());
 
             JToken resourceToken = jsonFile["resourceSets"][0]["resources"][0];
             _route = JsonConvert.DeserializeObject<BingMapsRESTService.Common.JSON.Route>(resourceToken.ToString());
-            
+
 
         }
 
-        public string CreateRequestURL()
-        {            
+        public string CreateRequestURL() {
             string substring = "";
 
-            for (int i = 0; i < Waypoints.Length; i++)
-            {
+            for (int i = 0; i < Waypoints.Length; i++) {
                 substring += "&wp." + i.ToString() + "=" + Waypoints[i];
-            }            
+            }
 
             return _startURL + substring + _endURL + _bingKey;
         }
-
-
     }
 }

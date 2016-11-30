@@ -1,15 +1,20 @@
-using Planning.Modules;
 using System;
 using System.Collections.Generic;
-
+using Planning.Model.Modules;
+using Planning.Model;
 
 namespace Planning
 {
     public class Citizen
     {
+        public int _age;
+        public string _firstname;
+        public string _lastname;
+        public DateTime DateAdmitted;
+        public DateTime DateDischarged;
 
         private string _cpr;
-        public string CPR {
+        public string CPR {//TODO validate that it is string?
             get { return _cpr; }
             set {
                 if(value.Length == 10) 
@@ -19,23 +24,11 @@ namespace Planning
             }
         }
 
-        public int _age;
-        public string _firstname;
-        public string _lastname;
 
-        private string _address;
-        public string Address {
-            get { return _address; }
-            set {
-                if(value.Contains(" "))
-                    _address = value;
-                else
-                    throw new ArgumentException("Address must contain space and number");
-            }
-        }
+        public Address _address { get; private set; } = new Address();       
 
         private int _classification;
-        public int Classification {
+        public int Classification { //TODO validate that it is int?
             get { return _classification; }
             set {
                     if(0 <= value && value <= 5)
@@ -52,7 +45,8 @@ namespace Planning
             _age = age;
             _firstname = firstname;
             _lastname = lastname;
-            Address = address;
+            _address.AddressName = address;
+            _address.StartDate = DateTime.Now;
             Classification = classification;
 
             Tasks = new List<JobModule>();
@@ -67,5 +61,21 @@ namespace Planning
 
         //    public Citizen(string cpr, int age, string firstname, string lastname, string address, int classification)
         //                    : this(cpr, age, firstname, lastname, classification, null) { }
+
+        public void CreateTask(int duration, string description) {
+            Tasks.Add(new TaskDescription(duration, description));
+
+        }
+
+
+        public void RemoveTask(TaskDescription task)
+        {
+
+        }
+
+        public void EditAddress()
+        {
+
+        }
     }
 }    

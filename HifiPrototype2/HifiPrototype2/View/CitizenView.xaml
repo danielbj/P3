@@ -1,0 +1,163 @@
+﻿<UserControl x:Class="HifiPrototype2.View.CitizenView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HifiPrototype2.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="1000" d:DesignWidth="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Margin="3">
+                <Button x:Name="ExpandAll"  Padding="3" Margin="3" Click="ExpandAll_Click">Åben alle</Button>
+                <Button x:Name="CollapseAll" Padding="3" Margin="3" Click="CollapseAll_Click">Luk alle</Button>
+                <Label Margin="3">Sorter efter:</Label>
+                <ComboBox Margin="3">
+                    <ComboBoxItem Selector.IsSelected="True" Content="Navn"/>
+                    <ComboBoxItem Content="Type"/>
+                    <ComboBoxItem Content="Område"/>
+                </ComboBox>
+            </StackPanel>
+            <ScrollViewer Grid.Row="1" Margin="3">
+                <StackPanel x:Name="JobPanel" Height="auto" Orientation="Vertical" Width="auto" HorizontalAlignment="Stretch" Grid.RowSpan="2">
+                    <Expander Margin="3" Header="Borger1" IsExpanded="True" >
+                        <ListBox>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min </ListBoxItem>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min</ListBoxItem>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min</ListBoxItem>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min</ListBoxItem>
+                        </ListBox>
+                    </Expander>
+                    <Expander Margin="3" Header="Borger1" IsExpanded="True" >
+                        <ListBox>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min</ListBoxItem>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min</ListBoxItem>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min</ListBoxItem>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min</ListBoxItem>
+                        </ListBox>
+                    </Expander>
+                    <Expander Margin="3" Header="Borger1" IsExpanded="True" >
+                        <ListBox>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min</ListBoxItem>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min</ListBoxItem>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min</ListBoxItem>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min</ListBoxItem>
+                        </ListBox>
+                    </Expander>
+                    <Expander Margin="3" Header="Borger1" IsExpanded="True" >
+                        <ListBox>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min</ListBoxItem>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min</ListBoxItem>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min</ListBoxItem>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min</ListBoxItem>
+                        </ListBox>
+                    </Expander>
+                    <Expander Margin="3" Header="Borger1" IsExpanded="True" >
+                        <ListBox>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min</ListBoxItem>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min</ListBoxItem>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min</ListBoxItem>
+                            <ListBoxItem>Bad | Personlig pleje | 20 min</ListBoxItem>
+                        </ListBox>
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <GridSplitter Grid.Column="1" Width="4" Background="Gray" VerticalAlignment="Stretch" HorizontalAlignment="Center" ShowsPreview="False"/>
+        <Grid Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="EditJobButton" Margin="3" Click="EditJobButton_Click">Rediger</Button>
+                <Button x:Name="CancelJobButton" Margin="3" Click="CancelJobButton_Click">Aflys</Button>
+            </StackPanel>
+            <ScrollViewer Grid.Row="1" Margin="3">
+                <StackPanel>
+                    <Label Content="Service:"/>
+                    <Label Margin="20,0,0,0"  Content="Bad"/>
+                    <Label Content="Borger:"/>
+                    <Label Margin="20,0,0,0"  Content="Navn"/>
+                    <Label Content="Addresse"/>
+                    <Label Margin="20,0,0,0" Content="Vej nr, by"/>
+                    <Label Content="Type"/>
+                    <Label Margin="20,0,0,0" Content="Personlig pleje"/>
+                    <Label Content="Tid"/>
+                    <Label Margin="20,0,0,0" Content="20 minutter"/>
+                    <Label Content="Hyppighed"/>
+                    <Label Margin="20,0,0,0" Content="3 ganger pr 7 dage"/>
+                    <Label Content="Beskrivelse"/>
+                    <TextBlock Margin="20,0,0,0"  TextWrapping="Wrap" Text="Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla" />
+                    <Label Content="Noter"/>
+                    <TextBlock Margin="20,0,0,0" TextWrapping="Wrap" Text="Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla"/>
+                </StackPanel>
+            </ScrollViewer>
+            <GridSplitter Grid.Row="2" Height="4" Background="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Center" ShowsPreview="False"/>
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="1" Content="Mandag"/>
+                <Label Grid.Row="0" Grid.Column="2" Content="Tirsdag"/>
+                <Label Grid.Row="0" Grid.Column="3" Content="Onsdag"/>
+                <Label Grid.Row="0" Grid.Column="4" Content="Torsdag"/>
+                <Label Grid.Row="0" Grid.Column="5" Content="Fredag"/>
+                <Label Grid.Row="0" Grid.Column="6" Content="Lørdag"/>
+                <Label Grid.Row="0" Grid.Column="7" Content="Søndag"/>
+
+                <Label Grid.Column="0" Grid.Row="1" Content="6:00"/>
+                <Label Grid.Column="0" Grid.Row="2" Content="7:00"/>
+                <Label Grid.Column="0" Grid.Row="3" Content="8:00"/>
+                <Label Grid.Column="0" Grid.Row="4" Content="9:00"/>
+                <Label Grid.Column="0" Grid.Row="5" Content="10:00"/>
+                <Label Grid.Column="0" Grid.Row="6" Content="11:00"/>
+                <Label Grid.Column="0" Grid.Row="7" Content="12:00"/>
+                <Label Grid.Column="0" Grid.Row="8" Content="13:00"/>
+                <Label Grid.Column="0" Grid.Row="9" Content="14:00"/>
+                <Label Grid.Column="0" Grid.Row="10" Content="15:00"/>
+                <Label Grid.Column="0" Grid.Row="11" Content="16:00"/>
+                <Label Grid.Column="0" Grid.Row="12" Content="17:00"/>
+
+                <TextBlock Grid.Column="1" Grid.Row="3" Grid.RowSpan="1" Text="Gruppe 1" Margin="1" Background="Orange"/>
+                <TextBlock Grid.Column="3" Grid.Row="10" Grid.RowSpan="1" Text="Gruppe 2" Margin="1" Background="CornflowerBlue"/>
+                <TextBlock Grid.Column="5" Grid.Row="3" Grid.RowSpan="1" Text="Gruppe 1" Margin="1" Background="Orange"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

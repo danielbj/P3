@@ -3,32 +3,29 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HifiPrototype2"
+        xmlns:local="clr-namespace:HifiPrototype2.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525"
+        WindowState ="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Margin="3">
-            <Button x:Name="addEmployeeButton" Padding="3" Margin="3" Click="addEmployeeButton_Click">
-                Add employee
-            </Button>
-            <Button x:Name="addTask" Padding="3" Margin="3" Click="addTask_Click" >
-                Add Task
-            </Button>
-            <StackPanel x:Name="taskHolder">
-                
-            </StackPanel>
-        
+        <StackPanel Grid.Column="0">
+            <Button x:Name="MailBoxButton" Margin="3" Click="MailBoxButton_Click">Postkasse</Button>
         </StackPanel>
-        <GridSplitter ResizeDirection="Columns" ShowsPreview="True" Background="LightGray" Width="3"/>
-        <ScrollViewer Grid.Column="2" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <local:ScheduleView x:Name="Schedule"/>
-        </ScrollViewer>
-
-
+        <TabControl Grid.Column="1" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TabItem Header ="Planer">
+                <local:ScheduleView></local:ScheduleView>
+            </TabItem>
+            <TabItem Header ="Medarbejdere">
+                <local:GroupView/>
+            </TabItem>
+            <TabItem Header ="Opgaver">
+                <local:CitizenView/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
