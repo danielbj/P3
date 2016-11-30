@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace Planning.View
 {
     /// <summary>
-    /// Interaction logic for ScheduleView.xaml
+    /// Interaction logic for CitizenView.xaml
     /// </summary>
-    public partial class ScheduleView : UserControl
+    public partial class CitizenView : UserControl
     {
-        public ScheduleView()
+        public CitizenView()
         {
             InitializeComponent();
-        }
-
-        private void Zoom1ComboBoxItem_Selected(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
