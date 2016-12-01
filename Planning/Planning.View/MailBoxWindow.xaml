@@ -1,0 +1,51 @@
+﻿<Window x:Class="Planning.View.MailBoxWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Planning.View"
+        mc:Ignorable="d"
+        Title="MailBoxWindow" Height="300" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Column="0" Margin="3" VerticalScrollBarVisibility="Auto" >
+            <!--Empty-->
+        </ScrollViewer>
+        <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Center" Background="Gray" Width="4" ShowsPreview="False"/>
+        <Grid Grid.Column="2" Margin="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="3">
+                <Button Margin="3" Content="Godkend" Click="Button_Click"/>
+            </StackPanel>
+            <TextBlock Name="ChangeDescriptionTextBlock" Grid.Row="1" Height="auto" Width="auto" TextWrapping="Wrap" Margin="3"/>
+            <ScrollViewer Grid.Row="2" Margin="3">
+                <StackPanel>
+                    <Label Content="Service:"/>
+                    <Label Name="ServiceDescriptionLabel" Margin="20,0,0,0"/>
+                    <Label Content="Borger:"/>
+                    <Label Name="CitizenDescriptionLabel" Margin="20,0,0,0"/>
+                    <Label Content="Addresse"/>
+                    <Label Name="AddressDescriptionLabel" Margin="20,0,0,0"/>
+                    <Label Content="Type"/>
+                    <Label Name="TypeDescriptionLabel" Margin="20,0,0,0"/>
+                    <Label Content="Tid"/>
+                    <Label Name="TimeDescriptionLabel" Margin="20,0,0,0"/>
+                    <Label Content="Hyppighed"/>
+                    <Label Name="FrequencyDescriptionLabel" Margin="20,0,0,0"/>
+                    <Label Content="Beskrivelse"/>
+                    <TextBlock Name="DescriptionLabel" Margin="20,0,0,0"  TextWrapping="Wrap"/>
+                    <Label Content="Noter"/>
+                    <TextBlock Name="NotesDescriptionLabel" Margin="20,0,0,0" TextWrapping="Wrap"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>

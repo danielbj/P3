@@ -58,6 +58,9 @@
     <Compile Include="CitizenView.xaml.cs">
       <DependentUpon>CitizenView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MailBoxWindow.xaml.cs">
+      <DependentUpon>MailBoxWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="OverviewView.xaml.cs">
       <DependentUpon>OverviewView.xaml</DependentUpon>
     </Compile>
@@ -65,6 +68,10 @@
       <DependentUpon>ScheduleView.xaml</DependentUpon>
     </Compile>
     <Page Include="CitizenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MailBoxWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -115,6 +122,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Planning.ViewModel\Planning.ViewModel.csproj">
+      <Project>{751a1b9d-aa96-49a4-b8c7-cf063560c4d4}</Project>
+      <Name>Planning.ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

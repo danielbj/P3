@@ -14,9 +14,9 @@
         </Grid.RowDefinitions>
         <StackPanel x:Name="GroupOverviewStackPanel" Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
             <ComboBox x:Name="GroupComboBox" Margin="3" FlowDirection="RightToLeft"/>
-            <ComboBox x:Name="ScheduleComboBox" Margin="3" FlowDirection="RightToLeft" >
-                <ComboBoxItem x:Name="CalenderScheduleComboBoxItem" Content="Kalender Plan" Selector.IsSelected="True"/>
-                <ComboBoxItem x:Name="TemplateScheduleComboBoxItem" Content="Template Plan"/>
+            <ComboBox x:Name="ScheduleComboBox" Margin="3" FlowDirection="RightToLeft" SelectedIndex="0" ItemsSource="{Binding Items}">
+                <ComboBoxItem x:Name="CalenderScheduleComboBoxItem" Content="Kalender Plan"/>
+                <ComboBoxItem x:Name="TemplateScheduleComboBoxItem" Content="GrundPlan"/>
             </ComboBox>
             <Grid x:Name="DateGrid">
                 <DatePicker x:Name="CurrentDatePicker" Margin="3"/>
@@ -28,7 +28,20 @@
                 <Button x:Name="CreateScheduleButton" Content="Opret Plan" Padding="2" Margin="2"/>
                 <Button x:Name="LoadButton" Content="Indlæs Grundplan" Padding="2" Margin="2"/>
                 <Button x:Name="AddEmployeeButton" Content="Tilføj Kolonne" Padding="2" Margin="2"/>
-                <Button x:Name="JobButton" Content="Opgaver" Padding="2" Margin="2"></Button>
+                <Button x:Name="JobButton" Content="Opgaver" Padding="2" Margin="2">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedIndex, ElementName=ScheduleComboBox}" Value="1">
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding SelectedIndex, ElementName=ScheduleComboBox}" Value="0">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
                 <Slider x:Name="UISlider" Margin="2" Padding="2" Maximum="3300" Minimum="330" Orientation="Horizontal" Width="200" Value="990"/>
             </StackPanel>
         </Border>
