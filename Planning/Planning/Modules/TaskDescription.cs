@@ -17,13 +17,13 @@ namespace Planning.Model.Modules
         public string Description { get; protected set; }
         public string Note { get; private set; }
         public List<TaskItem> TaskItems { get; set; } = new List<TaskItem>();
-        public int Duration { get; private set; }
-        public Route Route;
-        public TimeSpan TimeFrame;
+        public TimeSpan Duration { get; private set; }        
+        public TimePeriod TimeFrame;
+        private List<TaskChange> _taskChanges;
 
 
         public TaskDescription(int duration, string description) {//Maybe citizen input TODO
-            Duration = duration;
+            Duration = TimeSpan.FromMinutes(duration);
             Description = description;
             DateCreated = DateTime.Now;
         }
@@ -31,11 +31,21 @@ namespace Planning.Model.Modules
         public void AddNote() {
 
         }
+        public List<TaskChange> GetTaskChanges(Predicate<TaskChange> Filter)
+        {
+            List<TaskChange> result = new List<TaskChange>();
+
+            foreach (TaskChange e in _taskChanges)
+            {
+                if (Filter(e))
+                    result.Add(e);
+            }
+            return result;
+        }
        
         public TaskItem MakeNewTaskItem() {
             TaskItem tempTask = new TaskItem(Duration, Route, Citizen);
             TaskItems.Add(tempTask);
-
 
             return tempTask;
         }

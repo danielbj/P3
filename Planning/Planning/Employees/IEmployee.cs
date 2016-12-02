@@ -18,7 +18,7 @@ namespace Planning.Model.Employees
         int Qualification { get; set; }
 
 
-        void EditEmployee();
+        
 
 
     }

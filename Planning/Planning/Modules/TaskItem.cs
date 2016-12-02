@@ -8,8 +8,7 @@ namespace Planning.Model.Modules
 {
     public class TaskItem
     {
-        public int StartTime { get; set; }
-        public int EndTime { get { return StartTime + Duration; } }
+               
         public enum Status
         {
             Unplanned,
@@ -18,20 +17,20 @@ namespace Planning.Model.Modules
             Planned
         }
 
-        public Status State { get; set; } = Status.Unplanned;
+        public Status State { get; set; }
         public bool Locked;
-        public int Duration { get; private set; }
-        public Route Route;
-        public Citizen Citizen;
+        public RouteItem Route;
+        
+        public TimePeriod TimePeriod { get; set; }
+        public TaskDescription TaskDescription { get; }
 
 
-
-
-        public TaskItem(int duration, Route route, Citizen citizen) {
-            Duration = duration;
-            Route = route;
-            Citizen = citizen;
-            StartTime = 0;
+        public TaskItem(TaskDescription taskDescirption)
+        {
+            TaskDescription = taskDescirption;
+            State = Status.Unplanned;
+            Locked = false;
+            TimePeriod = new TimePeriod(taskDescirption.Duration);              
         }
 
 

@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Planning.Modules
+namespace Planning.Model.Modules
 {
-    public class TaskChanged
+    public class TaskChange
     {
-        DateTime Date;
+        public DateTime Date { get; set; }
+
         //TODO Type of change.
     }
 }

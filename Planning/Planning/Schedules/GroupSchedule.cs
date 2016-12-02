@@ -6,21 +6,22 @@ using Planning.Model.Employees;
 
 namespace Planning.Model.Schedules
 {
-    public abstract class GroupSchedule : IGroupSchedule
+    public abstract class GroupSchedule : IGroupSchedule    //hvorfor abstract??
     {
-        public abstract string Name { get; }                                        // Name or title
+        public abstract string Name { get; }       //se under Date!
         public abstract string Description { get; set; }                            // Might be a method to collect data from container element
        
-        public virtual bool Approved { get; private set; }                          // Shows state of aproval
+        public virtual bool Approved { get; private set; }                          // Shows state of approval
         public virtual bool IsSaved { get; private set; } = false;                  // Shows if saved or not
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; }   //bør ikke have en date, da de findes i dic i Group + temp har ingen dato!
         public Dictionary<Employee, EmployeeSchedule> EmployeeSchedules { get; set; } = new Dictionary<Employee, EmployeeSchedule>();
+        
 
-        /// <summary>
-        /// Initialises a schedule
-        /// </summary>
         public GroupSchedule()
-        { }
+        {
+
+        }
+
 
         
         public void AssignEmployee (Employee employee, EmployeeSchedule employeeSchedule)

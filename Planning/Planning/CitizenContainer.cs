@@ -8,28 +8,38 @@ namespace Planning.Model
 {
     public class CitizenContainer
     {
-        private List<Citizen> Citizens = new List<Citizen>();
+        private List<Citizen> _citizens;
 
-
-        public bool AddCitizen(Citizen citizen) {
-            Citizens.Add(citizen);
-
-            return Citizens.Contains(citizen);
+        public CitizenContainer()
+        {
+            _citizens = new List<Citizen>();
         }
 
-
-        public bool DeleteCitizen(Citizen citizen) {
-            return Citizens.Remove(citizen);
+        public void AddCitizen(Citizen citizen)
+        {
+            _citizens.Add(citizen); 
         }
 
-        public List<Citizen> GetCitizens(Predicate<Citizen> Filter) {
+        public void DeleteCitizen(Citizen citizen)
+        {
+            _citizens.Remove(citizen);
+        }
+
+        public List<Citizen> GetCitizens(Predicate<Citizen> Filter) //hvornår skal vi egentlig det?
+        {
             List<Citizen> result = new List<Citizen>();
 
-            foreach (Citizen t in Citizens) {
+            foreach (Citizen t in _citizens)
+            {
                 if (Filter(t))
                     result.Add(t);
             }
             return result;
+        }
+
+        public List<Citizen> GetCitizen()
+        {
+            return _citizens;
         }
     }
 }

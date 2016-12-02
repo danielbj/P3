@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using Planning.Model.Modules;
 using Planning.Model;
 
-namespace Planning
+namespace Planning.Model
 {
     public class Citizen
     {
-        public int _age;
-        public string _firstname;
-        public string _lastname;
-        public DateTime DateAdmitted;
-        public DateTime DateDischarged;
+        #region properties
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime DateAdmitted { get; set; }
+        public DateTime DateDischarged { get; set; }
 
         private string _cpr;
         public string CPR {//TODO validate that it is string?
@@ -24,58 +24,41 @@ namespace Planning
             }
         }
 
+        private List<Address> _addresses;
 
-        public Address _address { get; private set; } = new Address();       
+        public Address Address { get; private set; } = new Address();    
+        public List<TaskDescription> Tasks;
+        #endregion
 
-        private int _classification;
-        public int Classification { //TODO validate that it is int?
-            get { return _classification; }
-            set {
-                    if(0 <= value && value <= 5)
-                        _classification = value;
-                    else
-                        throw new ArgumentException("Classification is invalid");
-                }
-        }
-        public List<JobModule> Tasks;
-
-        public Citizen (string cpr, int age, string firstname, string lastname, string address, int classification, params JobModule[] tasks)
+        public Citizen (string cpr, string firstname, string lastname, Address address, DateTime dateAdmitted)
         {
             CPR = cpr;
-            _age = age;
-            _firstname = firstname;
-            _lastname = lastname;
-            _address.AddressName = address;
-            _address.StartDate = DateTime.Now;
-            Classification = classification;
-
-            Tasks = new List<JobModule>();
-            if(tasks.Length != 0)
-            {
-                for (int i = 0; i < tasks.Length; i++)
-                {
-                    Tasks.Add(tasks[i]);
-                }
-            }
+            
+            FirstName = firstname;
+            LastName = lastname;
+            _addresses = new List<Address>(){address};
+            DateAdmitted = dateAdmitted;          
         }
 
-        //    public Citizen(string cpr, int age, string firstname, string lastname, string address, int classification)
-        //                    : this(cpr, age, firstname, lastname, classification, null) { }
-
-        public void CreateTask(int duration, string description) {
-            Tasks.Add(new TaskDescription(duration, description));
-
+        public void AddTask(TaskDescription task)
+        {
+            Tasks.Add(task);
         }
-
 
         public void RemoveTask(TaskDescription task)
         {
-
+            Tasks.Remove(task);
         }
 
-        public void EditAddress()
+        public void AddAddress(Address newAddress)
         {
-
+            _addresses.Add(newAddress);   //validering
         }
+
+        public Address GetAddress(DateTime date)
+        {
+            return _addresses.Find(a => a.StartDate <= date); // sørg for at de ligger i den rette rækkefølge
+        }
+             
     }
 }    

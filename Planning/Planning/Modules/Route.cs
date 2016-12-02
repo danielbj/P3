@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Planning.Model.Modules
 {
-    public class RouteModule : Module
+    public class RouteCalculator
     {
         #region
 
@@ -16,33 +16,24 @@ namespace Planning.Model.Modules
         private string _bingKey = "ApHwnCobuvyzfVShxnVZ7_PV8Cf7Ok-zySgYQBd1liGGJU_GpPaCAw6kZmHJF9i4";
         private BingMapsRESTService.Common.JSON.Route _route;
 
-        public override int Duration
+        public int Duration
         {
             get
             {
                 TimeSpan time = TimeSpan.FromSeconds(_route.TravelDuration);
                 return (int)time.TotalMinutes;
-            }                        
+            }
         }
 
-        public double Distance {
+        public double Distance
+        {
             get { return _route.TravelDistance; }
         }
 
-        public string Name;
-        public int StartTime;
-        public int Endtime { get { return StartTime + Duration; } }
+        #endregion
 
-
-
-
-        public Route(params string[] waypoints) {
-            //StartTime = startTime;
-            Name = GetWaypoints(waypoints);
-            Waypoints = waypoints;
-        }
-
-        private static string GetWaypoints(string[] waypoints) {
+        private string GetWaypoints(string[] waypoints)
+        {
             string name = string.Empty;
 
             for (int i = 0; i < waypoints.Length; i++) {
@@ -55,22 +46,22 @@ namespace Planning.Model.Modules
             }
 
             return name;
-        } 
+        }
 
-        public RouteModule(params string[] waypoints)          
+        public RouteCalculator(params string[] waypoints)
         {
-           Waypoints = waypoints;
-            CalculateRoute();         
+            Waypoints = waypoints;
+            CalculateRoute();
         }
 
         public void CalculateRoute()
         {
-            WebResponse response =  MakeRequest(CreateRequestURL());
+            WebResponse response = MakeRequest(CreateRequestURL());
             JObject jsonFile = ProcessRequest(response);
             DeserializeJSONObjects(jsonFile);
-            
-        }      
-        
+
+        }
+
         private WebResponse MakeRequest(string requestURL)
         {
             //creating a web request with the url
@@ -105,7 +96,8 @@ namespace Planning.Model.Modules
         public string CreateRequestURL() {
             string substring = "";
 
-            for (int i = 0; i < Waypoints.Length; i++) {
+            for (int i = 0; i < Waypoints.Length; i++)
+            {
                 substring += "&wp." + i.ToString() + "=" + Waypoints[i];
             }
 
@@ -113,3 +105,4 @@ namespace Planning.Model.Modules
         }
     }
 }
+
