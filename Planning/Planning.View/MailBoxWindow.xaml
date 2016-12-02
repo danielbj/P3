@@ -23,7 +23,7 @@
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="3">
-                <Button Margin="3" Content="Godkend" Click="Button_Click"/>
+                <Button Margin="3" Content="Godkend" />
             </StackPanel>
             <TextBlock Name="ChangeDescriptionTextBlock" Grid.Row="1" Height="auto" Width="auto" TextWrapping="Wrap" Margin="3"/>
             <ScrollViewer Grid.Row="2" Margin="3">

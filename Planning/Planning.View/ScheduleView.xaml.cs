@@ -24,7 +24,7 @@ namespace Planning.View
         public ScheduleView()
         {
             InitializeComponent();
-            DataContext = new ScheduleViewModel();
+            //DataContext = new ScheduleViewModel();
         }
     }
 }
