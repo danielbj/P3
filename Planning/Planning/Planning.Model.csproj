@@ -68,7 +68,6 @@
     <Compile Include="GroupContainer.cs" />
     <Compile Include="IGroup.cs" />
     <Compile Include="JSONDataContracts.cs" />
-    <Compile Include="Modules\IModule.cs" />
     <Compile Include="Modules\ITask.cs" />
     <Compile Include="Modules\Route.cs" />
     <Compile Include="Modules\RouteItem.cs" />

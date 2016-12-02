@@ -8,7 +8,7 @@ namespace Planning.Model.Modules
 {
     public class RouteCalculator
     {
-        #region
+        #region Bing Keys
 
         public string[] Waypoints { get; set; }
         private string _startURL = "http://dev.virtualearth.net/REST/V1/Routes/Driving?o=json";

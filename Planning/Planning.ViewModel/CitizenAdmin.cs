@@ -28,19 +28,13 @@ namespace Planning.ViewModel
 
         public void DischargeCitizen(Citizen citizen, DateTime dateDischarged)
         {
-            _citizenContainer.DeleteCitizen(citizen); //og hvad så med discharge datoen?
+            _citizenContainer.DeleteCitizen(citizen, dateDischarged);
         }
 
         public void ChangeCitizenAddress(Citizen citizen, string addressString, DateTime fromDate)
         {
             Address newAddress = CreateAddress(addressString, fromDate);
             citizen.AddAddress(newAddress);              
-        }
-
-        private bool ValidateAddress(string address)
-        {
-            // TODO validate with bing
-            return true;
         }
 
         private Address CreateAddress(string address, DateTime date)
@@ -53,6 +47,12 @@ namespace Planning.ViewModel
             {
                 throw new ArgumentException("Address not valid.");
             }
+        }
+
+        private bool ValidateAddress(string address)
+        {
+            // TODO validate with bing
+            return true;
         }
     }
 }

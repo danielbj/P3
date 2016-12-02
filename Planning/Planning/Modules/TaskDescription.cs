@@ -44,7 +44,7 @@ namespace Planning.Model.Modules
         }
        
         public TaskItem MakeNewTaskItem() {
-            TaskItem tempTask = new TaskItem(Duration, Route, Citizen);
+            TaskItem tempTask = new TaskItem(this);
             TaskItems.Add(tempTask);
 
             return tempTask;

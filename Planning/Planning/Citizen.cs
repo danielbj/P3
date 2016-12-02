@@ -7,11 +7,13 @@ namespace Planning.Model
 {
     public class Citizen
     {
-        #region properties
+        #region Fields
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DateAdmitted { get; set; }
         public DateTime DateDischarged { get; set; }
+        private List<Address> _addresses;
+        public List<TaskDescription> Tasks;
 
         private string _cpr;
         public string CPR {//TODO validate that it is string?
@@ -24,11 +26,10 @@ namespace Planning.Model
             }
         }
 
-        private List<Address> _addresses;
 
-        public Address Address { get; private set; } = new Address();    
-        public List<TaskDescription> Tasks;
         #endregion
+
+
 
         public Citizen (string cpr, string firstname, string lastname, Address address, DateTime dateAdmitted)
         {

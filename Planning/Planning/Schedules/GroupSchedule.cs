@@ -6,16 +6,16 @@ using Planning.Model.Employees;
 
 namespace Planning.Model.Schedules
 {
-    public abstract class GroupSchedule : IGroupSchedule    //hvorfor abstract??
+    public class GroupSchedule : IGroupSchedule    //hvorfor abstract??
     {
-        public abstract string Name { get; }       //se under Date!
-        public abstract string Description { get; set; }                            // Might be a method to collect data from container element
-       
-        public virtual bool Approved { get; private set; }                          // Shows state of approval
-        public virtual bool IsSaved { get; private set; } = false;                  // Shows if saved or not
-        public DateTime Date { get; set; }   //bør ikke have en date, da de findes i dic i Group + temp har ingen dato!
+
+        public string Description { get; set; }                            // Might be a method to collect data from container element
+
+        public bool Approved { get; private set; }                          // Shows state of approval
+        public bool IsSaved { get; private set; } = false;                  // Shows if saved or not
+
         public Dictionary<Employee, EmployeeSchedule> EmployeeSchedules { get; set; } = new Dictionary<Employee, EmployeeSchedule>();
-        
+
 
         public GroupSchedule()
         {
@@ -23,8 +23,8 @@ namespace Planning.Model.Schedules
         }
 
 
-        
-        public void AssignEmployee (Employee employee, EmployeeSchedule employeeSchedule)
+
+        public void AssignEmployee(Employee employee, EmployeeSchedule employeeSchedule)
         {
 
         }
@@ -32,18 +32,18 @@ namespace Planning.Model.Schedules
         /// <summary>
         /// Clears all data from schedule
         /// </summary>
-        public abstract void DeleteSchedule();
+        public void DeleteSchedule() { }
 
         /// <summary>
         /// Saves data and updates
         /// </summary>
-        public abstract void Save();
+        public void Save() { }
 
         /// <summary>
         /// Set state of Approved variable
         /// </summary>
         /// <param name="state">Indicate approve status</param>
-        public abstract void Approve(bool state);
+        public void Approve(bool state) { }
     }
 }
 

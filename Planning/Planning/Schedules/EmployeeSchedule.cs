@@ -95,59 +95,59 @@ namespace Planning.Model.Schedules
             return result;
         }
 
-        public bool AssignTask(TaskItem task, int index) {//This is to plan. 
-            if (task == null)
-                return false;
-            _taskItems.Add(task);
-            return _taskItems.Contains(task);
+        //public bool AssignTask(TaskItem task, int index) {//This is to plan. 
+        //    if (task == null)
+        //        return false;
+        //    _taskItems.Add(task);
+        //    return _taskItems.Contains(task);
 
-            //ADDing from Groupschedule
-            if (EmployeeSchedules.Count != 0)
-            {
-                TaskItem previousTaskItem = (EmployeeSchedules[targetEmployee].GetTasks(t => t is TaskItem)).FindLast(t => t is TaskItem);
-                job.CalculateRoute(previousJob.Reciever.Address); // Todo: gør noget når det er den samme adresse
-                job.Route.StartTime = previousJob.EndTime;
-                job.StartTime = job.Route.EndTime;
-            }
-            else
-            {
-                job.CalculateRoute(EmployeeGroup.GroupAddress);  // TODO, GroupAddress skal implementeres i Group klassen
-                job.Route.StartTime = StartTime;
-                job.StartTime = job.Route.EndTime;
-            }
+        //    //ADDing from Groupschedule
+        //    if (EmployeeSchedules.Count != 0)
+        //    {
+        //        TaskItem previousTaskItem = (EmployeeSchedules[targetEmployee].GetTasks(t => t is TaskItem)).FindLast(t => t is TaskItem);
+        //        job.CalculateRoute(previousJob.Reciever.Address); // Todo: gør noget når det er den samme adresse
+        //        job.Route.StartTime = previousJob.EndTime;
+        //        job.StartTime = job.Route.EndTime;
+        //    }
+        //    else
+        //    {
+        //        job.CalculateRoute(EmployeeGroup.GroupAddress);  // TODO, GroupAddress skal implementeres i Group klassen
+        //        job.Route.StartTime = StartTime;
+        //        job.StartTime = job.Route.EndTime;
+        //    }
 
-            JobModules.Add(job);
-
-
-            //Insertion
-            JobModules.Insert(index, job);
-            JobModule previous = JobModules[index - 1];
-            JobModule next = JobModules[index + 1];
-
-            job.CalculateRoute(previous.Reciever.Address);
-            next.CalculateRoute(job.Reciever.Address);
-            AdjustTime(index);
-            task.State = Planned;
+        //    JobModules.Add(job);
 
 
-        }
+        //    //Insertion
+        //    JobModules.Insert(index, job);
+        //    JobModule previous = JobModules[index - 1];
+        //    JobModule next = JobModules[index + 1];
 
-        public bool RemoveTask(TaskItem tItem) {//This is to unplan.
-            return _taskItems.Remove(tItem);
+        //    job.CalculateRoute(previous.Reciever.Address);
+        //    next.CalculateRoute(job.Reciever.Address);
+        //    AdjustTime(index);
+        //    task.State = Planned;
 
-            //Remove from groupschedule
-            int index = JobModules.IndexOf(job);   //TODO håndter index = 0 / = count
-            JobModule previous = JobModules[index - 1];
-            JobModule next = JobModules[index + 1];
 
-            next.CalculateRoute(previous.Reciever.Address);
+        //}
 
-            JobModules.Remove(job);
+        //public bool RemoveTask(TaskItem tItem) {//This is to unplan.
+        //    return _taskItems.Remove(tItem);
 
-            AdjustTime(index);
+        //    //Remove from groupschedule
+        //    int index = JobModules.IndexOf(job);   //TODO håndter index = 0 / = count
+        //    JobModule previous = JobModules[index - 1];
+        //    JobModule next = JobModules[index + 1];
 
-            IsSaved = false;
-        }
+        //    next.CalculateRoute(previous.Reciever.Address);
+
+        //    JobModules.Remove(job);
+
+        //    AdjustTime(index);
+
+        //    IsSaved = false;
+        //}
 
         private void AdjustTime(int startIndex)
         {

@@ -35,7 +35,7 @@ namespace Planning.ViewModel
             //do somthing
         }
 
-        public void GetRuoteInfo(TaskItem)
+        public void GetRouteInfo(TaskItem taskITem)
         {
             //do something
         }

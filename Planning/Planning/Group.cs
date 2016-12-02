@@ -6,19 +6,18 @@ using System.Threading.Tasks;
 using Planning.Model.Employees;
 using Planning.Model.Schedules;
 using Planning.Model.Modules;
+using Planning.Model;
 
 namespace Planning
 {
     public class Group
     {
-       
-        
-
         private List<Employee> _employees;
         private Dictionary<DateTime, GroupSchedule> _dailySchedules;
         private Dictionary<string, GroupSchedule> _templateSchedules;
-        public  string GroupAddress{ get; set; } //evt som Address?
+        public Address GroupAddress{ get; set; }
         public string Name{ get; set; }
+
 
 
         public Group(string name, string address)
@@ -27,7 +26,7 @@ namespace Planning
             _dailySchedules = new Dictionary<DateTime, GroupSchedule>();
             _templateSchedules = new Dictionary<string, GroupSchedule>();
             Name = name;
-            address = GroupAddress;
+            GroupAddress.AddressName = address;
         }
 
         public void AddEmployee(Employee employee)

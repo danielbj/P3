@@ -9,9 +9,11 @@ namespace Planning.ViewModel
 {
     class GroupAdmin
     {
-        public GroupAdmin()
-        {
+        private Group _group;
 
+        public GroupAdmin(Group group)
+        {
+            _group = group;
         }
 
         public List<Employee> GetEmployeesOnDuty(Group group)
@@ -23,14 +25,10 @@ namespace Planning.ViewModel
             return result;
         }
 
-        public void GetGroupInfo()
+        public string GetGroupInfo()
         {
-            //return string with employees & group base address
+            return _group.ToString();//IMPLEMENT TODO = return string with employees & group base address
+
         }
-        
-        
-            
-            
-        
     }
 }

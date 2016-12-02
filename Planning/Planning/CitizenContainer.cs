@@ -20,8 +20,9 @@ namespace Planning.Model
             _citizens.Add(citizen); 
         }
 
-        public void DeleteCitizen(Citizen citizen)
+        public void DeleteCitizen(Citizen citizen, DateTime dateDischarged)
         {
+            citizen.DateDischarged = dateDischarged;
             _citizens.Remove(citizen);
         }
 
@@ -37,7 +38,7 @@ namespace Planning.Model
             return result;
         }
 
-        public List<Citizen> GetCitizen()
+        public List<Citizen> GetCitizens()
         {
             return _citizens;
         }

@@ -23,24 +23,14 @@ namespace Planning.Model.Employees
         private Dictionary<DateTime, TimePeriod> _workHours;
 
 
-        //private int _qualification;   //vi kan ikke holde styr på kurser osv, så har tilføjet 'notes' i stedet
-        //public int Qualification {
-        //    get { return _qualification; }
-        //    set {
-        //        if (0 < value && value < 4)
-        //           _qualification = value;
-        //        else
-        //            throw new ArgumentOutOfRangeException("Qualification", "Must be between 1-3");
-        //    }
-        //} 
 
-
-        public Employee(string firstname, string lastname, int qualification, DateTime dateHired, string notes, string phoneNumber) {
+        public Employee(string firstname, string lastname, DateTime dateHired, string notes, string phoneNumber) {
             Firstname = firstname;
             Lastname = lastname;
             Notes = notes;
             DateHired = dateHired;
             PhoneNumber = phoneNumber;
+            
             _workHours = new Dictionary<DateTime, TimePeriod>(); 
         }
 
@@ -52,11 +42,11 @@ namespace Planning.Model.Employees
             }
             else
             {
-                throw new ArgumentException("Work hours not found for the date");
+                throw new KeyNotFoundException("Work hours not found for the date");
             }
         }
 
-        public void AddWorkhours(DateTime date, TimePeriod timeperiod)
+        public void SetWorkhours(DateTime date, TimePeriod timeperiod)
         {
             if (_workHours.ContainsKey(date))
             {
@@ -67,13 +57,6 @@ namespace Planning.Model.Employees
                 _workHours.Add(date, timeperiod);
             }
         }
-
-
-        public void EditEmployee()//???
-        {
-            
-        }
-
     }
 }
 

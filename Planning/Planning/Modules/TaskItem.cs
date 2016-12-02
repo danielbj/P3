@@ -25,12 +25,12 @@ namespace Planning.Model.Modules
         public TaskDescription TaskDescription { get; }
 
 
-        public TaskItem(TaskDescription taskDescirption)
+        public TaskItem(TaskDescription taskDescription)
         {
-            TaskDescription = taskDescirption;
+            TaskDescription = taskDescription;
             State = Status.Unplanned;
             Locked = false;
-            TimePeriod = new TimePeriod(taskDescirption.Duration);              
+            TimePeriod = new TimePeriod(taskDescription.Duration);              
         }
 
 
