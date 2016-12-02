@@ -5,8 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Planning.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525" WindowState="Maximized">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="0" VerticalAlignment="Top">
+            <Button x:Name="MailBoxButton" Margin="3" Content="Postkasse" DockPanel.Dock="Top"/>
+            <Button x:Name="SomeButton" Margin="3" Content="SomeButton" DockPanel.Dock="Top"/>
+        </DockPanel>
+        <TabControl Grid.Column="1" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TabItem Header="Planer">
+                <local:ScheduleView/>
+            </TabItem>
+            <TabItem Header="Overblik">
+                <local:OverviewView/>
+            </TabItem>
+            <TabItem Header="Borger">
+                <local:CitizenView/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
