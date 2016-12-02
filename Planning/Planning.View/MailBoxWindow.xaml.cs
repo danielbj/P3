@@ -10,21 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Planning.ViewModel;
 
 namespace Planning.View
 {
     /// <summary>
-    /// Interaction logic for ScheduleView.xaml
+    /// Interaction logic for MailBoxWindow.xaml
     /// </summary>
-    public partial class ScheduleView : UserControl
+    public partial class MailBoxWindow : Window
     {
-        public ScheduleView()
+        public MailBoxWindow()
         {
             InitializeComponent();
-            DataContext = new ScheduleViewModel();
         }
     }
 }
