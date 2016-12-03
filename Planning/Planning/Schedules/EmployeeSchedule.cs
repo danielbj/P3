@@ -153,8 +153,8 @@ namespace Planning.Model.Schedules
         {
             for (int i = startIndex; i < _taskItems.Count; i++) //TODO, håndter startindex = 0
             {
-                _taskItems[i].Route.StartTime = _taskItems[i - 1].EndTime;
-                _taskItems[i].StartTime = _taskItems[i].Route.EndTime;
+                //_taskItems[i].Route.StartTime = _taskItems[i - 1].EndTime;
+                //_taskItems[i].StartTime = _taskItems[i].Route.EndTime;
 
             }
         }

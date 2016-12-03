@@ -6,7 +6,7 @@ using Planning.Model.Employees;
 
 namespace Planning.Model.Schedules
 {
-    public class GroupSchedule : IGroupSchedule    //hvorfor abstract??
+    public class GroupSchedule// : IGroupSchedule    //hvorfor abstract??
     {
 
         public string Description { get; set; }                            // Might be a method to collect data from container element

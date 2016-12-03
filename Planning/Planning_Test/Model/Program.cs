@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Planning;
 using NUnit.Framework;
 
-namespace Planning_Test
+namespace Planning.UnitTest.Model
 {
-    class Task_Test
+    class Program
     {
+        static void Main(string[] args) {
+        }
     }
 }

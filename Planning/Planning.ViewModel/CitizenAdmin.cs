@@ -41,7 +41,7 @@ namespace Planning.ViewModel
         {
             if (ValidateAddress(address))
             {
-                return new Address(address, date);
+                return null;//new Address(address, date);
             }
             else
             {

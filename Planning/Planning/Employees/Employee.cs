@@ -8,7 +8,7 @@ using Planning.Model.Modules;
 
 namespace Planning.Model.Employees
 {
-    public class Employee : IEmployee
+    public class Employee //: IEmployee
     {
         public DateTime DateHired { get; set; }
         public DateTime DateResigned { get; set; }

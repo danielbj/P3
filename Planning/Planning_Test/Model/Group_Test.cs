@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Planning;
 using NUnit.Framework;
 
-namespace Planning_Test
+namespace Planning.UnitTest.Model
 {
-    class Schedule_Test
+    class Group_Test
     {
     }
 }

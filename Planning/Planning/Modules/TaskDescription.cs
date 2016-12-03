@@ -7,7 +7,7 @@ using Planning.Model.Modules;
 
 namespace Planning.Model.Modules
 {
-    public class TaskDescription : ITask
+    public class TaskDescription// : ITask
     {
         public DateTime DateCreated { get; set; }
         public DateTime DateDeleted { get; set; }
