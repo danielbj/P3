@@ -6,45 +6,46 @@ using System.Threading.Tasks;
 using Planning.Model.Employees;
 using Planning.Model.Schedules;
 using Planning.Model.Modules;
+using Planning.Model;
 
 namespace Planning
 {
     public class Group
     {
-       
-        
-
-        private List<Employee> _employees;
-        private Dictionary<DateTime, GroupSchedule> _dailySchedules;
-        private Dictionary<string, GroupSchedule> _templateSchedules;
-        public  string GroupAddress{ get; set; } //evt som Address?
+        public List<Employee> Employees { get; set; }
+        public Dictionary<DateTime, GroupSchedule> DailySchedules { get; set; }
+        public Dictionary<string, GroupSchedule> TemplateSchedules { get; set; }
+        public  Address GroupAddress{ get; set; } 
         public string Name{ get; set; }
+        public List<TaskDescription> TaskDescriptions { get; set; }
 
 
         public Group(string name, string address)
         {
-            _employees = new List<Employee>();
-            _dailySchedules = new Dictionary<DateTime, GroupSchedule>();
-            _templateSchedules = new Dictionary<string, GroupSchedule>();
+            Employees = new List<Employee>();
+            DailySchedules = new Dictionary<DateTime, GroupSchedule>();
+            TemplateSchedules = new Dictionary<string, GroupSchedule>();
             Name = name;
-            address = GroupAddress;
+            //GroupAddress = address;
+            TaskDescriptions = new List<TaskDescription>();
+
         }
 
         public void AddEmployee(Employee employee)
         {
-            _employees.Add(employee);
+            Employees.Add(employee);
         }
 
         public void RemoveEmployee(Employee employee)
         {
-            _employees.Remove(employee);
+            Employees.Remove(employee);
         }
 
         public List<Employee> GetEmployees(Predicate<Employee> Filter)
         {
             List<Employee> result = new List<Employee>();
 
-            foreach (Employee e in _employees)
+            foreach (Employee e in Employees)
             {
                 if (Filter(e))
                     result.Add(e);
@@ -52,31 +53,36 @@ namespace Planning
             return result;
         }
 
+        public List<Employee> GetEmployees()
+        {
+            return Employees;
+        }
+
         public void AddSchedule(DateTime date, GroupSchedule dailySchedule)
         {
-            _dailySchedules.Add(date, dailySchedule);
+            DailySchedules.Add(date, dailySchedule);
         }
 
         public void AddSchedule(string name, GroupSchedule templateSchedule)
         {
-            _templateSchedules.Add(name, templateSchedule);
+            TemplateSchedules.Add(name, templateSchedule);
         }
 
         public void RemoveSchedule(DateTime date)
         {
-            _dailySchedules.Remove(date);
+            DailySchedules.Remove(date);
         }
 
         public void RemoveSchedule(string name)
         {
-            _templateSchedules.Remove(name);
+            TemplateSchedules.Remove(name);
         }
 
         public GroupSchedule GetSchedule(DateTime date)
         {
-            if (_dailySchedules.ContainsKey(date))
+            if (DailySchedules.ContainsKey(date))
             {
-                return _dailySchedules[date];
+                return DailySchedules[date];
             }
             else
             {
@@ -87,15 +93,22 @@ namespace Planning
 
         public GroupSchedule GetSchedule(string name)
         {
-            if (_templateSchedules.ContainsKey(name))
+            if (TemplateSchedules.ContainsKey(name))
             {
-                return _templateSchedules[name];
+                return TemplateSchedules[name];
             }
             else
             {
                 throw new ArgumentException("schedule not found.");
             }
         }
+
+        public override string ToString()
+        {
+            return Name + GroupAddress.ToString();
+        }
+
+
 
 
     }

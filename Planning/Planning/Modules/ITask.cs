@@ -14,7 +14,7 @@ namespace Planning.Model.Modules
 
         int Duration { get; }
         Citizen Citizen { get; set; }
-        string assignment { get; set; }
+        string Assignment { get; set; }
         List<TaskItem> TaskItems { get; set; }
 
 

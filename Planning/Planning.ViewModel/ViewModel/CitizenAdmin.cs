@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Planning.Model;
+using Planning.Model.Modules;
 
 namespace Planning.ViewModel
 {
@@ -12,38 +13,46 @@ namespace Planning.ViewModel
 
         private CitizenContainer _citizenContainer;
 
-
         public CitizenAdmin()
         {
             _citizenContainer = new CitizenContainer();
         }
 
-        public void CreateCitizen(string cpr, string firstname, string lastname, string addressString, DateTime dateAdmitted)
+        public void AdmitCitizen(Citizen citizen) //should this be placed in Visitator class?
         {
-            Address address = CreateAddress(addressString, DateTime.Today);
-            Citizen citizen = new Citizen(cpr, firstname, lastname, address, dateAdmitted);
-            _citizenContainer.AddCitizen(citizen);
+            _citizenContainer.AdmittedCitizens.Add(citizen);
         }
-
 
         public void DischargeCitizen(Citizen citizen, DateTime dateDischarged)
+        {            
+            _citizenContainer.DischargedCitizens.Add(citizen);
+            _citizenContainer.AdmittedCitizens.Remove(citizen);
+            citizen.DateDischarged = dateDischarged;
+        } //visitator class?
+
+        public void DeleteCitizen(Citizen citizen)
         {
-            _citizenContainer.DeleteCitizen(citizen); //og hvad så med discharge datoen?
-        }
+            if (_citizenContainer.AdmittedCitizens.Contains(citizen))
+            {
+                _citizenContainer.AdmittedCitizens.Remove(citizen);
+            }
+            else if (_citizenContainer.DischargedCitizens.Contains(citizen))
+            {
+                _citizenContainer.DischargedCitizens.Remove(citizen);
+            }
+            else
+            {
+                throw new ArgumentException("Citizen not found in the system.");
+            }
+        }  //visitator class?
 
         public void ChangeCitizenAddress(Citizen citizen, string addressString, DateTime fromDate)
         {
             Address newAddress = CreateAddress(addressString, fromDate);
             citizen.AddAddress(newAddress);              
         }
-
-        private bool ValidateAddress(string address)
-        {
-            // TODO validate with bing
-            return true;
-        }
-
-        private Address CreateAddress(string address, DateTime date)
+        
+        public Address CreateAddress(string address, DateTime date)
         {
             if (ValidateAddress(address))
             {
@@ -53,6 +62,12 @@ namespace Planning.ViewModel
             {
                 throw new ArgumentException("Address not valid.");
             }
+        }
+
+        private bool ValidateAddress(string address)
+        {
+            RouteCalculator routeCalc = new RouteCalculator(); //TODO lav det statisk!! det her er noget rod...
+            return routeCalc.ValidateLocation(address);
         }
     }
 }

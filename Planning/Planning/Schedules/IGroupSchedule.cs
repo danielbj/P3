@@ -13,7 +13,7 @@ namespace Planning.Model.Schedules
         string Name { get; }
         string Description { get; set; }
         bool Approved { get; }
-        bool IsSaved { get; }
+        bool Saved { get; }
         Dictionary<Employee, EmployeeSchedule> EmployeeSchedules { get; set; }
         void DeleteSchedule();
         void Save();

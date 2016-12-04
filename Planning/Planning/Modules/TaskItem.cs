@@ -19,21 +19,25 @@ namespace Planning.Model.Modules
 
         public Status State { get; set; }
         public bool Locked;
-        public RouteItem Route;
-        
+        public RouteItem Route;        
         public TimePeriod TimePeriod { get; set; }
         public TaskDescription TaskDescription { get; }
 
 
-        public TaskItem(TaskDescription taskDescirption)
+        public TaskItem(TaskDescription taskDescription)
         {
-            TaskDescription = taskDescirption;
+            TaskDescription = taskDescription;
             State = Status.Unplanned;
             Locked = false;
-            TimePeriod = new TimePeriod(taskDescirption.Duration);              
+            TimePeriod = new TimePeriod(taskDescription.Duration);              
+        }
+
+        public override string ToString()
+        {
+            return TaskDescription.ToString(); 
         }
 
 
-        
+
     }
 }

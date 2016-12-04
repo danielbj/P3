@@ -70,7 +70,7 @@
     <Compile Include="JSONDataContracts.cs" />
     <Compile Include="Modules\IModule.cs" />
     <Compile Include="Modules\ITask.cs" />
-    <Compile Include="Modules\Route.cs" />
+    <Compile Include="Modules\RouteCalculator.cs" />
     <Compile Include="Modules\RouteItem.cs" />
     <Compile Include="Modules\TaskChange.cs" />
     <Compile Include="Modules\TaskItem.cs" />

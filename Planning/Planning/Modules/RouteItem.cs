@@ -8,13 +8,29 @@ namespace Planning.Model.Modules
 {
     public class RouteItem
     {
-        public TimePeriod TimePeriod { get; set; }
-        public int Duration { get; set; }
+        public TimePeriod TimePeriod { get; set; } //nødvendig egentlig?
+        public TimeSpan Duration { get; set; }
+        private RouteCalculator _routeCalc;
+
 
         public RouteItem(int duration)
         {
-            Duration = duration;
+            Duration = TimeSpan.FromMinutes(duration);
+            RouteCalculator RouteCalc = new RouteCalculator();
+
         }
+
+        public override string ToString()
+        {
+            string wayPoints = "";
+            foreach (string waypoint in _routeCalc.Waypoints)
+            {
+                wayPoints += waypoint + ", ";
+            }
+            return Duration.ToString() + wayPoints;
+        }
+
+
 
 
 

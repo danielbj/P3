@@ -12,7 +12,6 @@ namespace Planning.Model
         public string LastName { get; set; }
         public DateTime DateAdmitted { get; set; }
         public DateTime DateDischarged { get; set; }
-
         private string _cpr;
         public string CPR {//TODO validate that it is string?
             get { return _cpr; }
@@ -23,10 +22,8 @@ namespace Planning.Model
                     throw new ArgumentException("CPR is invalid");
             }
         }
-
-        private List<Address> _addresses;
-
-        public Address Address { get; private set; } = new Address();    
+        private List<Address> _addresses; //TODO lav så det passer med den nye Addresse klasse
+        public Address Address { get; private set; }    //TODO lav så det passer med den nye Addresse klasse
         public List<TaskDescription> Tasks;
         #endregion
 
@@ -37,7 +34,8 @@ namespace Planning.Model
             FirstName = firstname;
             LastName = lastname;
             _addresses = new List<Address>(){address};
-            DateAdmitted = dateAdmitted;          
+            DateAdmitted = dateAdmitted; 
+                     
         }
 
         public void AddTask(TaskDescription task)

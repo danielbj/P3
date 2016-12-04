@@ -8,7 +8,7 @@ using Planning.Model.Modules;
 
 namespace Planning.ViewModel
 {
-    class TaskAdmin
+    class TaskAdmin  
     {
         
         public TaskAdmin()
@@ -30,17 +30,14 @@ namespace Planning.ViewModel
             return result;
         }
 
-        public void GetTaskInfo(TaskDescription task)
+        public void GetTaskItemInfo(TaskDescription task)
         {
-            //do somthing
+            task.ToString();
         }
 
-        public void GetRuoteInfo(TaskItem)
+        public string GetRuoteInfo(TaskItem task)
         {
-            //do something
+            return task.Route.ToString();
         }
-
-
-
     }
 }

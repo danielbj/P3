@@ -49,6 +49,7 @@
     <Compile Include="ViewModel\GroupAdmin.cs" />
     <Compile Include="ViewModel\ScheduleAdmin.cs" />
     <Compile Include="ViewModel\TaskAdmin.cs" />
+    <Compile Include="ViewModel\Visitator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
