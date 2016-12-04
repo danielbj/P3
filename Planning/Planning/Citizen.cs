@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Planning.Model.Modules;
 using Planning.Model;
+using System.Linq;
 
 namespace Planning.Model
 {
@@ -53,12 +54,19 @@ namespace Planning.Model
 
         public void AddAddress(Address newAddress)
         {
-            _addresses.Add(newAddress);   //validering
+            _addresses.Add(newAddress);
         }
 
-        public Address GetAddress(DateTime date)
+        /// <summary>
+        /// Returns relevant/active address in the list
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public Address GetAddress(DateTime date)//Can maybe return string with addressname? TODO.
         {
-            return _addresses.Find(a => a.StartDate <= date); // sørg for at de ligger i den rette rækkefølge
+            _addresses = _addresses.OrderByDescending(a => a.StartDate).ToList(); //Sorts list: future, ..., past.
+            Address addr = _addresses.Find(a => a.StartDate <= date);
+            return addr;
         }
              
     }

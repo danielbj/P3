@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Planning;
+using Planning.Model;
 using NUnit.Framework;
 
 namespace Planning.UnitTest.Model
@@ -35,5 +35,30 @@ namespace Planning.UnitTest.Model
         //    Assert.Throws<ArgumentException>(() => new Citizen(cpr, age, fn, ln, addr, qual));
 
         //}
+
+        [Test]
+        public void GetTasks_CorrectDate_ReturnsExpectedAddress()
+        {
+            //Arrange
+            Address address = new Address { StartDate = new DateTime(2015, 12, 31) };
+
+            Citizen c = new Citizen("1234567890", "bo", "bosen", address, new DateTime(2012, 1, 1));
+
+            for (int i = 1; i < 10; i+=2)
+            {
+                DateTime d = new DateTime(2016, 1, i);
+                Address a = new Address { StartDate = d };
+                c.AddAddress(a);
+            }
+
+            //Act
+            Address actualAddress = c.GetAddress(new DateTime(2016, 1, 4));
+
+            Address expectedAdress = new Address { StartDate = new DateTime(2016, 1, 3)};
+
+            //assert
+            Assert.AreEqual(expectedAdress, actualAddress);
+            
+        }
     }
 }
