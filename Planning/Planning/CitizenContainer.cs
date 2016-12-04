@@ -6,9 +6,15 @@ using System.Threading.Tasks;
 
 namespace Planning.Model
 {
+
+    public delegate void CitizenContainerCitizenChangeHandler(Citizen citizen);
+
     public class CitizenContainer
     {
         private List<Citizen> _citizens;
+
+        public event CitizenContainerCitizenChangeHandler OnCitizenAdded;
+        public event CitizenContainerCitizenChangeHandler OnCitizenRemoved;
 
         public CitizenContainer()
         {
@@ -17,13 +23,15 @@ namespace Planning.Model
 
         public void AddCitizen(Citizen citizen)
         {
-            _citizens.Add(citizen); 
+            _citizens.Add(citizen);
+            OnCitizenAdded?.Invoke(citizen);
         }
 
         public void DeleteCitizen(Citizen citizen, DateTime dateDischarged)
         {
             citizen.DateDischarged = dateDischarged;
             _citizens.Remove(citizen);
+            OnCitizenRemoved?.Invoke(citizen);
         }
 
         public List<Citizen> GetCitizens(Predicate<Citizen> Filter) //hvornår skal vi egentlig det?

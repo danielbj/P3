@@ -60,6 +60,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="Changes\Change.cs" />
+    <Compile Include="Changes\CitizenChange.cs" />
+    <Compile Include="Changes\IChange.cs" />
+    <Compile Include="Changes\TaskDescriptionChange.cs" />
     <Compile Include="Citizen.cs" />
     <Compile Include="CitizenContainer.cs" />
     <Compile Include="Employees\Employee.cs" />
