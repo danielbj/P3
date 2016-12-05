@@ -8,42 +8,41 @@ namespace Planning.Model.Schedules
 {
     public class GroupSchedule// : IGroupSchedule    //hvorfor abstract??
     {
+        
+        public string Description { get; set; }          
+        public bool Approved { get; private set; }                          
+        public bool Saved { get; private set; } = false;  //needs to be changed to false, everytime there is a change in schedule       
+        public List<EmployeeSchedule> EmployeeSchedules { get; set; }
+        
 
-        public string Description { get; set; }                            // Might be a method to collect data from container element
-
-        public bool Approved { get; private set; }                          // Shows state of approval
-        public bool IsSaved { get; private set; } = false;                  // Shows if saved or not
-
-        public Dictionary<Employee, EmployeeSchedule> EmployeeSchedules { get; set; } = new Dictionary<Employee, EmployeeSchedule>();
-
-
-        public GroupSchedule()
+        public GroupSchedule(string description)
         {
+            Description = description;
+            Approved = false;
+            Saved = false;
+            EmployeeSchedules = new List<EmployeeSchedule>();
+        }
 
+         
+        public void Save()
+        {
+            //save to file?
+            Saved = true;
+        }
+        
+        public void Approval(bool state) //visitator
+        {
+            Approved = state;
+        }
+
+        public override string ToString()
+        {
+            return Description;
         }
 
 
-
-        public void AssignEmployee(Employee employee, EmployeeSchedule employeeSchedule)
-        {
-
-        }
-
-        /// <summary>
-        /// Clears all data from schedule
-        /// </summary>
-        public void DeleteSchedule() { }
-
-        /// <summary>
-        /// Saves data and updates
-        /// </summary>
-        public void Save() { }
-
-        /// <summary>
-        /// Set state of Approved variable
-        /// </summary>
-        /// <param name="state">Indicate approve status</param>
-        public void Approve(bool state) { }
     }
+
+    
 }
 

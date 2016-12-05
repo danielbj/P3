@@ -8,29 +8,24 @@ namespace Planning.Model
 {
     public class CitizenContainer
     {
-        private List<Citizen> _citizens;
+        public List<Citizen> AdmittedCitizens { get; set; }
+        public List<Citizen> DischargedCitizens { get; set; }
 
         public CitizenContainer()
         {
-            _citizens = new List<Citizen>();
+            AdmittedCitizens = new List<Citizen>();
         }
 
-        public void AddCitizen(Citizen citizen)
+        public void DeleteCitizen(Citizen citizen) //slet fra systemet
         {
-            _citizens.Add(citizen); 
-        }
-
-        public void DeleteCitizen(Citizen citizen, DateTime dateDischarged)
-        {
-            citizen.DateDischarged = dateDischarged;
-            _citizens.Remove(citizen);
+            AdmittedCitizens.Remove(citizen);
         }
 
         public List<Citizen> GetCitizens(Predicate<Citizen> Filter) //hvornår skal vi egentlig det?
         {
             List<Citizen> result = new List<Citizen>();
 
-            foreach (Citizen t in _citizens)
+            foreach (Citizen t in AdmittedCitizens)
             {
                 if (Filter(t))
                     result.Add(t);
@@ -40,7 +35,7 @@ namespace Planning.Model
 
         public List<Citizen> GetCitizens()
         {
-            return _citizens;
+            return AdmittedCitizens;
         }
     }
 }

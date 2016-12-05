@@ -39,7 +39,8 @@ namespace Planning.Model
             FirstName = firstname;
             LastName = lastname;
             _addresses = new List<Address>(){address};
-            DateAdmitted = dateAdmitted;          
+            DateAdmitted = dateAdmitted; 
+                     
         }
 
         public void AddTask(TaskDescription task)

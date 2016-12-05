@@ -10,17 +10,15 @@ namespace Planning.Model.Employees
 {
     public class Employee //: IEmployee
     {
-        public DateTime DateHired { get; set; }
-        public DateTime DateResigned { get; set; }
+        public DateTime DateHired { get; private set; }
+        public DateTime DateResigned { get; private set; }        
+        public string Firstname { get; private set; }
+        public string Lastname { get; private set; }
+        public string Notes { get; private set; }
+        public string PhoneNumber { get; private set; }
 
-        
-        //Dictionary with date and worktime.
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
-        public string Notes { get; set; }
-        public string PhoneNumber { get; set; }
+        private Dictionary<DateTime, TimePeriod> WorkHours;
 
-        private Dictionary<DateTime, TimePeriod> _workHours;
 
 
 
@@ -30,15 +28,19 @@ namespace Planning.Model.Employees
             Notes = notes;
             DateHired = dateHired;
             PhoneNumber = phoneNumber;
-            
-            _workHours = new Dictionary<DateTime, TimePeriod>(); 
+            WorkHours = new Dictionary<DateTime, TimePeriod>(); 
+        }
+
+        public bool IsWorking(DateTime date)
+        {
+            return WorkHours.ContainsKey(date);
         }
 
         public TimePeriod GetWorkHours(DateTime date)
         {
-            if (_workHours.ContainsKey(date))
+            if (WorkHours.ContainsKey(date))
             {
-                return _workHours[date];
+                return WorkHours[date];
             }
             else
             {
@@ -48,13 +50,13 @@ namespace Planning.Model.Employees
 
         public void SetWorkhours(DateTime date, TimePeriod timeperiod)
         {
-            if (_workHours.ContainsKey(date))
+            if (WorkHours.ContainsKey(date))
             {
-                _workHours[date] = timeperiod;  //overrides the old work hours
+                WorkHours[date] = timeperiod;  //overrides the old work hours
             }
             else
             {
-                _workHours.Add(date, timeperiod);
+                WorkHours.Add(date, timeperiod);
             }
         }
     }

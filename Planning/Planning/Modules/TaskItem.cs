@@ -19,8 +19,7 @@ namespace Planning.Model.Modules
 
         public Status State { get; set; }
         public bool Locked;
-        public RouteItem Route;
-        
+        public RouteItem Route;        
         public TimePeriod TimePeriod { get; set; }
         public TaskDescription TaskDescription { get; }
 
@@ -33,7 +32,12 @@ namespace Planning.Model.Modules
             TimePeriod = new TimePeriod(taskDescription.Duration);              
         }
 
+        public override string ToString()
+        {
+            return TaskDescription.ToString(); 
+        }
 
-        
+
+
     }
 }

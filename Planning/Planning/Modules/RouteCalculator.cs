@@ -8,20 +8,22 @@ namespace Planning.Model.Modules
 {
     public class RouteCalculator
     {
-        #region Bing Keys
+        #region
 
         public string[] Waypoints { get; set; }
-        private string _startURL = "http://dev.virtualearth.net/REST/V1/Routes/Driving?o=json";
-        private string _endURL = "&optimize=distance&avoid=minimizeTolls&key=";
+        private string _startURLRoute = "http://dev.virtualearth.net/REST/V1/Routes/Driving?o=json";
+        private string _startURLLocation = "http://dev.virtualearth.net/REST/v1/Locations/DK/adminDistrict/postalCode/locality/";
+        private string _endURLRoute = "&optimize=distance&avoid=minimizeTolls&key=";
+        private string _endURLLocation = "?&key=";
         private string _bingKey = "ApHwnCobuvyzfVShxnVZ7_PV8Cf7Ok-zySgYQBd1liGGJU_GpPaCAw6kZmHJF9i4";
         private BingMapsRESTService.Common.JSON.Route _route;
 
-        public int Duration
+        public TimeSpan Duration
         {
             get
             {
-                TimeSpan time = TimeSpan.FromSeconds(_route.TravelDuration);
-                return (int)time.TotalMinutes;
+                
+                return TimeSpan.FromMinutes(_route.TravelDuration);
             }
         }
 
@@ -101,7 +103,21 @@ namespace Planning.Model.Modules
                 substring += "&wp." + i.ToString() + "=" + Waypoints[i];
             }
 
-            return _startURL + substring + _endURL + _bingKey;
+            return _startURLRoute + substring + _endURLRoute + _bingKey;
+        }
+
+        public bool ValidateLocation(string address) //kunne måske returnere en address?
+        {
+            string url = _startURLLocation + address + _endURLLocation + _bingKey;
+            try
+            {
+                WebResponse response = MakeRequest(url); //hvis get response ikke lykkes, returner false i metoden, evt.
+            }
+            catch (Exception)
+            {
+                return false;                
+            }      
+            return true;  
         }
     }
 }
