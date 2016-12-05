@@ -24,7 +24,7 @@ namespace Planning.ViewModel
             Date = DateTime.Now;
         }
 
-        public void Read()
+        public void SetToRead()
         {
             IsRead = true;
         }

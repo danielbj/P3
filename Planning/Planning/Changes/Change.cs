@@ -21,6 +21,7 @@ namespace Planning.Changes
             Obj = obj;
             NewValue = newValue;
             DateCreated = DateTime.Now;
+            Description = desctription;
         }
 
         protected abstract void ApplyChange();
