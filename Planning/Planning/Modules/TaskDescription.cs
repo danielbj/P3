@@ -59,6 +59,14 @@ namespace Planning.Model.Modules
             }
         }
 
+        public TaskItem MakeNewTaskItem()
+        {
+            TaskItem tempTask = new TaskItem(this);
+            TaskItems.Add(tempTask);
+
+            return tempTask;
+        }
+
         public override string ToString()
         {
             return Citizen.LastName + ", " + Citizen.FirstName + ", " + Assignment + ", " + Duration.ToString();
