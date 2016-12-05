@@ -17,7 +17,7 @@ namespace Planning.Model.Modules
         public string Description { get; protected set; }
         public string Note { get; private set; }
         public List<TaskItem> TaskItems { get; set; } = new List<TaskItem>();
-        public TimeSpan Duration { get; private set; }        
+        public TimeSpan Duration { get; set; }        
         public TimePeriod TimeFrame;
         private List<TaskChange> _taskChanges;
         public DateTime StartDate { get; set; }

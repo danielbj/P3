@@ -12,11 +12,17 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
-        <ScrollViewer Grid.Column="0" Margin="3" VerticalScrollBarVisibility="Auto" >
-            <!--Empty-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="1" Grid.Column="0" Margin="3" VerticalScrollBarVisibility="Auto" >
+            <ListBox VerticalAlignment="Stretch" Margin="3" Padding="2">
+                
+            </ListBox>
         </ScrollViewer>
-        <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Center" Background="Gray" Width="4" ShowsPreview="False"/>
-        <Grid Grid.Column="2" Margin="3">
+        <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Center" Background="Gray" Width="4" ShowsPreview="False"/>
+        <Grid Grid.Row="1" Grid.Column="2" Margin="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
