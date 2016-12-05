@@ -36,8 +36,5 @@ namespace Planning.Model.Modules
         {
             return TaskDescription.ToString(); 
         }
-
-
-
     }
 }

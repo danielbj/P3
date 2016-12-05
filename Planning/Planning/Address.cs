@@ -21,6 +21,11 @@ namespace Planning.Model
             }
         }
 
+        public Address(string addressName)
+        {
+            AddressName = addressName;
+        }
+
         public int CompareTo(object obj)
         {
             return AddressName.CompareTo(obj);

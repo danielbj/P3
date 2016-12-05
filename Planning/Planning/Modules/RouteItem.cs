@@ -8,33 +8,62 @@ namespace Planning.Model.Modules
 {
     public class RouteItem
     {
-        public TimePeriod TimePeriod { get; set; } //nødvendig egentlig?
-        public TimeSpan Duration { get; set; }
-        private RouteCalculator _routeCalc;
+        /// <summary>
+        /// List of all routes as dictionary with waypoints as key and duration as value.
+        /// </summary>
+        private static Dictionary<Tuple<string,string>, TimeSpan> _routeList;
+        //public TimePeriod TimePeriod { get; set; } //nødvendig egentlig?
+        public TimeSpan Duration { get; private set; }
 
+        public string[] Waypoints = new string[] { };
 
-        public RouteItem(int duration)
+        public RouteItem(Address startAddress, Address endAddress)
         {
-            Duration = TimeSpan.FromMinutes(duration);
-            RouteCalculator RouteCalc = new RouteCalculator();
+            CalculateRoute(startAddress, endAddress);
+        }
 
+        public void CalculateRoute(Address startAddresse, Address endAddress)
+        {
+            KeyValuePair<Tuple<string, string>, TimeSpan> keyValuePair = _routeList.FirstOrDefault(new Func<KeyValuePair<Tuple<string, string>, TimeSpan>, bool>(r => r.Key == new Tuple<string, string>(startAddresse.AddressName, endAddress.AddressName)));
+
+            if (keyValuePair.Equals(default(KeyValuePair<Tuple<string, string>, TimeSpan>)))
+            {
+                SetThisInstance(keyValuePair);
+            }
+            else
+            {
+                CalculateAndAddToList(startAddresse.AddressName, endAddress.AddressName);
+            }
+        }
+
+        /// <summary>
+        /// Calculates route and adds new route to _routeList
+        /// </summary>
+        /// <param name="startAddressName">Used as start address for route</param>
+        /// <param name="endAddressName">User as end address for route</param>
+        private void CalculateAndAddToList(string startAddressName, string endAddressName)
+        {
+            RouteCalculator.CalculateRoute(startAddressName, endAddressName);
+
+            Duration = RouteCalculator.Duration;
+            Waypoints = (string[])RouteCalculator.Waypoints.Clone();
+
+            _routeList.Add(new Tuple<string, string>(Waypoints[0], Waypoints[1]), Duration);
+        }
+
+        /// <summary>
+        /// Set the duration and waypoints of this instance.
+        /// </summary>
+        /// <param name="keyValuePair">Contains waypoints and duration</param>
+        private void SetThisInstance(KeyValuePair<Tuple<string, string>, TimeSpan> keyValuePair)
+        {
+            Waypoints = new string[] { keyValuePair.Key.Item1, keyValuePair.Key.Item2 };
+            Duration = keyValuePair.Value;
         }
 
         public override string ToString()
         {
-            string wayPoints = "";
-            foreach (string waypoint in _routeCalc.Waypoints)
-            {
-                wayPoints += waypoint + ", ";
-            }
-            return Duration.ToString() + wayPoints;
+            return Duration.ToString() + Waypoints.Aggregate(new Func<string, string, string>((s1,s2) => s1 + ", " + s2));
         }
-
-
-
-
-
-
-
     }
 }

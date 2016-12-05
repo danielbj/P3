@@ -56,7 +56,7 @@
     <Compile Include="Model\PersonalSchedule_Test.cs" />
     <Compile Include="Model\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\Route_Test.cs" />
+    <Compile Include="Model\RouteItem_Test.cs" />
     <Compile Include="Model\Schedule_Test.cs" />
     <Compile Include="Model\Task_Test.cs" />
   </ItemGroup>

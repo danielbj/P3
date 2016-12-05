@@ -14,7 +14,7 @@ namespace Planning.Model.Modules
         //TODO Add frequency .
         public Citizen Citizen { get; set; }
         public string Assignment { get; set; }
-        public string Description { get; protected set; }
+        public string Description { get; set; }
         public string Note { get; private set; }
         public List<TaskItem> TaskItems { get; set; } = new List<TaskItem>();
         public TimeSpan Duration { get; set; }        
