@@ -16,13 +16,6 @@ namespace Planning.ViewModel
             
         }
 
-        public List<TaskItem> GetUnplannedTasks()
-        {
-            List<TaskItem> result = new List<TaskItem>();
-            //do something
-            return result;
-        }
-
         public List<TaskItem> GetTasksDueToday()
         {
             List<TaskItem> result = new List<TaskItem>();

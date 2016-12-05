@@ -18,7 +18,7 @@ namespace Planning.ViewModel
             _taskClipBoard = new List<TaskItem>();
         }
 
-        public void PlanTask(Group targetGroup, EmployeeSchedule targetEmployeeSchedule, TaskItem taskToPlan, int index) // locked? ret så der bruges GetAddress(date) når address er impl
+        public void PlanTask(Group targetGroup, EmployeeSchedule targetEmployeeSchedule, TaskItem taskToPlan, int index) // locked? ret så der bruges GetAddress(date) når address er impl. Add methods.
         {
 
             if (index == 0) //first
@@ -60,7 +60,7 @@ namespace Planning.ViewModel
             targetEmployeeSchedule.TimeFrame.EndTime = targetEmployeeSchedule.TaskItems.Last<TaskItem>().TimePeriod.EndTime;
         }
 
-        public void UnPlan(Group targetGroup, EmployeeSchedule targetEmployeeSchedule, TaskItem targetTask)
+        public void UnPlan(Group targetGroup, EmployeeSchedule targetEmployeeSchedule, TaskItem targetTask) // Add methods
         {            
             if (targetEmployeeSchedule.TaskItems.IndexOf(targetTask) == 0) //first
             {
@@ -113,14 +113,7 @@ namespace Planning.ViewModel
 
         public void ToggleLockStatusTask(TaskItem task)
         {
-            if (task.Locked)
-            {
-                task.Locked = false;
-            }
-            else
-            {
-                task.Locked = true;
-            }
+            task.Locked = !task.Locked;
         }
 
         public List<TaskChange> GetRecentTaskChanges(TaskDescription task, DateTime fromDate)
@@ -151,12 +144,6 @@ namespace Planning.ViewModel
         {
             EmployeeSchedule employeeSchedule = new EmployeeSchedule(date,startTime);
             groupschedule.EmployeeSchedules.Add(employeeSchedule);
-        }
-
-        public void AssignEmployeeToEmployeeSchedule(Employee employee, EmployeeSchedule employeeSchedule, GroupSchedule groupSchedule)
-        {
-            AssignEmployeeToEmployeeSchedule(employee, employeeSchedule);
-            
         }
 
         public void RemoveEmployeeSchedule(string scheduleName, Group group, EmployeeSchedule employeeSchedule)  //from template

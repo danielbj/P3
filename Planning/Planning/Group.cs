@@ -105,7 +105,7 @@ namespace Planning
 
         public override string ToString()
         {
-            return Name + GroupAddress.ToString();
+            return Name;
         }
 
 

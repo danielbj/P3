@@ -10,14 +10,14 @@ namespace Planning.Model.Employees
 {
     public class Employee 
     {
-        public DateTime DateHired { get; set; }
-        public DateTime DateResigned { get; set; }        
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
-        public string Notes { get; set; }
-        public string PhoneNumber { get; set; }
+        public DateTime DateHired { get; private set; }
+        public DateTime DateResigned { get; private set; }        
+        public string Firstname { get; private set; }
+        public string Lastname { get; private set; }
+        public string Notes { get; private set; }
+        public string PhoneNumber { get; private set; }
 
-        public Dictionary<DateTime, TimePeriod> WorkHours { get; set; }
+        private Dictionary<DateTime, TimePeriod> WorkHours;
 
 
         //private int _qualification;   //vi kan ikke holde styr på kurser osv, så har tilføjet 'notes' i stedet
@@ -39,6 +39,11 @@ namespace Planning.Model.Employees
             DateHired = dateHired;
             PhoneNumber = phoneNumber;
             WorkHours = new Dictionary<DateTime, TimePeriod>(); 
+        }
+
+        public bool IsWorking(DateTime date)
+        {
+            return WorkHours.ContainsKey(date);
         }
 
         public TimePeriod GetWorkHours(DateTime date)

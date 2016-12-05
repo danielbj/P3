@@ -25,7 +25,7 @@ namespace Planning.ViewModel.ViewModel
 
         public void ChangeTask(TaskItem task, DateTime date)
         {
-            //taskDescription skal implementeres inden
+            //taskChangeskal implementeres inden
         }
 
         public void CreateCitizen(string cpr, string firstname, string lastname, string addressString, DateTime dateAdmitted)

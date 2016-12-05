@@ -24,14 +24,14 @@ namespace Planning.ViewModel
         public List<Employee> GetEmployeesOnDuty(Group group, DateTime date) //på dagen
         {
             List<Employee> result = new List<Employee>();
-            result = group.GetEmployees(e => e.WorkHours.ContainsKey(date));
+            result = group.GetEmployees(e => e.IsWorking(date));
 
             return result;
         }
 
         public string GetGroupInfo(Group group)
         {
-            return group.ToString(); //returns group name + address
+            return group.ToString(); //returns group name
         }
 
         public List<Employee> GetAllEmployeesInGroup(Group group)
@@ -66,7 +66,5 @@ namespace Planning.ViewModel
 
             //what happens to employees and tasks?
         }
-
-            
     }
 }
