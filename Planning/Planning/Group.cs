@@ -15,8 +15,8 @@ namespace Planning
         private List<Employee> _employees;
         private Dictionary<DateTime, GroupSchedule> _dailySchedules;
         private Dictionary<string, GroupSchedule> _templateSchedules;
-        public Address GroupAddress{ get; set; }
-        public string Name{ get; set; }
+        public Address GroupAddress { get; set; } = new Address();
+        public string Name { get; set; } = string.Empty;
 
 
 

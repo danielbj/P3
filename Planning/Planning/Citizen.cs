@@ -13,7 +13,7 @@ namespace Planning.Model
         public DateTime DateAdmitted { get; set; }
         public DateTime DateDischarged { get; set; }
         private List<Address> _addresses;
-        public List<TaskDescription> Tasks;
+        public List<TaskDescription> Tasks = new List<TaskDescription>();
 
         private string _cpr;
         public string CPR {//TODO validate that it is string?
@@ -25,8 +25,6 @@ namespace Planning.Model
                     throw new ArgumentException("CPR is invalid");
             }
         }
-
-
         #endregion
 
 
