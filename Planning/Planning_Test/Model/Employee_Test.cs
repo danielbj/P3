@@ -10,10 +10,29 @@ using Planning.Model.Modules;
 
 namespace Planning.UnitTest.Model
 {
-    class Employee_Test {
+    class Employee_Test
+    {
 
-        private static object[] dateTimeCase = { new DateTime(2016, 12, 21, 12, 00, 00) };
+        #region Fields
+        Employee _employee;
+        TimePeriod _timePeriod;
+        #endregion
 
+        #region Set Up
+        [OneTimeSetUp]
+        public void InitEmployee()
+        {
+            _employee = new Employee("testFirstname", "testLastname", new DateTime(2016,12,21), "testNote", "testPhoneNumber");
+        }
+
+        [OneTimeSetUp]
+        public void InitTimePeriod()
+        {
+            _timePeriod = new TimePeriod(new TimeSpan(12, 0, 0));
+        }
+        #endregion
+
+        #region Create new Employee test
         //[TestCase("lawd", "savior", 1)]
         //[TestCase("lawd", "savior", 2)]
         //[TestCase("lawd", "savior", 3)]
@@ -22,6 +41,7 @@ namespace Planning.UnitTest.Model
         //}
 
         [TestCase("testFirstname", "testLastname", "2016-12-21", "testNote", "testPhoneNumber")]
+        [Category("Constructor")]
         public void NewEmployee_EmployeeCreated_EmployeeFirstnameIsSet(string firstname, string lastname, DateTime dateHired, string notes, string phoneNumber)
         {
             Employee newEmployee = new Employee(firstname, lastname, dateHired, notes, phoneNumber);
@@ -30,11 +50,51 @@ namespace Planning.UnitTest.Model
         }
 
         [TestCase("testFirstname", "testLastname", "2016-12-21", "testNote", "testPhoneNumber")]
+        [Category("Constructor")]
         public void NewEmployee_EmployeeCreated_EmployeeLastnameIsSet(string firstname, string lastname, DateTime dateHired, string notes, string phoneNumber)
         {
             Employee newEmployee = new Employee(firstname, lastname, dateHired, notes, phoneNumber);
 
             Assert.AreEqual("testLastname", newEmployee.Lastname);
         }
+
+        [TestCase("testFirstname", "testLastname", "2016-12-21", "testNote", "testPhoneNumber")]
+        [Category("Constructor")]
+        public void NewEmployee_EmployeeCreated_EmployeeDateHiredSetIsSet(string firstname, string lastname, DateTime dateHired, string notes, string phoneNumber)
+        {
+            Employee newEmployee = new Employee(firstname, lastname, dateHired, notes, phoneNumber);
+
+            Assert.AreEqual("2016-12-21", newEmployee.DateHired.ToString("yyyy-MM-dd"));
+        }
+
+        [TestCase("testFirstname", "testLastname", "2016-12-21", "testNote", "testPhoneNumber")]
+        [Category("Constructor")]
+        public void NewEmployee_EmployeeCreated_EmployeeNoteIsSet(string firstname, string lastname, DateTime dateHired, string notes, string phoneNumber)
+        {
+            Employee newEmployee = new Employee(firstname, lastname, dateHired, notes, phoneNumber);
+
+            Assert.AreEqual("testNote", newEmployee.Notes);
+        }
+
+        [TestCase("testFirstname", "testLastname", "2016-12-21", "testNote", "testPhoneNumber")]
+        [Category("Constructor")]
+        public void NewEmployee_EmployeeCreated_EmployeePhoneNumberIsSet(string firstname, string lastname, DateTime dateHired, string notes, string phoneNumber)
+        {
+            Employee newEmployee = new Employee(firstname, lastname, dateHired, notes, phoneNumber);
+
+            Assert.AreEqual("testPhoneNumber", newEmployee.PhoneNumber);
+        }
+        #endregion
+
+        [TestCase("2016-12-21")]
+        [Category("Edit WorkHours")]
+        public void SetWorkHours_CorrectInput_WorkHoursSet(DateTime dateTime)
+        {
+            _employee.SetWorkhours(dateTime, _timePeriod);
+
+            Assert.AreEqual(_timePeriod, _employee.GetWorkHours(dateTime));
+        }
+
+        //TODO: TestCase for edit employee
     }
 }
