@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Planning.ViewModel;
 
 namespace Planning.View
 {
@@ -23,6 +24,7 @@ namespace Planning.View
         public CitizenView()
         {
             InitializeComponent();
+            DataContext = new CitizenOverviewViewModel();
         }
     }
 }

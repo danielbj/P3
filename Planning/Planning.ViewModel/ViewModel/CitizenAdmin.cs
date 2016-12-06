@@ -8,7 +8,7 @@ using Planning.Model.Modules;
 
 namespace Planning.ViewModel
 {
-    class CitizenAdmin
+    public class CitizenAdmin
     {
 
         private CitizenContainer _citizenContainer;
@@ -16,6 +16,11 @@ namespace Planning.ViewModel
         public CitizenAdmin()
         {
             _citizenContainer = new CitizenContainer();
+        }
+
+        public List<Citizen> GetCitizens()
+        {
+            return _citizenContainer.GetCitizens();
         }
 
         public void AdmitCitizen(Citizen citizen) //should this be placed in Visitator class?
@@ -56,7 +61,12 @@ namespace Planning.ViewModel
         {
             if (ValidateAddress(address))
             {
-                return new Address(address, date);
+                var adr = new Address();
+                adr.AddressName = address;
+                adr.StartDate = date;
+
+                return adr;
+                // return new Address(address, date);
             }
             else
             {

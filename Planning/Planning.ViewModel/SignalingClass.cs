@@ -40,10 +40,10 @@ namespace Planning.ViewModel
 
         public void AttachCitizen(Citizen citizen)
         {
-            citizen.OnTaskAdded += NotifyTaskAdded;
-            citizen.OnTaskRemoved += NotifyTaskRemoved;
-            citizen.OnAddressAdded += NotifyAddressAdded;
-            citizen.OnPropertyChanged += NotifyCitizenPropertyChanged;
+            //citizen.OnTaskAdded += NotifyTaskAdded;
+            //citizen.OnTaskRemoved += NotifyTaskRemoved;
+            //citizen.OnAddressAdded += NotifyAddressAdded;
+            //citizen.OnPropertyChanged += NotifyCitizenPropertyChanged;
         }
 
         private void NotifyTaskAdded(TaskDescription taskDescription)
@@ -74,8 +74,8 @@ namespace Planning.ViewModel
 
         public void AttachTaskDescription(TaskDescription taskDescription)
         {
-            taskDescription.OnPropertyChanged += NotifyTaskDescriptionPropertyChanged;
-            taskDescription. // osc TODO
+            //taskDescription.OnPropertyChanged += NotifyTaskDescriptionPropertyChanged;
+            //taskDescription. // osc TODO
         }
 
         private void NotifyTaskDescriptionPropertyChanged()

@@ -16,7 +16,7 @@ namespace Planning.Model.Modules
         public RouteItem(int duration)
         {
             Duration = TimeSpan.FromMinutes(duration);
-            RouteCalculator RouteCalc = new RouteCalculator();
+            _routeCalc = new RouteCalculator();
 
         }
 

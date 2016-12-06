@@ -9,7 +9,7 @@ using Planning.Model.Schedules;
 
 namespace Planning.ViewModel.ViewModel
 {
-    class Visitator
+    public class Visitator
     {
         private CitizenAdmin _citizenAdmin;
         
