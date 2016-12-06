@@ -9,6 +9,7 @@ namespace Planning.Model.Modules
 {
     public class TaskDescription// : ITask
     {
+        public int TaskDescriptionID { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateDeleted { get; set; }
         //TODO Add frequency .

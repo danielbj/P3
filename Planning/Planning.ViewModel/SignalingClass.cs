@@ -75,7 +75,7 @@ namespace Planning.ViewModel
         public void AttachTaskDescription(TaskDescription taskDescription)
         {
             taskDescription.OnPropertyChanged += NotifyTaskDescriptionPropertyChanged;
-            taskDescription. // osc TODO
+            //taskDescription. // osc TODO
         }
 
         private void NotifyTaskDescriptionPropertyChanged()

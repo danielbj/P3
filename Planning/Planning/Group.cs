@@ -12,6 +12,7 @@ namespace Planning
 {
     public class Group
     {
+        public int GroupId { get; set; }
         public List<Employee> Employees { get; set; }
         public Dictionary<DateTime, GroupSchedule> DailySchedules { get; set; }
         public Dictionary<string, GroupSchedule> TemplateSchedules { get; set; }

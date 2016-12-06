@@ -10,6 +10,7 @@ namespace Planning.Model.Employees
 {
     public class Employee //: IEmployee
     {
+        public int EmployeeId { get; set; }
         public DateTime DateHired { get; private set; }
         public DateTime DateResigned { get; private set; }        
         public string Firstname { get; private set; }
