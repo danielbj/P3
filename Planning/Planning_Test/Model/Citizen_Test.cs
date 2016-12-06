@@ -21,7 +21,7 @@ namespace Planning.UnitTest.Model
         [SetUp]
         public void InitCitizen()
         {
-            _citizen = new Citizen("0000000000", "testFirstname", "testLastname", new Address("testAddress"), new DateTime(2016, 12, 21));
+            _citizen = new Citizen("0000000000", "testFirstname", "testLastname", new Address("Snerlevej 11, Aalborg"), new DateTime(2016, 12, 21));
         }
         #endregion
 
@@ -61,7 +61,7 @@ namespace Planning.UnitTest.Model
         {
             Address thisAddress = _citizen.GetAddress(new DateTime());
 
-            Assert.AreEqual("testAddress", thisAddress.AddressName);
+            Assert.AreEqual("Snerlevej 11, Aalborg", thisAddress.AddressName);
         }
 
         [Test]

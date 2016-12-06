@@ -14,12 +14,15 @@ namespace Planning.UnitTest.Model
     {
         private RouteItem _routeItem;
 
-        [SetUp]
+        #region Set up
+        [OneTimeSetUp]
         public void InstRouteItem()
         {
             _routeItem = new RouteItem(new Address("Snerlevej 11, Aalborg"), new Address("Niels Bohrs Vej 36, Aalborg"));
         }
+        #endregion
 
+        #region Constructor
         [Test]
         [Category("Constructor")]
         public void RouteConstructor_RouteWaypointIsSet_True()
@@ -33,5 +36,22 @@ namespace Planning.UnitTest.Model
         {
             Assert.AreEqual(new TimeSpan(0, 12, 0), _routeItem.Duration);
         }
+
+        [Test]
+        [Category("Constructor")]
+        public void RouteConstructor_WrongAddressGiven_ExceptionThrown()
+        {
+            Assert.Throws<NullReferenceException>(new TestDelegate(() => new RouteItem(null, null)));
+        }
+
+        [Test]
+        [Category("Constructor")]
+        public void RouteConstructor_CreateNewRoute_NotReferenceEqual()
+        {
+            RouteItem routeItem = new RouteItem(new Address("Snerlevej 11, Aalborg"), new Address("Niels Bohrs Vej 36, Aalborg"));
+
+            Assert.AreNotEqual(_routeItem, routeItem);
+        }
+        #endregion
     }
 }

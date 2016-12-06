@@ -9,9 +9,9 @@ namespace Planning.Model.Modules
 {
     public class TaskDescription// : ITask
     {
+        #region Fields
         public DateTime DateCreated { get; set; }
         public DateTime DateDeleted { get; set; }
-        //TODO Add frequency .
         public Citizen Citizen { get; set; }
         public string Assignment { get; set; }
         public string Description { get; set; }
@@ -20,9 +20,27 @@ namespace Planning.Model.Modules
         public TimeSpan Duration { get; set; }        
         public TimePeriod TimeFrame;
         private List<TaskChange> _taskChanges;
+        private enum Days : int { Monday = 1, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday }
+        private int _startValue = 12;
+        #region Frequency Fields
+        /// <summary>
+        /// The factor that determines how often the task should occur.
+        /// </summary>
+        private double _frequencyFactor;
+        /// <summary>
+        /// Magic number that enables occurance of tasks. Is set to 12 since it is easily dividable by 2, 3 and 4.
+        /// </summary>
+        private readonly static double _frequencyNumber = 12;
+        /// <summary>
+        /// The current frequency value.
+        /// </summary>
+        private double _frequencyCounter; 
         public DateTime StartDate { get; set; }
+        #endregion
+        #endregion
 
-        public TaskDescription(int duration, string description, Citizen citizen, TimePeriod timeFrame, DateTime startDate, string assignment, int count) { 
+        public TaskDescription(int duration, string description, Citizen citizen, TimePeriod timeFrame, DateTime startDate, string assignment, double frequency)
+        { 
             Duration = TimeSpan.FromMinutes(duration);
             Description = description;
             DateCreated = DateTime.Now;
@@ -31,7 +49,8 @@ namespace Planning.Model.Modules
             TimeFrame = timeFrame;
             StartDate = startDate;
             Assignment = assignment;
-            AddNewTaskItems(count);
+            _frequencyFactor = frequency * _frequencyNumber; //Test if valid else no frequency
+            //AddNewTaskItems(count);
         }
 
         public void AddNote(string note)
@@ -51,20 +70,32 @@ namespace Planning.Model.Modules
             return result;
         }
        
-        private void AddNewTaskItems(int count) {
-            for (int i = 1; i <= count; i++)
-            {
-                TaskItem newTaskItem = new TaskItem(this);
-                TaskItems.Add(newTaskItem);
-            }
-        }
+        //private void AddNewTaskItems(int count) {
+        //    for (int i = 1; i <= count; i++)
+        //    {
+        //        TaskItem newTaskItem = new TaskItem(this);
+        //        TaskItems.Add(newTaskItem);
+        //    }
+        //}
 
-        public TaskItem MakeNewTaskItem()
+        public TaskItem MakeNewTaskItem(DayOfWeek selectedDate)
         {
-            TaskItem tempTask = new TaskItem(this);
-            TaskItems.Add(tempTask);
+            if (_startValue >= 12 && _frequencyFactor > _frequencyNumber)
+            {
+                int startDayIndex = (int)((Days)Enum.Parse(typeof(Days), selectedDate.ToString()));
 
-            return tempTask;
+                _startValue = (int)(((_frequencyFactor) * (2 - startDayIndex)) / 7);
+                _frequencyCounter += _frequencyFactor + _startValue;
+            }
+
+            if (_frequencyFactor > _frequencyNumber)
+            {
+                DoDaily();
+            }
+            else
+            {
+                DoWeekly();
+            }
         }
 
         public override string ToString()

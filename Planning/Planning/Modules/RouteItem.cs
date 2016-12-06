@@ -11,7 +11,7 @@ namespace Planning.Model.Modules
         /// <summary>
         /// List of all routes as dictionary with waypoints as key and duration as value.
         /// </summary>
-        private static Dictionary<Tuple<string,string>, TimeSpan> _routeList;
+        private static Dictionary<Tuple<string,string>, TimeSpan> _routeList = new Dictionary<Tuple<string, string>, TimeSpan>();
         //public TimePeriod TimePeriod { get; set; } //nødvendig egentlig?
         public TimeSpan Duration { get; private set; }
 
@@ -19,14 +19,22 @@ namespace Planning.Model.Modules
 
         public RouteItem(Address startAddress, Address endAddress)
         {
+            Duration = new TimeSpan();
             CalculateRoute(startAddress, endAddress);
         }
 
-        public void CalculateRoute(Address startAddresse, Address endAddress)
+        /// <summary>
+        /// Calculates route for this route item
+        /// </summary>
+        /// <param name="startAddresse">Used as start address for route</param>
+        /// <param name="endAddress">Used as end address for route</param>
+        private void CalculateRoute(Address startAddresse, Address endAddress)
         {
-            KeyValuePair<Tuple<string, string>, TimeSpan> keyValuePair = _routeList.FirstOrDefault(new Func<KeyValuePair<Tuple<string, string>, TimeSpan>, bool>(r => r.Key == new Tuple<string, string>(startAddresse.AddressName, endAddress.AddressName)));
+            Tuple<string, string> tempTuple = new Tuple<string, string>(startAddresse.AddressName, endAddress.AddressName);
+            KeyValuePair<Tuple<string, string>, TimeSpan> keyValuePair = _routeList.FirstOrDefault(
+                new Func<KeyValuePair<Tuple<string, string>, TimeSpan>, bool>(r => r.Key.Equals(tempTuple)));
 
-            if (keyValuePair.Equals(default(KeyValuePair<Tuple<string, string>, TimeSpan>)))
+            if (!keyValuePair.Equals(default(KeyValuePair<Tuple<string, string>, TimeSpan>)))
             {
                 SetThisInstance(keyValuePair);
             }
@@ -40,7 +48,7 @@ namespace Planning.Model.Modules
         /// Calculates route and adds new route to _routeList
         /// </summary>
         /// <param name="startAddressName">Used as start address for route</param>
-        /// <param name="endAddressName">User as end address for route</param>
+        /// <param name="endAddressName">Used as end address for route</param>
         private void CalculateAndAddToList(string startAddressName, string endAddressName)
         {
             RouteCalculator.CalculateRoute(startAddressName, endAddressName);
