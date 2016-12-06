@@ -14,7 +14,7 @@ namespace Planning.Model
         public DateTime DateAdmitted { get; set; }
         public DateTime DateDischarged { get; set; }
         private List<Address> _addresses;
-        public List<TaskDescription> Tasks = new List<TaskDescription>();
+        public List<TaskDescription> Tasks { get; set; }
 
         private string _cpr;
         public string CPR {//TODO validate that it is string?
@@ -37,8 +37,14 @@ namespace Planning.Model
             FirstName = firstname;
             LastName = lastname;
             _addresses = new List<Address>(){address};
+            Tasks = new List<TaskDescription>();
             DateAdmitted = dateAdmitted; 
                      
+        }
+
+        public override string ToString()
+        {
+            return FirstName + " " + LastName;
         }
 
         public void AddTask(TaskDescription task)

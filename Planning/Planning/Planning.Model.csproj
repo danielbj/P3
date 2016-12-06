@@ -66,6 +66,7 @@
     <Compile Include="Changes\TaskDescriptionChange.cs" />
     <Compile Include="Citizen.cs" />
     <Compile Include="CitizenContainer.cs" />
+    <Compile Include="DataBaseMockUp.cs" />
     <Compile Include="Employees\Employee.cs" />
     <Compile Include="Employees\IEmployee.cs" />
     <Compile Include="Group.cs" />

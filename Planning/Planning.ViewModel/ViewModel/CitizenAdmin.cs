@@ -15,7 +15,10 @@ namespace Planning.ViewModel
 
         public CitizenAdmin()
         {
-            _citizenContainer = new CitizenContainer();
+            // TODO rigtig database
+            _citizenContainer = DataBaseMockUp.LoadCitizens();
+
+            
         }
 
         public List<Citizen> GetCitizens()

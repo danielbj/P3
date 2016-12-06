@@ -36,6 +36,11 @@ namespace Planning
             }
             return result;
         }
-      
+
+        public List<Group> GetGroups()
+        {
+            return _groups;
+        }
+
     }
 }

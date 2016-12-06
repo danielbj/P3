@@ -23,8 +23,8 @@ namespace Planning.View
     {
         public CitizenView()
         {
-            InitializeComponent();
             DataContext = new CitizenOverviewViewModel();
+            InitializeComponent();
         }
     }
 }

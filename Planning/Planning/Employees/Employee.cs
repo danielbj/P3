@@ -59,6 +59,11 @@ namespace Planning.Model.Employees
                 WorkHours.Add(date, timeperiod);
             }
         }
+
+        public override string ToString()
+        {
+            return Firstname + " " + Lastname;
+        }
     }
 }
 

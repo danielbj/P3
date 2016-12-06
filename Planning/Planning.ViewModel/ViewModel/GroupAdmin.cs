@@ -8,7 +8,7 @@ using Planning.Model.Modules;
 
 namespace Planning.ViewModel
 {
-    class GroupAdmin
+    public class GroupAdmin
     {
         GroupContainer _groupContainer;
         ScheduleAdmin _scheduleAdmin; 
@@ -17,8 +17,14 @@ namespace Planning.ViewModel
            
         public GroupAdmin()
         {
-            _groupContainer = new GroupContainer();
+            _groupContainer = DataBaseMockUp.LoadGroups(); // TODO rigtig database
+            //_groupContainer = new GroupContainer();
             _taskDescriptionsClipBoard = new List<TaskDescription>();
+        }
+
+        public List<Group> GetAllGroups()
+        {
+            return _groupContainer.GetGroups();
         }
 
         public List<Employee> GetEmployeesOnDuty(Group group, DateTime date) //på dagen
