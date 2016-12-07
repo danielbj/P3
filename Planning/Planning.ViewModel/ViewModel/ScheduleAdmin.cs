@@ -35,18 +35,17 @@ namespace Planning.ViewModel
 
                 for (int i = index +1 ; i < targetEmployeeSchedule.TaskItems.Count; i++)
                 {
-                    AdjustTravelTime(targetEmployeeSchedule.TaskItems[i-1], targetEmployeeSchedule.TaskItems[i]);
+                    AdjustTravelTime(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i]);
+                    if (targetEmployeeSchedule.TaskItems[i].Locked)//ERRORS messes the list up (indexes and placement). TODO
+                        break;
                     AdjustStartTime(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i]);
                 }
-
-                taskToPlan.State = TaskItem.Status.Planned;
             }
             else if (index == targetEmployeeSchedule.TaskItems.Count)  //last
             {
                 targetEmployeeSchedule.TaskItems.Add(taskToPlan);
                 AdjustTravelTime(targetEmployeeSchedule.TaskItems[index - 1], taskToPlan);
                 AdjustStartTime(targetEmployeeSchedule.TaskItems[index - 1], taskToPlan);
-                taskToPlan.State = TaskItem.Status.Planned;
             }
 
             else
@@ -56,11 +55,13 @@ namespace Planning.ViewModel
                 for (int i = index; i < targetEmployeeSchedule.TaskItems.Count; i++)
                 {
                     AdjustTravelTime(targetEmployeeSchedule.TaskItems[i], targetEmployeeSchedule.TaskItems[i + 1]);
+                    if (targetEmployeeSchedule.TaskItems[i].Locked)//ERRORS messes the list up (indexes and placement). TODO
+                        break;
                     AdjustStartTime(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i]);
                 }
 
-                taskToPlan.State = TaskItem.Status.Planned;
             }
+            taskToPlan.State = TaskItem.Status.Planned;
             targetEmployeeSchedule.TimePeriod.EndTime = targetEmployeeSchedule.TaskItems.Last<TaskItem>().TimePeriod.EndTime;
             return true;
         }
@@ -83,6 +84,8 @@ namespace Planning.ViewModel
                 for (int i = 1; i < targetEmployeeSchedule.TaskItems.Count; i++)   //adjusts rest of the list
                 {
                     AdjustTravelTime(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i]);
+                    if (targetEmployeeSchedule.TaskItems[i].Locked)//ERRORS messes the list up (indexes and placement). TODO
+                        break;
                     AdjustStartTime(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i]);
                 }
                 
@@ -101,6 +104,8 @@ namespace Planning.ViewModel
                 for (int i = index; i < targetEmployeeSchedule.TaskItems.Count; i++)   //adjusts rest of the list
                 {
                     AdjustTravelTime(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i]);
+                    if (targetEmployeeSchedule.TaskItems[i].Locked)//ERRORS messes the list up (indexes and placement). TODO
+                        break;
                     AdjustStartTime(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i]);
                 }
 
@@ -130,7 +135,9 @@ namespace Planning.ViewModel
         /// <param name="task"></param>
         private void AdjustStartTime(TaskItem previousTask, TaskItem task) 
         {
-            task.TimePeriod.StartTime = previousTask.TimePeriod.EndTime + previousTask.Route.Duration;            
+            if (!task.Locked)
+                task.TimePeriod.StartTime = previousTask.TimePeriod.EndTime + previousTask.Route.Duration;           
+             
         }
 
         public void ToggleLockStatusTask(TaskItem task)
