@@ -6,7 +6,7 @@ using Planning.Model.Employees;
 
 namespace Planning.Model.Schedules
 {
-    public class GroupSchedule// : IGroupSchedule    //hvorfor abstract??
+    public class GroupSchedule// : IGroupSchedule   
     {
         
         public string Description { get; set; }          
@@ -30,7 +30,7 @@ namespace Planning.Model.Schedules
             Saved = true;
         }
         
-        public void Approval(bool state) //visitator
+        public void Approval(bool state) 
         {
             Approved = state;
         }

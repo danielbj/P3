@@ -18,6 +18,13 @@ namespace Planning.ViewModel
             _taskClipBoard = new List<TaskItem>();
         }
 
+        /// <summary>
+        /// Plans a task. Sets task status = planned, and adjusts rest of the tasks in the employee schedule
+        /// </summary>
+        /// <param name="targetGroup"></param>
+        /// <param name="targetEmployeeSchedule"></param>
+        /// <param name="taskToPlan"></param>
+        /// <param name="index"></param>
         public void PlanTask(Group targetGroup, EmployeeSchedule targetEmployeeSchedule, TaskItem taskToPlan, int index) // locked? ret så der bruges GetAddress(date) når address er impl. Add methods.
         {
 
@@ -60,6 +67,12 @@ namespace Planning.ViewModel
             targetEmployeeSchedule.TimeFrame.EndTime = targetEmployeeSchedule.TaskItems.Last<TaskItem>().TimePeriod.EndTime;
         }
 
+        /// <summary>
+        /// Unplans a task. Sets task status = unplanned, and adjusts rest of the tasks in the employee schedule
+        /// </summary>
+        /// <param name="targetGroup"></param>
+        /// <param name="targetEmployeeSchedule"></param>
+        /// <param name="targetTask"></param>
         public void UnPlan(Group targetGroup, EmployeeSchedule targetEmployeeSchedule, TaskItem targetTask) // Add methods
         {            
             if (targetEmployeeSchedule.TaskItems.IndexOf(targetTask) == 0) //first
@@ -100,6 +113,7 @@ namespace Planning.ViewModel
             targetEmployeeSchedule.TimeFrame.EndTime = targetEmployeeSchedule.TaskItems.Last<TaskItem>().TimePeriod.EndTime;
         }
 
+        
         private void AdjustTravelTime(TaskItem previousTask, TaskItem task) //opdaterer travelTime i task
         {
             RouteCalculator routeCalc = new RouteCalculator(previousTask.TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), task.TaskDescription.Citizen.GetAddress(DateTime.Today).ToString()); // TODO date på addresse
@@ -121,6 +135,12 @@ namespace Planning.ViewModel
             return task.GetTaskChanges(t => t.Date >= fromDate); 
         }
 
+        /// <summary>
+        /// Retuns the best task placements based on travel time and employee workhours
+        /// </summary>
+        /// <param name="task"></param>
+        /// <param name="groupSchedule"></param>
+        /// <returns></returns>
         public Dictionary<EmployeeSchedule, int> CalcTaskPlacement(TaskItem task, GroupSchedule groupSchedule)
         {
             Dictionary<EmployeeSchedule, int> result = new Dictionary<EmployeeSchedule, int>(); 
@@ -139,13 +159,24 @@ namespace Planning.ViewModel
         {
             return groupSchedule.ToString(); 
         }
-
+        /// <summary>
+        /// Creates a new daily schedule
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="groupschedule"></param>
+        /// <param name="startTime"></param>
+        
         public void CreateNewEmployeeSchedule(DateTime date, GroupSchedule groupschedule, TimeSpan startTime)
         {
             EmployeeSchedule employeeSchedule = new EmployeeSchedule(date,startTime);
             groupschedule.EmployeeSchedules.Add(employeeSchedule);
         }
-
+        /// <summary>
+        /// Removes an employeeschedule from a template schedule
+        /// </summary>
+        /// <param name="scheduleName"></param>
+        /// <param name="group"></param>
+        /// <param name="employeeSchedule"></param>
         public void RemoveEmployeeSchedule(string scheduleName, Group group, EmployeeSchedule employeeSchedule)  //from template
         {
             foreach (TaskItem task in employeeSchedule.TaskItems)
@@ -156,7 +187,12 @@ namespace Planning.ViewModel
             group.TemplateSchedules[scheduleName].EmployeeSchedules.Remove(employeeSchedule);
             //saved = false
         }
-
+        /// <summary>
+        /// Removes an employee schedule drom daily schedule
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="group"></param>
+        /// <param name="employeeSchedule"></param>
         public void RemoveEmployeeSchedule(DateTime date, Group group, EmployeeSchedule employeeSchedule) //from daily plan
         {
             foreach (TaskItem task in employeeSchedule.TaskItems)
@@ -185,13 +221,16 @@ namespace Planning.ViewModel
         {
             //unassigned taskDescriptions needs to be placed in clipboard in groupAdmin
         }
-
+        /// <summary>
+        /// Assigns an employee to the employee schedule
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <param name="employeeSchedule"></param>
         public void AssignEmployeeToEmployeeSchedule(Employee employee, EmployeeSchedule employeeSchedule)
         {
+            //Employee skal være en del af den gruppe som har den employee schedule
             employeeSchedule.Employee = employee;
-        }
-
- 
+        } 
 
     }
 }

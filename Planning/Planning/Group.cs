@@ -17,7 +17,7 @@ namespace Planning
         public Dictionary<string, GroupSchedule> TemplateSchedules { get; set; }
         public  Address GroupAddress{ get; set; } 
         public string Name{ get; set; }
-        public List<TaskDescription> TaskDescriptions { get; set; }
+        public List<TaskDescription> TaskDescriptions { get; private set; }
 
 
 
