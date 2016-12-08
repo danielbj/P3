@@ -3,12 +3,18 @@ using System.Net;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Planning.Model.Modules
 {
     public static class RouteCalculator
     {
         #region Fields
+        /// <summary>
+        /// List of all routes as dictionary with waypoints as key and duration as value.
+        /// </summary>
+        private static Dictionary<Tuple<string, string>, TimeSpan> _routeList = new Dictionary<Tuple<string, string>, TimeSpan>();
 
         public static string[] Waypoints { get; set; }
         private static string _startURLRoute = "http://dev.virtualearth.net/REST/V1/Routes/Driving?o=json";
@@ -49,21 +55,61 @@ namespace Planning.Model.Modules
             return name;
         }
 
-        //public RouteCalculator(params string[] waypoints)
-        //{
-        //    Waypoints = waypoints;
-        //    CalculateRoute();
-        //}
-
-        public static void CalculateRoute(params string[] waypoints)
+        /// <summary>
+        /// Checks if the Route already has been calculated and returns a new RouteItem.
+        /// </summary>
+        /// <param name="startAddress">Used as start address for route.</param>
+        /// <param name="endAddress">Used as end address for route.</param>
+        /// <returns>Returns RouteItem.</returns>
+        public static RouteItem GetRouteItem(Address startAddress, Address endAddress)
         {
-            Waypoints = waypoints;
+        Tuple<string, string> tempTuple = new Tuple<string, string>(startAddress.AddressName, endAddress.AddressName);
+        KeyValuePair<Tuple<string, string>, TimeSpan> keyValuePair = _routeList.FirstOrDefault(r => r.Key.Equals(tempTuple));
+
+            if (!keyValuePair.Equals(default(KeyValuePair<Tuple<string, string>, TimeSpan>)))
+            {
+                return GetExistingRoute(keyValuePair);
+            }
+            else
+            {
+                return CalculateAndAddToList(startAddress.AddressName, endAddress.AddressName);
+            }
+        }
+
+        /// <summary>
+        /// Calculates route and adds new route to _routeList.
+        /// </summary>
+        /// <param name="startAddressName">Used as start address for route.</param>
+        /// <param name="endAddressName">Used as end address for route.</param>
+        /// <returns>Returns RouteItem.</returns>
+        private static RouteItem CalculateAndAddToList(string startAddressName, string endAddressName)
+        {
+            Waypoints = new string[] { startAddressName, endAddressName };
+
             WebResponse response = MakeRequest(CreateRequestURL());
             JObject jsonFile = ProcessRequest(response);
             DeserializeJSONObjects(jsonFile);
 
+            _routeList.Add(new Tuple<string, string>(Waypoints[0], Waypoints[1]), Duration);
+
+            return new RouteItem(startAddressName, endAddressName, Duration);
         }
 
+        /// <summary>
+        /// Finds the route in the dictionary and returns it.
+        /// </summary>
+        /// <param name="keyValuePair">Contains waypoints and duration.</param>
+        /// <returns>Returns RouteItem.</returns>
+        private static RouteItem GetExistingRoute(KeyValuePair<Tuple<string, string>, TimeSpan> keyValuePair)
+        {
+            return new RouteItem(keyValuePair.Key.Item1, keyValuePair.Key.Item2, keyValuePair.Value);
+        }
+
+        /// <summary>
+        /// Creates a request to a webservice and returns the reponse.
+        /// </summary>
+        /// <param name="requestURL">Used as request URL.</param>
+        /// <returns>Returns response.</returns>
         private static WebResponse MakeRequest(string requestURL)
         {
             //creating a web request with the url
@@ -74,6 +120,11 @@ namespace Planning.Model.Modules
             return response;
         }
 
+        /// <summary>
+        /// Process the response and converts to a Json object.
+        /// </summary>
+        /// <param name="response">Used to hold the answer given by the webservice.</param>
+        /// <returns>Returns Json object.</returns>
         private static JObject ProcessRequest(WebResponse response) {
             //read response in json, returns raw json string
             string rawJson = new StreamReader(response.GetResponseStream()).ReadToEnd();

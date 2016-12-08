@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Planning.Model.Employees;
 using Planning.Model.Schedules;
 using Planning.Model.Modules;
+using Planning.Model;
 
 namespace Planning.ViewModel
 {
@@ -191,7 +192,39 @@ namespace Planning.ViewModel
             employeeSchedule.Employee = employee;
         }
 
- 
+        public TaskItem FindOptimalPlacement(Group group, GroupSchedule groupSchedule, TaskItem taskItem)
+        {
+            //List<TaskItem> tempList = new List<TaskItem>();
+            Tuple<int, TaskItem> tempItem = new Tuple<int, TaskItem>(0 , null);
+            List<EmployeeSchedule> employeeSchedule = groupSchedule.EmployeeSchedules;
+            List<TaskItem> taskItemList = new List<TaskItem>();
+            int tempValue = 0;
+            int length;
+
+            foreach (EmployeeSchedule schedule in employeeSchedule)
+            {
+                taskItemList = schedule.TaskItems;
+                length = taskItemList.Count();
+
+                for (int i = 0; i < length; i++)
+                {
+                    tempValue = CompareRoutes(taskItem, taskItemList[i].Route.Waypoints[0], taskItemList[i].Route.Waypoints[1]);
+
+                    if (tempValue < tempItem.Item1)
+                        tempItem = new Tuple<int, TaskItem>(tempValue, taskItemList[i]);
+                }
+            }
+
+            return tempItem.Item2;
+        }
+
+        private int CompareRoutes(TaskItem taskItemClicked, string startAddress, string endAddress)
+        {
+            RouteItem AC = RouteCalculator.GetRouteItem((Address)startAddress, taskItemClicked.TaskDescription.Citizen.GetAddress(DateTime.Now));
+            RouteItem CB = RouteCalculator.GetRouteItem(taskItemClicked.TaskDescription.Citizen.GetAddress(DateTime.Now), (Address)endAddress);
+
+            return AC.Duration.Seconds + CB.Duration.Seconds;
+        }
 
     }
 }

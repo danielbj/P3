@@ -21,8 +21,8 @@ namespace Planning.Model.Modules
         public bool Locked;
         public RouteItem Route;        
         public TimePeriod TimePeriod { get; set; }
-        public TaskDescription TaskDescription { get; }
-
+        public TaskDescription TaskDescription { get; } //Skal den være her? 
+        public DateTime FirstTimeLoaded { get; set; } = new DateTime(0, 0, 0, 12, 0, 0);
 
         public TaskItem(TaskDescription taskDescription)
         {

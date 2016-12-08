@@ -45,5 +45,10 @@ namespace Planning.Model
         {
             return (int)(Math.Pow(StartDate.Day + StartDate.Month + StartDate.Year, 2) + AddressName.Length); // Used to minimize change of coincidence between two hash codes.
         }
+
+        public static explicit operator Address(String input)
+        {
+            return new Address(input);
+        }
     }
 }

@@ -8,5 +8,15 @@ namespace Planning.Changes
 {
     class Frequency
     {
+        DateTime _startDate;
+
+        void asdf(DateTime selectedDate)
+        {
+            retur _startDate % selectedDate == 0;)
+            {
+
+            }
+            
+        }
     }
 }
