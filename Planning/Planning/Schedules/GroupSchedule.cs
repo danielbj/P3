@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Planning.Model.Modules;
-using Planning.Model.Schedules;
-using Planning.Model.Employees;
 
-namespace Planning.Model.Schedules
+namespace Planning.Model
 {
     public class GroupSchedule// : IGroupSchedule    //hvorfor abstract??
     {

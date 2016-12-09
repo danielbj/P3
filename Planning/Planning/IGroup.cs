@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Planning.Model.Schedules;
-using Planning.Model.Employees;
 
 
 
-namespace Planning
+namespace Planning.Model
 {
     public interface IGroup
     {

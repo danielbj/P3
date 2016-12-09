@@ -70,8 +70,6 @@
                     <Label Name="NameDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedTask.Citizen}"/>
                     <Label Content="Addresse"/>
                     <Label Name="AddressDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedTask.Address}"/>
-                    <Label Content="Type"/>
-                    <Label Name="TypeDescriptionLabel" Margin="20,0,0,0" Content="???"/>
                     <Label Content="Tid"/>
                     <Label Name="TimeDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedTask.Duration}"/>
                     <Label Content="Hyppighed"/>

@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Planning.Model.Modules;
-using Planning.Model;
 using System.Linq;
 
 namespace Planning.Model

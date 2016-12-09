@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Planning.Model.Employees;
-using Planning.Model.Schedules;
-using Planning.Model.Modules;
-using Planning.Model;
 
-namespace Planning
+namespace Planning.Model
 {
     public class Group
     {

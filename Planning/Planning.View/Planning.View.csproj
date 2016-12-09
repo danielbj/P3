@@ -64,8 +64,8 @@
     <Compile Include="MailBoxWindow.xaml.cs">
       <DependentUpon>MailBoxWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OverviewView.xaml.cs">
-      <DependentUpon>OverviewView.xaml</DependentUpon>
+    <Compile Include="GroupView.xaml.cs">
+      <DependentUpon>GroupView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ScheduleView.xaml.cs">
       <DependentUpon>ScheduleView.xaml</DependentUpon>
@@ -90,7 +90,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="OverviewView.xaml">
+    <Page Include="GroupView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

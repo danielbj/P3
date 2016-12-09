@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Planning.Model;
-using Planning.Model.Modules;
 using System.Collections.ObjectModel;
 
 namespace Planning.ViewModel
@@ -23,12 +22,9 @@ namespace Planning.ViewModel
             set
             {
                 _selectedTask = value;
-                OnPropertyChanged("SelectedTask");
+                OnPropertyChanged(nameof(SelectedTask));
             }
         }
-
-
-
 
         public ObservableCollection<Citizen> Citizens
         {

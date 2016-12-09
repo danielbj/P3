@@ -7,23 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525" WindowState="Maximized">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <DockPanel Grid.Column="0" VerticalAlignment="Top">
-            <Button x:Name="MailBoxButton" Margin="3" Content="Postkasse" DockPanel.Dock="Top"/>
-            <Button x:Name="SomeButton" Margin="3" Content="SomeButton" DockPanel.Dock="Top"/>
-        </DockPanel>
-        <TabControl Grid.Column="1" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <TabControl Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TabItem Header="Post">
+                
+            </TabItem>
             <TabItem Header="Planer">
                 <local:ScheduleView/>
             </TabItem>
-            <TabItem Header="Overblik">
-                <local:OverviewView/>
+            <TabItem Header="Grupper">
+                <local:GroupView/>
             </TabItem>
-            <TabItem Header="Borger">
+            <TabItem Header="Borgere">
                 <local:CitizenView/>
             </TabItem>
         </TabControl>

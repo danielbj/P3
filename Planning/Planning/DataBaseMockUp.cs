@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Planning.Model;
-using Planning.Model.Modules;
-using Planning.Model.Employees;
 
-namespace Planning
+namespace Planning.Model
 {
     public class DataBaseMockUp
     {
@@ -52,6 +50,8 @@ namespace Planning
             gr1.AddEmployee(emplA);
             gr1.AddEmployee(emplB);
             gr1.AddEmployee(emplC);
+
+            gr1.TemplateSchedules.Add("Mandag", new GroupSchedule("Mandag"));
 
             var gr2 = new Group("Den magtfulde elite", "St. Helena, Atlanterhavet");
             

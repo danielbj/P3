@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Planning.Changes
+namespace Planning.Model
 {
     public abstract class Change<T, U> : IChange
     {

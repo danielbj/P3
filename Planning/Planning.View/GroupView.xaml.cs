@@ -19,9 +19,9 @@ namespace Planning.View
     /// <summary>
     /// Interaction logic for OverviewView.xaml
     /// </summary>
-    public partial class OverviewView : UserControl
+    public partial class GroupView : UserControl
     {
-        public OverviewView()
+        public GroupView()
         {
             InitializeComponent();
             DataContext = new EmployeeOverviewViewModel();
