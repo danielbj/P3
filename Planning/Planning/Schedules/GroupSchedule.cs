@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Planning.Model
 {
-    public class GroupSchedule// : IGroupSchedule    //hvorfor abstract??
+    public class GroupSchedule// : IGroupSchedule 
     {
         
         public string Description { get; set; }          

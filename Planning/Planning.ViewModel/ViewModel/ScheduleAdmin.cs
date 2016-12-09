@@ -189,7 +189,39 @@ namespace Planning.ViewModel
             employeeSchedule.Employee = employee;
         }
 
- 
+        public TaskItem FindOptimalPlacement(Group group, DateTime selectedDate, TaskItem taskItem)
+        {
+            //List<TaskItem> tempList = new List<TaskItem>();
+            Tuple<int, TaskItem> tempItem = new Tuple<int, TaskItem>(int.MaxValue , null);
+            List<EmployeeSchedule> employeeSchedules = group.DailySchedules[selectedDate].EmployeeSchedules;
+            List<TaskItem> taskItemList = new List<TaskItem>();
+            int tempValue = 0;
+            int length;
+
+            foreach (EmployeeSchedule schedule in employeeSchedules)
+            {
+                taskItemList = schedule.TaskItems;
+                length = taskItemList.Count();
+
+                for (int i = 0; i < length; i++)
+                {
+                    tempValue = CompareRoutes(taskItem, taskItemList[i].Route.Waypoints[0], taskItemList[i].Route.Waypoints[1], selectedDate);
+
+                    if (tempValue < tempItem.Item1)
+                        tempItem = new Tuple<int, TaskItem>(tempValue, taskItemList[i]);
+                }
+            }
+
+            return tempItem.Item2;
+        }
+
+        private int CompareRoutes(TaskItem taskItemClicked, string startAddress, string endAddress, DateTime selectedDate)
+        {
+            RouteItem AC = RouteCalculator.GetRouteItem((Address)startAddress, taskItemClicked.TaskDescription.Citizen.GetAddress(selectedDate));
+            RouteItem CB = RouteCalculator.GetRouteItem(taskItemClicked.TaskDescription.Citizen.GetAddress(selectedDate), (Address)endAddress);
+
+            return AC.Duration.Seconds + CB.Duration.Seconds;
+        }
 
     }
 }

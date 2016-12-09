@@ -3,38 +3,43 @@ using System.Net;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Planning.Model
 {
-    public class RouteCalculator
+    public static class RouteCalculator
     {
-        #region
+        #region Fields
+        /// <summary>
+        /// List of all routes as dictionary with waypoints as key and duration as value.
+        /// </summary>
+        private static Dictionary<Tuple<string, string>, TimeSpan> _routeList = new Dictionary<Tuple<string, string>, TimeSpan>();
 
-        public string[] Waypoints { get; set; }
-        private string _startURLRoute = "http://dev.virtualearth.net/REST/V1/Routes/Driving?o=json";
-        private string _startURLLocation = "http://dev.virtualearth.net/REST/v1/Locations/DK/adminDistrict/postalCode/locality/";
-        private string _endURLRoute = "&optimize=distance&avoid=minimizeTolls&key=";
-        private string _endURLLocation = "?&key=";
-        private string _bingKey = "ApHwnCobuvyzfVShxnVZ7_PV8Cf7Ok-zySgYQBd1liGGJU_GpPaCAw6kZmHJF9i4";
-        private BingMapsRESTService.Common.JSON.Route _route;
+        public static string[] Waypoints { get; set; }
+        private static string _startURLRoute = "http://dev.virtualearth.net/REST/V1/Routes/Driving?o=json";
+        private static string _startURLLocation = "http://dev.virtualearth.net/REST/v1/Locations/DK/adminDistrict/postalCode/locality/";
+        private static string _endURLRoute = "&optimize=distance&avoid=minimizeTolls&key=";
+        private static string _endURLLocation = "?&key=";
+        private static string _bingKey = "ApHwnCobuvyzfVShxnVZ7_PV8Cf7Ok-zySgYQBd1liGGJU_GpPaCAw6kZmHJF9i4";
+        private static BingMapsRESTService.Common.JSON.Route _route;
 
-        public TimeSpan Duration
+        public static TimeSpan Duration
         {
             get
             {
-                
-                return TimeSpan.FromMinutes(_route.TravelDuration);
+                return TimeSpan.FromSeconds(_route.TravelDuration);
             }
         }
 
-        public double Distance
+        public static double Distance
         {
             get { return _route.TravelDistance; }
         }
 
         #endregion
 
-        private string GetWaypoints(string[] waypoints)
+        private static string GetWaypoints(string[] waypoints)
         {
             string name = string.Empty;
 
@@ -50,21 +55,62 @@ namespace Planning.Model
             return name;
         }
 
-        public RouteCalculator(params string[] waypoints)
+        /// <summary>
+        /// Checks if the Route already has been calculated and returns a new RouteItem.
+        /// </summary>
+        /// <param name="startAddress">Used as start address for route.</param>
+        /// <param name="endAddress">Used as end address for route.</param>
+        /// <returns>Returns RouteItem.</returns>
+        public static RouteItem GetRouteItem(Address startAddress, Address endAddress)
         {
-            Waypoints = waypoints;
-            CalculateRoute();
+        Tuple<string, string> tempTuple = new Tuple<string, string>(startAddress.AddressName, endAddress.AddressName);
+        KeyValuePair<Tuple<string, string>, TimeSpan> keyValuePair = _routeList.FirstOrDefault(r => r.Key.Equals(tempTuple));
+
+            if (!keyValuePair.Equals(default(KeyValuePair<Tuple<string, string>, TimeSpan>)))
+            {
+                return GetExistingRoute(keyValuePair);
+            }
+            else
+            {
+                return CalculateAndAddToList(startAddress.AddressName, endAddress.AddressName);
+            }
         }
 
-        public void CalculateRoute()
+        /// <summary>
+        /// Calculates route and adds new route to _routeList.
+        /// </summary>
+        /// <param name="startAddressName">Used as start address for route.</param>
+        /// <param name="endAddressName">Used as end address for route.</param>
+        /// <returns>Returns RouteItem.</returns>
+        private static RouteItem CalculateAndAddToList(string startAddressName, string endAddressName)
         {
+            Waypoints = new string[] { startAddressName, endAddressName };
+
             WebResponse response = MakeRequest(CreateRequestURL());
             JObject jsonFile = ProcessRequest(response);
             DeserializeJSONObjects(jsonFile);
 
+            _routeList.Add(new Tuple<string, string>(Waypoints[0], Waypoints[1]), Duration);
+
+            return new RouteItem(startAddressName, endAddressName, Duration);
         }
 
-        private WebResponse MakeRequest(string requestURL)
+        /// <summary>
+        /// Finds the route in the dictionary and returns it.
+        /// </summary>
+        /// <param name="keyValuePair">Contains waypoints and duration.</param>
+        /// <returns>Returns RouteItem.</returns>
+        private static RouteItem GetExistingRoute(KeyValuePair<Tuple<string, string>, TimeSpan> keyValuePair)
+        {
+            return new RouteItem(keyValuePair.Key.Item1, keyValuePair.Key.Item2, keyValuePair.Value);
+        }
+
+        /// <summary>
+        /// Creates a request to a webservice and returns the reponse.
+        /// </summary>
+        /// <param name="requestURL">Used as request URL.</param>
+        /// <returns>Returns response.</returns>
+        private static WebResponse MakeRequest(string requestURL)
         {
             //creating a web request with the url
             var request = WebRequest.Create(requestURL);
@@ -74,7 +120,12 @@ namespace Planning.Model
             return response;
         }
 
-        private JObject ProcessRequest(WebResponse response) {
+        /// <summary>
+        /// Process the response and converts to a Json object.
+        /// </summary>
+        /// <param name="response">Used to hold the answer given by the webservice.</param>
+        /// <returns>Returns Json object.</returns>
+        private static JObject ProcessRequest(WebResponse response) {
             //read response in json, returns raw json string
             string rawJson = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
@@ -84,7 +135,7 @@ namespace Planning.Model
             return json;
         }
 
-        private void DeserializeJSONObjects(JObject jsonFile) {
+        private static void DeserializeJSONObjects(JObject jsonFile) {
             //is only returning distance&duration between first two waypoints
             //JToken resourceToken = jsonFile["resourceSets"][0]["resources"][0]["routeLegs"][0];
             //routeLegs = JsonConvert.DeserializeObject<RouteLeg>(resourceToken.ToString());
@@ -95,7 +146,7 @@ namespace Planning.Model
 
         }
 
-        public string CreateRequestURL() {
+        public static string CreateRequestURL() {
             string substring = "";
 
             for (int i = 0; i < Waypoints.Length; i++)
@@ -106,7 +157,7 @@ namespace Planning.Model
             return _startURLRoute + substring + _endURLRoute + _bingKey;
         }
 
-        public bool ValidateLocation(string address) //kunne måske returnere en address?
+        public static bool ValidateLocation(string address) //kunne måske returnere en address?
         {
             string url = _startURLLocation + address + _endURLLocation + _bingKey;
             try

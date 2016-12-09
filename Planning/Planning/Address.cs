@@ -21,6 +21,11 @@ namespace Planning.Model
             }
         }
 
+        public Address(string addressName)
+        {
+            AddressName = addressName;
+        }
+
         public int CompareTo(object obj)
         {
             return AddressName.CompareTo(obj);
@@ -39,6 +44,11 @@ namespace Planning.Model
         public override int GetHashCode()
         {
             return (int)(Math.Pow(StartDate.Day + StartDate.Month + StartDate.Year, 2) + AddressName.Length); // Used to minimize change of coincidence between two hash codes.
+        }
+
+        public static explicit operator Address(String input)
+        {
+            return new Address(input);
         }
     }
 }
