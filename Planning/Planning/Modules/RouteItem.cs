@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Planning.Model.Modules
+namespace Planning.Model
 {
     public class RouteItem
     {
@@ -16,7 +16,7 @@ namespace Planning.Model.Modules
         public RouteItem(int duration)
         {
             Duration = TimeSpan.FromMinutes(duration);
-            RouteCalculator RouteCalc = new RouteCalculator();
+            _routeCalc = new RouteCalculator();
 
         }
 

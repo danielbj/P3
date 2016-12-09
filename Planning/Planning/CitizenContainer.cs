@@ -24,14 +24,14 @@ namespace Planning.Model
 
         public void AddCitizen(Citizen citizen)
         {
-            _citizens.Add(citizen); // Check with lists
+            AdmittedCitizens.Add(citizen); // Check with lists
             OnCitizenAdded?.Invoke(citizen);
         }
 
         public void DeleteCitizen(Citizen citizen, DateTime dateDischarged)
         {
             citizen.DateDischarged = dateDischarged;
-            _citizens.Remove(citizen); // Check with lists
+            AdmittedCitizens.Remove(citizen); // Check with lists
             OnCitizenRemoved?.Invoke(citizen);
         }
 

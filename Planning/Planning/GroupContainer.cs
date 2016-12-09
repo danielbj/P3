@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Planning
+namespace Planning.Model
 {
     public class GroupContainer
     {
@@ -36,6 +36,11 @@ namespace Planning
             }
             return result;
         }
-      
+
+        public List<Group> GetGroups()
+        {
+            return _groups;
+        }
+
     }
 }

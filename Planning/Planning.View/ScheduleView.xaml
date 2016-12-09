@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Planning.View"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -13,35 +13,43 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel x:Name="GroupOverviewStackPanel" Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
-            <ComboBox x:Name="GroupComboBox" Margin="3" FlowDirection="RightToLeft"/>
-            <ComboBox x:Name="ScheduleComboBox" Margin="3" FlowDirection="RightToLeft" SelectedIndex="0" ItemsSource="{Binding Items}">
-                <ComboBoxItem x:Name="CalenderScheduleComboBoxItem" Content="Kalender Plan"/>
-                <ComboBoxItem x:Name="TemplateScheduleComboBoxItem" Content="GrundPlan"/>
-            </ComboBox>
+            <ComboBox x:Name="GroupComboBox" Margin="3" Width ="160" ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}"/>
+            <ComboBox x:Name="ScheduleComboBox" Margin="3" Width="160" ItemsSource="{Binding CalendarTypes}" SelectedItem="{Binding SelectedCalendarType}"/>
             <Grid x:Name="DateGrid">
-                <DatePicker x:Name="CurrentDatePicker" Margin="3"/>
+                <DatePicker x:Name="CurrentDatePicker" Margin="3" SelectedDate="{Binding SelectedDate}"/>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=ScheduleComboBox, Path = SelectedIndex}" Value="0">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=ScheduleComboBox, Path = SelectedIndex}" Value="1">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
             </Grid>
-            <!--<ComboBox x:Name="TemplateComboBox" Margin="3" Visibility="Collapsed"/>-->
+            <ComboBox x:Name="TemplateComboBox" Margin="3" Width="160" ItemsSource="{Binding TemplateNames}" SelectedItem="{Binding SelectedTemplateName}" SelectedIndex="0">
+                <ComboBox.Style>
+                    <Style TargetType="ComboBox">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=ScheduleComboBox, Path = SelectedIndex}" Value="1">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=ScheduleComboBox, Path = SelectedIndex}" Value="0">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.Style>
+            </ComboBox>
         </StackPanel>
         <Border BorderBrush="Black" BorderThickness="0 0 0 2" Grid.Row="1">
             <StackPanel x:Name="ButtonStackPanel" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
-                <Button x:Name="CreateScheduleButton" Content="Opret Plan" Padding="2" Margin="2"/>
                 <Button x:Name="LoadButton" Content="Indlæs Grundplan" Padding="2" Margin="2"/>
                 <Button x:Name="AddEmployeeButton" Content="Tilføj Kolonne" Padding="2" Margin="2"/>
-                <Button x:Name="JobButton" Content="Opgaver" Padding="2" Margin="2">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding SelectedIndex, ElementName=ScheduleComboBox}" Value="1">
-                                    <Setter Property="IsEnabled" Value="True"/>
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding SelectedIndex, ElementName=ScheduleComboBox}" Value="0">
-                                    <Setter Property="IsEnabled" Value="False"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
+                <Button x:Name="JobButton" Content="Uplanlagte Opgaver" Padding="2" Margin="2"/>
                 <Slider x:Name="UISlider" Margin="2" Padding="2" Maximum="3300" Minimum="330" Orientation="Horizontal" Width="200" Value="990"/>
             </StackPanel>
         </Border>

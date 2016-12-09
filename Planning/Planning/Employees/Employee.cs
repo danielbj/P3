@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Planning.Model.Employees;
-using Planning.Model.Modules;
 
-namespace Planning.Model.Employees
+namespace Planning.Model
 {
     public class Employee //: IEmployee
     {
@@ -58,6 +56,11 @@ namespace Planning.Model.Employees
             {
                 WorkHours.Add(date, timeperiod);
             }
+        }
+
+        public override string ToString()
+        {
+            return Firstname + " " + Lastname;
         }
     }
 }

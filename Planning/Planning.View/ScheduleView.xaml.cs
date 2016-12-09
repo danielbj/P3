@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Planning.ViewModel;
 
 namespace Planning.View
 {
@@ -22,8 +23,8 @@ namespace Planning.View
     {
         public ScheduleView()
         {
+            DataContext = new ScheduleViewModel();
             InitializeComponent();
-            //DataContext = new ScheduleViewModel();
         }
     }
 }

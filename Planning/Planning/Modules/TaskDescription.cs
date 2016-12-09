@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Planning.Model.Modules;
 
-namespace Planning.Model.Modules
+namespace Planning.Model
 {
     public class TaskDescription// : ITask
     {
@@ -14,7 +13,7 @@ namespace Planning.Model.Modules
         //TODO Add frequency .
         public Citizen Citizen { get; set; }
         public string Assignment { get; set; }
-        public string Description { get; protected set; }
+        public string Description { get; set; }
         public string Note { get; private set; }
         public List<TaskItem> TaskItems { get; set; } = new List<TaskItem>();
         public TimeSpan Duration { get; set; }        

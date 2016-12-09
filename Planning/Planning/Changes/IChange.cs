@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Planning.Model.Modules;
-using Planning.Model;
 
-namespace Planning.Changes
+namespace Planning.Model
 {
     public interface IChange
     {

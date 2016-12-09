@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Planning.Model.Modules;
 using Planning.Model;
-using Planning.Model.Schedules;
 
-namespace Planning.ViewModel.ViewModel
+namespace Planning.ViewModel
 {
-    class Visitator
+    public class Visitator
     {
         private CitizenAdmin _citizenAdmin;
         

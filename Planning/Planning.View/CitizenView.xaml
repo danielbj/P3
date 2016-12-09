@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Planning.View"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="600">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -28,9 +28,26 @@
                 </ComboBox>
             </StackPanel>
             <ScrollViewer Grid.Row="1" Margin="3">
-                <StackPanel x:Name="JobPanel" Height="auto" Orientation="Vertical" Width="auto" HorizontalAlignment="Stretch" Grid.RowSpan="2">
-                    <!---->
-                </StackPanel>
+                <ItemsControl x:Name="CitizenPanel" ItemsSource="{Binding Citizens}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Height="auto" Width="auto" HorizontalAlignment="Stretch"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Expander Margin="3" Header="{Binding}">
+                                <ListBox x:Name="TaskList" ItemsSource="{Binding Path=Tasks}" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedTask, Mode=TwoWay}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding}"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Expander>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </ScrollViewer>
         </Grid>
         <GridSplitter Grid.Column="1" Width="4" Background="Gray" VerticalAlignment="Stretch" HorizontalAlignment="Center" ShowsPreview="False"/>
@@ -41,7 +58,6 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
-
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="EditJobButton" Margin="3">Rediger</Button>
                 <Button x:Name="CancelJobButton" Margin="3">Aflys</Button>
@@ -49,21 +65,19 @@
             <ScrollViewer Grid.Row="1" Margin="3">
                 <StackPanel>
                     <Label Content="Service:"/>
-                    <Label Name="ServiceDescriptionLabel" Margin="20,0,0,0"/>
+                    <Label Name="ServiceDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedTask.Assignment}"/>
                     <Label Content="Borger:"/>
-                    <Label Name="NameDescriptionLabel" Margin="20,0,0,0"/>
+                    <Label Name="NameDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedTask.Citizen}"/>
                     <Label Content="Addresse"/>
-                    <Label Name="AddressDescriptionLabel" Margin="20,0,0,0"/>
-                    <Label Content="Type"/>
-                    <Label Name="TypeDescriptionLabel" Margin="20,0,0,0"/>
+                    <Label Name="AddressDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedTask.Address}"/>
                     <Label Content="Tid"/>
-                    <Label Name="TimeDescriptionLabel" Margin="20,0,0,0"/>
+                    <Label Name="TimeDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedTask.Duration}"/>
                     <Label Content="Hyppighed"/>
-                    <Label Name="FrequencyDescriptionLabel" Margin="20,0,0,0"/>
+                    <Label Name="FrequencyDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedTask.Description}"/>
                     <Label Content="Beskrivelse"/>
-                    <TextBlock Name="DescriptionLabel" Margin="20,0,0,0"  TextWrapping="Wrap"/>
+                    <TextBlock Name="DescriptionLabel" Margin="20,0,0,0"  TextWrapping="Wrap" Text="{Binding Path=SelectedTask.Description}"/>
                     <Label Content="Noter"/>
-                    <TextBlock Name="NoteDescriptionLabel" Margin="20,0,0,0" TextWrapping="Wrap"/>
+                    <TextBlock Name="NoteDescriptionLabel" Margin="20,0,0,0" TextWrapping="Wrap"  Text="{Binding Path=SelectedTask.Notes}"/>
                 </StackPanel>
             </ScrollViewer>
             <GridSplitter Grid.Row="2" Height="4" Background="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Center" ShowsPreview="False"/>
