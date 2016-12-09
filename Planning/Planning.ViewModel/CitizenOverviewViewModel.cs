@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 
 namespace Planning.ViewModel
 {
-    public class CitizenOverviewViewModel: ViewModelClass
+    public class CitizenOverviewViewModel: ViewModelBase
     {
         public CitizenAdmin CitizenAdmin { get; private set; }
 

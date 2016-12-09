@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 
 namespace Planning.ViewModel
 {
-    public class ScheduleViewModel : ViewModelClass
+    public class ScheduleViewModel : ViewModelBase
     {
 
         #region Properties
@@ -100,16 +100,19 @@ namespace Planning.ViewModel
                 return _selectedGroup;
             }
             set
-            {
-                _selectedGroup = value;
-                OnPropertyChanged(nameof(Group));
-                OnPropertyChanged(nameof(SelectedSchedule));
-                TemplateNames = _selectedGroup.TemplateSchedules.Keys.ToList<string>();
-                if (TemplateNames.Count > 0)
+            { 
+                if(_selectedGroup != value)
                 {
-                    SelectedTemplateName = TemplateNames[0];
+                    _selectedGroup = value;
+                    OnPropertyChanged(nameof(SelectedGroup));
+                    OnPropertyChanged(nameof(SelectedSchedule));
+                    TemplateNames = _selectedGroup.TemplateSchedules.Keys.ToList<string>();
+                    if (TemplateNames.Count > 0)
+                    {
+                        SelectedTemplateName = TemplateNames[0];
+                    }
+                    OnPropertyChanged(nameof(SelectedTemplateName));
                 }
-                OnPropertyChanged(nameof(SelectedTemplateName));
             }
         }
 

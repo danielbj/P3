@@ -7,7 +7,7 @@ using Planning.Model;
 
 namespace Planning.ViewModel
 {
-    public class EmployeeOverviewViewModel: ViewModelClass
+    public class EmployeeOverviewViewModel: ViewModelBase
     {
 
         private DateTime _dateOfMonday;
