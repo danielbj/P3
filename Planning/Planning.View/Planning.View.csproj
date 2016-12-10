@@ -40,6 +40,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -61,6 +63,9 @@
     <Compile Include="CitizenView.xaml.cs">
       <DependentUpon>CitizenView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeScheduleView.xaml.cs">
+      <DependentUpon>EmployeeScheduleView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MailBoxWindow.xaml.cs">
       <DependentUpon>MailBoxWindow.xaml</DependentUpon>
     </Compile>
@@ -70,7 +75,14 @@
     <Compile Include="ScheduleView.xaml.cs">
       <DependentUpon>ScheduleView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TaskItemView.xaml.cs">
+      <DependentUpon>TaskItemView.xaml</DependentUpon>
+    </Compile>
     <Page Include="CitizenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EmployeeScheduleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -95,6 +107,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ScheduleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TaskItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

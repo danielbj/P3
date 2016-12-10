@@ -13,8 +13,7 @@ namespace Planning.Model
         {
             var container = new CitizenContainer();
 
-            var adrA = new Address();
-            adrA.AddressName = "James Tobins Alle 24, 2. th,  9220 Aalborg Øst";
+            var adrA = new Address("James Tobins Alle 24, 2. th,  9220 Aalborg Øst");
             adrA.StartDate = new DateTime(2016,12,1);
             var citizenA = new Citizen("1712920000", "Nicolai", "Gjøderum",adrA, new DateTime(2016,12,1));
             var taskA1 = new TaskDescription(15, "Bad", citizenA, new TimePeriod(TimeSpan.FromHours(14)), new DateTime(2016,12,1), "Personlig hygiejne", 2);
@@ -22,8 +21,7 @@ namespace Planning.Model
             citizenA.AddTask(taskA1);
             citizenA.AddTask(taskA2);
 
-            var adrB = new Address();
-            adrA.AddressName = "Sigensvej 10, 9310 Vodskov";
+            var adrB = new Address("Sigensvej 10, 9310 Vodskov");
             adrA.StartDate = new DateTime(2016, 12, 3);
             var citizenB = new Citizen("0202620000", "Leif", "Gjøderum", adrB, new DateTime(2016, 12, 3));
             var taskB1 = new TaskDescription(15, "Bad", citizenB, new TimePeriod(TimeSpan.FromHours(13)), new DateTime(2016, 12, 3), "Personlig hygiejne", 2);

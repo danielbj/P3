@@ -19,7 +19,6 @@ namespace Planning.Model
         public TimeSpan Duration { get; set; }        
         public TimePeriod TimeFrame;
         private List<TaskChange> _taskChanges;
-        public int Frequency { get; }
 
         #endregion
 
@@ -32,7 +31,6 @@ namespace Planning.Model
             TimeFrame = timeFrame;
             StartDate = startDate;
             Assignment = assignment;
-            Frequency = frequency;
             
         }
         public void CreateTaskItem()

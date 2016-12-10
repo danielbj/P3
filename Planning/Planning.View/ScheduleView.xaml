@@ -10,9 +10,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="83*"/>
+            <RowDefinition Height="34*"/>
         </Grid.RowDefinitions>
-        <StackPanel x:Name="GroupOverviewStackPanel" Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
+        <StackPanel x:Name="GroupOverviewStackPanel" Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top" Margin="2,2,2,0">
             <ComboBox x:Name="GroupComboBox" Margin="3" Width ="160" ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}"/>
             <ComboBox x:Name="ScheduleComboBox" Margin="3" Width="160" ItemsSource="{Binding CalendarTypes}" SelectedItem="{Binding SelectedCalendarType}"/>
             <Grid x:Name="DateGrid">
@@ -48,24 +49,26 @@
         <Border BorderBrush="Black" BorderThickness="0 0 0 2" Grid.Row="1">
             <StackPanel x:Name="ButtonStackPanel" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
                 <Button x:Name="LoadButton" Content="Indlæs Grundplan" Padding="2" Margin="2"/>
-                <Button x:Name="AddEmployeeButton" Content="Tilføj Kolonne" Padding="2" Margin="2"/>
+                <Button x:Name="AddEmployeeButton" Content="Tilføj Kolonne" Padding="2" Margin="2" Command="{Binding AddEmployeeColumn}"/>
                 <Button x:Name="JobButton" Content="Uplanlagte Opgaver" Padding="2" Margin="2"/>
                 <Slider x:Name="UISlider" Margin="2" Padding="2" Maximum="3300" Minimum="330" Orientation="Horizontal" Width="200" Value="990"/>
             </StackPanel>
         </Border>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="161*"/>
+                <ColumnDefinition Width="440*"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <ScrollViewer Grid.Column="0" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+            <ScrollViewer Grid.Column="0" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True" Grid.ColumnSpan="2">
                 <Grid x:Name="ScheduleViewGrid" VerticalAlignment="Top" ScrollViewer.CanContentScroll="True" Height="{Binding ElementName=UISlider,Path=Value, Mode=TwoWay}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width ="auto"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="97*"/>
+                        <ColumnDefinition Width="442*"/>
                     </Grid.ColumnDefinitions>
                     <Grid VerticalAlignment="Stretch" x:Name="TimePanel" Grid.Row="0" Grid.Column="0">
                         <Grid.RowDefinitions>
@@ -101,7 +104,7 @@
                     <StackPanel x:Name ="SchedulePanel" Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" />
                 </Grid>
             </ScrollViewer>
-            <StackPanel x:Name="JobPanel" Grid.Column="1"  Width="auto" MinWidth="100" Visibility="Collapsed">
+            <StackPanel x:Name="JobPanel" Grid.Column="2"  Width="auto" MinWidth="100" Visibility="Collapsed" Margin="0,0,-100,0">
 
             </StackPanel>
         </Grid>

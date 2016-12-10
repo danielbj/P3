@@ -5,18 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using Planning.Model;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Planning.ViewModel
 {
     public class ScheduleViewModel : ViewModelBase
     {
 
+        #region Events
+        public delegate void ButtonClickEventHandler();
+        public event ButtonClickEventHandler AddEmployeeButtonClicked;
+        public event ButtonClickEventHandler LoadTemplateScheduleButtonClicked;
+
+        #endregion
+
         #region Properties
 
         public ObservableCollection<string> CalendarTypes { get; set; }
 
         private string _selectedCalendarType;
-        public string SelectedCalendarType
+        public string SelectedCalenderType
         {
             get
             {
@@ -25,7 +33,7 @@ namespace Planning.ViewModel
             set
             {
                 _selectedCalendarType = value;
-                OnPropertyChanged(nameof(SelectedCalendarType));
+                OnPropertyChanged(nameof(SelectedCalenderType));
                 OnPropertyChanged(nameof(SelectedSchedule));
             }
         }
@@ -79,7 +87,7 @@ namespace Planning.ViewModel
         {
             get
             {
-                if (SelectedCalendarType == CalendarTypes[0])
+                if (SelectedCalenderType == CalendarTypes[0])
                 {
                     return SelectedGroup.GetSchedule(SelectedDate);
                 }
@@ -90,7 +98,7 @@ namespace Planning.ViewModel
             }
         }
 
-        public ObservableCollection<EmployeeSchedule> EmployeeSchedules { get; set; }
+        public ObservableCollection<EmployeeSchedule> EmployeeSchedules { get; set; } = new ObservableCollection<EmployeeSchedule>();
 
         private Group _selectedGroup;
         public Group SelectedGroup
@@ -118,6 +126,9 @@ namespace Planning.ViewModel
 
         public ObservableCollection<Group> Groups { get; set; }
 
+        public RelayCommand AddEmployeeColumn { get; }
+        public RelayCommand LoadTemplateSchedule { get; }
+
         #endregion
 
         #region Fields
@@ -135,8 +146,24 @@ namespace Planning.ViewModel
             Groups = new ObservableCollection<Group>(_groupAdmin.GetAllGroups());
             SelectedGroup = Groups[0];
             CalendarTypes = new ObservableCollection<string>() { "Kalenderplaner", "Grundplaner" };
-            SelectedCalendarType = CalendarTypes[0];
+            SelectedCalenderType = CalendarTypes[0];
             SelectedDate = DateTime.Today;
+            
+
+            AddEmployeeColumn = new RelayCommand(parameter => AddEmployeeButtonClicked?.Invoke(), null);
+            LoadTemplateSchedule = new RelayCommand(parameter => LoadTemplateScheduleButtonClicked?.Invoke(), parameter => (SelectedDate != null && SelectedCalenderType == CalendarTypes[0]));
+        }
+
+        public void LoadEmployeeSchedules()
+        {
+
+            //Suggestion
+            //foreach (EmployeeSchedule es in SelectedGroup.DailySchedules[SelectedDate].EmployeeSchedules)
+            //{
+            //    EmployeeScheduleViewModel tempESViewModel = new EmployeeScheduleViewModel();
+            //    EmployeeScheduleView ESView = new EmployeeScheduleView();
+            //    JobPanel.Children.Add(ESView);
+            //}
         }
     }
 }

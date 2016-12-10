@@ -17,23 +17,23 @@ namespace Planning.Model
         {
             EffectiveDate = effectiveFrom;
             TaskItems = new List<TaskItem>();
-            TimeFrame.StartTime = startTime;
-            SetRelevantTasks(TaskItems); //Skal ske når du laver en kalenderplan
+            //TimeFrame.StartTime = startTime;
+            //SetRelevantTasks(TaskItems); //Skal ske når du laver en kalenderplan
         }
 
         //Bliver kaldt når du åbner en grundplan som kalenderplan.
-        public void SetRelevantTasks(List<TaskItem> taskItems)
-        {
-            taskItems.Add(new TaskItem());
-            TaskItems = taskItems;
-            TaskItems = GetTasks(t => CheckIfRelevant(t));
+        //public void SetRelevantTasks(List<TaskItem> taskItems)
+        //{
+        //    taskItems.Add(new TaskItem());
+        //    TaskItems = taskItems;
+        //    TaskItems = GetTasks(t => CheckIfRelevant(t));
 
-        }
+        //}
 
-        private bool CheckIfRelevant(TaskItem taskItem)
-        {
-            return (EffectiveDate - taskItem.FirstTimeLoaded).Days % taskItem.TaskDescription.Frequency == 0;
-        }
+        //private bool CheckIfRelevant(TaskItem taskItem)
+        //{
+        //    return (EffectiveDate - taskItem.FirstTimeLoaded).Days % taskItem.TaskDescription.Frequency == 0;
+        //}
 
         //Input is delegate function etc. t => "t.startTime > 12.00"
         public List<TaskItem> GetTasks(Predicate<TaskItem> Filter)

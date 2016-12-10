@@ -21,10 +21,26 @@ namespace Planning.View
     /// </summary>
     public partial class ScheduleView : UserControl
     {
+        ScheduleViewModel VM;
         public ScheduleView()
         {
-            DataContext = new ScheduleViewModel();
+            DataContext = VM = new ScheduleViewModel();
             InitializeComponent();
+            VM.AddEmployeeButtonClicked += VM_AddEmployeeButtonClicked;
+            VM.LoadTemplateScheduleButtonClicked += VM_LoadTemplateScheduleButtonClicked;
+
+
+        }
+
+        private void VM_LoadTemplateScheduleButtonClicked()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void VM_AddEmployeeButtonClicked()
+        {
+            EmployeeScheduleView ESV = new EmployeeScheduleView();
+            SchedulePanel.Children.Add(ESV);
         }
     }
 }

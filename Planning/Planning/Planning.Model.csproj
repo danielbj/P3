@@ -62,7 +62,6 @@
     <Compile Include="Address.cs" />
     <Compile Include="Changes\Change.cs" />
     <Compile Include="Changes\CitizenChange.cs" />
-    <Compile Include="Changes\Frequency.cs" />
     <Compile Include="Changes\IChange.cs" />
     <Compile Include="Changes\TaskDescriptionChange.cs" />
     <Compile Include="Citizen.cs" />

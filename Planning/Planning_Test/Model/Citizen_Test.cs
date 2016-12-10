@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Planning.Model;
 using NUnit.Framework;
 using Planning.Model;
-using Planning.Model.Modules;
 using System.Threading;
 
 namespace Planning.UnitTest.Model

@@ -63,8 +63,7 @@ namespace Planning.ViewModel
         {
             if (ValidateAddress(address))
             {
-                var adr = new Address();
-                adr.AddressName = address;
+                var adr = new Address(address);
                 adr.StartDate = date;
 
                 return adr;
@@ -78,8 +77,9 @@ namespace Planning.ViewModel
 
         private bool ValidateAddress(string address)
         {
-            RouteCalculator routeCalc = new RouteCalculator(); //TODO lav det statisk!! det her er noget rod...
-            return routeCalc.ValidateLocation(address);
+            //RouteCalculator routeCalc = new RouteCalculator(); //TODO lav det statisk!! det her er noget rod...
+            return true;
+                //routeCalc.ValidateLocation(address);
         }
     }
 }
