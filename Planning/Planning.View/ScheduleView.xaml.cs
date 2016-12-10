@@ -32,9 +32,12 @@ namespace Planning.View
 
         }
 
-        private void VM_LoadTemplateScheduleButtonClicked()
+        private void VM_LoadTemplateScheduleButtonClicked(List<EmployeeScheduleViewModel> vM)
         {
-            throw new NotImplementedException();
+            foreach (EmployeeScheduleViewModel esvm in vM) {
+                SchedulePanel.Children.Add(new EmployeeScheduleView(esvm));
+
+            }
         }
 
         private void VM_AddEmployeeButtonClicked()

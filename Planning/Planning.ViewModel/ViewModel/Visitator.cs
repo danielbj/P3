@@ -16,9 +16,9 @@ namespace Planning.ViewModel
 
         }
 
-        public void NewTask(int duration, string description, Citizen citizen, TimePeriod timeFrame, DateTime startDate, string assignment, int count)
+        public void NewTask(int duration, string description, Citizen citizen, TimePeriod timeFrame, DateTime startDate, string assignment)
         {
-            TaskDescription newTask = new TaskDescription(duration, description, citizen, timeFrame, startDate, assignment, count);
+            TaskDescription newTask = new TaskDescription(duration, description, citizen, timeFrame, startDate, assignment);
         }
 
         public void ChangeTask(TaskItem task, DateTime date)

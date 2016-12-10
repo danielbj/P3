@@ -22,24 +22,30 @@ namespace Planning.ViewModel
 
         #region properties
 
-        private List<TaskItem> _taskItem;
-        public List<TaskItem> TaskItem {
-            get { return _taskItem; }
+        private List<TaskItem> _taskItems;
+        public List<TaskItem> TaskItems {
+            get { return _taskItems; }
             set {
-                _taskItem = value;
-                OnPropertyChanged(nameof(TaskItem));
+                _taskItems = value;
+                OnPropertyChanged(nameof(TaskItems));
             }
         }
 
         #endregion
 
+        public EmployeeScheduleViewModel() {
+            _groupAdmin = new GroupAdmin();
+            _scheduleAdmin = new ScheduleAdmin();
+            TaskItems = new List<TaskItem>();
+            
+        }
 
-        public EmployeeScheduleViewModel(/*EmployeeSchedule es*/)
+        public EmployeeScheduleViewModel(EmployeeSchedule es)
         {
             _groupAdmin = new GroupAdmin();
             _scheduleAdmin = new ScheduleAdmin();
-            //EmployeeSchedule = es;
-            //TaskItem = EmployeeSchedule.GetTasks();
+            EmployeeSchedule = es;
+            TaskItems = EmployeeSchedule.GetTasks();
         }
     }
 }

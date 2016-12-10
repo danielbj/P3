@@ -14,8 +14,9 @@ namespace Planning.ViewModel
 
         #region Events
         public delegate void ButtonClickEventHandler();
+        public delegate void LoadTemplateButtonClickEventHandler(List<EmployeeScheduleViewModel> vM);
         public event ButtonClickEventHandler AddEmployeeButtonClicked;
-        public event ButtonClickEventHandler LoadTemplateScheduleButtonClicked;
+        public event LoadTemplateButtonClickEventHandler LoadTemplateScheduleButtonClicked;
 
         #endregion
 
@@ -98,7 +99,16 @@ namespace Planning.ViewModel
             }
         }
 
-        public ObservableCollection<EmployeeSchedule> EmployeeSchedules { get; set; } = new ObservableCollection<EmployeeSchedule>();
+        private List<EmployeeSchedule> _employeeSchedules;
+        public List<EmployeeSchedule> EmployeeSchedules {
+            get { return _employeeSchedules; }
+            set {
+                if(_employeeSchedules != value) {
+                    _employeeSchedules = value;
+                    OnPropertyChanged(nameof(EmployeeSchedules));
+                }
+            }
+        }
 
         private Group _selectedGroup;
         public Group SelectedGroup
@@ -135,12 +145,12 @@ namespace Planning.ViewModel
 
         private GroupAdmin _groupAdmin;
         private ScheduleAdmin _scheduleAdmin;
+        private List<EmployeeScheduleViewModel> EmployeeScheduleViewModels = new List<EmployeeScheduleViewModel>();
 
         #endregion
 
 
-        public ScheduleViewModel()
-        {
+        public ScheduleViewModel() {
             _groupAdmin = new GroupAdmin();
             _scheduleAdmin = new ScheduleAdmin();
             Groups = new ObservableCollection<Group>(_groupAdmin.GetAllGroups());
@@ -148,10 +158,21 @@ namespace Planning.ViewModel
             CalendarTypes = new ObservableCollection<string>() { "Kalenderplaner", "Grundplaner" };
             SelectedCalenderType = CalendarTypes[0];
             SelectedDate = DateTime.Today;
-            
+
+
 
             AddEmployeeColumn = new RelayCommand(parameter => AddEmployeeButtonClicked?.Invoke(), null);
-            LoadTemplateSchedule = new RelayCommand(parameter => LoadTemplateScheduleButtonClicked?.Invoke(), parameter => (SelectedDate != null && SelectedCalenderType == CalendarTypes[0]));
+
+            CreateEmployeeScheduleViewModels();
+            LoadTemplateSchedule = new RelayCommand(parameter => LoadTemplateScheduleButtonClicked?.Invoke(EmployeeScheduleViewModels), parameter => (SelectedDate != null && SelectedCalenderType == CalendarTypes[0]));
+        }
+        private void CreateEmployeeScheduleViewModels() {
+            EmployeeSchedules = Groups.First(g => g.Equals(SelectedGroup)).GetSchedule(SelectedTemplateName).EmployeeSchedules;
+
+            foreach (EmployeeSchedule es in EmployeeSchedules) {
+                EmployeeScheduleViewModels.Add(new EmployeeScheduleViewModel(es));
+            }
+
         }
 
         public void LoadEmployeeSchedules()

@@ -21,8 +21,7 @@ namespace Planning.Model
         public bool Locked;
         public RouteItem Route;        
         public TimePeriod TimePeriod { get; set; }
-        public TaskDescription TaskDescription { get; } //Skal den være her? 
-        public DateTime FirstTimeLoaded { get; set; } = new DateTime(0, 0, 0, 12, 0, 0);
+        public TaskDescription TaskDescription { get; } //Skal den være her?
 
         public TaskItem(TaskDescription taskDescription)
         {

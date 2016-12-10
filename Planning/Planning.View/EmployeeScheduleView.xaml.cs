@@ -21,27 +21,26 @@ namespace Planning.View
     /// </summary>
     public partial class EmployeeScheduleView : UserControl
     {
+        EmployeeScheduleViewModel VM;
+
         public EmployeeScheduleView()
         {
-            for (int i = 0; i < 660; i++)
-            {
-                RowDefinition rowdef = new RowDefinition();
-                rowdef.Height = new GridLength(1, GridUnitType.Star);
-
-                ScheduleGrid.RowDefinitions.Add(rowdef);
-            }
-
-
             InitializeComponent();
-            DataContext = new EmployeeScheduleViewModel();
+            DataContext = VM = new EmployeeScheduleViewModel();
+
+
+        }
+        public EmployeeScheduleView(EmployeeScheduleViewModel eSVM) {
+            InitializeComponent();
+            DataContext = VM = eSVM;
         }
 
 
-        public void AddTaskItemViewToGrid(TaskItemView tiView)
-        {
-            ScheduleGrid.Children.Add(tiView);
-            Grid.SetRow(tiView, tiView.VM.TaskStartTime);
-            Grid.SetRowSpan(tiView, tiView.VM.TaskDuration);
-        }
+        //public void AddTaskItemViewToGrid(TaskItemView tiView)
+        //{
+        //    EmployeeListBox.Add(tiView);
+        //    Grid.SetRow(tiView, tiView.VM.TaskStartTime);
+        //    Grid.SetRowSpan(tiView, tiView.VM.TaskDuration);
+        //}
     }
 }

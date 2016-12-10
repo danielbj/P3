@@ -25,7 +25,7 @@ namespace Planning.View
         public TaskItemView()
         {
             InitializeComponent();
-            DataContext = VM = new TaskItemViewModel();
+            //DataContext = VM = new TaskItemViewModel();
         }
     }
 }

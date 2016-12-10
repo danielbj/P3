@@ -39,7 +39,7 @@
                                 <Setter Property="Visibility" Value="Visible"/>
                             </DataTrigger>
                             <DataTrigger Binding="{Binding ElementName=ScheduleComboBox, Path = SelectedIndex}" Value="0">
-                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Setter Property="Visibility" Value="Visible"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -48,7 +48,7 @@
         </StackPanel>
         <Border BorderBrush="Black" BorderThickness="0 0 0 2" Grid.Row="1">
             <StackPanel x:Name="ButtonStackPanel" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
-                <Button x:Name="LoadButton" Content="Indlæs Grundplan" Padding="2" Margin="2"/>
+                <Button x:Name="LoadButton" Content="Indlæs Grundplan" Padding="2" Margin="2" Command="{Binding LoadTemplateSchedule}"/>
                 <Button x:Name="AddEmployeeButton" Content="Tilføj Kolonne" Padding="2" Margin="2" Command="{Binding AddEmployeeColumn}"/>
                 <Button x:Name="JobButton" Content="Uplanlagte Opgaver" Padding="2" Margin="2"/>
                 <Slider x:Name="UISlider" Margin="2" Padding="2" Maximum="3300" Minimum="330" Orientation="Horizontal" Width="200" Value="990"/>
