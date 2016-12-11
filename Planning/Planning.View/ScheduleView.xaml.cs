@@ -34,9 +34,10 @@ namespace Planning.View
 
         private void VM_LoadTemplateScheduleButtonClicked(List<EmployeeScheduleViewModel> vM)
         {
+            if (SchedulePanel.Children.Count > 0)
+                MessageBox.Show("Already loaded!!");
             foreach (EmployeeScheduleViewModel esvm in vM) {
                 SchedulePanel.Children.Add(new EmployeeScheduleView(esvm));
-
             }
         }
 

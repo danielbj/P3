@@ -19,12 +19,13 @@ namespace Planning.ViewModel
             }
         }
 
-        public int TaskDuration {
-            get { return TaskItem.TaskDescription.Duration.Minutes; }
+        public double TaskDuration {
+            get {
+                return TaskItem.TaskDescription.Duration.TotalMinutes; }
         }
 
-        public int TaskStartTime {
-            get { return TaskItem.TaskDescription.TimeFrame.StartTime.Minutes; }
+        public double TaskStartTime {
+            get { return TaskItem.TaskDescription.TimeFrame.StartTime.TotalMinutes; }
         }
 
         #endregion

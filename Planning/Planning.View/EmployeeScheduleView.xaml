@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Planning.View"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="100">
-    <Grid Width="100">
+             d:DesignHeight="300" d:DesignWidth="145">
+    <Grid Width="135">
         <Grid.ContextMenu>
             <ContextMenu x:Name="Contextmenu">
                 <MenuItem Header="Tilføj Medarbejder"/>
@@ -21,21 +21,19 @@
         </Grid.RowDefinitions>
         <TextBlock x:Name="NameLabel" Margin="2" Padding="2" Grid.Row="0" Text="{Binding }"/>
         <!--Maybe bind to a collection of taskitems and display them with size etc.-->
-        <ListBox x:Name="EmployeeListBox" ItemsSource="{Binding TaskItems}" Grid.Row="1" AllowDrop="True" Background="Beige">
+        <ListBox x:Name="EmployeeListBox" ItemsSource="{Binding TaskItems}" Grid.Row="1" AllowDrop="True" Background="Beige" MaxWidth="135" MinWidth="135">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Height="{Binding TaskDescription.Duration.Minutes + Route.Duration.Minutes}">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Background="Aqua" Height="{Binding TaskDescription.Duration.Minutes}">
-                                <TextBlock x:Name="Citizen" HorizontalAlignment="Center" Text="{Binding TaskDescription.Citizen}"/>
-                                <TextBlock x:Name="Description" HorizontalAlignment="Center" Text="{Binding TaskDescription.Description}"/>
-                                <TextBlock x:Name="Duration"  HorizontalAlignment="Center" Text="{Binding TaskDescription.Duration.Minutes}"/>
+                    <TextBlock Height="{Binding TaskDescription.Duration.TotalMinutes + Route.Duration.TotalMinutes}" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Vertical" MaxWidth="120" MinWidth="120">
+                            <TextBlock Background="Aqua" Height="{Binding TaskDescription.Duration.TotalMinutes}">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock x:Name="Citizen" HorizontalAlignment="Center" Text="{Binding TaskDescription.Citizen}" FontStyle="Italic"/>
+                                    <TextBlock x:Name="Description" HorizontalAlignment="Center" Text="{Binding TaskDescription.Description}" FontWeight="Bold" FontSize="14"/>
+                                    <TextBlock x:Name="Duration"  HorizontalAlignment="Center" Text="{Binding TaskDescription.Duration.TotalMinutes}">-Minutter</TextBlock>
+                                </StackPanel>
                             </TextBlock>
-                            <TextBlock x:Name="DriveTime" Background="Gray" Height="{Binding Route.Duration.Minutes}">
-                                <Run>Køretid: </Run>
-                                <Run Text="{Binding Route.Duration.Minutes}"></Run>
-                                <!--Køretid: <TextBlock x:Name="DriveTime" HorizontalAlignment="Center" Text="{Binding Route.Duration.Minutes}"> </TextBlock>-->
-                            </TextBlock>
+                            <TextBlock x:Name="DriveTime" Background="Gray" Height="{Binding Route.Duration.TotalMinutes}"/>
                         </StackPanel>
                     </TextBlock>
                 </DataTemplate>
