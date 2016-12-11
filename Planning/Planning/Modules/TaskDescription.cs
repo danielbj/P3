@@ -10,6 +10,8 @@ namespace Planning.Model
     {
         #region Fields
         public DateTime StartDate { get; set; }
+        public int TaskDescriptionID { get; set; }
+        public DateTime DateCreated { get; set; }
         public DateTime DateDeleted { get; set; }
         public Citizen Citizen { get; set; }
         public string Assignment { get; set; }

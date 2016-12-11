@@ -7,6 +7,7 @@ namespace Planning.Model
     public class Citizen
     {
         #region Fields
+        public int CitizenId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DateAdmitted { get; set; }

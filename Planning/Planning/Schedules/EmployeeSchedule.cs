@@ -8,10 +8,11 @@ namespace Planning.Model
 {
     public class EmployeeSchedule
     {
+        public int EmployeeScheduleId { get; set; }
         public List<TaskItem> TaskItems { get; set; }        
         public DateTime EffectiveDate;
         public Employee Employee { get; set; }
-        public TimePeriod TimeFrame { get; set; }
+        public TimePeriod TimePeriod { get; set; }
 
         public EmployeeSchedule(DateTime effectiveFrom, TimeSpan startTime)
         {
