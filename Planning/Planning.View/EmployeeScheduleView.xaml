@@ -21,7 +21,19 @@
         </Grid.RowDefinitions>
         <TextBlock x:Name="NameLabel" Margin="2" Padding="2" Grid.Row="0" Text="{Binding }"/>
         <!--Maybe bind to a collection of taskitems and display them with size etc.-->
-        <ListBox x:Name="EmployeeListBox" ItemsSource="{Binding TaskItems}" Grid.Row="1" AllowDrop="True" Background="Beige" MaxWidth="135" MinWidth="135">
+        <ListBox x:Name="EmployeeListBox" ItemsSource="{Binding TaskItems}" Grid.Row="1" AllowDrop="False" Background="Beige" MaxWidth="135" MinWidth="135">
+                 <!--PreviewMouseMove="EmployeeListBox_PreviewMouseMove"
+                 Drop="EmployeeListBox_Drop"
+                 PreviewMouseDown="EmployeeListBox_PreviewMouseDown"-->
+            
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="AllowDrop" Value="True"/>
+                    <EventSetter Event="ListBoxItem.PreviewMouseDown" Handler="EmployeeListBox_PreviewMouseDown"/>
+                    <EventSetter Event="ListBoxItem.PreviewMouseMove" Handler="EmployeeListBox_PreviewMouseMove"/>
+                    <EventSetter Event="ListBoxItem.Drop" Handler="EmployeeListBox_Drop"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Height="{Binding TaskDescription.Duration.TotalMinutes + Route.Duration.TotalMinutes}" HorizontalAlignment="Center">

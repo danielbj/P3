@@ -104,9 +104,21 @@
                     <StackPanel x:Name ="SchedulePanel" Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" />
                 </Grid>
             </ScrollViewer>
-            <StackPanel x:Name="JobPanel" Grid.Column="2"  Width="auto" MinWidth="100" Visibility="Collapsed" Margin="0,0,-100,0">
-
-            </StackPanel>
+            <ListBox x:Name="JobPanel" ItemsSource="{Binding TaskItems}" AllowDrop="True" Background="Beige" Grid.Column="2"  Width="auto" MinWidth="100" Visibility="Collapsed" Margin="0,0,-100,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Height="{Binding TaskDescription.Duration.TotalMinutes}" HorizontalAlignment="Center">
+                            <TextBlock Background="AntiqueWhite" Height="{Binding TaskDescription.Duration.TotalMinutes}">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock x:Name="Citizen" HorizontalAlignment="Center" Text="{Binding TaskDescription.Citizen}" FontStyle="Italic"/>
+                                    <TextBlock x:Name="Description" HorizontalAlignment="Center" Text="{Binding TaskDescription.Description}" FontWeight="Bold" FontSize="14"/>
+                                    <TextBlock x:Name="Duration"  HorizontalAlignment="Center" Text="{Binding TaskDescription.Duration.TotalMinutes}">-Minutter</TextBlock>
+                                </StackPanel>
+                            </TextBlock>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
     </Grid>
 </UserControl>

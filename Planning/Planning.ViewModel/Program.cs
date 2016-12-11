@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Planning.Model;
-using Planning.Model.Employees;
-using Planning.Model.Schedules;
-using Planning.Model.Modules;
+
 
 
 namespace Planning.ViewModel

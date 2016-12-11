@@ -26,10 +26,9 @@ namespace Planning.ViewModel
 
             if (index == 0) //first
             {
-                targetEmployeeSchedule.TaskItems.Insert(index, taskToPlan); 
-                //RouteCalculator routeCalc = new RouteCalculator(targetGroup.GroupAddress.ToString(), taskToPlan.TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());  // Todo med date på adresse
-                //routeCalc.CalculateRoute();
-                taskToPlan.TimePeriod.StartTime = targetEmployeeSchedule.TimeFrame.StartTime;
+                targetEmployeeSchedule.TaskItems.Insert(index, taskToPlan);
+                taskToPlan.Route = RouteCalculator.GetRouteItem(new Address("Kærvej 2, 7752 Snedsted"), taskToPlan.TaskDescription.Citizen.GetAddress(DateTime.Today));
+                taskToPlan.TimePeriod.StartTime = targetEmployeeSchedule.TimePeriod.StartTime;
 
                 for (int i = index +1 ; i < targetEmployeeSchedule.TaskItems.Count; i++)
                 {
@@ -75,8 +74,8 @@ namespace Planning.ViewModel
             if (targetEmployeeSchedule.TaskItems.IndexOf(taskToUnplan) == 0) //first
             {
                 targetEmployeeSchedule.TaskItems.Remove(taskToUnplan);
-                RouteCalculator routeCalc = new RouteCalculator(targetGroup.GroupAddress.ToString(), targetEmployeeSchedule.TaskItems[0].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
-                routeCalc.CalculateRoute();
+                //RouteCalculator routeCalc = new RouteCalculator(targetGroup.GroupAddress.ToString(), targetEmployeeSchedule.TaskItems[0].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
+                //routeCalc.CalculateRoute();
                 targetEmployeeSchedule.TaskItems[0].TimePeriod.StartTime = targetEmployeeSchedule.TimePeriod.StartTime;
 
                 for (int i = 1; i < targetEmployeeSchedule.TaskItems.Count; i++)   //adjusts rest of the list
@@ -122,8 +121,7 @@ namespace Planning.ViewModel
         /// <param name="task"></param>
         private void AdjustTravelTime(TaskItem previousTask, TaskItem task) 
         {
-            //RouteCalculator routeCalc = new RouteCalculator(previousTask.TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), task.TaskDescription.Citizen.GetAddress(DateTime.Today).ToString()); // TODO date på addresse
-            //task.Route.Duration = routeCalc.Duration;
+            task.Route = RouteCalculator.GetRouteItem(previousTask.TaskDescription.Citizen.GetAddress(DateTime.Today), task.TaskDescription.Citizen.GetAddress(DateTime.Today)); // todo date på addresse
         }
 
         /// <summary>

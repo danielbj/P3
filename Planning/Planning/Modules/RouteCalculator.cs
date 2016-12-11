@@ -21,6 +21,7 @@ namespace Planning.Model
         private static string _startURLLocation = "http://dev.virtualearth.net/REST/v1/Locations/DK/adminDistrict/postalCode/locality/";
         private static string _endURLRoute = "&optimize=distance&avoid=minimizeTolls&key=";
         private static string _endURLLocation = "?&key=";
+        //CHRISTIANS: private static string _bingKey = "bAxs3SyskXuDizTOa7TV ~iP31vRCcDDXqsUyfSIw2Fg~AlT-xjscp9jj4mJssfX8axpxg8S1DpGXZx6ZhogikZehBFVu57gJLerkgVfN5qbv";
         private static string _bingKey = "ApHwnCobuvyzfVShxnVZ7_PV8Cf7Ok-zySgYQBd1liGGJU_GpPaCAw6kZmHJF9i4";
         private static BingMapsRESTService.Common.JSON.Route _route;
 
