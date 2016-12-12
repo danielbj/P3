@@ -138,6 +138,7 @@ namespace Planning.ViewModel
 
         public RelayCommand AddEmployeeColumn { get; }
         public RelayCommand LoadTemplateSchedule { get; }
+        public RelayCommand FlushToDatabase { get; }
 
         #endregion
 
@@ -164,7 +165,9 @@ namespace Planning.ViewModel
             AddEmployeeColumn = new RelayCommand(parameter => AddEmployeeButtonClicked?.Invoke(), null);
 
             CreateEmployeeScheduleViewModels();
-            LoadTemplateSchedule = new RelayCommand(parameter => LoadTemplateScheduleButtonClicked?.Invoke(EmployeeScheduleViewModels), parameter => (SelectedDate != null && SelectedCalenderType == CalendarTypes[0]));
+            LoadTemplateSchedule = new RelayCommand(parameter => LoadTemplateScheduleButtonClicked?.Invoke(EmployeeScheduleViewModels), parameter => false && (SelectedDate != null && SelectedCalenderType == CalendarTypes[0]));
+
+            FlushToDatabase = new RelayCommand(FlushToDatabaseAction, null);
         }
         private void CreateEmployeeScheduleViewModels() {
             EmployeeSchedules = Groups.First(g => g.Equals(SelectedGroup)).GetSchedule(SelectedTemplateName).EmployeeSchedules;
@@ -175,16 +178,10 @@ namespace Planning.ViewModel
 
         }
 
-        public void LoadEmployeeSchedules()
+        public void FlushToDatabaseAction(object input)
         {
 
-            //Suggestion
-            //foreach (EmployeeSchedule es in SelectedGroup.DailySchedules[SelectedDate].EmployeeSchedules)
-            //{
-            //    EmployeeScheduleViewModel tempESViewModel = new EmployeeScheduleViewModel();
-            //    EmployeeScheduleView ESView = new EmployeeScheduleView();
-            //    JobPanel.Children.Add(ESView);
-            //}
+            
         }
     }
 }
