@@ -23,7 +23,7 @@ namespace Planning.ViewModel
         /// <param name="targetEmployeeSchedule"></param>
         /// <param name="taskToPlan"></param>
         /// <param name="index"></param>
-        public void PlanTask(Group targetGroup, EmployeeSchedule targetEmployeeSchedule, TaskItem taskToPlan, int index) // locked? ret så der bruges GetAddress(date) når address er impl. Add methods.
+        public bool PlanTask(Group targetGroup, EmployeeSchedule targetEmployeeSchedule, TaskItem taskToPlan, int index) // locked? ret så der bruges GetAddress(date) når address er impl. Add methods.
         {
             if (taskToPlan.Locked)
             {

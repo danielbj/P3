@@ -29,7 +29,7 @@ namespace Planning.ViewModel
         {
             if (_citizenContainer.AdmittedCitizens.Contains(citizen))
             {
-                TaskDescription newTask = new TaskDescription(duration, description, citizen, timeFrame, startDate, assignment, count);
+                TaskDescription newTask = new TaskDescription(duration, description, citizen, timeFrame, startDate, assignment);
             }
             else if (_citizenContainer.DischargedCitizens.Contains(citizen))
             {
@@ -129,10 +129,7 @@ namespace Planning.ViewModel
         {
             if (ValidateAddress(address))
             {
-                var adr = new Address();
-                adr.AddressName = address;
-                adr.StartDate = date;
-
+                var adr = new Address(address);
                 return adr;
                 // return new Address(address, date);
             }
@@ -148,8 +145,7 @@ namespace Planning.ViewModel
         /// <returns></returns>
         private bool ValidateAddress(string address)
         {
-            RouteCalculator routeCalc = new RouteCalculator(); //TODO lav det statisk!! det her er noget rod...
-            return routeCalc.ValidateLocation(address);
+            return RouteCalculator.ValidateLocation(address);
         }
 
         /// <summary>
