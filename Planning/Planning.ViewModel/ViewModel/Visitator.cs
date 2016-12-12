@@ -29,7 +29,7 @@ namespace Planning.ViewModel
         {
             if (_citizenContainer.AdmittedCitizens.Contains(citizen))
             {
-                TaskDescription newTask = new TaskDescription(duration, description, citizen, timeFrame, startDate, assignment, count);
+                //TaskDescription newTask = new TaskDescription(duration, description, citizen, timeFrame, startDate, assignment, count);
             }
             else if (_citizenContainer.DischargedCitizens.Contains(citizen))
             {
@@ -127,10 +127,9 @@ namespace Planning.ViewModel
         /// <returns></returns>
         private Address CreateAddress(string address, DateTime date)
         {
-            if (ValidateAddress(address))
+            if (true)//ValidateAddress(address))
             {
-                var adr = new Address();
-                adr.AddressName = address;
+                var adr = new Address(address);
                 adr.StartDate = date;
 
                 return adr;
@@ -146,11 +145,11 @@ namespace Planning.ViewModel
         /// </summary>
         /// <param name="address">Address that as to be validated</param>
         /// <returns></returns>
-        private bool ValidateAddress(string address)
-        {
-            RouteCalculator routeCalc = new RouteCalculator(); //TODO lav det statisk!! det her er noget rod...
-            return routeCalc.ValidateLocation(address);
-        }
+        //private bool ValidateAddress(string address)
+        //{
+        //    RouteCalculator routeCalc = new RouteCalculator(); //TODO lav det statisk!! det her er noget rod...
+        //    return routeCalc.ValidateLocation(address);
+        //}
 
         /// <summary>
         /// Approves the group schedule.

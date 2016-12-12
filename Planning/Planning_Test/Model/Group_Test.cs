@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Planning;
 using NUnit.Framework;
-using Planning.Model.Employees;
+using Planning.Model;
 
 namespace Planning.UnitTest.Model
 {

@@ -4,9 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using Planning.Model.Schedules;
-using Planning.Model.Employees;
-using Planning.Model.Modules;
 
 namespace Planning.UnitTest.Model
 {

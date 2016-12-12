@@ -100,6 +100,7 @@ namespace Planning.UnitTest.Model
         }
 
         [Test]
+        [Ignore("Not implemented")]
         [Category("Edit Task")]
         public void GetTasks_CorrectDate_ReturnsExpectedAddress()
         {

@@ -28,7 +28,7 @@ namespace Planning.ViewModel
             if (taskToPlan.Locked)
             {
                 taskToPlan.State = TaskItem.Status.Unplanned;
-                return false;
+                //return false;
             }
 
             if (index == 0) //first
@@ -67,7 +67,7 @@ namespace Planning.ViewModel
             }
             taskToPlan.State = TaskItem.Status.Planned;
             targetEmployeeSchedule.TimePeriod.EndTime = targetEmployeeSchedule.TaskItems.Last<TaskItem>().TimePeriod.EndTime;
-            return true;
+            //return true;
         }
 
         /// <param name="targetTask"></param>
