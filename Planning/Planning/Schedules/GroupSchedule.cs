@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Planning.Model
 {
-    public class GroupSchedule// : IGroupSchedule 
+    public class GroupSchedule// : IGroupSchedule   
     {
         
         public string Description { get; set; }          
@@ -27,7 +27,7 @@ namespace Planning.Model
             Saved = true;
         }
         
-        public void Approval(bool state) //visitator
+        public void Approval(bool state) 
         {
             Approved = state;
         }

@@ -23,20 +23,11 @@ namespace Planning.ViewModel
         public List<Citizen> GetCitizens()
         {
             return _citizenContainer.GetCitizens();
-        }
-
-        public void AdmitCitizen(Citizen citizen) //should this be placed in Visitator class?
-        {
-            _citizenContainer.AdmittedCitizens.Add(citizen);
-        }
-
-        public void DischargeCitizen(Citizen citizen, DateTime dateDischarged)
-        {            
-            _citizenContainer.DischargedCitizens.Add(citizen);
-            _citizenContainer.AdmittedCitizens.Remove(citizen);
-            citizen.DateDischarged = dateDischarged;
-        } //visitator class?
-
+        }        
+        /// <summary>
+        /// Deletes a citizen from the system. The citizen has to be discharged first.
+        /// </summary>
+        /// <param name="citizen"></param>
         public void DeleteCitizen(Citizen citizen)
         {
             if (_citizenContainer.AdmittedCitizens.Contains(citizen))
@@ -51,35 +42,6 @@ namespace Planning.ViewModel
             {
                 throw new ArgumentException("Citizen not found in the system.");
             }
-        }  //visitator class?
-
-        public void ChangeCitizenAddress(Citizen citizen, string addressString, DateTime fromDate)
-        {
-            Address newAddress = CreateAddress(addressString, fromDate);
-            citizen.AddAddress(newAddress);              
-        }
-        
-        public Address CreateAddress(string address, DateTime date)
-        {
-            if (ValidateAddress(address))
-            {
-                var adr = new Address(address);
-                adr.StartDate = date;
-
-                return adr;
-                // return new Address(address, date);
-            }
-            else
-            {
-                throw new ArgumentException("Address not valid.");
-            }
-        }
-
-        private bool ValidateAddress(string address)
-        {
-            //RouteCalculator routeCalc = new RouteCalculator(); //TODO lav det statisk!! det her er noget rod...
-            return true;
-                //routeCalc.ValidateLocation(address);
-        }
+        }          
     }
 }
