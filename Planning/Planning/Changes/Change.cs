@@ -8,8 +8,8 @@ namespace Planning.Model
 {
     public abstract class Change<T, U> : IChange
     {
-        public DateTime DateCreated { get; }
-        public DateTime DateApplied { get; private set; }
+        public DateTime DateCreated { get; } = DateTime.MinValue;
+        public DateTime DateApplied { get; private set; } = DateTime.MaxValue;
         public bool IsApplied{ get; private set; } = false;
 
         public U Obj { get; protected set; }

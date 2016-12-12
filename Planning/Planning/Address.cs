@@ -9,7 +9,7 @@ namespace Planning.Model
 {
     public class Address : IComparable
     {
-        public DateTime StartDate;
+        public DateTime StartDate = DateTime.MinValue;
         private string _address;
         public string AddressName { //TODO validate that it is string?
             get { return _address; }
@@ -20,6 +20,9 @@ namespace Planning.Model
                     throw new ArgumentException("Address must contain space and number");
             }
         }
+
+        [Obsolete("Only needed for serialization and materialization in Entity Framework", true)]
+        public Address() {    }
 
         public Address(string addressName)
         {

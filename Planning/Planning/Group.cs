@@ -16,7 +16,8 @@ namespace Planning.Model
         public string Name{ get; set; }
         public List<TaskDescription> TaskDescriptions { get; private set; }
 
-
+        [Obsolete("Only needed for serialization and materialization in Entity Framework", true)]
+        public Group() {    }
 
         public Group(string name, string address)
         {
@@ -24,7 +25,7 @@ namespace Planning.Model
             DailySchedules = new Dictionary<DateTime, GroupSchedule>();
             TemplateSchedules = new Dictionary<string, GroupSchedule>();
             Name = name;
-            //GroupAddress = address;
+            GroupAddress = new Address(address);
             TaskDescriptions = new List<TaskDescription>();
 
         }

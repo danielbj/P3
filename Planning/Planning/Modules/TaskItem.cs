@@ -8,7 +8,8 @@ namespace Planning.Model
 {
     public class TaskItem
     {
-               
+        public int TaskItemId { get; set; }
+
         public enum Status
         {
             Unplanned,

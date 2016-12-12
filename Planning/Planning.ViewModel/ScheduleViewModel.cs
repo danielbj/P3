@@ -147,6 +147,7 @@ namespace Planning.ViewModel
         private GroupAdmin _groupAdmin;
         private ScheduleAdmin _scheduleAdmin;
         private List<EmployeeScheduleViewModel> EmployeeScheduleViewModels = new List<EmployeeScheduleViewModel>();
+        private DatabaseControl DatabaseControl = new DatabaseControl();
 
         #endregion
 
@@ -165,7 +166,7 @@ namespace Planning.ViewModel
             AddEmployeeColumn = new RelayCommand(parameter => AddEmployeeButtonClicked?.Invoke(), null);
 
             CreateEmployeeScheduleViewModels();
-            LoadTemplateSchedule = new RelayCommand(parameter => LoadTemplateScheduleButtonClicked?.Invoke(EmployeeScheduleViewModels), parameter => false && (SelectedDate != null && SelectedCalenderType == CalendarTypes[0]));
+            LoadTemplateSchedule = new RelayCommand(parameter => LoadTemplateScheduleButtonClicked?.Invoke(EmployeeScheduleViewModels), parameter => (SelectedDate != null && SelectedCalenderType == CalendarTypes[0]));
 
             FlushToDatabase = new RelayCommand(FlushToDatabaseAction, null);
         }
@@ -180,7 +181,19 @@ namespace Planning.ViewModel
 
         public void FlushToDatabaseAction(object input)
         {
+            DatabaseControl.EraseDatabaseContent(); 
 
+            foreach (Group g in _groupAdmin.GetAllGroups()) {  
+                DatabaseControl.AddGroup(g);
+            }
+
+            foreach (EmployeeSchedule es in EmployeeSchedules) {
+                DatabaseControl.AddEmployeeSchedule(es);
+            }
+
+            foreach (TaskItem ti in _scheduleAdmin.GetTaskClipBoard()) {
+
+            }
             
         }
     }

@@ -9,10 +9,10 @@ namespace Planning.Model
     public class TaskDescription// : ITask
     {
         #region Fields
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; } = DateTime.MinValue;
         public int TaskDescriptionID { get; set; }
-        public DateTime DateCreated { get; set; }
-        public DateTime DateDeleted { get; set; }
+        public DateTime DateCreated { get; set; } = DateTime.MinValue;
+        public DateTime DateDeleted { get; set; } = DateTime.MaxValue;
         public Citizen Citizen { get; set; }
         public string Assignment { get; set; }
         public string Description { get; set; }

@@ -9,8 +9,8 @@ namespace Planning.Model
     public class Employee //: IEmployee
     {
         public int EmployeeId { get; set; }
-        public DateTime DateHired { get; private set; }
-        public DateTime DateResigned { get; private set; }        
+        public DateTime DateHired { get; private set; } = DateTime.MinValue;
+        public DateTime DateResigned { get; private set; } = DateTime.MaxValue;      
         public string Firstname { get; private set; }
         public string Lastname { get; private set; }
         public string Notes { get; private set; }

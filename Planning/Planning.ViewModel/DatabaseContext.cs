@@ -18,6 +18,7 @@ namespace Planning.ViewModel
         public DbSet<EmployeeSchedule> EScheduleDB { get; set; }
         public DbSet<Group> GroupDB { get; set; }
         public DbSet<TaskDescription> TaskDescDB { get; set; }
+        public DbSet<TaskItem> TaskItemDB { get; set; }
 
     }
 }

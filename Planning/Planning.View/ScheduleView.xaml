@@ -52,6 +52,9 @@
                 <Button x:Name="AddEmployeeButton" Content="Tilføj Kolonne" Padding="2" Margin="2" Command="{Binding AddEmployeeColumn}"/>
                 <Button x:Name="JobButton" Content="Uplanlagte Opgaver" Padding="2" Margin="2"/>
                 <Slider x:Name="UISlider" Margin="2" Padding="2" Maximum="3300" Minimum="330" Orientation="Horizontal" Width="200" Value="990"/>
+                <DockPanel Width="150">
+                    <Button x:Name="SaveButton" Content="Gem" Width="50" Padding="2" Margin="2" Command="{Binding FlushToDatabase}" HorizontalAlignment="Right"/>
+                </DockPanel>
             </StackPanel>
         </Border>
         <Grid Grid.Row="2" Grid.RowSpan="2">

@@ -10,7 +10,7 @@ namespace Planning.Model
     {
         public int EmployeeScheduleId { get; set; }
         public List<TaskItem> TaskItems { get; set; }        
-        public DateTime EffectiveDate;
+        public DateTime EffectiveDate = DateTime.MinValue;
         public Employee Employee { get; set; }
         public TimePeriod TimePeriod { get; set; }
 
@@ -18,7 +18,7 @@ namespace Planning.Model
         {
             EffectiveDate = effectiveFrom;
             TaskItems = new List<TaskItem>();
-            //TimeFrame.StartTime = startTime;
+            TimePeriod = new TimePeriod(startTime);
             //SetRelevantTasks(TaskItems); //Skal ske når du laver en kalenderplan
         }
 

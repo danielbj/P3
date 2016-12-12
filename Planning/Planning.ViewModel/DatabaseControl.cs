@@ -9,10 +9,22 @@ using Planning.Model;
 
 namespace Planning.ViewModel
 {
-    public static class DatabaseControl
+    public class DatabaseControl
     {
+        public DatabaseControl() {
+
+        }
+
+        public bool EraseDatabaseContent() {
+            bool succes;
+            using (DatabaseContext ctx = new DatabaseContext()) {
+                succes = ctx.Database.Delete();
+            }
+
+            return succes;
+        }
         
-        public static List<Citizen> CitizenQuery(string query) //Remember tablenames are dbo.[namefromDatabaseContextField]
+        public List<Citizen> CitizenQuery(string query) //Remember tablenames are dbo.[namefromDatabaseContextField]
         {
             List<Citizen> cList = new List<Citizen>();
             using (DatabaseContext ctx = new DatabaseContext())
@@ -23,7 +35,7 @@ namespace Planning.ViewModel
             return cList;
         }
 
-        public static void AddCitizen(Citizen c)
+        public void AddCitizen(Citizen c)
         {
             using (DatabaseContext ctx = new DatabaseContext())
             {
@@ -32,7 +44,7 @@ namespace Planning.ViewModel
             }
         }
 
-        public static List<Citizen> ReadCitizens()
+        public List<Citizen> ReadCitizens()
         {
             List<Citizen> cList = new List<Citizen>();
             using (DatabaseContext ctx = new DatabaseContext())
@@ -48,7 +60,7 @@ namespace Planning.ViewModel
             return cList;
         }
 
-        public static void AddEmployee(Employee e)
+        public void AddEmployee(Employee e)
         {
             using (DatabaseContext ctx = new DatabaseContext())
             {
@@ -57,7 +69,7 @@ namespace Planning.ViewModel
             }
         }
 
-        public static List<Employee> ReadEmployees()
+        public List<Employee> ReadEmployees()
         {
             List<Employee> eList = new List<Employee>();
             using (DatabaseContext ctx = new DatabaseContext())
@@ -74,7 +86,7 @@ namespace Planning.ViewModel
         }
 
 
-        public static void AddEmployeeSchedule(EmployeeSchedule es)
+        public void AddEmployeeSchedule(EmployeeSchedule es)
         {
             using (DatabaseContext ctx = new DatabaseContext())
             {
@@ -83,7 +95,7 @@ namespace Planning.ViewModel
             }
         }
 
-        public static List<EmployeeSchedule> ReadEmployeeSchedules()
+        public List<EmployeeSchedule> ReadEmployeeSchedules()
         {
             List<EmployeeSchedule> esList = new List<EmployeeSchedule>();
             using (DatabaseContext ctx = new DatabaseContext())
@@ -100,7 +112,7 @@ namespace Planning.ViewModel
         }
 
 
-        public static void AddTaskDescription(TaskDescription td)
+        public void AddTaskDescription(TaskDescription td)
         {
             using (DatabaseContext ctx = new DatabaseContext())
             {
@@ -109,7 +121,7 @@ namespace Planning.ViewModel
             }
         }
 
-        public static List<TaskDescription> ReadTaskDescriptions()
+        public List<TaskDescription> ReadTaskDescriptions()
         {
             List<TaskDescription> tdList = new List<TaskDescription>();
             using (DatabaseContext ctx = new DatabaseContext())
@@ -125,8 +137,27 @@ namespace Planning.ViewModel
             return tdList;
         }
 
+        public void AddTaskItem(TaskItem ti) {
+            using (DatabaseContext ctx = new DatabaseContext()) {
+                ctx.TaskItemDB.Add(ti);
+                ctx.SaveChanges();
+            }
+        }
 
-        public static void AddGroup(Group g)
+        public List<TaskItem> ReadTaskItems() {
+            List<TaskItem> tdList = new List<TaskItem>();
+            using (DatabaseContext ctx = new DatabaseContext()) {
+                if (ctx.TaskItemDB != null) {
+                    foreach (TaskItem ti in ctx.TaskItemDB) {
+                        tdList.Add(ti);
+                    }
+                }
+            }
+            return tdList;
+        }
+
+
+        public void AddGroup(Group g)
         {
             using (DatabaseContext ctx = new DatabaseContext())
             {
@@ -135,7 +166,7 @@ namespace Planning.ViewModel
             }
         }
 
-        public static List<Group> ReadGroups()
+        public List<Group> ReadGroups()
         {
             List<Group> gList = new List<Group>();
             using (DatabaseContext ctx = new DatabaseContext())

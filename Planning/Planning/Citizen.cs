@@ -10,8 +10,8 @@ namespace Planning.Model
         public int CitizenId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime DateAdmitted { get; set; }
-        public DateTime DateDischarged { get; set; }
+        public DateTime DateAdmitted { get; set; } = DateTime.MinValue;
+        public DateTime DateDischarged { get; set; } = DateTime.MaxValue;
         private List<Address> _addresses;
         public List<TaskDescription> Tasks { get; set; }
 

@@ -8,7 +8,7 @@ namespace Planning.Model
 {
     public class TimePeriod
     {
-        public TimeSpan StartTime { get; set; }
+        public TimeSpan StartTime { get; set; } 
         public TimeSpan Duration { get; set; }
         public TimeSpan EndTime { get; set; }
         
