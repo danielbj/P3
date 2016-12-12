@@ -70,7 +70,7 @@ namespace Planning.View
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void EmployeeListBox_Drop(object sender, DragEventArgs e) {
-            //VM.DropAndPlanTask(sender, e);        
+            VM.DropAndPlanTask(sender, e);        
 
             EmployeeListBox.Items.Refresh();
         }
