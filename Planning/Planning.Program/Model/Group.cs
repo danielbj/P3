@@ -78,14 +78,14 @@ namespace Planning.Model
             TemplateSchedules.Remove(templateSchedule);
         }
 
-        public GroupSchedule GetSchedule(DateTime date)
+        public GroupSchedule GetSchedule(DateTime date) //validering
         {
-            throw new NotImplementedException();           
+            return TemplateSchedules.Find(e => e.Date == date);
         }
 
-        public GroupSchedule GetSchedule(string name)
+        public GroupSchedule GetSchedule(string name) //validering
         {
-            throw new NotImplementedException();
+            return TemplateSchedules.Find(e => e.Name == name);
         }
 
         public override string ToString()
