@@ -124,5 +124,23 @@ namespace Planning.ViewModel
             }
             _groupContainer.RemoveGroup(group);            
         }
+
+        public void NewEmployee(string firstname, string lastname, string notes, string phoneNumber, Group group)
+        {
+            Employee empl = new Employee(firstname, lastname, DateTime.Today, notes, phoneNumber);
+            group.AddEmployee(empl);
+        }
+
+        public void RemoveEmployeeFromGroup(Group group, Employee employee)
+        {
+            group.RemoveEmployee(employee);
+            _employeeClipBoard.Add(employee);
+        }
+
+        public void AssignEmployeeToGroup(Group group, Employee employee)
+        {
+            group.AddEmployee(employee);
+            _employeeClipBoard.Remove(employee);
+        }
     }
 }
