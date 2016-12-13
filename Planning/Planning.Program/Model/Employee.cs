@@ -72,6 +72,11 @@ namespace Planning.Model
             }
         }
 
+        public void AddNotes(string notes)
+        {
+            Notes += notes;
+        }
+
         public override string ToString()
         {
             return Firstname + " " + Lastname;
