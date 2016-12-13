@@ -47,5 +47,15 @@ namespace Planning.Model
             return TaskItems;
         }   
 
+        public EmployeeSchedule Clone()
+        {
+            var clone = new EmployeeSchedule(this.EffectiveDate, this.TimePeriod.StartTime);
+            foreach (TaskItem task in this.TaskItems)
+            {
+                clone.TaskItems.Add(task.Clone());
+            }
+            return clone;
+        }
+
     }
 }

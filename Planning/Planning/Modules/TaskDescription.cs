@@ -24,7 +24,7 @@ namespace Planning.Model
 
         #endregion
 
-        public TaskDescription(int duration, string description, Citizen citizen, TimePeriod timeFrame, DateTime startDate, string assignment, int frequency)
+        public TaskDescription(int duration, string description, Citizen citizen, TimePeriod timeFrame, DateTime startDate, string assignment, int frequencyPerWeek)
         { 
             Duration = TimeSpan.FromMinutes(duration);
             Description = description;
