@@ -67,7 +67,7 @@ namespace Planning.Model
 
 
             es1.TaskItems.Add(new TaskItem(new TaskDescription(30, "bad", citizenA, new TimePeriod(TimeSpan.FromHours(8)), DateTime.Today, "bad", 1)));
-            es1.TaskItems.Add(new TaskItem(new TaskDescription(15, "Skid", citizenB, new TimePeriod(TimeSpan.FromHours(12)), DateTime.Today, "Skid", 1)));
+            es1.TaskItems.Add(new TaskItem(new TaskDescription(15, "Skid", citizenB, new TimePeriod(TimeSpan.FromHours(12)), DateTime.Today, "Tandbørstning", 1)));
             es1.TaskItems.Add(new TaskItem(new TaskDescription(45, "Pis", citizenC, new TimePeriod(TimeSpan.FromHours(12)), DateTime.Today, "Skid",1)));
             es1.TaskItems.Add(new TaskItem(new TaskDescription(10, "Bræk mig", citizenD, new TimePeriod(TimeSpan.FromHours(12)), DateTime.Today, "Skid", 1)));
 
