@@ -29,7 +29,7 @@ namespace Planning.ViewModel
         {
             if (_citizenContainer.AdmittedCitizens.Contains(citizen))
             {
-                TaskDescription newTask = new TaskDescription(duration, description, citizen, timeFrame, startDate, assignment);
+                TaskDescription newTask = new TaskDescription(duration, description, citizen, timeFrame, startDate, assignment, count);
             }
             else if (_citizenContainer.DischargedCitizens.Contains(citizen))
             {

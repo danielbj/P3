@@ -69,6 +69,7 @@ namespace Planning.ViewModel
         /// <summary>
         public bool UnPlan(Group targetGroup, EmployeeSchedule targetEmployeeSchedule, TaskItem taskToUnplan) // Add methods
         {
+            DateTime date = targetEmployeeSchedule.EffectiveDate;
             if (taskToUnplan.Locked)
             {
                 taskToUnplan.State = TaskItem.Status.Unplanned;
@@ -84,10 +85,10 @@ namespace Planning.ViewModel
 
                 for (int i = 1; i < targetEmployeeSchedule.TaskItems.Count; i++)   //adjusts rest of the list
                 {
-                    AdjustTravelTime(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i]);
+                    AdjustRoute(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i], date);
                     if (targetEmployeeSchedule.TaskItems[i].Locked)//ERRORS messes the list up (indexes and placement). TODO
                         break;
-                    AdjustStartTime(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i]);
+                    AdjustRoute(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i], date);
                 }
                 
                 taskToUnplan.State = TaskItem.Status.Unplanned;
@@ -104,7 +105,7 @@ namespace Planning.ViewModel
 
                 for (int i = index; i < targetEmployeeSchedule.TaskItems.Count; i++)   //adjusts rest of the list
                 {
-                    AdjustTravelTime(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i]);
+                    AdjustRoute(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i], date);
                     if (targetEmployeeSchedule.TaskItems[i].Locked)//ERRORS messes the list up (indexes and placement). TODO
                         break;
                     AdjustStartTime(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i]);

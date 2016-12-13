@@ -16,16 +16,16 @@ namespace Planning.Model
             var adrA = new Address("James Tobins Alle 24, 2. th,  9220 Aalborg Øst");
             adrA.StartDate = new DateTime(2016,12,1);
             var citizenA = new Citizen("1712920000", "Nicolai", "Gjøderum",adrA, new DateTime(2016,12,1));
-            var taskA1 = new TaskDescription(15, "Bad", citizenA, new TimePeriod(TimeSpan.FromHours(14)), new DateTime(2016,12,1), "Personlig hygiejne");
-            var taskA2 = new TaskDescription(20, "Indkøb", citizenA, new TimePeriod(TimeSpan.FromHours(7)), new DateTime(2016, 12, 1), "Andet");
+            var taskA1 = new TaskDescription(15, "Bad", citizenA, new TimePeriod(TimeSpan.FromHours(14)), new DateTime(2016,12,1), "Personlig hygiejne", 1);
+            var taskA2 = new TaskDescription(20, "Indkøb", citizenA, new TimePeriod(TimeSpan.FromHours(7)), new DateTime(2016, 12, 1), "Andet", 1);
             citizenA.AddTask(taskA1);
             citizenA.AddTask(taskA2);
 
             var adrB = new Address("Sigensvej 10, 9310 Vodskov");
             adrA.StartDate = new DateTime(2016, 12, 3);
             var citizenB = new Citizen("0202620000", "Leif", "Gjøderum", adrB, new DateTime(2016, 12, 3));
-            var taskB1 = new TaskDescription(15, "Bad", citizenB, new TimePeriod(TimeSpan.FromHours(13)), new DateTime(2016, 12, 3), "Personlig hygiejne");
-            var taskB2 = new TaskDescription(20, "Toilet", citizenB, new TimePeriod(TimeSpan.FromHours(8)), new DateTime(2016, 12, 3), "Personlig hygiejne");
+            var taskB1 = new TaskDescription(15, "Bad", citizenB, new TimePeriod(TimeSpan.FromHours(13)), new DateTime(2016, 12, 3), "Personlig hygiejne", 1);
+            var taskB2 = new TaskDescription(20, "Toilet", citizenB, new TimePeriod(TimeSpan.FromHours(8)), new DateTime(2016, 12, 3), "Personlig hygiejne", 1);
             citizenB.AddTask(taskB1);
             citizenB.AddTask(taskB2);
 
@@ -77,13 +77,15 @@ namespace Planning.Model
             //add routes to es1
             for (int i = 1; i < es1.TaskItems.Count; i++)
             {
-                es1.TaskItems[i].Route.Duration = RouteCalculator.CalculateRouteDuration(es1.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), es1.TaskItems[i+1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());               
+                es1.TaskItems[i].Route.Duration = TimeSpan.FromMinutes(8);
+                //es1.TaskItems[i].Route.Duration = RouteCalculator.CalculateRouteDuration(es1.TaskItems[i-1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), es1.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());               
             }
 
             //add routes to es2
             for (int i = 1; i < es2.TaskItems.Count; i++)
             {
-                es2.TaskItems[i].Route.Duration = RouteCalculator.CalculateRouteDuration(es2.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), es2.TaskItems[i + 1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
+                es1.TaskItems[i].Route.Duration = TimeSpan.FromMinutes(5);
+                //es2.TaskItems[i].Route.Duration = RouteCalculator.CalculateRouteDuration(es2.TaskItems[i-1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), es2.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
             }
 
 

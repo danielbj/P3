@@ -29,7 +29,8 @@ namespace Planning.Model
             TaskDescription = taskDescription;
             State = Status.Unplanned;
             Locked = false;
-            TimePeriod = new TimePeriod(taskDescription.Duration);              
+            TimePeriod = new TimePeriod(taskDescription.Duration);
+            Route = new RouteItem();             
         }
 
         public override string ToString()

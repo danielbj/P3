@@ -18,6 +18,11 @@ namespace Planning.Model
             Duration = duration;
         }
 
+        public RouteItem()
+        {
+
+        }
+
         public override string ToString()
         {
             return Duration.ToString() + Waypoints.Aggregate(new Func<string, string, string>((s1,s2) => s1 + ", " + s2));
