@@ -4,29 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Planning.View;
+using Planning.Model;
 
 namespace Planning.ViewModel
 {
     class TemplateSelectionViewModel : ViewModelBase
     {
-        private List<string> _templateNames;
-        public List<string> TemplateNames
+        private List<GroupSchedule> _templates;
+        public List<GroupSchedule> Templates
         {
-            get { return _templateNames; }
-            set { _templateNames = value; }
+            get { return _templates; }
+            set { _templates = value; }
         }
 
-        private string _selectedName;
-        public string SelectedName
+        private GroupSchedule _selectedTemplate;
+        public GroupSchedule SelectedTemplate
         {
             get
             {
-                return _selectedName;
+                return _selectedTemplate;
             }
             set
             {
-                _selectedName = value;
-                OnPropertyChanged(nameof(SelectedName));
+                _selectedTemplate = value;
+                OnPropertyChanged(nameof(SelectedTemplate));
             }
         }
 
@@ -36,10 +37,10 @@ namespace Planning.ViewModel
 
         private TemplateSelectionWindow _window;
 
-        public TemplateSelectionViewModel(List<string> templateNames, TemplateSelectionWindow window)
+        public TemplateSelectionViewModel(List<GroupSchedule> templates, TemplateSelectionWindow window)
         {
-            _templateNames = new List<string>();
-            _templateNames = templateNames;
+            
+            _templates = templates;
             CancelCommand = new RelayCommand(p => Cancel(), p => true);
             ImportCommand = new RelayCommand(p => Import(), p => true);
 

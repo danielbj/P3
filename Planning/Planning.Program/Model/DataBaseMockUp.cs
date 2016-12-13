@@ -92,7 +92,7 @@ namespace Planning.Model
             }
 
 
-            var gs1 = new GroupSchedule("Mandag");
+            var gs1 = new GroupSchedule(DateTime.Today);
             var gs2 = new GroupSchedule("Tirsdag");
             var gs3 = new GroupSchedule("Onsdag");
             var gs4 = new GroupSchedule("Torsdag");
@@ -103,8 +103,8 @@ namespace Planning.Model
             gs1.EmployeeSchedules.Add(es1);
             gs1.EmployeeSchedules.Add(es2);
 
-            gr1.TemplateSchedules.Add("Mandag", gs1);
-            gr1.AddSchedule(DateTime.Today, gs1);
+            gr1.AddScheduleTemplate(gs2);
+            gr1.AddDailySchedule(gs1);
 
             var gr2 = new Group("Den magtfulde elite", "St. Helena, Atlanterhavet");
             

@@ -11,7 +11,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <ListBox Grid.Row="0" ItemsSource="{Binding TemplateNames}" SelectedItem="{Binding SelectedName}">
+        <ListBox Grid.Row="0" ItemsSource="{Binding Templates}" SelectedItem="{Binding SelectedTemplate}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding}"/>
