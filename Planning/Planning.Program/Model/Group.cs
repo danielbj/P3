@@ -64,7 +64,7 @@ namespace Planning.Model
         }
         public void AddScheduleTemplate(GroupSchedule scheduleTemplate)
         {
-            DailySchedules.Add(scheduleTemplate);
+            TemplateSchedules.Add(scheduleTemplate);
 
         }
 
@@ -80,7 +80,7 @@ namespace Planning.Model
 
         public GroupSchedule GetSchedule(DateTime date) //validering
         {
-            return TemplateSchedules.Find(e => e.Date == date);
+            return DailySchedules.Find(e => e.Date.Equals(date));
         }
 
         public GroupSchedule GetSchedule(string name) //validering

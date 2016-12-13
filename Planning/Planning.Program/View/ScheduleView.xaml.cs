@@ -21,30 +21,21 @@ namespace Planning.View
     /// </summary>
     public partial class ScheduleView : UserControl
     {
-        ScheduleViewModel VM;
         public ScheduleView()
         {
-            DataContext = VM = new ScheduleViewModel();
+            DataContext = new ScheduleViewModel();
             InitializeComponent();
-            VM.AddEmployeeButtonClicked += VM_AddEmployeeButtonClicked;
-            //VM.LoadTemplateScheduleButtonClicked += VM_LoadTemplateScheduleButtonClicked;
 
-
+            
         }
 
-        //private void VM_LoadTemplateScheduleButtonClicked(List<EmployeeScheduleViewModel> vM)
-        //{
-        //    //if (SchedulePanel.Children.Count > 0)
-        //    //    MessageBox.Show("Already loaded!!");
-        //    //foreach (EmployeeScheduleViewModel esvm in vM) {
-        //    //    SchedulePanel.Children.Add(new EmployeeScheduleView(esvm));
-        //    //}
-        //}
-
-        private void VM_AddEmployeeButtonClicked()
+        private void Grid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //EmployeeScheduleView ESV = new EmployeeScheduleView();
-            //SchedulePanel.Children.Add(ESV);
+            var vm = this.DataContext as ScheduleViewModel;
+            Grid g = sender as Grid;
+            var item = g.DataContext;            
+
+            vm.StartDrag(sender,item);            
         }
     }
 }

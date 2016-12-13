@@ -105,6 +105,7 @@ namespace Planning.Model
 
             gr1.AddScheduleTemplate(gs2);
             gr1.AddDailySchedule(gs1);
+            gr1.AddScheduleTemplate(gs3);
 
             var gr2 = new Group("Den magtfulde elite", "St. Helena, Atlanterhavet");
             

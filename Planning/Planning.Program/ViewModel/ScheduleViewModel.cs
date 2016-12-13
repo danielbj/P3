@@ -7,7 +7,7 @@ using Planning.Model;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Planning.View;
-
+using System.Windows;
 
 namespace Planning.ViewModel
 {
@@ -27,7 +27,7 @@ namespace Planning.ViewModel
         public ObservableCollection<string> CalendarTypes { get; set; }
 
         private string _selectedCalendarType;
-        public string SelectedCalenderType
+        public string SelectedCalendarType
         {
             get
             {
@@ -36,7 +36,7 @@ namespace Planning.ViewModel
             set
             {
                 _selectedCalendarType = value;
-                OnPropertyChanged(nameof(SelectedCalenderType));
+                OnPropertyChanged(nameof(SelectedCalendarType));
                 OnPropertyChanged(nameof(SelectedSchedule));
             }
         }
@@ -90,7 +90,7 @@ namespace Planning.ViewModel
         {
             get
             {
-                if (SelectedCalenderType == CalendarTypes[0])
+                if (SelectedCalendarType == CalendarTypes[0])
                 {
                     return SelectedGroup.GetSchedule(SelectedDate);
                 }
@@ -136,8 +136,9 @@ namespace Planning.ViewModel
 
         public RelayCommand ChangeEmployeeCommand { get; }
         public RelayCommand AddEmployeeScheduleCommand { get; }
+        public RelayCommand LockTaskCommand { get; }
 
-        public RelayCommand LoadTemplateSchedule { get; }
+        public RelayCommand LoadTemplateScheduleCommand { get; }
         public RelayCommand FlushToDatabase { get; }
 
         #endregion
@@ -156,26 +157,49 @@ namespace Planning.ViewModel
         {
             _groupAdmin = new GroupAdmin();
             _scheduleAdmin = new ScheduleAdmin();
+
             Groups = new ObservableCollection<Group>(_groupAdmin.GetAllGroups());
             SelectedGroup = Groups[0];
             CalendarTypes = new ObservableCollection<string>() { "Kalenderplaner", "Grundplaner" };
-            SelectedCalenderType = CalendarTypes[0];
+            SelectedCalendarType = CalendarTypes[0];
             SelectedDate = DateTime.Today;
             Templates = SelectedGroup.TemplateSchedules;
 
             ChangeEmployeeCommand = new RelayCommand(p => ChangeEmployee(p as EmployeeSchedule), p => true);
 
             AddEmployeeScheduleCommand = new RelayCommand(p => AddEmployeeSchedule(), p => true);
+            LockTaskCommand = new RelayCommand(p => LockTask(p as TaskItem), p => true);
 
             //CreateEmployeeScheduleViewModels();
-            LoadTemplateSchedule = new RelayCommand(parameter => ImportTemplate(), parameter => (SelectedDate != null && SelectedCalenderType == CalendarTypes[0]));
+            LoadTemplateScheduleCommand = new RelayCommand(parameter => ImportTemplate(), parameter => (SelectedDate != null && SelectedCalendarType == CalendarTypes[0]));
 
             FlushToDatabase = new RelayCommand(FlushToDatabaseAction, null);
+        }
+
+        public void StartDrag(object source, object item)
+        {
+            TaskItem taskItem = item as TaskItem;
+
+            if (taskItem !=null)
+            {
+                DragDrop.DoDragDrop((DependencyObject)source ,item, DragDropEffects.Move);
+            }
+        }
+
+        private void LockTask(TaskItem taskItem)
+        {
+            _scheduleAdmin.ToggleLockStatusTask(taskItem);
+        }
+
+        private void UpdateSchedule()
+        {
+            OnPropertyChanged("SelectedSchedule.EmployeeSchedules");
         }
 
         private void AddEmployeeSchedule()
         {
             _scheduleAdmin.CreateNewEmployeeSchedule(SelectedSchedule, new TimeSpan(6,0,0));
+            UpdateSchedule();
         }
 
         private void ChangeEmployee(EmployeeSchedule es)
@@ -214,18 +238,6 @@ namespace Planning.ViewModel
             }
         }
 
-        
-
-    //    private void CreateEmployeeScheduleViewModels()
-    //    {
-    //        EmployeeSchedules = SelectedGroup.GetSchedule(SelectedTemplate).EmployeeSchedules;
-
-    //        foreach (EmployeeSchedule es in EmployeeSchedules)
-    //        {
-    ////            EmployeeScheduleViewModels.Add(new EmployeeScheduleViewModel(es));
-    //        }
-
-    //    }
 
         public void FlushToDatabaseAction(object input)
         {
