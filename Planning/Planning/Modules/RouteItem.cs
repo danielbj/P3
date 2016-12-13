@@ -8,9 +8,9 @@ namespace Planning.Model
 {
     public class RouteItem
     {
-        public TimeSpan Duration { get; private set; }
+        public TimeSpan Duration { get; set; }
 
-        public string[] Waypoints = new string[] { };
+        public string[] Waypoints = new string[] { }; //og hvorfor skal vi lagre den samme addresse to forskellige steder?
 
         public RouteItem(string startAddressName, string endAddressName, TimeSpan duration)
         {

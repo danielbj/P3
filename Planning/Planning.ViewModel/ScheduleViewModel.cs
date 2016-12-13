@@ -153,7 +153,7 @@ namespace Planning.ViewModel
 
 
         public ScheduleViewModel() {
-            _groupAdmin = new GroupAdmin();
+            _groupAdmin = new GroupAdmin(); 
             _scheduleAdmin = new ScheduleAdmin();
             Groups = new ObservableCollection<Group>(_groupAdmin.GetAllGroups());
             SelectedGroup = Groups[0];
