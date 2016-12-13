@@ -260,15 +260,32 @@ namespace Planning.ViewModel
             return AC.Duration.Seconds + CB.Duration.Seconds;
         }
 
+        /// <summary>
+        /// Makes a clone of the template and assigns it to a daily schedule
+        /// </summary>
+        /// <param name="template"></param>
+        /// <param name="daily"></param>
         public void CopyTemplateScheduleToDailySchedule(GroupSchedule template, GroupSchedule daily)
         {
             daily = CloneSchedule(template);
         }
 
+        /// <summary>
+        /// Clones a schedule
+        /// </summary>
+        /// <param name="schedule"></param>
+        /// <returns></returns>
         private GroupSchedule CloneSchedule(GroupSchedule schedule)
         {
             return GroupSchedule.CloneSchedule(schedule);
         }
 
+        public void LockTaskInEmployeeSchedule(TaskItem task, TimeSpan time, EmployeeSchedule employeeschedule)
+        {
+            task.TimePeriod.StartTime = time;
+
+        }
     }
+
+
 }
