@@ -9,13 +9,14 @@ namespace Planning.ViewModel
 {
     class ScheduleAdmin
     {
-        private List<TaskItem> _taskClipBoard;        
+        private List<TaskItem> _unplannedTaskClipBoard;
+        private List<TaskItem> _cancelledTaskClipBoard;     
         
         public ScheduleAdmin()
         {
-            _taskClipBoard = new List<TaskItem>();
+            _unplannedTaskClipBoard = new List<TaskItem>();
+            _cancelledTaskClipBoard = new List<TaskItem>();
         }
-
 
         //new
         public void PlanTask(Group targetGroup, EmployeeSchedule targetEmployeeSchedule, TaskItem taskToPlan, int index) 
@@ -123,7 +124,6 @@ namespace Planning.ViewModel
         {
             task.Locked = !task.Locked;
         }
-
     
         public List<TaskChange> GetRecentTaskChanges(TaskDescription task, DateTime fromDate)
         {
@@ -178,7 +178,7 @@ namespace Planning.ViewModel
         {
             foreach (TaskItem task in employeeSchedule.TaskItems)
             {
-                _taskClipBoard.Add(task);
+                _unplannedTaskClipBoard.Add(task);
                 task.State = TaskItem.Status.Unplanned;
             }
             groupSchedule.EmployeeSchedules.Remove(employeeSchedule);
@@ -186,14 +186,14 @@ namespace Planning.ViewModel
 
         public List<TaskItem> GetTaskClipBoard()
         {
-            return _taskClipBoard;
+            return _unplannedTaskClipBoard;
         }
 
         public void AddTasksToClipBoard(List<TaskItem> tasksToClipBoard) //fx når en ny taskDescription assignes til en gruppe. unplanned TaskItems lægges i clipboard.
         {
             foreach (TaskItem task in tasksToClipBoard)
             {
-                _taskClipBoard.Add(task);
+                _unplannedTaskClipBoard.Add(task);
             }
         }
 
@@ -265,23 +265,39 @@ namespace Planning.ViewModel
         {
             return GroupSchedule.CloneSchedule(schedule);
         }
-
         public void LockTaskInEmployeeSchedule(TaskItem task, TimeSpan time, EmployeeSchedule employeeschedule)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Creates a daily schedule
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="group"></param>
         public void CreateSchedule(string name, Group group)
         {
             GroupSchedule templateSchedule = new GroupSchedule(name);
             group.AddScheduleTemplate(templateSchedule);
         }
+
+        /// <summary>
+        /// Creates a schedule template
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="group"></param>
         public void CreateSchedule(DateTime date, Group group)
         {
             GroupSchedule dailySchedule = new GroupSchedule(date);
             group.AddDailySchedule(dailySchedule);
         }       
 
+        /// <summary>
+        /// Finds the employee schedule where a task is placed.
+        /// </summary>
+        /// <param name="task"></param>
+        /// <param name="groupSchedule"></param>
+        /// <returns></returns>
         public EmployeeSchedule FindTask(TaskItem task, GroupSchedule groupSchedule)
         {
             foreach (EmployeeSchedule item in groupSchedule.EmployeeSchedules)
@@ -292,6 +308,18 @@ namespace Planning.ViewModel
                 }                
             }
             throw new ArgumentException("Task not found in the group schedule.");
+        }
+
+        /// <summary>
+        /// Cancels a task, and moves it to the clipboard of unplanned tasks
+        /// </summary>
+        /// <param name="task"></param>
+        /// <param name="employeeSchedule"></param>
+        public void CancelTask(TaskItem task, EmployeeSchedule employeeSchedule)
+        {
+            task.State = TaskItem.Status.Cancelled;
+            _cancelledTaskClipBoard.Add(task);
+            employeeSchedule.TaskItems.Remove(task);
         }
 
     }

@@ -127,7 +127,7 @@
                                                         <RowDefinition Height="auto"/>
                                                     </Grid.RowDefinitions>
                                                     <Border Grid.Row="0" >
-                                                        <Rectangle Fill="Black" Height="{Binding Route.Duration.TotalMinutes}" HorizontalAlignment="Stretch"/>
+                                                        <Rectangle Fill="Lavender" Height="{Binding Route.Duration.TotalMinutes}" HorizontalAlignment="Stretch"/>
                                                     </Border>
                                                     <Border Grid.Row="1" Width="auto" Height="{Binding TaskDescription.Duration.TotalMinutes}">
                                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Width="auto">

@@ -25,6 +25,7 @@ namespace Planning.ViewModel
             _groupContainer = DataBaseMockUp.LoadGroups(); // TODO rigtig database
             //_groupContainer = new GroupContainer();
             _taskDescriptionsClipBoard = new List<TaskDescription>();
+            _employeeClipBoard = new List<Employee>();
         }
         /// <summary>
         /// Gets all groups in the group container
@@ -143,6 +144,11 @@ namespace Planning.ViewModel
         {
             group.AddEmployee(employee);
             _employeeClipBoard.Remove(employee);
+        }
+
+        public void AddNotesToEmployee(Employee employee, string note)
+        {
+            employee.AddNotes(note);
         }
     }
 }
