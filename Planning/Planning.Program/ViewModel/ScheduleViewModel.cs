@@ -139,7 +139,9 @@ namespace Planning.ViewModel
 
         public ObservableCollection<Group> Groups { get; set; }
 
-        public RelayCommand AddEmployeeColumn { get; }
+        public RelayCommand ChangeEmployeeCommand { get; }
+        public RelayCommand AddEmployeeScheduleCommand { get; }
+
         public RelayCommand LoadTemplateSchedule { get; }
         public RelayCommand FlushToDatabase { get; }
 
@@ -165,14 +167,34 @@ namespace Planning.ViewModel
             SelectedCalenderType = CalendarTypes[0];
             SelectedDate = DateTime.Today;
 
+            ChangeEmployeeCommand = new RelayCommand(p => ChangeEmployee(p as EmployeeSchedule), p => true);
 
+            AddEmployeeScheduleCommand = new RelayCommand(p => AddEmployeeSchedule(), p => true);
 
-            AddEmployeeColumn = new RelayCommand(parameter => AddEmployeeButtonClicked?.Invoke(), null);
-
-            CreateEmployeeScheduleViewModels();
+            //CreateEmployeeScheduleViewModels();
             LoadTemplateSchedule = new RelayCommand(parameter => ImportTemplate(), parameter => (SelectedDate != null && SelectedCalenderType == CalendarTypes[0]));
 
             FlushToDatabase = new RelayCommand(FlushToDatabaseAction, null);
+        }
+
+        private void AddEmployeeSchedule()
+        {
+            _scheduleAdmin.CreateNewEmployeeSchedule(SelectedSchedule, new TimeSpan(6,0,0));
+        }
+
+        private void ChangeEmployee(EmployeeSchedule es)
+        {
+            var window = new EmployeeSelectionWindow();
+            var viewModel = new EmployeeSelectionViewModel(_groupAdmin.GetEmployeesOnDuty(SelectedGroup,SelectedDate),window);
+            window.DataContext = viewModel;
+            window.ShowDialog();
+
+            if (viewModel.Excecute && viewModel.SelectedEmployee != null)
+            {
+                _scheduleAdmin.AssignEmployeeToEmployeeSchedule(viewModel.SelectedEmployee, es);
+                OnPropertyChanged(nameof(SelectedSchedule));
+            }
+
         }
 
         private void ImportTemplate()

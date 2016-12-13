@@ -74,6 +74,7 @@
     <Compile Include="ViewModel\DatabaseContext.cs" />
     <Compile Include="ViewModel\DatabaseControl.cs" />
     <Compile Include="ViewModel\EmployeeOverviewViewModel.cs" />
+    <Compile Include="ViewModel\EmployeeSelectionViewModel.cs" />
     <Compile Include="ViewModel\GroupAdmin.cs" />
     <Compile Include="ViewModel\InboxViewModel.cs" />
     <Compile Include="ViewModel\Message.cs" />
@@ -88,6 +89,9 @@
     <Compile Include="ViewModel\Visitator.cs" />
     <Compile Include="View\CitizenView.xaml.cs">
       <DependentUpon>CitizenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EmployeeSelectionWindow.xaml.cs">
+      <DependentUpon>EmployeeSelectionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GroupView.xaml.cs">
       <DependentUpon>GroupView.xaml</DependentUpon>
@@ -113,6 +117,10 @@
     <Page Include="View\CitizenView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\EmployeeSelectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\GroupView.xaml">
       <Generator>MSBuild:Compile</Generator>

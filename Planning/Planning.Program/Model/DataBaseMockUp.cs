@@ -42,6 +42,9 @@ namespace Planning.Model
             var gr1 = new Group("Gruppe ds310e16","Selma Lagerløfsvej 300, 9220 Aalborg Øst");
 
             var emplA = new Employee("Nicolai", "Gjøderum", DateTime.Today, "Datalog", "26112935");
+
+            emplA.SetWorkhours(DateTime.Today, new TimePeriod(TimeSpan.FromHours(8)));
+
             var emplB = new Employee("Kamilla", "Fincke", DateTime.Today, "Datalog", "22434479");
             var emplC = new Employee("Christian", "Kloster", DateTime.Today, "Datalog", "38383138");
 

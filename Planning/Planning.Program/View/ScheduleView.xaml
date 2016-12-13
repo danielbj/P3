@@ -49,7 +49,7 @@
         <Border BorderBrush="Black" BorderThickness="0 0 0 2" Grid.Row="1">
             <StackPanel x:Name="ButtonStackPanel" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
                 <Button x:Name="LoadButton" Content="Importer Grundplan" Padding="2" Margin="2" Command="{Binding LoadTemplateSchedule}"/>
-                <Button x:Name="AddEmployeeButton" Content="Tilføj Kolonne" Padding="2" Margin="2" Command="{Binding AddEmployeeColumn}"/>
+                <Button x:Name="AddEmployeeButton" Content="Tilføj Kolonne" Padding="2" Margin="2" Command="{Binding AddEmployeeScheduleCommand}"/>
                 <Button x:Name="JobButton" Content="Uplanlagte Opgaver" Padding="2" Margin="2"/>
                 <Slider x:Name="UISlider" Margin="2" Padding="2" Maximum="3300" Minimum="330" Orientation="Horizontal" Width="200" Value="990"/>
                 <DockPanel Width="150">
@@ -117,7 +117,7 @@
                                         <RowDefinition Height="auto"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <Label Grid.Row="0" Content="{Binding}"/>
+                                    <Button Grid.Row="0" Content="{Binding Employee}" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ChangeEmployeeCommand}" CommandParameter="{Binding}"/>
                                     <ListBox Grid.Row="1" ItemsSource="{Binding Path=TaskItems}">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
