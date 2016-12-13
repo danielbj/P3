@@ -265,9 +265,9 @@ namespace Planning.ViewModel
         /// </summary>
         /// <param name="template"></param>
         /// <param name="daily"></param>
-        public void CopyTemplateScheduleToDailySchedule(GroupSchedule template, GroupSchedule daily)
+        public GroupSchedule CopyTemplateScheduleToDailySchedule(GroupSchedule template)
         {
-            daily = CloneSchedule(template);
+             return CloneSchedule(template);
         }
 
         /// <summary>

@@ -184,13 +184,18 @@ namespace Planning.ViewModel
 
             if (viewModel.Excecute && viewModel.SelectedName != null)
             {
-                var daily = new GroupSchedule("");
+                
                 var template = _selectedGroup.TemplateSchedules[viewModel.SelectedName];
 
-                _scheduleAdmin.CopyTemplateScheduleToDailySchedule(template, daily);
+                var daily = _scheduleAdmin.CopyTemplateScheduleToDailySchedule(template);
                 _selectedGroup.AddSchedule(_selectedDate, daily);
+
+                _selectedSchedule = daily;
+                OnPropertyChanged(nameof(SelectedSchedule));
             }
         }
+
+        
 
         private void CreateEmployeeScheduleViewModels()
         {

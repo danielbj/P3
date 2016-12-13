@@ -45,7 +45,7 @@ namespace Planning.Model
             var clone = new GroupSchedule(schedule.Description);
             foreach (EmployeeSchedule item in schedule.EmployeeSchedules)
             {
-                clone.EmployeeSchedules.Add(item.clone());
+                clone.EmployeeSchedules.Add(item.Clone());
             }
 
             return clone;       
