@@ -38,6 +38,7 @@
                 <DataTemplate>
                     <TextBlock Height="{Binding TaskDescription.Duration.TotalMinutes + Route.Duration.TotalMinutes}" HorizontalAlignment="Center">
                         <StackPanel Orientation="Vertical" MaxWidth="120" MinWidth="120">
+                            <TextBlock x:Name="DriveTime" Background="Gray" Height="{Binding Route.Duration.TotalMinutes}"/>
                             <TextBlock Background="Aqua" Height="{Binding TaskDescription.Duration.TotalMinutes}">
                                 <StackPanel Orientation="Vertical">
                                     <TextBlock x:Name="Citizen" HorizontalAlignment="Center" Text="{Binding TaskDescription.Citizen}" FontStyle="Italic"/>
@@ -45,7 +46,7 @@
                                     <TextBlock x:Name="Duration"  HorizontalAlignment="Center" Text="{Binding TaskDescription.Duration.TotalMinutes}">-Minutter</TextBlock>
                                 </StackPanel>
                             </TextBlock>
-                            <TextBlock x:Name="DriveTime" Background="Gray" Height="{Binding Route.Duration.TotalMinutes}"/>
+                            
                         </StackPanel>
                     </TextBlock>
                 </DataTemplate>

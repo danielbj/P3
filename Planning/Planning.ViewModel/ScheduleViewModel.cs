@@ -170,6 +170,7 @@ namespace Planning.ViewModel
 
             FlushToDatabase = new RelayCommand(FlushToDatabaseAction, null);
         }
+
         private void CreateEmployeeScheduleViewModels() {
             EmployeeSchedules = Groups.First(g => g.Equals(SelectedGroup)).GetSchedule(SelectedTemplateName).EmployeeSchedules;
 

@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Linq;
+using BingMapsRESTService.Common.JSON;
 
 namespace Planning.Model
 {
@@ -16,14 +17,13 @@ namespace Planning.Model
         /// </summary>
         private static Dictionary<Tuple<string, string>, TimeSpan> _routeList = new Dictionary<Tuple<string, string>, TimeSpan>();
 
-        public static string[] Waypoints { get; set; }
+        public static string[] Waypoints { get; set; }  //TODO slet
         private static string _startURLRoute = "http://dev.virtualearth.net/REST/V1/Routes/Driving?o=json";
         private static string _startURLLocation = "http://dev.virtualearth.net/REST/v1/Locations/DK/adminDistrict/postalCode/locality/";
         private static string _endURLRoute = "&optimize=distance&avoid=minimizeTolls&key=";
         private static string _endURLLocation = "?&key=";
-        //CHRISTIANS: private static string _bingKey = "bAxs3SyskXuDizTOa7TV ~iP31vRCcDDXqsUyfSIw2Fg~AlT-xjscp9jj4mJssfX8axpxg8S1DpGXZx6ZhogikZehBFVu57gJLerkgVfN5qbv";
         private static string _bingKey = "ApHwnCobuvyzfVShxnVZ7_PV8Cf7Ok-zySgYQBd1liGGJU_GpPaCAw6kZmHJF9i4";
-        private static BingMapsRESTService.Common.JSON.Route _route;
+        private static Route _route;  // TODO slet
 
         public static TimeSpan Duration
         {
@@ -39,8 +39,17 @@ namespace Planning.Model
         }
 
         #endregion
+        public static TimeSpan CalculateRouteDuration(string address1, string address2)
+        {
+            string url = CreateRequestURL(address1, address2);
+            WebResponse response = MakeRequest(url);
+            JObject jsonFile = ProcessRequest(response);
+            Route route = DeserializeJSONObjects(jsonFile);
 
-        private static string GetWaypoints(string[] waypoints)
+            return TimeSpan.FromSeconds(route.TravelDuration);
+        }
+
+        private static string GetWaypoints(string[] waypoints) // TODO slet
         {
             string name = string.Empty;
 
@@ -62,7 +71,7 @@ namespace Planning.Model
         /// <param name="startAddress">Used as start address for route.</param>
         /// <param name="endAddress">Used as end address for route.</param>
         /// <returns>Returns RouteItem.</returns>
-        public static RouteItem GetRouteItem(Address startAddress, Address endAddress)
+        public static RouteItem GetRouteItem(Address startAddress, Address endAddress)  //TODO slet
         {
         Tuple<string, string> tempTuple = new Tuple<string, string>(startAddress.AddressName, endAddress.AddressName);
         KeyValuePair<Tuple<string, string>, TimeSpan> keyValuePair = _routeList.FirstOrDefault(r => r.Key.Equals(tempTuple));
@@ -89,7 +98,7 @@ namespace Planning.Model
 
             WebResponse response = MakeRequest(CreateRequestURL());
             JObject jsonFile = ProcessRequest(response);
-            DeserializeJSONObjects(jsonFile);
+            DeserializeJSONObjects1(jsonFile);
 
             _routeList.Add(new Tuple<string, string>(Waypoints[0], Waypoints[1]), Duration);
 
@@ -136,18 +145,21 @@ namespace Planning.Model
             return json;
         }
 
-        private static void DeserializeJSONObjects(JObject jsonFile) {
-            //is only returning distance&duration between first two waypoints
-            //JToken resourceToken = jsonFile["resourceSets"][0]["resources"][0]["routeLegs"][0];
-            //routeLegs = JsonConvert.DeserializeObject<RouteLeg>(resourceToken.ToString());
-
+        private static Route DeserializeJSONObjects(JObject jsonFile)
+        {
             JToken resourceToken = jsonFile["resourceSets"][0]["resources"][0];
-            _route = JsonConvert.DeserializeObject<BingMapsRESTService.Common.JSON.Route>(resourceToken.ToString());
+            Route route = JsonConvert.DeserializeObject<BingMapsRESTService.Common.JSON.Route>(resourceToken.ToString());
 
-
+            return route;
         }
 
-        public static string CreateRequestURL() {
+        private static void DeserializeJSONObjects1(JObject jsonFile)
+        {
+            JToken resourceToken = jsonFile["resourceSets"][0]["resources"][0];
+            _route = JsonConvert.DeserializeObject<BingMapsRESTService.Common.JSON.Route>(resourceToken.ToString());
+        }
+
+        public static string CreateRequestURL() {  //TODO slet
             string substring = "";
 
             for (int i = 0; i < Waypoints.Length; i++)
@@ -158,18 +170,25 @@ namespace Planning.Model
             return _startURLRoute + substring + _endURLRoute + _bingKey;
         }
 
-        public static bool ValidateLocation(string address) //kunne måske returnere en address?
+        public static string CreateRequestURL(string address1, string address2)
+        {
+            string waypointString = "&wp0=" + address2 + "&wp1=" + address2;
+
+            return _startURLRoute + waypointString + _endURLRoute + _bingKey;
+        }
+
+        public static bool ValidateLocation(string address) 
         {
             string url = _startURLLocation + address + _endURLLocation + _bingKey;
             try
             {
-                WebResponse response = MakeRequest(url); //hvis get response ikke lykkes, returner false i metoden, evt.
+                WebResponse response = MakeRequest(url);
+                return true;
             }
             catch (Exception)
             {
                 return false;                
             }      
-            return true;  
         }
     }
 }
