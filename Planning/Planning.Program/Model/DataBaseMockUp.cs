@@ -13,7 +13,7 @@ namespace Planning.Model
         {
             var container = new CitizenContainer();
 
-            var adrA = new Address("James Tobins Alle 24, 2. th,  9220 Aalborg Øst");
+            var adrA = new Address("James Tobins Alle 24, 2. th,  9220 Aalborg Øst, Danmark");
             adrA.StartDate = new DateTime(2016,12,1);
             var citizenA = new Citizen("1712920000", "Nicolai", "Gjøderum",adrA, new DateTime(2016,12,1));
             var taskA1 = new TaskDescription(15, "Bad", citizenA, new TimePeriod(TimeSpan.FromHours(14)), new DateTime(2016,12,1), "Personlig hygiejne", 1);
@@ -39,7 +39,7 @@ namespace Planning.Model
         {
             var container = new GroupContainer();
 
-            var gr1 = new Group("Gruppe ds310e16","Selma Lagerløfsvej 300, 9220 Aalborg Øst");
+            var gr1 = new Group("Gruppe ds310e16","Selma Lagerløfsvej 300, 9220 Aalborg Øst, Danmark");
 
             var emplA = new Employee("Nicolai", "Gjøderum", DateTime.Today, "Datalog", "26112935", new TimeSpan(8,0,0), new TimeSpan(16,0,0));
 

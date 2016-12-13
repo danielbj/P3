@@ -38,6 +38,7 @@ namespace Planning.ViewModel
                 _selectedCalendarType = value;
                 OnPropertyChanged(nameof(SelectedCalendarType));
                 OnPropertyChanged(nameof(SelectedSchedule));
+                OnPropertyChanged(nameof(EmployeeSchedules));
             }
         }
 
@@ -53,20 +54,15 @@ namespace Planning.ViewModel
                 _selectedDate = value;
                 OnPropertyChanged(nameof(SelectedDate));
                 OnPropertyChanged(nameof(SelectedSchedule));
+                OnPropertyChanged(nameof(EmployeeSchedules));
             }
         }
 
-        private List<GroupSchedule> _templates;
         public List<GroupSchedule> Templates
         {
             get
             {
-                return _templates;
-            }
-            set
-            {
-                _templates = value;
-                OnPropertyChanged(nameof(Templates));
+                return SelectedGroup.TemplateSchedules;
             }
         }
 
@@ -82,6 +78,7 @@ namespace Planning.ViewModel
                 _selectedTemplate = value;
                 OnPropertyChanged(nameof(SelectedTemplate));
                 OnPropertyChanged(nameof(SelectedSchedule));
+                OnPropertyChanged(nameof(EmployeeSchedules));
             }
         }
 
@@ -92,7 +89,17 @@ namespace Planning.ViewModel
             {
                 if (SelectedCalendarType == CalendarTypes[0])
                 {
-                    return SelectedGroup.GetSchedule(SelectedDate);
+                    var s = SelectedGroup.GetSchedule(SelectedDate);
+
+                    if (s != null)
+                    {
+                        return s;
+                    }
+                    else
+                    {
+                        _scheduleAdmin.CreateSchedule(SelectedDate, SelectedGroup);
+                        return SelectedGroup.GetSchedule(SelectedDate);
+                    } 
                 }
                 else
                 {
@@ -103,13 +110,7 @@ namespace Planning.ViewModel
 
         private List<EmployeeSchedule> _employeeSchedules;
         public List<EmployeeSchedule> EmployeeSchedules {
-            get { return _employeeSchedules; }
-            set {
-                if(_employeeSchedules != value) {
-                    _employeeSchedules = value;
-                    OnPropertyChanged(nameof(EmployeeSchedules));
-                }
-            }
+            get { return SelectedSchedule.EmployeeSchedules; }
         }
 
         private Group _selectedGroup;
@@ -126,8 +127,10 @@ namespace Planning.ViewModel
                     _selectedGroup = value;
 
                     OnPropertyChanged(nameof(SelectedGroup));
+                    OnPropertyChanged(nameof(Templates));
                     OnPropertyChanged(nameof(SelectedTemplate));
                     OnPropertyChanged(nameof(SelectedSchedule));
+                    OnPropertyChanged(nameof(EmployeeSchedules));
                 }
             }
         }
@@ -137,8 +140,9 @@ namespace Planning.ViewModel
         public RelayCommand ChangeEmployeeCommand { get; }
         public RelayCommand AddEmployeeScheduleCommand { get; }
         public RelayCommand LockTaskCommand { get; }
-
         public RelayCommand LoadTemplateScheduleCommand { get; }
+        public RelayCommand RemoveEmployeeScheduleCommand { get; }
+
         public RelayCommand FlushToDatabase { get; }
 
         #endregion
@@ -163,17 +167,24 @@ namespace Planning.ViewModel
             CalendarTypes = new ObservableCollection<string>() { "Kalenderplaner", "Grundplaner" };
             SelectedCalendarType = CalendarTypes[0];
             SelectedDate = DateTime.Today;
-            Templates = SelectedGroup.TemplateSchedules;
+            
 
             ChangeEmployeeCommand = new RelayCommand(p => ChangeEmployee(p as EmployeeSchedule), p => true);
 
             AddEmployeeScheduleCommand = new RelayCommand(p => AddEmployeeSchedule(), p => true);
+
             LockTaskCommand = new RelayCommand(p => LockTask(p as TaskItem), p => true);
 
-            //CreateEmployeeScheduleViewModels();
             LoadTemplateScheduleCommand = new RelayCommand(parameter => ImportTemplate(), parameter => (SelectedDate != null && SelectedCalendarType == CalendarTypes[0]));
 
+            RemoveEmployeeScheduleCommand = new RelayCommand(p => RemoveEmployeeSchedule(p as EmployeeSchedule), p=> true);
+
             FlushToDatabase = new RelayCommand(FlushToDatabaseAction, null);
+        }
+
+        private void RemoveEmployeeSchedule(EmployeeSchedule employeeSchedule)
+        {
+            _scheduleAdmin.RemoveEmployeeSchedule(SelectedSchedule, employeeSchedule);
         }
 
         public void StartDrag(object source, object item)
@@ -182,7 +193,28 @@ namespace Planning.ViewModel
 
             if (taskItem !=null)
             {
-                DragDrop.DoDragDrop((DependencyObject)source ,item, DragDropEffects.Move);
+                var employeeSchedule = _scheduleAdmin.FindTask(taskItem, SelectedSchedule);
+                _scheduleAdmin.UnPlan(SelectedGroup, employeeSchedule, taskItem);
+                DragDrop.DoDragDrop((DependencyObject)source ,taskItem, DragDropEffects.Move);
+            }
+        }
+
+        public void DropTask(TaskItem draggedTaskItem, object dropTarget)
+        {
+            TaskItem taskItem = draggedTaskItem;
+            TaskItem taskItem2 = dropTarget as TaskItem;
+            EmployeeSchedule emplTarget = dropTarget as EmployeeSchedule;
+
+            if (taskItem != null && taskItem2 != null)
+            {
+                var employeeSchedule = _scheduleAdmin.FindTask(taskItem2, SelectedSchedule);
+                int index = employeeSchedule.TaskItems.IndexOf(taskItem2);
+                _scheduleAdmin.PlanTask(SelectedGroup,employeeSchedule, taskItem, index);
+            }
+            else if (taskItem != null && emplTarget != null)
+            {
+                int index2 = emplTarget.TaskItems.Count;
+                _scheduleAdmin.PlanTask(SelectedGroup, emplTarget, taskItem, index2);
             }
         }
 
@@ -212,7 +244,7 @@ namespace Planning.ViewModel
             if (viewModel.Excecute && viewModel.SelectedEmployee != null)
             {
                 _scheduleAdmin.AssignEmployeeToEmployeeSchedule(viewModel.SelectedEmployee, es);
-                OnPropertyChanged(nameof(SelectedSchedule));
+                OnPropertyChanged(nameof(EmployeeSchedules));
             }
 
         }

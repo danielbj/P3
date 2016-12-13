@@ -51,7 +51,7 @@ namespace Planning.ViewModel
 
                 for (int i = index; i < targetEmployeeSchedule.TaskItems.Count; i++)
                 {
-                    AdjustRoute(targetEmployeeSchedule.TaskItems[i], targetEmployeeSchedule.TaskItems[i + 1], date);
+                    AdjustRoute(targetEmployeeSchedule.TaskItems[i-1], targetEmployeeSchedule.TaskItems[i], date);
                     AdjustStartTime(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i]);
                 }
 

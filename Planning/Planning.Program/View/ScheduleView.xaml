@@ -104,7 +104,7 @@
                         <!--#endregion-->
                     </Grid>
                     <StackPanel x:Name="NamePanel" Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Grid.IsSharedSizeScope="True" HorizontalAlignment="Left"/>
-                    <ItemsControl x:Name="SchedulePanel" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SelectedSchedule.EmployeeSchedules}">
+                    <ItemsControl x:Name="SchedulePanel" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding EmployeeSchedules}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
@@ -117,11 +117,18 @@
                                         <RowDefinition Height="auto"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <Button Grid.Row="0" Content="{Binding Employee}" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ChangeEmployeeCommand}" CommandParameter="{Binding}"/>
-                                    <ListBox Grid.Row="1" ItemsSource="{Binding Path=TaskItems}">
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <Button  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="{Binding Employee}" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ChangeEmployeeCommand}" CommandParameter="{Binding}"/>
+                                        <Menu>
+                                            <MenuItem Header="...">
+                                                <MenuItem Header="Fjern Kolonne" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.RemoveEmployeeScheduleCommand}" CommandParameter="{Binding}"/>
+                                            </MenuItem>
+                                        </Menu>
+                                    </StackPanel>
+                                    <ListBox Grid.Row="1" ItemsSource="{Binding Path=TaskItems}" AllowDrop="True" Drop="ListBox_Drop">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
-                                                <Grid Width="auto" Background="Transparent" PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown">
+                                                <Grid Width="auto" Background="Transparent" PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown" AllowDrop="True" Drop="Grid_Drop">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="auto"/>
                                                         <RowDefinition Height="auto"/>

@@ -21,7 +21,7 @@ namespace Planning.Model
 
         protected override void ApplyChange()
         {
-            Obj.Duration = NewValue;  // TODO
+            Obj.Duration = NewValue; 
         }
     }
 
@@ -33,7 +33,7 @@ namespace Planning.Model
 
         protected override void ApplyChange()
         {
-            Obj.Description = NewValue; // TODO
+            Obj.Description = NewValue;
         }
     }
 }
