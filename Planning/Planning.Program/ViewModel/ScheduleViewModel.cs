@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Planning.Model;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Planning.View;
 
 
 namespace Planning.ViewModel
@@ -176,7 +177,19 @@ namespace Planning.ViewModel
 
         private void ImportTemplate()
         {
-            
+            var window = new TemplateSelectionWindow();
+            var viewModel = new TemplateSelectionViewModel(TemplateNames, window);
+            window.DataContext = viewModel;
+            window.ShowDialog();
+
+            if (viewModel.Excecute && viewModel.SelectedName != null)
+            {
+                var daily = new GroupSchedule("");
+                var template = _selectedGroup.TemplateSchedules[viewModel.SelectedName];
+
+                _scheduleAdmin.CopyTemplateScheduleToDailySchedule(template, daily);
+                _selectedGroup.AddSchedule(_selectedDate, daily);
+            }
         }
 
         private void CreateEmployeeScheduleViewModels()

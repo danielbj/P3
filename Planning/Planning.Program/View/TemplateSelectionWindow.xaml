@@ -7,10 +7,20 @@
         mc:Ignorable="d"
         Title="TemplateSelectionWindow" Height="300" Width="300">
     <Grid>
-        <ListBox ItemsSource="{Binding}">
-            <TextBlock>
-                
-            </TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <ListBox Grid.Row="0" ItemsSource="{Binding TemplateNames}" SelectedItem="{Binding SelectedName}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Button Content="Annuller" Command="{Binding CancelCommand}"/>
+            <Button Content="Importer" Command="{Binding ImportCommand}"/>
+        </StackPanel>
     </Grid>
 </Window>

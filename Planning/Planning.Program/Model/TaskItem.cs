@@ -37,5 +37,14 @@ namespace Planning.Model
         {
             return TaskDescription.ToString(); 
         }
+
+        public TaskItem Clone()
+        {
+            var clone = new TaskItem(this.TaskDescription);
+            clone.TimePeriod.StartTime = TimeSpan.FromSeconds(this.TimePeriod.StartTime.TotalSeconds);
+
+            return clone;
+        }
+
     }
 }

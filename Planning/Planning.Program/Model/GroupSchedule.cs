@@ -41,9 +41,14 @@ namespace Planning.Model
         }
 
         public static GroupSchedule CloneSchedule(GroupSchedule schedule)
-        { 
-            var clone = JsonConvert.SerializeObject(schedule);
-            return JsonConvert.DeserializeObject<GroupSchedule>(clone);        
+        {
+            var clone = new GroupSchedule(schedule.Description);
+            foreach (EmployeeSchedule item in schedule.EmployeeSchedules)
+            {
+                clone.EmployeeSchedules.Add(item.clone());
+            }
+
+            return clone;       
         }
 
 

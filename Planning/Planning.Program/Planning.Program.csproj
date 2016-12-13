@@ -83,6 +83,7 @@
     <Compile Include="ViewModel\ScheduleViewModel.cs" />
     <Compile Include="ViewModel\SignalingClass.cs" />
     <Compile Include="ViewModel\TaskAdmin.cs" />
+    <Compile Include="ViewModel\TemplateSelectionViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\Visitator.cs" />
     <Compile Include="View\CitizenView.xaml.cs">
