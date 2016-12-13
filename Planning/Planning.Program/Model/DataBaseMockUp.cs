@@ -41,12 +41,12 @@ namespace Planning.Model
 
             var gr1 = new Group("Gruppe ds310e16","Selma Lagerløfsvej 300, 9220 Aalborg Øst");
 
-            var emplA = new Employee("Nicolai", "Gjøderum", DateTime.Today, "Datalog", "26112935");
+            var emplA = new Employee("Nicolai", "Gjøderum", DateTime.Today, "Datalog", "26112935", new TimeSpan(8,0,0), new TimeSpan(16,0,0));
 
-            emplA.SetWorkhours(DateTime.Today, new TimePeriod(TimeSpan.FromHours(8)));
+            //emplA.SetWorkhours(DateTime.Today, new TimePeriod(TimeSpan.FromHours(8))); 
 
-            var emplB = new Employee("Kamilla", "Fincke", DateTime.Today, "Datalog", "22434479");
-            var emplC = new Employee("Christian", "Kloster", DateTime.Today, "Datalog", "38383138");
+            var emplB = new Employee("Kamilla", "Fincke", DateTime.Today, "Datalog", "22434479", new TimeSpan(8, 0, 0), new TimeSpan(16, 0, 0));
+            var emplC = new Employee("Christian", "Kloster", DateTime.Today, "Datalog", "38383138", new TimeSpan(8, 0, 0), new TimeSpan(16, 0, 0));
 
             gr1.AddEmployee(emplA);
             gr1.AddEmployee(emplB);
@@ -108,9 +108,9 @@ namespace Planning.Model
 
             var gr2 = new Group("Den magtfulde elite", "St. Helena, Atlanterhavet");
             
-            var emplD = new Employee("Napoleon", "Bonaparte", DateTime.Today, "Kejser", "12354678");
-            var emplE = new Employee("Lars", "Løkke", DateTime.Today, "Statsminister", "112");
-            var emplF = new Employee("Mohsin", "Iqbal", DateTime.Today, "Vejleder", "300 2548 214569 51551 626262 0 G 65454");
+            var emplD = new Employee("Napoleon", "Bonaparte", DateTime.Today, "Kejser", "12354678", new TimeSpan(8, 0, 0), new TimeSpan(16, 0, 0));
+            var emplE = new Employee("Lars", "Løkke", DateTime.Today, "Statsminister", "112", new TimeSpan(8, 0, 0), new TimeSpan(16, 0, 0));
+            var emplF = new Employee("Mohsin", "Iqbal", DateTime.Today, "Vejleder", "300 2548 214569 51551 626262 0 G 65454", new TimeSpan(8, 0, 0), new TimeSpan(16, 0, 0));
 
             gr2.AddEmployee(emplD);
             gr2.AddEmployee(emplE);

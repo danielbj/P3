@@ -124,6 +124,7 @@ namespace Planning.ViewModel
             task.Locked = !task.Locked;
         }
 
+    
         public List<TaskChange> GetRecentTaskChanges(TaskDescription task, DateTime fromDate)
         {
             return task.GetTaskChanges(t => t.Date >= fromDate); 
@@ -137,8 +138,9 @@ namespace Planning.ViewModel
         /// <returns></returns>
         public Dictionary<EmployeeSchedule, int> CalcTaskPlacement(TaskItem task, GroupSchedule groupSchedule)
         {
-            Dictionary<EmployeeSchedule, int> result = new Dictionary<EmployeeSchedule, int>(); 
-            //returnerer en dictionary med employeeschedules, og placering (int index) i employeeSchedule
+            Dictionary<EmployeeSchedule, int> result = new Dictionary<EmployeeSchedule, int>();
+            //returnerer en dictionary med employeeschedules, og placering (int index) i employeeSchedule       
+
             // tjek hvilken emploeeSchedule har plads til task
             // tjek hvor der er mindst køretid
             return result;
@@ -278,11 +280,19 @@ namespace Planning.ViewModel
         {
             GroupSchedule dailySchedule = new GroupSchedule(date);
             group.AddDailySchedule(dailySchedule);
+        }       
+
+        public EmployeeSchedule FindTask(TaskItem task, GroupSchedule groupSchedule)
+        {
+            foreach (EmployeeSchedule item in groupSchedule.EmployeeSchedules)
+            {
+                if (item.TaskItems.Contains(task))
+                {
+                    return item;
+                }                
+            }
+            throw new ArgumentException("Task not found in the group schedule.");
         }
-
-
-
-       
 
     }
 
