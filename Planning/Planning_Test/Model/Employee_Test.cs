@@ -130,6 +130,7 @@ namespace Planning.UnitTest.Model
         #endregion
 
         [Test, TestCaseSource("EmployeeCases")]
+        [Category("ToString Method")]
         public void ToString_GetsFirstnameAndLastName_AreEqual(Employee employee)
         {
             Assert.AreEqual(employee.Firstname + " " + employee.Lastname, employee.ToString());

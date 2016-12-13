@@ -41,7 +41,7 @@ namespace Planning.Model
         }
 
 
-        public void AddNote(string note)
+        public void SetNote(string note)
         {
             Note = note;
         }

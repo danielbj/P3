@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Planning.Model;
 using NUnit.Framework;
-using Planning.Model;
 using System.Threading;
 
 namespace Planning.UnitTest.Model
@@ -14,6 +13,7 @@ namespace Planning.UnitTest.Model
     {
         #region Fields
         Citizen _citizen;
+        TaskDescription _taskDescription;
         #endregion
 
         #region Set up
@@ -22,9 +22,14 @@ namespace Planning.UnitTest.Model
         {
             _citizen = new Citizen("0000000000", "testFirstname", "testLastname", new Address("Snerlevej 11, Aalborg"), new DateTime(2016, 12, 21));
         }
+        [SetUp]
+        public void InstTaskDescription()
+        {
+            _taskDescription = new TaskDescription(30, "testTaskDescription", new Citizen("0000000000", "testFirstname", "testLastname", new Address("Snerlevej 11, 9000"), new DateTime(2016, 12, 21)), new TimePeriod(new TimeSpan(00, 30, 00)), new DateTime(2016, 12, 21), "testAssignment");
+        }
         #endregion
 
-        #region New Instance
+        #region Constructor
         [Test]
         [Category("Constructor")]
         public void CitizenConstructor_CprIsSet_True()
@@ -55,16 +60,6 @@ namespace Planning.UnitTest.Model
 
         [Test]
         [Category("Constructor")]
-        [Category("NOT FINISHED")]
-        public void CitizenConstructor_AdressIsSet_True()
-        {
-            Address thisAddress = _citizen.GetAddress(new DateTime());
-
-            Assert.AreEqual("Snerlevej 11, Aalborg", thisAddress.AddressName);
-        }
-
-        [Test]
-        [Category("Constructor")]
         public void CitizenConstructor_DateAdmittedIsSet_True()
         {
             Assert.AreEqual("2016-12-21", _citizen.DateAdmitted.ToString("yyyy-MM-dd"));
@@ -73,53 +68,45 @@ namespace Planning.UnitTest.Model
 
         #region Edit Task
         [Test]
-        [Ignore("Not implemented")]
         [Category("Edit Task")]
-        [Category("Should be changed")]
         public void AddTask_TaskAdded_True()
         {
-            TaskDescription description = null;//new TaskDescription(0, "testDescription");
+            _citizen.AddTask(_taskDescription);
 
-            _citizen.AddTask(description);
-
-            Assert.Contains(description, _citizen.Tasks);
+            Assert.Contains(_taskDescription, _citizen.Tasks);
         }
 
         [Test]
-        [Ignore("Not implemented")]
         [Category("Edit Task")]
-        [Category("Should be changed")]
         public void RemoveTask_TaskRemoved_True()
         {
-            TaskDescription description = null;// new TaskDescription(0, "testDescription");
-            _citizen.AddTask(description);
+            _citizen.AddTask(_taskDescription);
 
-            _citizen.RemoveTask(description);
+            _citizen.RemoveTask(_taskDescription);
 
             Assert.AreEqual(0, _citizen.Tasks.Count);
         }
 
         [Test]
-        [Ignore("Not implemented")]
         [Category("Edit Task")]
         public void GetTasks_CorrectDate_ReturnsExpectedAddress()
         {
             //Arrange 
-            Address address = new Address("testAddress") { StartDate = new DateTime(2015, 12, 31) };
+            Address address = new Address("Snerlevej 11, Aalborg") { StartDate = new DateTime(2015, 12, 31) };
 
             Citizen c = new Citizen("1234567890", "bo", "bosen", address, new DateTime(2012, 1, 1));
 
             for (int i = 1; i < 10; i += 2)
             {
                 DateTime d = new DateTime(2016, 1, i);
-                Address a = new Address("testAddress") { StartDate = d };
+                Address a = new Address("Snerlevej 11, Aalborg") { StartDate = d };
                 c.AddAddress(a);
             }
 
             //Act 
             Address actualAddress = c.GetAddress(new DateTime(2016, 1, 4));
 
-            Address expectedAdress = new Address("testAddress") { StartDate = new DateTime(2016, 1, 3) };
+            Address expectedAdress = new Address("Snerlevej 11, Aalborg") { StartDate = new DateTime(2016, 1, 3) };
 
             //assert 
             Assert.AreEqual(expectedAdress, actualAddress);
@@ -128,26 +115,22 @@ namespace Planning.UnitTest.Model
         #endregion
 
         #region Edit Address
-        [Test]
-        [Ignore("Address implementation needed")]
+        [TestCase("Snerlevej 11, Aalborg")]
         [Category("Edit Address")]
-        [Category("NOT FINISHED")]
-        public void AddAddress_AddressAdded_True()
+        public void AddAddress_AddressAdded_True(string addressName)
         {
-            Address address = new Address("testAddress");
+            Address address = new Address(addressName);
 
             _citizen.AddAddress(address);
 
             Assert.AreEqual(address, _citizen.GetAddress(new DateTime()));
         }
 
-        [TestCase("2016-12-21")]
-        [Ignore("Address implementation needed")]
+        [TestCase("2016-12-21", "Snerlevej 11, Aalborg")]
         [Category("Edit Address")]
-        [Category("NOT FINISHED")]
-        public void GetAddress_AddressFetched_True(DateTime dateTime)
+        public void GetAddress_AddressFetched_True(DateTime dateTime, string addressName)
         {
-            Address expectedAddress = new Address("testAddress");
+            Address expectedAddress = new Address(addressName);
             _citizen.AddAddress(expectedAddress);
 
             Address actualAddress = _citizen.GetAddress(dateTime);
@@ -156,7 +139,17 @@ namespace Planning.UnitTest.Model
         }
         #endregion
 
+        #region ToString
+        [Test]
+        [Category("ToString Method")]
+        public void ToString_GetStringOfCitizen_AreEqual()
+        {
+            string actual = _citizen.ToString();
+            string expected = "testFirstname testLastname";
 
+            Assert.AreEqual(expected, actual);
+        }
+        #endregion
 
 
         //[TestCase("9999999999", 87, "Nico", "Thos", "herningvej 00", 0)]
@@ -207,7 +200,7 @@ namespace Planning.UnitTest.Model
 
         //    //assert
         //    Assert.AreEqual(expectedAdress, actualAddress);
-            
+
         //}
     }
 }

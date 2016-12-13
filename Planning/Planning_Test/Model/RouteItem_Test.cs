@@ -36,6 +36,7 @@ namespace Planning.UnitTest.Model
         [TestCase("testStartAddressName", "testEndAddressName", "00:00:01")]
         [TestCase("", "", "00:00:00")]
         [TestCase("testStartAddressName", "testEndAddressName", "23:59:59")]
+        [Category("ToString Method")]
         public void ToString_ReturnsString_AreEqual(string startAddress, string endAddress, TimeSpan duration)
         {
             RouteItem routeItem = new RouteItem(startAddress, endAddress, duration);

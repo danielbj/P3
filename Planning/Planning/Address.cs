@@ -34,7 +34,7 @@ namespace Planning.Model
 
         public override bool Equals(Object obj)
         {
-            Address address = (Address)obj;
+            Address address = obj as Address;
             if (address == null)
                 return false;
 
@@ -51,9 +51,9 @@ namespace Planning.Model
             return AddressName;
         }
 
-        public static explicit operator Address(String input)
+        public static explicit operator Address(string addressName)
         {
-            return new Address(input);
+            return new Address(addressName);
         }
     }
 }
