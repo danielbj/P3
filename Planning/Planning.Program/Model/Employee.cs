@@ -15,47 +15,60 @@ namespace Planning.Model
         public string Lastname { get; private set; }
         public string Notes { get; private set; }
         public string PhoneNumber { get; private set; }
+        private Dictionary<DayOfWeek, TimePeriod> _workhours;
+        
+        
 
-        private Dictionary<DateTime, TimePeriod> WorkHours;
-
-
-
-
-        public Employee(string firstname, string lastname, DateTime dateHired, string notes, string phoneNumber) {
+        public Employee(string firstname, string lastname, DateTime dateHired, string notes, string phoneNumber, TimeSpan startTime, TimeSpan endTime) {
             Firstname = firstname;
             Lastname = lastname;
             Notes = notes;
             DateHired = dateHired;
             PhoneNumber = phoneNumber;
-            WorkHours = new Dictionary<DateTime, TimePeriod>(); 
+            _workhours = new Dictionary<DayOfWeek, TimePeriod>();
+            TimePeriod defaultWorkHours = new TimePeriod(endTime - startTime);
+            defaultWorkHours.StartTime = startTime;
+            defaultWorkHours.EndTime = endTime;
+            SetWorkHoursForWeek(defaultWorkHours);            
         }
 
         public bool IsWorking(DateTime date)
         {
-            return WorkHours.ContainsKey(date);
+            DayOfWeek weekday = date.DayOfWeek;
+            return _workhours.ContainsKey(weekday);
         }
 
         public TimePeriod GetWorkHours(DateTime date)
         {
-            if (WorkHours.ContainsKey(date))
+            if (_workhours.ContainsKey(date.DayOfWeek))
             {
-                return WorkHours[date];
+                return _workhours[date.DayOfWeek];
             }
             else
             {
-                throw new KeyNotFoundException("Work hours not found for the date");
+                throw new ArgumentException("WOrk hours not found.");
+                //return defaultWorkHours;
             }
         }
 
-        public void SetWorkhours(DateTime date, TimePeriod timeperiod)
+        public void SetWorkhours(DayOfWeek day, TimePeriod timeperiod)
         {
-            if (WorkHours.ContainsKey(date))
+            if (_workhours.ContainsKey(day))
             {
-                WorkHours[date] = timeperiod;  //overrides the old work hours
+                _workhours[day] = timeperiod;  //overrides the old work hours
             }
             else
             {
-                WorkHours.Add(date, timeperiod);
+                _workhours.Add(day, timeperiod);
+            }
+        }
+
+        public void SetWorkHoursForWeek(TimePeriod timeperiod)
+        {
+            _workhours.Add(DayOfWeek.Monday, timeperiod);
+            for (int i = 0; i <= 6; i++)
+            {
+                SetWorkhours((DayOfWeek)i, timeperiod);
             }
         }
 

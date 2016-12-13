@@ -125,10 +125,12 @@ namespace Planning.ViewModel
             _groupContainer.RemoveGroup(group);            
         }
 
-        public void NewEmployee(string firstname, string lastname, string notes, string phoneNumber, Group group)
+        public void NewEmployee(string firstname, string lastname, string notes, string phoneNumber, Group group, TimeSpan startTime, TimeSpan endTime)
         {
-            Employee empl = new Employee(firstname, lastname, DateTime.Today, notes, phoneNumber);
+            Employee empl = new Employee(firstname, lastname, DateTime.Today, notes, phoneNumber, startTime, endTime);
             group.AddEmployee(empl);
+            //workhours
+            
         }
 
         public void RemoveEmployeeFromGroup(Group group, Employee employee)
