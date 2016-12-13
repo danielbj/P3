@@ -87,6 +87,9 @@
     <Compile Include="TaskItemView.xaml.cs">
       <DependentUpon>TaskItemView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TemplateSelectionWindow.xaml.cs">
+      <DependentUpon>TemplateSelectionWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="CitizenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -120,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TaskItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TemplateSelectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

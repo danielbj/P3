@@ -7,6 +7,7 @@ using Planning.Model;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
+
 namespace Planning.ViewModel
 {
     public class ScheduleViewModel : ViewModelBase
@@ -168,14 +169,14 @@ namespace Planning.ViewModel
             AddEmployeeColumn = new RelayCommand(parameter => AddEmployeeButtonClicked?.Invoke(), null);
 
             CreateEmployeeScheduleViewModels();
-            LoadTemplateSchedule = new RelayCommand(parameter => LoadTemplateScheduleButtonClicked?.Invoke(EmployeeScheduleViewModels), parameter => (SelectedDate != null && SelectedCalenderType == CalendarTypes[0]));
+            LoadTemplateSchedule = new RelayCommand(parameter => ImportTemplate(), parameter => (SelectedDate != null && SelectedCalenderType == CalendarTypes[0]));
 
             FlushToDatabase = new RelayCommand(FlushToDatabaseAction, null);
         }
 
         private void ImportTemplate()
         {
-
+            
         }
 
         private void CreateEmployeeScheduleViewModels()

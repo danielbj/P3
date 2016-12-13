@@ -20,7 +20,7 @@ namespace Planning.Model
 
         public RouteItem()
         {
-
+            
         }
 
         public override string ToString()

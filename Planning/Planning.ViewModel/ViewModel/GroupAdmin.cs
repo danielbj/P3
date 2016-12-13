@@ -17,10 +17,10 @@ namespace Planning.ViewModel
            
         public GroupAdmin()
         {
-            GroupContainer grC = new GroupContainer();
-            foreach (var g in DatabaseControl.ReadGroups()) {
-                grC.AddGroup(g);
-            }
+            //GroupContainer grC = new GroupContainer();
+            //foreach (var g in DatabaseControl.ReadGroups()) {
+            //    grC.AddGroup(g);
+            //}
 
             _groupContainer = DataBaseMockUp.LoadGroups(); // TODO rigtig database
             //_groupContainer = new GroupContainer();

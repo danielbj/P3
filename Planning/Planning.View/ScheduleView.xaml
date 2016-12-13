@@ -121,16 +121,16 @@
                                     <ListBox Grid.Row="1" ItemsSource="{Binding Path=TaskItems}">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
-                                                <Grid>
+                                                <Grid Width="auto">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="auto"/>
                                                         <RowDefinition Height="auto"/>
                                                     </Grid.RowDefinitions>
-                                                    <Border Grid.Row="0" Height="{Binding Route.Duration.TotalMinutes}">
-                                                        <Rectangle Fill="Bisque"/>
+                                                    <Border Grid.Row="0" >
+                                                        <Rectangle Fill="Black" Height="{Binding Route.Duration.TotalMinutes}" HorizontalAlignment="Stretch"/>
                                                     </Border>
-                                                    <Border Grid.Row="1" Height="{Binding TaskDescription.Duration.TotalMinutes}">
-                                                        <StackPanel Orientation="Vertical">
+                                                    <Border Grid.Row="1" Width="auto" Height="{Binding TaskDescription.Duration.TotalMinutes}">
+                                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Width="auto">
                                                             <TextBlock x:Name="Citizen" HorizontalAlignment="Center" Text="{Binding TaskDescription.Citizen}" FontStyle="Italic"/>
                                                             <TextBlock x:Name="Description" HorizontalAlignment="Center" Text="{Binding TaskDescription.AssignmentType}" FontWeight="Bold" FontSize="14"/>
                                                             <TextBlock x:Name="Duration"  HorizontalAlignment="Center" Text="{Binding TaskDescription.Duration.TotalMinutes}">-Minutter</TextBlock>

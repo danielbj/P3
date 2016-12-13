@@ -20,7 +20,7 @@ namespace Planning.Model
 
         public Status State { get; set; }
         public bool Locked;
-        public RouteItem Route;        
+        public RouteItem Route { get; set; }        
         public TimePeriod TimePeriod { get; set; }
         public TaskDescription TaskDescription { get; }
 
