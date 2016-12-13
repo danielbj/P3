@@ -160,42 +160,26 @@ namespace Planning.ViewModel
         /// <param name="groupschedule"></param>
         /// <param name="startTime"></param>
         
-        public void CreateNewEmployeeSchedule(DateTime date, GroupSchedule groupschedule, TimeSpan startTime)
+        public void CreateNewEmployeeSchedule(GroupSchedule groupschedule, TimeSpan startTime)
         {
-            EmployeeSchedule employeeSchedule = new EmployeeSchedule(date,startTime);
+            EmployeeSchedule employeeSchedule = new EmployeeSchedule(startTime);
             groupschedule.EmployeeSchedules.Add(employeeSchedule);
-        }
+        }        
+        
         /// <summary>
         /// Removes an employeeschedule from a template schedule
         /// </summary>
         /// <param name="scheduleName"></param>
         /// <param name="group"></param>
         /// <param name="employeeSchedule"></param>
-        public void RemoveEmployeeSchedule(string scheduleName, Group group, EmployeeSchedule employeeSchedule)  //from template
+        public void RemoveEmployeeSchedule(GroupSchedule groupSchedule, EmployeeSchedule employeeSchedule)  //from template
         {
             foreach (TaskItem task in employeeSchedule.TaskItems)
             {
                 _taskClipBoard.Add(task);
                 task.State = TaskItem.Status.Unplanned;
             }
-            group.TemplateSchedules[scheduleName].EmployeeSchedules.Remove(employeeSchedule);
-            //saved = false
-        }
-        /// <summary>
-        /// Removes an employee schedule drom daily schedule
-        /// </summary>
-        /// <param name="date"></param>
-        /// <param name="group"></param>
-        /// <param name="employeeSchedule"></param>
-        public void RemoveEmployeeSchedule(DateTime date, Group group, EmployeeSchedule employeeSchedule) //from daily plan
-        {
-            foreach (TaskItem task in employeeSchedule.TaskItems)
-            {
-                _taskClipBoard.Add(task);
-                task.State = TaskItem.Status.Unplanned;               
-            }
-            group.DailySchedules[date].EmployeeSchedules.Remove(employeeSchedule);
-            //saved = false
+            groupSchedule.EmployeeSchedules.Remove(employeeSchedule);
         }
 
         public List<TaskItem> GetTaskClipBoard()
@@ -223,7 +207,7 @@ namespace Planning.ViewModel
         public void AssignEmployeeToEmployeeSchedule(Employee employee, EmployeeSchedule employeeSchedule)
         {
             //Employee skal være en del af den gruppe som har den employee schedule
-            employeeSchedule.Employee = employee;
+            employeeSchedule.Employee = employee;            
         } 
 
         public TaskItem FindOptimalPlacement(Group group, DateTime selectedDate, TaskItem taskItem)
@@ -285,6 +269,9 @@ namespace Planning.ViewModel
             task.TimePeriod.StartTime = time;
 
         }
+
+       
+
     }
 
 

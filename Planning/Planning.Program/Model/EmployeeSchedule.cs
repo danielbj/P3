@@ -22,6 +22,12 @@ namespace Planning.Model
             //SetRelevantTasks(TaskItems); //Skal ske når du laver en kalenderplan
         }
 
+        public EmployeeSchedule(TimeSpan startTime) //empl sche i template har ingen dato
+        {
+            TaskItems = new List<TaskItem>();
+            TimePeriod = new TimePeriod(startTime);
+        }
+
         //Bliver kaldt når du åbner en grundplan som kalenderplan.
         //public void SetRelevantTasks(List<TaskItem> taskItems)
         //{
