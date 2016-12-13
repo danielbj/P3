@@ -208,7 +208,7 @@ namespace Planning.ViewModel
                 _taskClipBoard.Add(task);
                 task.State = TaskItem.Status.Unplanned;
             }
-            group.TemplateSchedules[scheduleName].EmployeeSchedules.Remove(employeeSchedule);
+            group.GetSchedule(scheduleName).EmployeeSchedules.Remove(employeeSchedule);
             //saved = false
         }
         /// <summary>
@@ -224,7 +224,7 @@ namespace Planning.ViewModel
                 _taskClipBoard.Add(task);
                 task.State = TaskItem.Status.Unplanned;               
             }
-            group.DailySchedules[date].EmployeeSchedules.Remove(employeeSchedule);
+            group.GetSchedule(date).EmployeeSchedules.Remove(employeeSchedule);
             //saved = false
         }
 
@@ -260,7 +260,7 @@ namespace Planning.ViewModel
         {
             //List<TaskItem> tempList = new List<TaskItem>();
             Tuple<int, TaskItem> tempItem = new Tuple<int, TaskItem>(int.MaxValue , null);
-            List<EmployeeSchedule> employeeSchedules = group.DailySchedules[selectedDate].EmployeeSchedules;
+            List<EmployeeSchedule> employeeSchedules = group.GetSchedule(selectedDate).EmployeeSchedules;
             List<TaskItem> taskItemList = new List<TaskItem>();
             int tempValue = 0;
             int length;

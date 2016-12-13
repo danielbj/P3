@@ -9,7 +9,7 @@ namespace Planning.Model
     public class Employee //: IEmployee
     {
         public int EmployeeId { get; set; }
-        public DateTime DateHired { get; private set; } = DateTime.MinValue;
+        public DateTime DateHired { get; private set; } = DateTime.MaxValue;
         public DateTime DateResigned { get; private set; } = DateTime.MaxValue;      
         public string Firstname { get; private set; }
         public string Lastname { get; private set; }
@@ -18,8 +18,8 @@ namespace Planning.Model
 
         private Dictionary<DateTime, TimePeriod> WorkHours;
 
-
-
+        [Obsolete("Only needed for serialization and materialization in Entity Framework", true)]
+        public Employee() {  }
 
         public Employee(string firstname, string lastname, DateTime dateHired, string notes, string phoneNumber) {
             Firstname = firstname;

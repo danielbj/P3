@@ -94,7 +94,7 @@ namespace Planning.ViewModel
                 }
                 else
                 {
-                    return SelectedGroup.TemplateSchedules[SelectedTemplateName];
+                    return SelectedGroup.GetSchedule(SelectedTemplateName);
                 }
             }
         }
@@ -124,7 +124,11 @@ namespace Planning.ViewModel
                     _selectedGroup = value;
                     OnPropertyChanged(nameof(SelectedGroup));
                     OnPropertyChanged(nameof(SelectedSchedule));
-                    TemplateNames = _selectedGroup.TemplateSchedules.Keys.ToList<string>();
+                    List<string> tempStrings = new List<string>();
+                    foreach (GroupSchedule gs in _selectedGroup.TemplateSchedules.FindAll(g => g is GroupSchedule)) {
+                        tempStrings.Add(gs.Name);
+                    }
+                    TemplateNames = tempStrings;
                     if (TemplateNames.Count > 0)
                     {
                         SelectedTemplateName = TemplateNames[0];
@@ -185,15 +189,27 @@ namespace Planning.ViewModel
 
             foreach (Group g in _groupAdmin.GetAllGroups()) {  
                 DatabaseControl.AddGroup(g);
+                //Store Daily Schedules
+                //foreach (KeyValuePair<string, GroupSchedule> KVgs in g.TemplateSchedules) {
+                //    DatabaseControl.AddGroupSchedule(KVgs.Value);
+                //}
+                //foreach (KeyValuePair<DateTime, GroupSchedule> KVgs in g.DailySchedules) {
+                //    DatabaseControl.AddGroupSchedule(KVgs.Value);
+                //}
             }
 
-            foreach (EmployeeSchedule es in EmployeeSchedules) {
-                DatabaseControl.AddEmployeeSchedule(es);
-            }
+            //foreach (EmployeeSchedule es in EmployeeSchedules) {
+            //    //DatabaseControl.AddEmployeeSchedule(es);
+            //}
 
             foreach (TaskItem ti in _scheduleAdmin.GetTaskClipBoard()) {
-
+                DatabaseControl.AddTaskItem(ti);
             }
+
+            
+
+
+
             
         }
     }

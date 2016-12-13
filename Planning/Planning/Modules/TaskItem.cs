@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Planning.Model
 {
@@ -22,7 +24,10 @@ namespace Planning.Model
         public bool Locked;
         public RouteItem Route;        
         public TimePeriod TimePeriod { get; set; }
-        public TaskDescription TaskDescription { get; } //Skal den være her?
+        public TaskDescription TaskDescription { get; private set; } //Skal den være her?
+
+        [Obsolete("Only needed for serialization and materialization in Entity Framework", true)]
+        public TaskItem() {    }
 
         public TaskItem(TaskDescription taskDescription)
         {

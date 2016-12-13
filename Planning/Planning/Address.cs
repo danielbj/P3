@@ -9,7 +9,7 @@ namespace Planning.Model
 {
     public class Address : IComparable
     {
-        public DateTime StartDate = DateTime.MinValue;
+        public DateTime StartDate = DateTime.MaxValue;
         private string _address;
         public string AddressName { //TODO validate that it is string?
             get { return _address; }

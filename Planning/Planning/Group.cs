@@ -10,8 +10,8 @@ namespace Planning.Model
     {
         public int GroupId { get; set; }
         public List<Employee> Employees { get; set; }
-        public Dictionary<DateTime, GroupSchedule> DailySchedules { get; set; }
-        public Dictionary<string, GroupSchedule> TemplateSchedules { get; set; }
+        public List<GroupSchedule> DailySchedules { get; set; }
+        public List<GroupSchedule> TemplateSchedules { get; set; }
         public  Address GroupAddress{ get; set; } 
         public string Name{ get; set; }
         public List<TaskDescription> TaskDescriptions { get; private set; }
@@ -22,8 +22,8 @@ namespace Planning.Model
         public Group(string name, string address)
         {
             Employees = new List<Employee>();
-            DailySchedules = new Dictionary<DateTime, GroupSchedule>();
-            TemplateSchedules = new Dictionary<string, GroupSchedule>();
+            DailySchedules = new List<GroupSchedule>();
+            TemplateSchedules = new List<GroupSchedule>();
             Name = name;
             GroupAddress = new Address(address);
             TaskDescriptions = new List<TaskDescription>();
@@ -57,31 +57,36 @@ namespace Planning.Model
             return Employees;
         }
 
-        public void AddSchedule(DateTime date, GroupSchedule dailySchedule)
+        public void AddSchedule(GroupSchedule schedule)
         {
-            DailySchedules.Add(date, dailySchedule);
-        }
-
-        public void AddSchedule(string name, GroupSchedule templateSchedule)
-        {
-            TemplateSchedules.Add(name, templateSchedule);
+            if (schedule.Name == null)
+                DailySchedules.Add(schedule);
+            else
+            TemplateSchedules.Add(schedule);
         }
 
         public void RemoveSchedule(DateTime date)
         {
-            DailySchedules.Remove(date);
+            GroupSchedule tempGS = DailySchedules.Find(g => g.Date == date);
+            if (tempGS != null) {
+                DailySchedules.Remove(tempGS);
+            }
         }
 
         public void RemoveSchedule(string name)
         {
-            TemplateSchedules.Remove(name);
+            GroupSchedule tempGS = TemplateSchedules.Find(g => String.Equals(g.Name,name));//TODO Is it dangerous to compare strings?
+            if (tempGS != null) {
+                TemplateSchedules.Remove(tempGS);
+            }
         }
 
         public GroupSchedule GetSchedule(DateTime date)
         {
-            if (DailySchedules.ContainsKey(date))
+            GroupSchedule tempGS = DailySchedules.Find(g => g.Date == date);
+            if (tempGS != null)
             {
-                return DailySchedules[date];
+                return tempGS;
             }
             else
             {
@@ -92,9 +97,10 @@ namespace Planning.Model
 
         public GroupSchedule GetSchedule(string name)
         {
-            if (TemplateSchedules.ContainsKey(name))
+            GroupSchedule tempGS = TemplateSchedules.Find(g => String.Equals(g.Name, name));
+            if (tempGS != null)
             {
-                return TemplateSchedules[name];
+                return tempGS;
             }
             else
             {

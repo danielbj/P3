@@ -81,11 +81,13 @@ namespace Planning.Model
             var gs5 = new GroupSchedule("Fredag");
             var gs6 = new GroupSchedule("Lørdag");
             var gs7 = new GroupSchedule("Søndag");
+            var gs8 = new GroupSchedule(DateTime.Today);
 
             gs1.EmployeeSchedules.Add(es1);
-            gs1.EmployeeSchedules.Add(es2);
+            gs8.EmployeeSchedules.Add(es2);
 
-            gr1.TemplateSchedules.Add("Mandag", gs1);
+            gr1.AddSchedule(gs1);
+            gr1.AddSchedule(gs8);
 
             var gr2 = new Group("Den magtfulde elite", "St. Helena, Atlanterhavet");
             
