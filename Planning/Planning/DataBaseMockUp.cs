@@ -86,6 +86,7 @@ namespace Planning.Model
             gs1.EmployeeSchedules.Add(es2);
 
             gr1.TemplateSchedules.Add("Mandag", gs1);
+            gr1.AddSchedule(DateTime.Today, gs1);
 
             var gr2 = new Group("Den magtfulde elite", "St. Helena, Atlanterhavet");
             

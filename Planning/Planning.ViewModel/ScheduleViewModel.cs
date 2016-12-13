@@ -123,13 +123,14 @@ namespace Planning.ViewModel
                 {
                     _selectedGroup = value;
                     OnPropertyChanged(nameof(SelectedGroup));
-                    OnPropertyChanged(nameof(SelectedSchedule));
+                    
                     TemplateNames = _selectedGroup.TemplateSchedules.Keys.ToList<string>();
                     if (TemplateNames.Count > 0)
                     {
                         SelectedTemplateName = TemplateNames[0];
                     }
                     OnPropertyChanged(nameof(SelectedTemplateName));
+                    OnPropertyChanged(nameof(SelectedSchedule));
                 }
             }
         }
@@ -152,7 +153,8 @@ namespace Planning.ViewModel
         #endregion
 
 
-        public ScheduleViewModel() {
+        public ScheduleViewModel()
+        {
             _groupAdmin = new GroupAdmin();
             _scheduleAdmin = new ScheduleAdmin();
             Groups = new ObservableCollection<Group>(_groupAdmin.GetAllGroups());
@@ -171,10 +173,17 @@ namespace Planning.ViewModel
             FlushToDatabase = new RelayCommand(FlushToDatabaseAction, null);
         }
 
-        private void CreateEmployeeScheduleViewModels() {
-            EmployeeSchedules = Groups.First(g => g.Equals(SelectedGroup)).GetSchedule(SelectedTemplateName).EmployeeSchedules;
+        private void ImportTemplate()
+        {
 
-            foreach (EmployeeSchedule es in EmployeeSchedules) {
+        }
+
+        private void CreateEmployeeScheduleViewModels()
+        {
+            EmployeeSchedules = SelectedGroup.GetSchedule(SelectedTemplateName).EmployeeSchedules;
+
+            foreach (EmployeeSchedule es in EmployeeSchedules)
+            {
                 EmployeeScheduleViewModels.Add(new EmployeeScheduleViewModel(es));
             }
 

@@ -85,7 +85,8 @@ namespace Planning.Model
             }
             else
             {
-                throw new ArgumentException("schedule not found.");
+                // throw new ArgumentException("schedule not found.");  // TODO temp fix
+                return null;
             }
             
         }
