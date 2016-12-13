@@ -50,7 +50,7 @@
             <StackPanel x:Name="ButtonStackPanel" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
                 <Button x:Name="LoadButton" Content="Importer Grundplan" Padding="2" Margin="2" Command="{Binding LoadTemplateScheduleCommand}"/>
                 <Button x:Name="AddEmployeeButton" Content="Tilføj Kolonne" Padding="2" Margin="2" Command="{Binding AddEmployeeScheduleCommand}"/>
-                <Button x:Name="JobButton" Content="Uplanlagte Opgaver" Padding="2" Margin="2"/>
+                <ToggleButton x:Name="UnplannedTaskItemToggleButton" Content="Uplanlagte Opgaver" Padding="2" Margin="2" IsChecked="False"/>
                 <Slider x:Name="UISlider" Margin="2" Padding="2" Maximum="3300" Minimum="330" Orientation="Horizontal" Width="200" Value="990"/>
                 <DockPanel Width="150">
                     <Button x:Name="SaveButton" Content="Gem" Width="50" Padding="2" Margin="2" Command="{Binding FlushToDatabase}" HorizontalAlignment="Right"/>
@@ -59,11 +59,10 @@
         </Border>
         <Grid Grid.Row="2" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="161*"/>
-                <ColumnDefinition Width="440*"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <ScrollViewer Grid.Column="0" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True" Grid.ColumnSpan="2">
+            <ScrollViewer Grid.Column="0" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
                 <Grid x:Name="ScheduleViewGrid" VerticalAlignment="Top" ScrollViewer.CanContentScroll="True" Height="{Binding ElementName=UISlider,Path=Value, Mode=TwoWay}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
@@ -88,7 +87,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <!--#region Label definitions-->
+
                         <Label Grid.Row="0" Margin="2" Padding="2"/>
                         <Label Grid.Row="1" Content="06.00" />
                         <Label Grid.Row="2" Content="07.00" />
@@ -101,7 +100,7 @@
                         <Label Grid.Row="9" Content="14.00" />
                         <Label Grid.Row="10" Content="15.00" />
                         <Label Grid.Row="11" Content="16.00" />
-                        <!--#endregion-->
+   
                     </Grid>
                     <StackPanel x:Name="NamePanel" Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Grid.IsSharedSizeScope="True" HorizontalAlignment="Left"/>
                     <ItemsControl x:Name="SchedulePanel" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding EmployeeSchedules}">
@@ -117,7 +116,7 @@
                                         <RowDefinition Height="auto"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal" Width="160">
                                         <Button  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="{Binding Employee}" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ChangeEmployeeCommand}" CommandParameter="{Binding}"/>
                                         <Menu>
                                             <MenuItem Header="...">
@@ -128,33 +127,40 @@
                                     <ListBox Grid.Row="1" ItemsSource="{Binding Path=TaskItems}" AllowDrop="True" Drop="ListBox_Drop">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
-                                                <Grid Width="auto" Background="Transparent" PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown" AllowDrop="True" Drop="Grid_Drop">
+                                                <Grid Width="160" Background="Transparent" PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown" PreviewMouseMove="Grid_PreviewMouseMove" AllowDrop="True" Drop="Grid_Drop">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="auto"/>
                                                         <RowDefinition Height="auto"/>
                                                     </Grid.RowDefinitions>
-                                                    <Border Grid.Row="0" >
-                                                        <Rectangle Fill="Lavender" Height="{Binding Route.Duration.TotalMinutes}" HorizontalAlignment="Stretch"/>
+                                                    <Border Grid.Row="0" Background="Lavender">
+                                                        <TextBlock Text="{Binding Route.Duration.TotalMinutes}"  Height="{Binding Route.Duration.TotalMinutes}" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
                                                     </Border>
-                                                    <Border Grid.Row="1" Width="auto" Height="{Binding TaskDescription.Duration.TotalMinutes}">
+                                                    <Border Grid.Row="1" Width="auto" Height="{Binding TaskDescription.Duration.TotalMinutes}" Background="LightSteelBlue">
                                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Width="auto">
-                                                            <StackPanel Orientation="Horizontal">
-                                                                <TextBlock x:Name="Citizen" HorizontalAlignment="Center" Text="{Binding TaskDescription.Citizen}" FontStyle="Italic"/>
-                                                                <Button Content="L" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.LockTaskCommand}" CommandParameter="{Binding}">
-                                                                    <Button.Style>
-                                                                        <Style TargetType="Button">
-                                                                            <Style.Triggers>
-                                                                                <DataTrigger Binding="{Binding Locked}" Value="True">
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="auto"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock x:Name="Citizen" Grid.Column="0" HorizontalAlignment="Center" Text="{Binding TaskDescription.Citizen}" FontStyle="Italic"/>
+                                                                <ToggleButton Grid.Column="1" Content="L" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.LockTaskCommand}" CommandParameter="{Binding}" IsChecked="{Binding Locked}">
+                                                                    <ToggleButton.Template>
+                                                                        <ControlTemplate TargetType="ToggleButton">
+                                                                            <Border CornerRadius="3" Background="{TemplateBinding Background}">
+                                                                                <ContentPresenter Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                            </Border>
+                                                                            <ControlTemplate.Triggers>
+                                                                                <Trigger Property="IsChecked" Value="True">
                                                                                     <Setter Property="Background" Value="Red"/>
-                                                                                </DataTrigger>
-                                                                                <DataTrigger  Binding="{Binding Locked}" Value="False">
+                                                                                </Trigger>
+                                                                                <Trigger Property="IsChecked" Value="False">
                                                                                     <Setter Property="Background" Value="Green"/>
-                                                                                </DataTrigger>
-                                                                            </Style.Triggers>
-                                                                        </Style>
-                                                                    </Button.Style>
-                                                                </Button>
-                                                            </StackPanel>
+                                                                                </Trigger>
+                                                                            </ControlTemplate.Triggers>
+                                                                        </ControlTemplate>
+                                                                    </ToggleButton.Template>
+                                                                </ToggleButton>
+                                                            </Grid>
                                                             <TextBlock x:Name="Description" HorizontalAlignment="Center" Text="{Binding TaskDescription.AssignmentType}" FontWeight="Bold" FontSize="14"/>
                                                             <TextBlock x:Name="Duration"  HorizontalAlignment="Center" Text="{Binding TaskDescription.Duration.TotalMinutes}">-Minutter</TextBlock>
                                                         </StackPanel>
@@ -167,9 +173,33 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                    
                 </Grid>
             </ScrollViewer>
+            <ListBox Grid.Column="1" Width="200" ItemsSource="{Binding UnplannedTaskItems}" AllowDrop="True" Drop="ListBox_Drop_1">
+                <ListBox.Style>
+                    <Style TargetType="ListBox">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=UnplannedTaskItemToggleButton, Path = IsChecked }" Value="false">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=UnplannedTaskItemToggleButton, Path = IsChecked }" Value="true">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.Style>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="Beige">
+                            <StackPanel>
+                                <TextBlock Text="{Binding TaskDescription.Citizen}"/>
+                                <TextBlock  Text="{Binding TaskDescription.AssignmentType}" FontWeight="Bold" FontSize="14"/>
+                                <TextBlock Text="{Binding TaskDescription.Duration.TotalMinutes}">-Minutter</TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>       
         </Grid>
     </Grid>
 </UserControl>

@@ -22,21 +22,37 @@ namespace Planning.View
     /// </summary>
     public partial class ScheduleView : UserControl
     {
+        private Point _startpoint;
+
         public ScheduleView()
         {
             DataContext = new ScheduleViewModel();
             InitializeComponent();
+        }
 
-            
+        private void Grid_PreviewMouseMove(object sender, MouseEventArgs e)
+        {
+            var vm = this.DataContext as ScheduleViewModel;
+            Grid g = sender as Grid;
+            var item = g.DataContext;
+
+            if (item != null && e.LeftButton == MouseButtonState.Pressed)
+            {
+                var position = e.GetPosition(null);
+                var x = Math.Abs(position.X - _startpoint.X);
+                var y = Math.Abs(position.Y - _startpoint.Y);
+                var xs = SystemParameters.MinimumHorizontalDragDistance;
+                var ys = SystemParameters.MinimumVerticalDragDistance;
+                if (x > xs || y > ys)
+                {
+                    vm.StartDrag(sender, item);
+                }
+            }
         }
 
         private void Grid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var vm = this.DataContext as ScheduleViewModel;
-            Grid g = sender as Grid;
-            var item = g.DataContext;            
-
-            vm.StartDrag(sender,item);            
+            _startpoint = e.GetPosition(null);
         }
 
         private void Grid_Drop(object sender, DragEventArgs e)
@@ -60,5 +76,16 @@ namespace Planning.View
 
             vm.DropTask(item, target);
         }
+
+        private void ListBox_Drop_1(object sender, DragEventArgs e)
+        {
+            var vm = this.DataContext as ScheduleViewModel;
+
+            var item = e.Data.GetData(typeof(TaskItem)) as TaskItem;
+
+            vm.UnplanTask(item);
+        }
+
+
     }
 }

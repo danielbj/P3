@@ -24,6 +24,16 @@ namespace Planning.ViewModel
 
         #region Properties
 
+        public ObservableCollection<TaskItem> UnplannedTaskItems
+        {
+            get
+            {
+                return new ObservableCollection<TaskItem>(_scheduleAdmin.GetTaskClipBoard());
+            }
+        }
+
+  
+
         public ObservableCollection<string> CalendarTypes { get; set; }
 
         private string _selectedCalendarType;
@@ -57,6 +67,8 @@ namespace Planning.ViewModel
                 OnPropertyChanged(nameof(EmployeeSchedules));
             }
         }
+
+   
 
         public List<GroupSchedule> Templates
         {
@@ -108,9 +120,12 @@ namespace Planning.ViewModel
             }
         }
 
-        private List<EmployeeSchedule> _employeeSchedules;
-        public List<EmployeeSchedule> EmployeeSchedules {
-            get { return SelectedSchedule.EmployeeSchedules; }
+        public ObservableCollection<EmployeeSchedule> EmployeeSchedules
+        {
+            get
+            {
+                return new ObservableCollection<EmployeeSchedule>(SelectedSchedule.EmployeeSchedules);
+            }
         }
 
         private Group _selectedGroup;
@@ -142,6 +157,7 @@ namespace Planning.ViewModel
         public RelayCommand LockTaskCommand { get; }
         public RelayCommand LoadTemplateScheduleCommand { get; }
         public RelayCommand RemoveEmployeeScheduleCommand { get; }
+        public RelayCommand ToggleUnplannedTaskItemPanelCommand { get; }
 
         public RelayCommand FlushToDatabase { get; }
 
@@ -151,8 +167,7 @@ namespace Planning.ViewModel
 
         private GroupAdmin _groupAdmin;
         private ScheduleAdmin _scheduleAdmin;
-     //   private List<EmployeeScheduleViewModel> EmployeeScheduleViewModels = new List<EmployeeScheduleViewModel>();
-        private DatabaseControl DatabaseControl = new DatabaseControl();
+        private DatabaseControl _databaseControl;
 
         #endregion
 
@@ -161,6 +176,7 @@ namespace Planning.ViewModel
         {
             _groupAdmin = new GroupAdmin();
             _scheduleAdmin = new ScheduleAdmin();
+            _databaseControl = new DatabaseControl();
 
             Groups = new ObservableCollection<Group>(_groupAdmin.GetAllGroups());
             SelectedGroup = Groups[0];
@@ -179,12 +195,16 @@ namespace Planning.ViewModel
 
             RemoveEmployeeScheduleCommand = new RelayCommand(p => RemoveEmployeeSchedule(p as EmployeeSchedule), p=> true);
 
+      
+
             FlushToDatabase = new RelayCommand(FlushToDatabaseAction, null);
         }
+
 
         private void RemoveEmployeeSchedule(EmployeeSchedule employeeSchedule)
         {
             _scheduleAdmin.RemoveEmployeeSchedule(SelectedSchedule, employeeSchedule);
+            UpdateSchedule();
         }
 
         public void StartDrag(object source, object item)
@@ -196,7 +216,9 @@ namespace Planning.ViewModel
                 var employeeSchedule = _scheduleAdmin.FindTask(taskItem, SelectedSchedule);
                 _scheduleAdmin.UnPlan(SelectedGroup, employeeSchedule, taskItem);
                 DragDrop.DoDragDrop((DependencyObject)source ,taskItem, DragDropEffects.Move);
+                
             }
+            UpdateSchedule();
         }
 
         public void DropTask(TaskItem draggedTaskItem, object dropTarget)
@@ -216,16 +238,28 @@ namespace Planning.ViewModel
                 int index2 = emplTarget.TaskItems.Count;
                 _scheduleAdmin.PlanTask(SelectedGroup, emplTarget, taskItem, index2);
             }
+            UpdateSchedule();
+        }
+
+        public void UnplanTask(TaskItem item)
+        {
+            var cb =_scheduleAdmin.GetTaskClipBoard();
+            cb.Add(item);
+            OnPropertyChanged(nameof(UnplannedTaskItems));
+            UpdateSchedule();
         }
 
         private void LockTask(TaskItem taskItem)
         {
             _scheduleAdmin.ToggleLockStatusTask(taskItem);
+            //UpdateSchedule();
         }
 
         private void UpdateSchedule()
         {
-            OnPropertyChanged("SelectedSchedule.EmployeeSchedules");
+            SelectedSchedule.EmployeeSchedules = EmployeeSchedules.ToList<EmployeeSchedule>(); 
+            OnPropertyChanged(nameof(SelectedSchedule));
+            OnPropertyChanged(nameof(EmployeeSchedules));
         }
 
         private void AddEmployeeSchedule()
@@ -244,8 +278,8 @@ namespace Planning.ViewModel
             if (viewModel.Excecute && viewModel.SelectedEmployee != null)
             {
                 _scheduleAdmin.AssignEmployeeToEmployeeSchedule(viewModel.SelectedEmployee, es);
-                OnPropertyChanged(nameof(EmployeeSchedules));
             }
+            UpdateSchedule();
 
         }
 
@@ -266,21 +300,22 @@ namespace Planning.ViewModel
                 daily = _scheduleAdmin.CopyTemplateScheduleToDailySchedule(template);
 
                 _selectedSchedule = daily;
-                OnPropertyChanged(nameof(SelectedSchedule));
+                
             }
+            UpdateSchedule();
         }
 
 
         public void FlushToDatabaseAction(object input)
         {
-            DatabaseControl.EraseDatabaseContent(); 
+            _databaseControl.EraseDatabaseContent(); 
 
             foreach (Group g in _groupAdmin.GetAllGroups()) {  
-                DatabaseControl.AddGroup(g);
+                _databaseControl.AddGroup(g);
             }
 
             foreach (EmployeeSchedule es in EmployeeSchedules) {
-                DatabaseControl.AddEmployeeSchedule(es);
+                _databaseControl.AddEmployeeSchedule(es);
             }
 
             foreach (TaskItem ti in _scheduleAdmin.GetTaskClipBoard()) {
