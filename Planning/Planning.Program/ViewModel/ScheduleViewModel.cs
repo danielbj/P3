@@ -210,7 +210,7 @@ namespace Planning.ViewModel
                 var template = _selectedGroup.TemplateSchedules[viewModel.SelectedName];
 
                 var daily = _scheduleAdmin.CopyTemplateScheduleToDailySchedule(template);
-                _selectedGroup.AddSchedule(_selectedDate, daily);
+                _selectedGroup.AddSchedule(_selectedDate, daily);  
 
                 _selectedSchedule = daily;
                 OnPropertyChanged(nameof(SelectedSchedule));

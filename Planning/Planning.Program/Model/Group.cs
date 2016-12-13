@@ -10,10 +10,10 @@ namespace Planning.Model
     {
         public int GroupId { get; set; }
         public List<Employee> Employees { get; set; }
-        public Dictionary<DateTime, GroupSchedule> DailySchedules { get; set; }
-        public Dictionary<string, GroupSchedule> TemplateSchedules { get; set; }
+        public List<GroupSchedule> DailySchedules { get; set; }
+        public List<GroupSchedule> TemplateSchedules { get; set; }
         public Address GroupAddress{ get; set; } 
-        public string Name{ get; set; }
+        public string Name{ get; set; }        
         public List<TaskDescription> TaskDescriptions { get; private set; }
 
         [Obsolete("Only needed for serialization and materialization in Entity Framework", true)]
@@ -22,8 +22,8 @@ namespace Planning.Model
         public Group(string name, string address)
         {
             Employees = new List<Employee>();
-            DailySchedules = new Dictionary<DateTime, GroupSchedule>();
-            TemplateSchedules = new Dictionary<string, GroupSchedule>();
+            DailySchedules = new List<GroupSchedule>();
+            TemplateSchedules = new List<GroupSchedule>();
             Name = name;
             GroupAddress = new Address(address);
             TaskDescriptions = new List<TaskDescription>();
@@ -57,50 +57,35 @@ namespace Planning.Model
             return Employees;
         }
 
-        public void AddSchedule(DateTime date, GroupSchedule dailySchedule)
+        public void AddDailySchedule(GroupSchedule dailySchedule) 
         {
-            DailySchedules.Add(date, dailySchedule);
+            DailySchedules.Add(dailySchedule);
+            
+        }
+        public void AddScheduleTemplate(GroupSchedule scheduleTemplate)
+        {
+            DailySchedules.Add(scheduleTemplate);
+
         }
 
-        public void AddSchedule(string name, GroupSchedule templateSchedule)
+        public void RemoveDailySchedule(GroupSchedule dailySchedule)
         {
-            TemplateSchedules.Add(name, templateSchedule);
+            DailySchedules.Remove(dailySchedule);
         }
 
-        public void RemoveSchedule(DateTime date)
+        public void RemoveScheduleTmeplate(GroupSchedule templateSchedule)
         {
-            DailySchedules.Remove(date);
-        }
-
-        public void RemoveSchedule(string name)
-        {
-            TemplateSchedules.Remove(name);
+            TemplateSchedules.Remove(templateSchedule);
         }
 
         public GroupSchedule GetSchedule(DateTime date)
         {
-            if (DailySchedules.ContainsKey(date))
-            {
-                return DailySchedules[date];
-            }
-            else
-            {
-                // throw new ArgumentException("schedule not found.");  // TODO temp fix
-                return null;
-            }
-            
+            throw new NotImplementedException();           
         }
 
         public GroupSchedule GetSchedule(string name)
         {
-            if (TemplateSchedules.ContainsKey(name))
-            {
-                return TemplateSchedules[name];
-            }
-            else
-            {
-                throw new ArgumentException("schedule not found.");
-            }
+            throw new NotImplementedException();
         }
 
         public override string ToString()

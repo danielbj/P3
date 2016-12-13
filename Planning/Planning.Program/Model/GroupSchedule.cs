@@ -9,21 +9,30 @@ namespace Planning.Model
     public class GroupSchedule// : IGroupSchedule   
     {
         
-        public string Description { get; set; }          
+        public string Name { get; set; }    
+        public DateTime Date { get; set; }      
         public bool Approved { get; private set; }                          
         public bool Saved { get; private set; } = false;  //needs to be changed to false, everytime there is a change in schedule       
         public List<EmployeeSchedule> EmployeeSchedules { get; set; }
         
 
-        public GroupSchedule(string description)
+        public GroupSchedule(string name) 
         {
-            Description = description;
+            Name = name;
             Approved = false;
             Saved = false;
             EmployeeSchedules = new List<EmployeeSchedule>();
         }
 
-         
+        public GroupSchedule(DateTime date)
+        {
+            Date = date;
+            Approved = false;
+            Saved = false;
+            EmployeeSchedules = new List<EmployeeSchedule>();
+        }
+
+
         public void Save()
         {
             //save to file?
@@ -37,12 +46,12 @@ namespace Planning.Model
 
         public override string ToString()
         {
-            return Description;
+            return Name;
         }
 
         public static GroupSchedule CloneSchedule(GroupSchedule schedule)
         {
-            var clone = new GroupSchedule(schedule.Description);
+            var clone = new GroupSchedule(schedule.Name);
             foreach (EmployeeSchedule item in schedule.EmployeeSchedules)
             {
                 clone.EmployeeSchedules.Add(item.Clone());

@@ -270,6 +270,18 @@ namespace Planning.ViewModel
 
         }
 
+        public void CreateSchedule(string name, Group group)
+        {
+            GroupSchedule templateSchedule = new GroupSchedule(name);
+            group.AddScheduleTemplate(templateSchedule);
+        }
+        public void CreateSchedule(DateTime date, Group group)
+        {
+            GroupSchedule dailySchedule = new GroupSchedule(date);
+            group.AddDailySchedule(dailySchedule);
+
+        }
+
        
 
     }
