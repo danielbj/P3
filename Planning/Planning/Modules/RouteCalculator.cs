@@ -172,7 +172,7 @@ namespace Planning.Model
 
         public static string CreateRequestURL(string address1, string address2)
         {
-            string waypointString = "&wp0=" + address2 + "&wp1=" + address2;
+            string waypointString = "&wp.0=" + address1 + "&wp.1=" + address2;
 
             return _startURLRoute + waypointString + _endURLRoute + _bingKey;
         }

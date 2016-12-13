@@ -49,10 +49,10 @@ namespace Planning.Model
             gr1.AddEmployee(emplB);
             gr1.AddEmployee(emplC);
 
-            var adrA = new Address("James Tobins Alle 24,  9220 Aalborg Øst");
-            var adrB = new Address("Egevej 14, 9620, Aalestrup");
-            var adrC = new Address("Niels Bohrs Vej 36, 9220 Aalborg Øst");
-            var adrD = new Address("Teglmarken 181, 8800 Viborg");
+            var adrA = new Address("James Tobins Alle 24, 9220, Aalborg Øst, Denmark");
+            var adrB = new Address("Egevej 14, 9620, Aalestrup, Denmark");
+            var adrC = new Address("Niels Bohrs Vej 36, 9220 Aalborg Øst, Denmark");
+            var adrD = new Address("Teglmarken 181, 8800 Viborg, Denmark");
             
 
             adrA.StartDate = new DateTime(2016, 12, 1);
@@ -77,15 +77,15 @@ namespace Planning.Model
             //add routes to es1
             for (int i = 1; i < es1.TaskItems.Count; i++)
             {
-                es1.TaskItems[i].Route.Duration = TimeSpan.FromMinutes(8);
-                //es1.TaskItems[i].Route.Duration = RouteCalculator.CalculateRouteDuration(es1.TaskItems[i-1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), es1.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());               
+                //es1.TaskItems[i].Route.Duration = TimeSpan.FromMinutes(8);
+                es1.TaskItems[i].Route.Duration = RouteCalculator.CalculateRouteDuration(es1.TaskItems[i-1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), es1.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());               
             }
 
             //add routes to es2
             for (int i = 1; i < es2.TaskItems.Count; i++)
             {
-                es1.TaskItems[i].Route.Duration = TimeSpan.FromMinutes(5);
-                //es2.TaskItems[i].Route.Duration = RouteCalculator.CalculateRouteDuration(es2.TaskItems[i-1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), es2.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
+                //es2.TaskItems[i].Route.Duration = TimeSpan.FromMinutes(5);
+                es2.TaskItems[i].Route.Duration = RouteCalculator.CalculateRouteDuration(es2.TaskItems[i-1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), es2.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
             }
 
 
