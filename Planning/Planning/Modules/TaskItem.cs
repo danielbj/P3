@@ -22,7 +22,7 @@ namespace Planning.Model
         public bool Locked;
         public RouteItem Route;        
         public TimePeriod TimePeriod { get; set; }
-        public TaskDescription TaskDescription { get; } //Skal den være her?
+        public TaskDescription TaskDescription { get; }
 
         public TaskItem(TaskDescription taskDescription)
         {

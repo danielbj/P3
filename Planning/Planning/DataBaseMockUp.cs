@@ -66,13 +66,26 @@ namespace Planning.Model
             var es2 = new EmployeeSchedule(DateTime.Today, new TimeSpan(5, 0, 0));
 
 
-            es1.TaskItems.Add(new TaskItem(new TaskDescription(30, "bad", citizenA, new TimePeriod(TimeSpan.FromHours(8)), DateTime.Today, "bad")));
-            es1.TaskItems.Add(new TaskItem(new TaskDescription(15, "Skid", citizenB, new TimePeriod(TimeSpan.FromHours(12)), DateTime.Today, "Skid")));
-            es1.TaskItems.Add(new TaskItem(new TaskDescription(45, "Pis", citizenC, new TimePeriod(TimeSpan.FromHours(12)), DateTime.Today, "Skid")));
-            es1.TaskItems.Add(new TaskItem(new TaskDescription(10, "Bræk mig", citizenD, new TimePeriod(TimeSpan.FromHours(12)), DateTime.Today, "Skid")));
+            es1.TaskItems.Add(new TaskItem(new TaskDescription(30, "bad", citizenA, new TimePeriod(TimeSpan.FromHours(8)), DateTime.Today, "bad", 1)));
+            es1.TaskItems.Add(new TaskItem(new TaskDescription(15, "Skid", citizenB, new TimePeriod(TimeSpan.FromHours(12)), DateTime.Today, "Skid", 1)));
+            es1.TaskItems.Add(new TaskItem(new TaskDescription(45, "Pis", citizenC, new TimePeriod(TimeSpan.FromHours(12)), DateTime.Today, "Skid",1)));
+            es1.TaskItems.Add(new TaskItem(new TaskDescription(10, "Bræk mig", citizenD, new TimePeriod(TimeSpan.FromHours(12)), DateTime.Today, "Skid", 1)));
 
-            es2.TaskItems.Add(new TaskItem(new TaskDescription(30, "E2BAD", citizenA, new TimePeriod(TimeSpan.FromHours(8)), DateTime.Today, "bad")));
-            es2.TaskItems.Add(new TaskItem(new TaskDescription(45, "E2SKID", citizenB, new TimePeriod(TimeSpan.FromHours(12)), DateTime.Today, "Skid")));
+            es2.TaskItems.Add(new TaskItem(new TaskDescription(30, "E2BAD", citizenA, new TimePeriod(TimeSpan.FromHours(8)), DateTime.Today, "bad", 1)));
+            es2.TaskItems.Add(new TaskItem(new TaskDescription(45, "E2SKID", citizenB, new TimePeriod(TimeSpan.FromHours(12)), DateTime.Today, "Skid", 1)));
+
+            //add routes to es1
+            for (int i = 1; i < es1.TaskItems.Count; i++)
+            {
+                es1.TaskItems[i].Route.Duration = RouteCalculator.CalculateRouteDuration(es1.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), es1.TaskItems[i+1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());               
+            }
+
+            //add routes to es2
+            for (int i = 1; i < es2.TaskItems.Count; i++)
+            {
+                es2.TaskItems[i].Route.Duration = RouteCalculator.CalculateRouteDuration(es2.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), es2.TaskItems[i + 1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
+            }
+
 
             var gs1 = new GroupSchedule("Mandag");
             var gs2 = new GroupSchedule("Tirsdag");

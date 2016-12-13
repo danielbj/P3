@@ -102,9 +102,9 @@ namespace Planning.ViewModel
         /// </summary>
         /// <param name="name"></param>
         /// <param name="address"></param>
-        public void AddNewGroup(string name, string address)
+        public void AddNewGroup(string name)
         {
-            Group group = new Group(name, address);
+            Group group = new Group(name, "Kærvej 2, 7752 Snedsted");
             _groupContainer.AddGroup(group);
         }
         /// <summary>

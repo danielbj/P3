@@ -14,9 +14,9 @@ namespace Planning.Model
         public DateTime DateCreated { get; set; } = DateTime.MinValue;
         public DateTime DateDeleted { get; set; } = DateTime.MaxValue;
         public Citizen Citizen { get; set; }
-        public string Assignment { get; set; }
+        public string AssignmentType { get; set; }
         public string Description { get; set; }
-        public string Note { get; private set; }
+        public string NoteFromPlanner { get; private set; }
         public List<TaskItem> TaskItems { get; set; } = new List<TaskItem>();
         public TimeSpan Duration { get; set; }        
         public TimePeriod TimeFrame;
@@ -24,7 +24,7 @@ namespace Planning.Model
 
         #endregion
 
-        public TaskDescription(int duration, string description, Citizen citizen, TimePeriod timeFrame, DateTime startDate, string assignment)
+        public TaskDescription(int duration, string description, Citizen citizen, TimePeriod timeFrame, DateTime startDate, string assignment, int frequency)
         { 
             Duration = TimeSpan.FromMinutes(duration);
             Description = description;
@@ -32,18 +32,17 @@ namespace Planning.Model
             Citizen = citizen;
             TimeFrame = timeFrame;
             StartDate = startDate;
-            Assignment = assignment;
-            
+            AssignmentType = assignment;            
         }
+
         public void CreateTaskItem()
         {
             TaskItems.Add(new TaskItem(this)); 
         }
 
-
         public void AddNote(string note)
         {
-            Note = note;
+            NoteFromPlanner = note;
         }
 
         public List<TaskChange> GetTaskChanges(Predicate<TaskChange> Filter)
@@ -53,7 +52,7 @@ namespace Planning.Model
 
         public override string ToString()
         {
-            return Citizen.LastName + ", " + Citizen.FirstName + ", " + Assignment + ", " + Duration.ToString();
+            return Citizen.LastName + ", " + Citizen.FirstName + ", " + AssignmentType + ", " + Duration.ToString();
         }
 
         //Impleement equals method

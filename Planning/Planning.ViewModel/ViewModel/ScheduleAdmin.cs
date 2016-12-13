@@ -16,59 +16,50 @@ namespace Planning.ViewModel
             _taskClipBoard = new List<TaskItem>();
         }
 
-        /// <summary>
-        /// Plans a task. Sets task status = planned, and adjusts rest of the tasks in the employee schedule
-        /// </summary>
-        /// <param name="targetGroup"></param>
-        /// <param name="targetEmployeeSchedule"></param>
-        /// <param name="taskToPlan"></param>
-        /// <param name="index"></param>
-        public bool PlanTask(Group targetGroup, EmployeeSchedule targetEmployeeSchedule, TaskItem taskToPlan, int index) // locked? ret så der bruges GetAddress(date) når address er impl. Add methods.
-        {
-            if (taskToPlan.Locked)
-            {
-                taskToPlan.State = TaskItem.Status.Unplanned;
-                return false;
-            }
 
-            if (index == 0) //first
+        //new
+        public void PlanTask(Group targetGroup, EmployeeSchedule targetEmployeeSchedule, TaskItem taskToPlan, int index) 
+        {
+            DateTime date = targetEmployeeSchedule.EffectiveDate;
+            if (index == 0) //first 
             {
                 targetEmployeeSchedule.TaskItems.Insert(index, taskToPlan);
-                taskToPlan.Route = RouteCalculator.GetRouteItem(new Address("Kærvej 2, 7752 Snedsted"), taskToPlan.TaskDescription.Citizen.GetAddress(DateTime.Today));
-                taskToPlan.TimePeriod.StartTime = targetEmployeeSchedule.TimePeriod.StartTime;
+                taskToPlan.Route.Duration = RouteCalculator.CalculateRouteDuration(targetGroup.GroupAddress.ToString(), taskToPlan.TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
+                taskToPlan.TimePeriod.StartTime = targetEmployeeSchedule.TimePeriod.StartTime;                         
+                
 
-                for (int i = index +1 ; i < targetEmployeeSchedule.TaskItems.Count; i++)
+                for (int i = index + 1; i < targetEmployeeSchedule.TaskItems.Count; i++)
                 {
-                    AdjustTravelTime(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i]);
-                    if (targetEmployeeSchedule.TaskItems[i].Locked)//ERRORS messes the list up (indexes and placement). TODO
-                        break;
+                    AdjustRoute(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i], date);
                     AdjustStartTime(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i]);
                 }
+
+                taskToPlan.State = TaskItem.Status.Planned;
+
             }
-            else if (index == targetEmployeeSchedule.TaskItems.Count)  //last
+            else if (index == targetEmployeeSchedule.TaskItems.Count)  //last 
             {
                 targetEmployeeSchedule.TaskItems.Add(taskToPlan);
-                AdjustTravelTime(targetEmployeeSchedule.TaskItems[index - 1], taskToPlan);
+                AdjustRoute(targetEmployeeSchedule.TaskItems[index - 1], taskToPlan, date);
                 AdjustStartTime(targetEmployeeSchedule.TaskItems[index - 1], taskToPlan);
+                taskToPlan.State = TaskItem.Status.Planned;
             }
 
             else
             {
-                targetEmployeeSchedule.TaskItems.Insert(index, taskToPlan); 
+                targetEmployeeSchedule.TaskItems.Insert(index, taskToPlan);
 
                 for (int i = index; i < targetEmployeeSchedule.TaskItems.Count; i++)
                 {
-                    AdjustTravelTime(targetEmployeeSchedule.TaskItems[i], targetEmployeeSchedule.TaskItems[i + 1]);
-                    if (targetEmployeeSchedule.TaskItems[i].Locked)//ERRORS messes the list up (indexes and placement). TODO
-                        break;
+                    AdjustRoute(targetEmployeeSchedule.TaskItems[i], targetEmployeeSchedule.TaskItems[i + 1], date);
                     AdjustStartTime(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i]);
                 }
 
+                taskToPlan.State = TaskItem.Status.Planned;
             }
-            taskToPlan.State = TaskItem.Status.Planned;
             targetEmployeeSchedule.TimePeriod.EndTime = targetEmployeeSchedule.TaskItems.Last<TaskItem>().TimePeriod.EndTime;
-            return true;
         }
+
 
         /// <param name="targetTask"></param>
         /// <param name="targetEmployeeSchedule"></param>
@@ -132,9 +123,9 @@ namespace Planning.ViewModel
         /// </summary>
         /// <param name="previousTask"></param>
         /// <param name="task"></param>
-        private void AdjustTravelTime(TaskItem previousTask, TaskItem task) 
+        private void AdjustRoute(TaskItem previousTask, TaskItem task, DateTime date) 
         {
-            task.Route = RouteCalculator.GetRouteItem(previousTask.TaskDescription.Citizen.GetAddress(DateTime.Today), task.TaskDescription.Citizen.GetAddress(DateTime.Today)); // todo date på addresse
+            task.Route.Duration = RouteCalculator.CalculateRouteDuration(previousTask.TaskDescription.Citizen.GetAddress(date).ToString(), task.TaskDescription.Citizen.GetAddress(date).ToString());
         }
 
         /// <summary>
@@ -143,13 +134,11 @@ namespace Planning.ViewModel
         /// <param name="previousTask"></param>
         /// <param name="task"></param>
         private void AdjustStartTime(TaskItem previousTask, TaskItem task) 
-        {
-            if (!task.Locked)
-                task.TimePeriod.StartTime = previousTask.TimePeriod.EndTime + previousTask.Route.Duration;           
-             
+        {            
+            task.TimePeriod.StartTime = previousTask.TimePeriod.EndTime + previousTask.Route.Duration;                 
         }
 
-        public void ToggleLockStatusTask(TaskItem task)
+        public void ToggleLockStatusTask(TaskItem task) //TODO
         {
             task.Locked = !task.Locked;
         }

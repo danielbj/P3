@@ -12,7 +12,7 @@ namespace Planning.Model
         public List<Employee> Employees { get; set; }
         public Dictionary<DateTime, GroupSchedule> DailySchedules { get; set; }
         public Dictionary<string, GroupSchedule> TemplateSchedules { get; set; }
-        public  Address GroupAddress{ get; set; } 
+        public Address GroupAddress{ get; set; } 
         public string Name{ get; set; }
         public List<TaskDescription> TaskDescriptions { get; private set; }
 
