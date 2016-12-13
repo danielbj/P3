@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
 
 namespace Planning.Model
 {
@@ -35,6 +38,12 @@ namespace Planning.Model
         public override string ToString()
         {
             return Description;
+        }
+
+        public static GroupSchedule CloneSchedule(GroupSchedule schedule)
+        { 
+            var clone = JsonConvert.SerializeObject(schedule);
+            return JsonConvert.DeserializeObject<GroupSchedule>(clone);        
         }
 
 
