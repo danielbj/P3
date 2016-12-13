@@ -214,7 +214,7 @@ namespace Planning.ViewModel
         {
             //List<TaskItem> tempList = new List<TaskItem>();
             Tuple<int, TaskItem> tempItem = new Tuple<int, TaskItem>(int.MaxValue , null);
-            List<EmployeeSchedule> employeeSchedules = group.DailySchedules[selectedDate].EmployeeSchedules;
+            List<EmployeeSchedule> employeeSchedules = group.GetSchedule(selectedDate).EmployeeSchedules;
             List<TaskItem> taskItemList = new List<TaskItem>();
             int tempValue = 0;
             int length;
@@ -251,7 +251,7 @@ namespace Planning.ViewModel
         /// <param name="daily"></param>
         public GroupSchedule CopyTemplateScheduleToDailySchedule(GroupSchedule template)
         {
-             return CloneSchedule(template);
+            return CloneSchedule(template);
         }
 
         /// <summary>
@@ -266,8 +266,7 @@ namespace Planning.ViewModel
 
         public void LockTaskInEmployeeSchedule(TaskItem task, TimeSpan time, EmployeeSchedule employeeschedule)
         {
-            task.TimePeriod.StartTime = time;
-
+            throw new NotImplementedException();
         }
 
         public void CreateSchedule(string name, Group group)
@@ -279,8 +278,9 @@ namespace Planning.ViewModel
         {
             GroupSchedule dailySchedule = new GroupSchedule(date);
             group.AddDailySchedule(dailySchedule);
-
         }
+
+
 
        
 
