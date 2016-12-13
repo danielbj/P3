@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Planning.Model
 {
-    public class TaskDescription// : ITask
+    public class TaskDescription 
     {
         #region Fields
         public DateTime StartDate { get; set; } = DateTime.MinValue;
@@ -20,7 +20,7 @@ namespace Planning.Model
         public List<TaskItem> TaskItems { get; set; } = new List<TaskItem>();
         public TimeSpan Duration { get; set; }        
         public TimePeriod TimeFrame;
-        private List<TaskChange> _taskChanges;
+        private List<ITaskdescritpionChange> _changes;
 
         #endregion
 
@@ -28,26 +28,29 @@ namespace Planning.Model
         { 
             Duration = TimeSpan.FromMinutes(duration);
             Description = description;
-            TaskItems = new List<TaskItem>();            
+            TaskItems = new List<TaskItem>();
+            _changes = new List<ITaskdescritpionChange>();            
             Citizen = citizen;
             TimeFrame = timeFrame;
             StartDate = startDate;
-            AssignmentType = assignment;            
+            AssignmentType = assignment;
+            CreateTaskItem(frequencyPerWeek); 
+
         }
 
-        public void CreateTaskItem()
+        private void CreateTaskItem(int count)
         {
             TaskItems.Add(new TaskItem(this)); 
         }
 
         public void AddNote(string note)
         {
-            NoteFromPlanner = note;
+            NoteFromPlanner += note;
         }
 
-        public List<TaskChange> GetTaskChanges(Predicate<TaskChange> Filter)
+        public List<ITaskdescritpionChange> GetTaskChanges(Predicate<ITaskdescritpionChange> Filter)
         {
-            return _taskChanges.FindAll(t => Filter(t));
+            return _changes.FindAll(t => Filter(t));
         }
 
         public override string ToString()
@@ -55,6 +58,7 @@ namespace Planning.Model
             return Citizen.LastName + ", " + Citizen.FirstName + ", " + AssignmentType + ", " + Duration.ToString();
         }
 
-        //Impleement equals method
+
+        
     }
 }

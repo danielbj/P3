@@ -125,9 +125,9 @@ namespace Planning.ViewModel
             task.Locked = !task.Locked;
         }
     
-        public List<TaskChange> GetRecentTaskChanges(TaskDescription task, DateTime fromDate)
+        public List<ITaskdescritpionChange> GetRecentTaskChanges(TaskDescription task, DateTime fromDate)
         {
-            return task.GetTaskChanges(t => t.Date >= fromDate); 
+            return task.GetTaskChanges(t => t.DateApplied >= fromDate); 
         }
 
         /// <summary>
