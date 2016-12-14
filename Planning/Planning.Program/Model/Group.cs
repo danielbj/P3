@@ -8,6 +8,7 @@ namespace Planning.Model
 {
     public class Group
     {
+        // hej
         public int GroupId { get; set; }
         public List<Employee> Employees { get; set; }
         public List<GroupSchedule> DailySchedules { get; set; }
