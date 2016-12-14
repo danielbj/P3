@@ -6,10 +6,34 @@ using System.Threading.Tasks;
 using Planning.Model;
 using Planning.ViewModel;
 
+
 namespace Planning.Model
 {
-    public class DataBaseMockUp
-    {
+    public class DataBaseMockUp {
+        public static CitizenContainer LoadCitizens() {
+            var container = new CitizenContainer();
+
+            var adrA = new Address("James Tobins Alle 24, 2. th,  9220 Aalborg Øst, Danmark");
+            adrA.StartDate = new DateTime(2016, 12, 1);
+            var citizenA = new Citizen("1712920000", "Nicolai", "Gjøderum", adrA, new DateTime(2016, 12, 1));
+            var taskA1 = new TaskDescription(15, "Bad", citizenA, new TimePeriod(TimeSpan.FromHours(14)), new DateTime(2016, 12, 1), "Personlig hygiejne", 1);
+            var taskA2 = new TaskDescription(20, "Indkøb", citizenA, new TimePeriod(TimeSpan.FromHours(7)), new DateTime(2016, 12, 1), "Andet", 1);
+            citizenA.AddTask(taskA1);
+            citizenA.AddTask(taskA2);
+
+            var adrB = new Address("Sigensvej 10, 9310 Vodskov");
+            adrA.StartDate = new DateTime(2016, 12, 3);
+            var citizenB = new Citizen("0202620000", "Leif", "Gjøderum", adrB, new DateTime(2016, 12, 3));
+            var taskB1 = new TaskDescription(15, "Bad", citizenB, new TimePeriod(TimeSpan.FromHours(13)), new DateTime(2016, 12, 3), "Personlig hygiejne", 1);
+            var taskB2 = new TaskDescription(20, "Toilet", citizenB, new TimePeriod(TimeSpan.FromHours(8)), new DateTime(2016, 12, 3), "Personlig hygiejne", 1);
+            citizenB.AddTask(taskB1);
+            citizenB.AddTask(taskB2);
+
+            container.AddCitizen(citizenA);
+            container.AddCitizen(citizenB);
+
+            return container;
+        }
         //Til employee clipboard.
         public static List<Employee> LoadEmployees()
         {
@@ -236,7 +260,7 @@ namespace Planning.Model
                 int opgave = rnd.Next(Opgaver.Count);
                 int tid = rnd.Next(Tider.Count);
 
-                Tasks.Add(new TaskItem(new TaskDescription(Tider[tid], "opgave", citizen, new TimePeriod(TimeSpan.FromHours(8)), DateTime.Today, Opgaver[opgave])));
+                Tasks.Add(new TaskItem(new TaskDescription(Tider[tid], "opgave", citizen, new TimePeriod(TimeSpan.FromHours(8)), DateTime.Today, Opgaver[opgave], tid)));
             }
 
             int ran = 0;
