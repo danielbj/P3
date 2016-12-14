@@ -21,103 +21,127 @@ namespace Planning.ViewModel
         //new
         public void PlanTask(Group targetGroup, EmployeeSchedule targetEmployeeSchedule, TaskItem taskToPlan, int index) 
         {
-            DateTime date = targetEmployeeSchedule.EffectiveDate;
-            if (index == 0) //first 
+            DateTime CurrentDate 
+                = !targetEmployeeSchedule.EffectiveDate.Equals(DateTime.MaxValue) 
+                ? targetEmployeeSchedule.EffectiveDate 
+                : DateTime.Today;
+
+            int count = targetEmployeeSchedule.TaskItems.Count;
+
+            string toAddress = taskToPlan.TaskDescription.Citizen.GetAddress(CurrentDate).ToString();
+
+            if (index > count)
             {
-                targetEmployeeSchedule.TaskItems.Insert(index, taskToPlan);
-                taskToPlan.Route.Duration = RouteCalculator.CalculateRouteDuration(targetGroup.GroupAddress.ToString(), taskToPlan.TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
-                taskToPlan.TimePeriod.StartTime = targetEmployeeSchedule.TimePeriod.StartTime;                         
-                
-
-                for (int i = index + 1; i < targetEmployeeSchedule.TaskItems.Count; i++)
-                {
-                    AdjustRoute(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i], date);
-                    AdjustStartTime(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i]);
-                }
-
-                taskToPlan.State = TaskItem.Status.Planned;
-
-            }
-            else if (index == targetEmployeeSchedule.TaskItems.Count)  //last 
-            {
-                targetEmployeeSchedule.TaskItems.Add(taskToPlan);
-                AdjustRoute(targetEmployeeSchedule.TaskItems[index - 1], taskToPlan, date);
-                AdjustStartTime(targetEmployeeSchedule.TaskItems[index - 1], taskToPlan);
-                taskToPlan.State = TaskItem.Status.Planned;
+                throw new Exception();
             }
 
+            
+            targetEmployeeSchedule.TaskItems.Insert(index, taskToPlan);
+            taskToPlan.State = TaskItem.Status.Planned;
+            
+            
+
+            if (index == 0) 
+            {
+                taskToPlan.Route.TimePeriod.Duration = RouteCalculator.CalculateRouteDuration(targetGroup.GroupAddress.ToString(), toAddress);
+                taskToPlan.Route.TimePeriod.StartTime = targetEmployeeSchedule.TimePeriod.StartTime;
+                taskToPlan.TimePeriod.StartTime = taskToPlan.Route.TimePeriod.EndTime;
+            }
             else
             {
-                targetEmployeeSchedule.TaskItems.Insert(index, taskToPlan);
+                TaskItem previosTaskItem = targetEmployeeSchedule.TaskItems[index - 1];
 
-                for (int i = index; i < targetEmployeeSchedule.TaskItems.Count; i++)
-                {
-                    AdjustRoute(targetEmployeeSchedule.TaskItems[i-1], targetEmployeeSchedule.TaskItems[i], date);
-                    AdjustStartTime(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i]);
-                }
-
-                taskToPlan.State = TaskItem.Status.Planned;
+                AdjustRouteDuration(previosTaskItem, taskToPlan, CurrentDate);
+                AdjustStartTime(previosTaskItem, taskToPlan);
             }
-            targetEmployeeSchedule.TimePeriod.EndTime = targetEmployeeSchedule.TaskItems.Last<TaskItem>().TimePeriod.EndTime;
+
+            if (index != count)
+            {
+                TaskItem nextTaskItem = targetEmployeeSchedule.TaskItems[index + 1];
+                AdjustRouteDuration(taskToPlan, nextTaskItem, CurrentDate);
+
+                for (int i = index + 1; i <= count; i++)
+                {
+                    TaskItem previous = targetEmployeeSchedule.TaskItems[i - 1];
+                    TaskItem current = targetEmployeeSchedule.TaskItems[i];
+
+                    AdjustStartTime(previous, current);
+                }
+            }
+
+            _unplannedTaskClipBoard.Remove(taskToPlan);
         }
 
-        //new
         public void UnPlan(Group targetGroup, EmployeeSchedule targetEmployeeSchedule, TaskItem targetTask)
         {
-            DateTime date = targetEmployeeSchedule.EffectiveDate;
-            if (targetEmployeeSchedule.TaskItems.IndexOf(targetTask) == 0) //first 
-            {
-                //remove
-                targetEmployeeSchedule.TaskItems.Remove(targetTask);
-                //Calc route between base and new first task
-                targetEmployeeSchedule.TaskItems[0].Route.Duration = RouteCalculator.CalculateRouteDuration(targetGroup.GroupAddress.ToString(), targetEmployeeSchedule.TaskItems[0].TaskDescription.Citizen.GetAddress(date).ToString());
-                targetEmployeeSchedule.TaskItems[0].TimePeriod.StartTime = targetEmployeeSchedule.TimePeriod.StartTime;
+            DateTime CurrentDate
+                = !targetEmployeeSchedule.EffectiveDate.Equals(DateTime.MaxValue)
+                ? targetEmployeeSchedule.EffectiveDate
+                : DateTime.Today;
 
-                for (int i = 1; i < targetEmployeeSchedule.TaskItems.Count; i++)   //adjusts rest of the list 
-                {
-                    AdjustRoute(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i], date);
-                    AdjustStartTime(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i]);
-                }
-                targetTask.State = TaskItem.Status.Unplanned;
-            }
-            else if (targetEmployeeSchedule.TaskItems.IndexOf(targetTask) == targetEmployeeSchedule.TaskItems.Count) //sidste 
+            int index = targetEmployeeSchedule.TaskItems.IndexOf(targetTask);
+            int count = targetEmployeeSchedule.TaskItems.Count;
+
+            if (index < 0)
             {
-                targetEmployeeSchedule.TaskItems.Remove(targetTask);
-                targetTask.State = TaskItem.Status.Unplanned;
+                return;
+            }
+
+            targetEmployeeSchedule.TaskItems.Remove(targetTask);
+            targetTask.State = TaskItem.Status.Unplanned;
+            _unplannedTaskClipBoard.Add(targetTask);
+
+            if (index == count - 1)
+            {
+                return;
             }
             else
             {
-                int index = targetEmployeeSchedule.TaskItems.IndexOf(targetTask);
-                targetEmployeeSchedule.TaskItems.Remove(targetTask);
+                TaskItem nextTask = targetEmployeeSchedule.TaskItems[index];
+                string nextTaskAddress = nextTask.TaskDescription.Citizen.GetAddress(CurrentDate).ToString();
 
-                for (int i = index; i < targetEmployeeSchedule.TaskItems.Count; i++)   //adjusts rest of the list 
+                if (index == 0)
                 {
-                    AdjustRoute(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i], date);
-                    AdjustStartTime(targetEmployeeSchedule.TaskItems[i - 1], targetEmployeeSchedule.TaskItems[i]);
+                    nextTask.Route.TimePeriod.StartTime = targetEmployeeSchedule.TimePeriod.StartTime;
+                    nextTask.Route.TimePeriod.Duration = RouteCalculator.CalculateRouteDuration(targetGroup.GroupAddress.ToString(), nextTaskAddress);
                 }
-                targetTask.State = TaskItem.Status.Unplanned;
+                else
+                {
+                    TaskItem previosTaskItem = targetEmployeeSchedule.TaskItems[index - 1];
+                    AdjustRouteDuration(previosTaskItem, nextTask, CurrentDate);
+                    AdjustStartTime(previosTaskItem, nextTask);
+                }
+
+                for (int i = index + 1; i < count - 1; i++)
+                {
+                    TaskItem previous = targetEmployeeSchedule.TaskItems[i - 1];
+                    TaskItem current = targetEmployeeSchedule.TaskItems[i];
+
+                    AdjustStartTime(previous, current);
+                }
             }
-            targetEmployeeSchedule.TimePeriod.EndTime = targetEmployeeSchedule.TaskItems.Last<TaskItem>().TimePeriod.EndTime;
+
         }       
 
         /// <summary>
         /// Updates travelTime in a task, according to previous task.
         /// </summary>
         /// <param name="previousTask"></param>
-        /// <param name="task"></param>
-        private void AdjustRoute(TaskItem previousTask, TaskItem task, DateTime date) 
+        /// <param name="currentTask"></param>
+        private void AdjustRouteDuration(TaskItem previousTask, TaskItem currentTask, DateTime date) 
         {
-            task.Route.Duration = RouteCalculator.CalculateRouteDuration(previousTask.TaskDescription.Citizen.GetAddress(date).ToString(), task.TaskDescription.Citizen.GetAddress(date).ToString());
+            currentTask.Route.TimePeriod.Duration = RouteCalculator.CalculateRouteDuration(previousTask.TaskDescription.Citizen.GetAddress(date).ToString(), currentTask.TaskDescription.Citizen.GetAddress(date).ToString());
         }
 
         /// <summary>
         /// Updates start time in task according to previous task.
         /// </summary>
         /// <param name="previousTask"></param>
-        /// <param name="task"></param>
-        private void AdjustStartTime(TaskItem previousTask, TaskItem task) 
-        {            
-            task.TimePeriod.StartTime = previousTask.TimePeriod.EndTime + previousTask.Route.Duration;                 
+        /// <param name="currentTask"></param>
+        private void AdjustStartTime(TaskItem previousTask, TaskItem currentTask) 
+        {
+            currentTask.Route.TimePeriod.StartTime = previousTask.TimePeriod.EndTime;
+            currentTask.TimePeriod.StartTime = currentTask.Route.TimePeriod.EndTime;                 
         }
 
         public void ToggleLockStatusTask(TaskItem task) //TODO
@@ -174,12 +198,13 @@ namespace Planning.ViewModel
         /// <param name="scheduleName"></param>
         /// <param name="group"></param>
         /// <param name="employeeSchedule"></param>
-        public void RemoveEmployeeSchedule(GroupSchedule groupSchedule, EmployeeSchedule employeeSchedule)  //from template
+        public void RemoveEmployeeSchedule(Group group, GroupSchedule groupSchedule, EmployeeSchedule employeeSchedule)  //from template
         {
-            foreach (TaskItem task in employeeSchedule.TaskItems)
+            List<TaskItem> tasks = employeeSchedule.TaskItems.ToList();
+
+            foreach (TaskItem task in tasks)
             {
-                _unplannedTaskClipBoard.Add(task);
-                task.State = TaskItem.Status.Unplanned;
+                UnPlan(group, employeeSchedule, task);
             }
             groupSchedule.EmployeeSchedules.Remove(employeeSchedule);
         }

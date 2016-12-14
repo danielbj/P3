@@ -6,8 +6,9 @@ using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Linq;
 using BingMapsRESTService.Common.JSON;
+using Planning.Model;
 
-namespace Planning.Model
+namespace Planning.ViewModel
 {
     public static class RouteCalculator
     {
@@ -71,7 +72,7 @@ namespace Planning.Model
         /// <param name="startAddress">Used as start address for route.</param>
         /// <param name="endAddress">Used as end address for route.</param>
         /// <returns>Returns RouteItem.</returns>
-        public static RouteItem GetRouteItem(Address startAddress, Address endAddress)  //TODO slet
+        public static RouteItem GetRouteItem(Planning.Model.Address startAddress, Planning.Model.Address endAddress)  //TODO slet
         {
         Tuple<string, string> tempTuple = new Tuple<string, string>(startAddress.AddressName, endAddress.AddressName);
         KeyValuePair<Tuple<string, string>, TimeSpan> keyValuePair = _routeList.FirstOrDefault(r => r.Key.Equals(tempTuple));

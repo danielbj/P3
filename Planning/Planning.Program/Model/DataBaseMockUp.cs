@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Planning.Model;
+using Planning.ViewModel;
 
 namespace Planning.Model
 {
@@ -81,14 +81,14 @@ namespace Planning.Model
             for (int i = 1; i < es1.TaskItems.Count; i++)
             {
                 //es1.TaskItems[i].Route.Duration = TimeSpan.FromMinutes(8);
-                es1.TaskItems[i].Route.Duration = RouteCalculator.CalculateRouteDuration(es1.TaskItems[i-1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), es1.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());               
+                es1.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.CalculateRouteDuration(es1.TaskItems[i-1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), es1.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());               
             }
 
             //add routes to es2
             for (int i = 1; i < es2.TaskItems.Count; i++)
             {
                 //es2.TaskItems[i].Route.Duration = TimeSpan.FromMinutes(5);
-                es2.TaskItems[i].Route.Duration = RouteCalculator.CalculateRouteDuration(es2.TaskItems[i-1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), es2.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
+                es2.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.CalculateRouteDuration(es2.TaskItems[i-1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), es2.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
             }
 
 

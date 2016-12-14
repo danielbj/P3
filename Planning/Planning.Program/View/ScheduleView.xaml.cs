@@ -82,10 +82,26 @@ namespace Planning.View
             var vm = this.DataContext as ScheduleViewModel;
 
             var item = e.Data.GetData(typeof(TaskItem)) as TaskItem;
-
-            vm.UnplanTask(item);
         }
 
+        private void Border_PreviewMouseMove(object sender, MouseEventArgs e)
+        {
+            var vm = this.DataContext as ScheduleViewModel;
+            Border b = sender as Border;
+            var item = b.DataContext;
 
+            if (item != null && e.LeftButton == MouseButtonState.Pressed)
+            {
+                var position = e.GetPosition(null);
+                var x = Math.Abs(position.X - _startpoint.X);
+                var y = Math.Abs(position.Y - _startpoint.Y);
+                var xs = SystemParameters.MinimumHorizontalDragDistance;
+                var ys = SystemParameters.MinimumVerticalDragDistance;
+                if (x > xs || y > ys)
+                {
+                    vm.StartDragPlan(sender, item);
+                }
+            }
+        }
     }
 }

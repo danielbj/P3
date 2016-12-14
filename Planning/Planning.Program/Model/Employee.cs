@@ -29,7 +29,6 @@ namespace Planning.Model
             _workhours = new Dictionary<DayOfWeek, TimePeriod>();
             TimePeriod defaultWorkHours = new TimePeriod(endTime - startTime);
             defaultWorkHours.StartTime = startTime;
-            defaultWorkHours.EndTime = endTime;
             SetWorkHoursForWeek(defaultWorkHours);            
         }
 

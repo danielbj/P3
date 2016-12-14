@@ -18,21 +18,33 @@ namespace Planning.ViewModel
         public delegate void ButtonClickEventHandler();
         //public delegate void LoadTemplateButtonClickEventHandler(List<EmployeeScheduleViewModel> vM);
         public event ButtonClickEventHandler AddEmployeeButtonClicked;
-      //  public event LoadTemplateButtonClickEventHandler LoadTemplateScheduleButtonClicked;
+        //  public event LoadTemplateButtonClickEventHandler LoadTemplateScheduleButtonClicked;
 
         #endregion
 
         #region Properties
 
-        public List<TaskItem> UnplannedTaskItems
+        //private List<TaskItem> _unplannedTaskItems;
+        //public List<TaskItem> UnplannedTaskItems
+        //{
+        //    get
+        //    {
+        //        return _unplannedTaskItems;
+        //    }
+        //    set
+        //    {
+        //        _unplannedTaskItems = value;
+        //        OnPropertyChanged(nameof(UnplannedTaskItems));
+        //    }
+        //}
+
+        public ObservableCollection<TaskItem> UnplannedTaskItems
         {
             get
             {
-                return _scheduleAdmin.GetTaskClipBoard();
+                return new ObservableCollection<TaskItem>(_scheduleAdmin.GetTaskClipBoard());
             }
         }
-
-  
 
         public ObservableCollection<string> CalendarTypes { get; set; }
 
@@ -203,23 +215,37 @@ namespace Planning.ViewModel
 
         private void RemoveEmployeeSchedule(EmployeeSchedule employeeSchedule)
         {
-            _scheduleAdmin.RemoveEmployeeSchedule(SelectedSchedule, employeeSchedule);
+            _scheduleAdmin.RemoveEmployeeSchedule(SelectedGroup,SelectedSchedule, employeeSchedule);
             UpdateSchedule();
+            // OnPropertyChanged(nameof(UnplannedTaskItems));
             OnPropertyChanged(nameof(UnplannedTaskItems));
+
         }
 
         public void StartDrag(object source, object item)
         {
             TaskItem taskItem = item as TaskItem;
 
-            if (taskItem !=null)
+            if (taskItem != null)
             {
                 var employeeSchedule = _scheduleAdmin.FindTask(taskItem, SelectedSchedule);
                 _scheduleAdmin.UnPlan(SelectedGroup, employeeSchedule, taskItem);
-                DragDrop.DoDragDrop((DependencyObject)source ,taskItem, DragDropEffects.Move);
+                UpdateSchedule();
                 
+                DragDrop.DoDragDrop((DependencyObject)source, taskItem, DragDropEffects.Move);
+                OnPropertyChanged(nameof(UnplannedTaskItems));
             }
-            UpdateSchedule();
+        }
+
+        public void StartDragPlan(object source, object item)
+        {
+            TaskItem taskItem = item as TaskItem;
+
+            if (taskItem != null)
+            {
+                DragDrop.DoDragDrop((DependencyObject)source, taskItem, DragDropEffects.Move);
+            }
+
         }
 
         public void DropTask(TaskItem draggedTaskItem, object dropTarget)
@@ -239,15 +265,10 @@ namespace Planning.ViewModel
                 int index2 = emplTarget.TaskItems.Count;
                 _scheduleAdmin.PlanTask(SelectedGroup, emplTarget, taskItem, index2);
             }
-            UpdateSchedule();
-        }
-
-        public void UnplanTask(TaskItem item)
-        {
-            var cb =_scheduleAdmin.GetTaskClipBoard();
-            cb.Add(item);
             OnPropertyChanged(nameof(UnplannedTaskItems));
+
             UpdateSchedule();
+            
         }
 
         private void LockTask(TaskItem taskItem)
@@ -258,7 +279,7 @@ namespace Planning.ViewModel
 
         private void UpdateSchedule()
         {
-            SelectedSchedule.EmployeeSchedules = EmployeeSchedules.ToList<EmployeeSchedule>(); 
+           // SelectedSchedule.EmployeeSchedules = EmployeeSchedules.ToList<EmployeeSchedule>(); 
             OnPropertyChanged(nameof(SelectedSchedule));
             OnPropertyChanged(nameof(EmployeeSchedules));
         }

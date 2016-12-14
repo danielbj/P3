@@ -10,7 +10,13 @@ namespace Planning.Model
     {
         public TimeSpan StartTime { get; set; } 
         public TimeSpan Duration { get; set; }
-        public TimeSpan EndTime { get; set; }
+        public TimeSpan EndTime
+        {
+            get
+            {
+                return StartTime + Duration;
+            }
+        }
 
         [Obsolete("Only needed for serialization and materialization in Entity Framework", true)]
         public TimePeriod() { }

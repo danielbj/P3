@@ -17,8 +17,8 @@ namespace Planning.ViewModel
            
         public GroupAdmin()
         {
-            //_groupContainer = DataBaseMockUp.LoadGroups();
-            _groupContainer = DatabaseControl.ReadAll();//DataBaseMockUp.LoadGroups();
+            _groupContainer = DataBaseMockUp.LoadGroups();
+            //_groupContainer = DatabaseControl.ReadAll();
 
             _taskDescriptionsClipBoard = new List<TaskDescription>();
             _employeeClipBoard = new List<Employee>();

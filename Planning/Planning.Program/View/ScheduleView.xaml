@@ -51,7 +51,7 @@
                 <Button x:Name="LoadButton" Content="Importer Grundplan" Padding="2" Margin="2" Command="{Binding LoadTemplateScheduleCommand}"/>
                 <Button x:Name="AddEmployeeButton" Content="Tilføj Kolonne" Padding="2" Margin="2" Command="{Binding AddEmployeeScheduleCommand}"/>
                 <ToggleButton x:Name="UnplannedTaskItemToggleButton" Content="Uplanlagte Opgaver" Padding="2" Margin="2" IsChecked="False"/>
-                <Slider x:Name="UISlider" Margin="2" Padding="2" Maximum="3300" Minimum="330" Orientation="Horizontal" Width="200" Value="990"/>
+                <Slider x:Name="UISlider" Margin="2" Padding="2" Maximum="10" Minimum="0.5" Orientation="Horizontal" Width="200" Value="1"/>
                 <DockPanel Width="150">
                     <Button x:Name="SaveButton" Content="Gem" Width="50" Padding="2" Margin="2" Command="{Binding FlushToDatabase}" HorizontalAlignment="Right"/>
                 </DockPanel>
@@ -63,7 +63,7 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <ScrollViewer Grid.Column="0" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
-                <Grid x:Name="ScheduleViewGrid" VerticalAlignment="Top" ScrollViewer.CanContentScroll="True" Height="{Binding ElementName=UISlider,Path=Value, Mode=TwoWay}">
+                <Grid x:Name="ScheduleViewGrid" VerticalAlignment="Top" ScrollViewer.CanContentScroll="True" Height="1200">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
@@ -132,10 +132,14 @@
                                                         <RowDefinition Height="auto"/>
                                                         <RowDefinition Height="auto"/>
                                                     </Grid.RowDefinitions>
-                                                    <Border Grid.Row="0" Background="Lavender">
-                                                        <TextBlock Text="{Binding Route.Duration.TotalMinutes}"  Height="{Binding Route.Duration.TotalMinutes}" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Border x:Name="RouteItemBorder" Grid.Row="0" Grid.Column="0" Background="Lavender" Height="{Binding Route.Duration.TotalMinutes}">
+                                                        <TextBlock Text="{Binding Route.Duration.TotalMinutes}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                     </Border>
-                                                    <Border Grid.Row="1" Width="auto" Height="{Binding TaskDescription.Duration.TotalMinutes}" Background="LightSteelBlue">
+                                                    <Border x:Name="TaskItemBorder" Grid.Row="1" Grid.Column="0" Width="auto" Height="{Binding TaskDescription.Duration.TotalMinutes}" Background="LightSteelBlue">
                                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Width="auto">
                                                             <Grid>
                                                                 <Grid.ColumnDefinitions>
@@ -190,7 +194,7 @@
                 </ListBox.Style>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border Background="Beige">
+                        <Border Background="Beige" PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown" PreviewMouseMove="Border_PreviewMouseMove">
                             <StackPanel>
                                 <TextBlock Text="{Binding TaskDescription.Citizen}"/>
                                 <TextBlock  Text="{Binding TaskDescription.AssignmentType}" FontWeight="Bold" FontSize="14"/>

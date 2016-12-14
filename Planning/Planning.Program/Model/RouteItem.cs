@@ -8,19 +8,26 @@ namespace Planning.Model
 {
     public class RouteItem
     {
-        public TimeSpan Duration { get; set; }
+        public TimeSpan Duration
+        {
+            get
+            {
+                return TimePeriod.Duration;
+            }
+        }
+        public TimePeriod TimePeriod { get; set; }
 
         public string[] Waypoints = new string[] { }; //og hvorfor skal vi lagre den samme addresse to forskellige steder?
 
         public RouteItem(string startAddressName, string endAddressName, TimeSpan duration)
         {
+            TimePeriod = new TimePeriod(duration);
             Waypoints = new string[] { startAddressName, endAddressName };
-            Duration = duration;
         }
 
         public RouteItem()
         {
-            
+            TimePeriod = new TimePeriod(new TimeSpan(0,0,0));
         }
 
         public override string ToString()
