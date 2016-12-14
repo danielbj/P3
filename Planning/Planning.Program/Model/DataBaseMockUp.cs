@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Planning.Model;
+using Planning.ViewModel;
 
 namespace Planning.Model
 {
@@ -30,27 +31,27 @@ namespace Planning.Model
         {
             List<Employee> Employees = new List<Employee>();
 
-            Employees.Add(new Employee("Hanne", "Hansen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Lars", "Larsen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Trine", "Trinesen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Grethe", "Grethesen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Kanokporn", "kanokpornsen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Sidse", "Sidsesen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Nico", "Nicosen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Theis", "Sorensen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Niels", "Nielsen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Bo", "Bosen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Morten", "Mortensen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Mohsin", "Mohsinsen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Spang", "Spangsen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Flot", "Flotsen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Mai", "Maisen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Helle", "Hellesen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Simon", "Simonsen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Søren", "Sørensen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Anne", "Annesen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Anna", "Annasen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            Employees.Add(new Employee("Kjær", "Kjærsen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Hanne", "Hansen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Lars", "Larsen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Trine", "Trinesen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Grethe", "Grethesen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Kanokporn", "kanokpornsen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Sidse", "Sidsesen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Nico", "Nicosen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Theis", "Sorensen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Niels", "Nielsen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Bo", "Bosen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Morten", "Mortensen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Mohsin", "Mohsinsen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Spang", "Spangsen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Flot", "Flotsen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Mai", "Maisen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Helle", "Hellesen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Simon", "Simonsen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Søren", "Sørensen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Anne", "Annesen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Anna", "Annasen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            //Employees.Add(new Employee("Kjær", "Kjærsen", DateTime.Today, "Hjemmeplejer", "11111111"));
 
             return Employees;
         }
@@ -283,6 +284,29 @@ namespace Planning.Model
             }
             
             return container;
+        }
+
+        public static List<Message> LoadMessages() {
+            List<Message> mList = new List<Message>();
+
+            var adrA = new Address("James Tobins Alle 24, 9220, Aalborg Øst, Denmark");
+            var adrB = new Address("Egevej 14, 9620, Aalestrup, Denmark");
+
+
+            var citizenA = new Citizen("1712920000", "Palle", "Larsen", adrA, new DateTime(2016, 12, 1));
+            var citizenB = new Citizen("1234567800", "Gerda", "Olsen", adrB, new DateTime(2016, 2, 4));
+
+
+            TaskDescriptionstringChange tdC = new TaskDescriptionstringChange(new TaskDescription(30, "Bad", citizenA, new TimePeriod(TimeSpan.FromHours(8)), DateTime.Today, "bad", 1), "Bad inkl barbering", "Ændrede beskrivelse");
+            TaskDurationChange tdc2 = new TaskDurationChange(new TaskDescription(15, "Støvsugning", citizenB, new TimePeriod(TimeSpan.FromHours(12)), DateTime.Today, "Tandbørstning", 1), new TimeSpan(0, 30, 0), "Ændrede visiteret tid");
+
+            TaskDescriptionMessage tdM = new TaskDescriptionMessage(tdC, "Hej planlæggere. Palle har fået tilføjet en barbering til sit bad, jeg håber det er ok at tiden ikke er forlænget.");
+            TaskDescriptionMessage tdM2 = new TaskDescriptionMessage(tdc2, "Hej. Jeg har visitereret 15 min. mere til støvsugning hos Gerda, da hun gerne vil have støvsuget græsplænen også.");
+
+            mList.Add(tdM);
+            mList.Add(tdM2);
+
+            return mList;
         }
 
 
