@@ -31,27 +31,27 @@ namespace Planning.Model
         {
             List<Employee> Employees = new List<Employee>();
 
-            //Employees.Add(new Employee("Hanne", "Hansen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Lars", "Larsen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Trine", "Trinesen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Grethe", "Grethesen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Kanokporn", "kanokpornsen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Sidse", "Sidsesen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Nico", "Nicosen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Theis", "Sorensen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Niels", "Nielsen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Bo", "Bosen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Morten", "Mortensen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Mohsin", "Mohsinsen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Spang", "Spangsen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Flot", "Flotsen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Mai", "Maisen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Helle", "Hellesen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Simon", "Simonsen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Søren", "Sørensen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Anne", "Annesen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Anna", "Annasen", DateTime.Today, "Hjemmeplejer", "11111111"));
-            //Employees.Add(new Employee("Kjær", "Kjærsen", DateTime.Today, "Hjemmeplejer", "11111111"));
+            Employees.Add(new Employee("Hanne", "Hansen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8) , TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Lars", "Larsen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Trine", "Trinesen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Grethe", "Grethesen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Kanokporn", "kanokpornsen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Sidse", "Sidsesen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Nico", "Nicosen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Theis", "Sorensen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Niels", "Nielsen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Bo", "Bosen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Morten", "Mortensen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Mohsin", "Mohsinsen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Spang", "Spangsen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Flot", "Flotsen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Mai", "Maisen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Helle", "Hellesen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Simon", "Simonsen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Søren", "Sørensen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Anne", "Annesen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Anna", "Annasen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            Employees.Add(new Employee("Kjær", "Kjærsen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
 
             return Employees;
         }
