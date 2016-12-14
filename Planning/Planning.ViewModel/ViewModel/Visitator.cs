@@ -127,7 +127,7 @@ namespace Planning.ViewModel
         /// <returns></returns>
         private Address CreateAddress(string address, DateTime date)
         {
-            if (true)//ValidateAddress(address))
+            if (ValidateAddress(address))
             {
                 var adr = new Address(address);
                 return adr;
