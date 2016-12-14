@@ -23,18 +23,15 @@ namespace Planning.UnitTest.Model
 
         #region New Instance
         [Test]
-        [Ignore("Address implementation needed")]
         [Category("Constructor")]
-        [Category("NOT FINISHED")]
         public void GroupConstructor_NameIsSet_True()
         {
-            Assert.AreEqual("testName", _group.Name.ToString());
+            Assert.AreEqual("testName", _group.Name);
         }
 
         [Test]
-        [Ignore("Address implementation needed")]
+        [Ignore("No address?")]
         [Category("Constructor")]
-        [Category("NOT FINISHED")]
         public void GroupConstructor_AddressIsSet_True()
         {
             Assert.AreEqual("testAddress", _group.GroupAddress.AddressName);
@@ -43,10 +40,7 @@ namespace Planning.UnitTest.Model
 
         #region Edit Employee
         [Test]
-        [Ignore("Address not implemented")]
         [Category("Edit Employee")]
-        [Category("NOT FINISHED")]
-        [Description("Depend on method: GetEmployee")]
         public void AddEmployee_EmployeeAdded_True()
         {
             Employee employee = new Employee("testFirstname", "testLastname", new DateTime(2016, 12, 21), "testNote", "testPhoneNumber");
@@ -57,10 +51,7 @@ namespace Planning.UnitTest.Model
         }
 
         [Test]
-        [Ignore("Address not implemented")]
         [Category("Edit Employee")]
-        [Category("NOT FINISHED")]
-        [Description("Depend on method: AddEmployee")]
         public void RemoveEmployee_EmployeeRemoved_True()
         {
             Employee employee = new Employee("testFirstname", "testLastname", new DateTime(2016, 12, 21), "testNote", "testPhoneNumber");
@@ -68,16 +59,33 @@ namespace Planning.UnitTest.Model
 
             _group.RemoveEmployee(employee);
 
-            Assert.AreEqual(null, _group.GetEmployees(new Predicate<Employee>(e => e.Firstname == employee.Firstname)));
+            Assert.AreEqual(new List<Employee>(), _group.GetEmployees(new Predicate<Employee>(e => e.Firstname == employee.Firstname)));
         }
 
         [Test] // Should be more GetEmployeeTests
-        [Ignore("Not implemented")]
         [Category("Edit Employee")]
-        [Category("NOT FINISHED")]
         public void GetEmployee_EmployeeGotten_True()
         {
+            _group.AddEmployee(new Employee("testFirstname", "testLastname", new DateTime(2016, 12, 21), "testNote", "testPhoneNumber"));
+            _group.AddEmployee(new Employee("Bob", "Jespersen", new DateTime(1, 1, 1), "Cleans House Real Good", "22002200"));
 
+            int actual = _group.GetEmployees().Count;
+            int expected = 2;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test] // Should be more GetEmployeeTests
+        [Category("Edit Employee")]
+        public void GetEmployee_GetsEmployeesThatAreGoodAtCleaning_True()
+        {
+            _group.AddEmployee(new Employee("testFirstname", "testLastname", new DateTime(2016, 12, 21), "testNote", "testPhoneNumber"));
+            _group.AddEmployee(new Employee("Bob", "Jespersen", new DateTime(1, 1, 1), "Cleans House Real Good", "22002200"));
+
+            int actual = _group.GetEmployees(e => e.Notes.Contains("Clean")).Count;
+            int expected = 1;
+
+            Assert.AreEqual(expected, actual);
         }
         #endregion
 
