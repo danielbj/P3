@@ -9,6 +9,22 @@ namespace Planning.Model
 {
     public class DataBaseMockUp
     {
+        static List<Citizen> Citizens = new List<Citizen>();
+
+        public static CitizenContainer LoadCitizens()
+        {
+            CitizenContainer container = new CitizenContainer();
+
+            foreach (Citizen citizen in Citizens)
+            {
+                container.AddCitizen(citizen);
+            }
+
+            return container;
+        }
+
+        
+
         //Til employee clipboard.
         public static List<Employee> LoadEmployees()
         {
@@ -122,63 +138,62 @@ namespace Planning.Model
             #endregion
 
             //Citizens
-            List<Citizen> Citizens = new List<Citizen>();
             #region
-            Citizens.Add(new Citizen("111111-1111", "Jose", "Gonzalez", SnedstedLunegårdsvej5, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Kathy", "Peterson", SnedstedKolonihavevej16, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Emily", "Simmons", SnedstedVandhøjvej9, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Scott", "Hill", Snedstedkærvej9, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Harry", "Morgan", SnedstedRosenvænget22, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Anthony", "Smith", SnedstedVandhøjvej19, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "John", "Morris", SnedstedGartnervænget7, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Judith", "Miller", SnedstedIdrætsvej13, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Arthur", "Prerez", SundbyILiljevej6, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Doris", "Edward", SundbyILiljevej14, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "David", "Bell", SundbyElstedvej8, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Daniel", "Scott", SundbyElstedvej17, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Willie", "Russell", SundbyMøgelvej9, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Gerald", "Diaz", SundbyMøgelvej13, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Kelly", "Phillips", HundborgMosevej2, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Maria", "Coleman", HundborgLarsKjærsvej5, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Diana", "Wood", HundborgRødeAnesVej19, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Henry", "Richardson", HundborgSolgårdsvej1, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Catherine", "Foster", HundborgMøllestien22, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Benjamin", "Ramirez", HundborgKirkevej16, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Lois", "Bailey", HundborgLarsKjærsVej6, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Sharon", "Sanchez", HundborgThadetoftvej14, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Michelle", "Robinson", VangsåTingbakken5, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Jeremy", "Brooks", VangsåTingbakken16, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Robert", "Powell", VangsåTingbakken22, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Rebecca", "Wilson", VangsåSkjærbakken2, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Victor", "Jackson", VangsåSkjærbakken13, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Johnny", "Johnson", VangsåHvidbakken4, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Lori", "Lee", StenbjergIstrupvej8, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Jason", "Henderson", VangsåSkjærbakken17, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Annie", "Gray", VangsåHvidbakken15, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Norma", "Martinez", VangsåHvidbakken7, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Rose", "Adams", StenbjergSømærkevej17, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Joseph", "White", StenbjergStrandgårdsvej5, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Denise", "Griffin", StenbjergEbenezevej9, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Douglas", "Murphy", StenbjergNielsJulesVej21, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Lisa", "Torres", StenbjergStenbjergKirkevej7, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Frank", "Green", StenbjergGråhavrevej12, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Roy", "Sanders", StenbjergSarasvej19, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Sean", "Butler", KoldbyBorgergade9, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Todd", "Mitchell", KoldbyAlgade17, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Peter", "Howard", KoldbyThorsevej27, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Ernest", "Baker", KoldbyLavendelvej19, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Margaret", "Lopez", KoldbyBiblioteksvej1, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Laura", "Roberts", KoldbyKirsebærvænget6, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Walter", "Davis", KoldbyDegnevej13, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Mildred", "Perry", KoldbySvinget11, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Joe", "Watson", HørdumIdylvej6, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Anna", "Ward", HørdumMølbakkvej8, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Joan", "Jones", HørdumSportsvej13, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Gary", "Bryant", HørdumBanevej22, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Joyce", "Young", HørdumDamsgårdvej14, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Terry", "Patterson", HørdumTårnvej19, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Carlos", "King", HørdumGisselbækvej22, DateTime.Today));
-            Citizens.Add(new Citizen("111111-1111", "Jessica", "Parker", HørdumLegindvej16, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Jose", "Gonzalez", SnedstedLunegårdsvej5, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Kathy", "Peterson", SnedstedKolonihavevej16, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Emily", "Simmons", SnedstedVandhøjvej9, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Scott", "Hill", Snedstedkærvej9, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Harry", "Morgan", SnedstedRosenvænget22, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Anthony", "Smith", SnedstedVandhøjvej19, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "John", "Morris", SnedstedGartnervænget7, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Judith", "Miller", SnedstedIdrætsvej13, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Arthur", "Prerez", SundbyILiljevej6, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Doris", "Edward", SundbyILiljevej14, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "David", "Bell", SundbyElstedvej8, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Daniel", "Scott", SundbyElstedvej17, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Willie", "Russell", SundbyMøgelvej9, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Gerald", "Diaz", SundbyMøgelvej13, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Kelly", "Phillips", HundborgMosevej2, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Maria", "Coleman", HundborgLarsKjærsvej5, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Diana", "Wood", HundborgRødeAnesVej19, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Henry", "Richardson", HundborgSolgårdsvej1, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Catherine", "Foster", HundborgMøllestien22, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Benjamin", "Ramirez", HundborgKirkevej16, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Lois", "Bailey", HundborgLarsKjærsVej6, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Sharon", "Sanchez", HundborgThadetoftvej14, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Michelle", "Robinson", VangsåTingbakken5, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Jeremy", "Brooks", VangsåTingbakken16, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Robert", "Powell", VangsåTingbakken22, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Rebecca", "Wilson", VangsåSkjærbakken2, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Victor", "Jackson", VangsåSkjærbakken13, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Johnny", "Johnson", VangsåHvidbakken4, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Lori", "Lee", StenbjergIstrupvej8, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Jason", "Henderson", VangsåSkjærbakken17, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Annie", "Gray", VangsåHvidbakken15, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Norma", "Martinez", VangsåHvidbakken7, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Rose", "Adams", StenbjergSømærkevej17, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Joseph", "White", StenbjergStrandgårdsvej5, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Denise", "Griffin", StenbjergEbenezevej9, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Douglas", "Murphy", StenbjergNielsJulesVej21, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Lisa", "Torres", StenbjergStenbjergKirkevej7, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Frank", "Green", StenbjergGråhavrevej12, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Roy", "Sanders", StenbjergSarasvej19, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Sean", "Butler", KoldbyBorgergade9, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Todd", "Mitchell", KoldbyAlgade17, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Peter", "Howard", KoldbyThorsevej27, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Ernest", "Baker", KoldbyLavendelvej19, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Margaret", "Lopez", KoldbyBiblioteksvej1, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Laura", "Roberts", KoldbyKirsebærvænget6, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Walter", "Davis", KoldbyDegnevej13, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Mildred", "Perry", KoldbySvinget11, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Joe", "Watson", HørdumIdylvej6, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Anna", "Ward", HørdumMølbakkvej8, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Joan", "Jones", HørdumSportsvej13, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Gary", "Bryant", HørdumBanevej22, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Joyce", "Young", HørdumDamsgårdvej14, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Terry", "Patterson", HørdumTårnvej19, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Carlos", "King", HørdumGisselbækvej22, DateTime.Today));
+            Citizens.Add(new Citizen("1111111111", "Jessica", "Parker", HørdumLegindvej16, DateTime.Today));
             #endregion
 
             //Groups
@@ -235,7 +250,10 @@ namespace Planning.Model
                 int opgave = rnd.Next(Opgaver.Count);
                 int tid = rnd.Next(Tider.Count);
 
-                Tasks.Add(new TaskItem(new TaskDescription(Tider[tid], "opgave", citizen, new TimePeriod(TimeSpan.FromHours(8)), DateTime.Today, Opgaver[opgave])));
+                TaskDescription tempTaskDesc = new TaskDescription(Tider[tid], "opgave", citizen, new TimePeriod(TimeSpan.FromHours(8)), DateTime.Today, Opgaver[opgave]);
+
+                Tasks.Add(new TaskItem(tempTaskDesc));
+                citizen.Tasks.Add(tempTaskDesc);
             }
 
             int ran = 0;
@@ -255,7 +273,7 @@ namespace Planning.Model
                                 schedule.TaskItems[i].Route.Duration = RouteCalculator.CalculateRouteDuration(schedule.TaskItems[i - 1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
                             }
 
-                            else if (i == 10)
+                            else if (i == 0)
                             {
                                 schedule.TaskItems[i].Route.Duration = RouteCalculator.CalculateRouteDuration("Kærvej 3, 7752, Snedsted, Denmark", schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
                             }
@@ -263,16 +281,10 @@ namespace Planning.Model
                     }
                 }
             }
-
-
-                    //Routes
-                    for (int i = 1; i < Tasks.Count; i++)
-            {
-                Tasks[i].Route.Duration = RouteCalculator.CalculateRouteDuration(Tasks[i - 1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), Tasks[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
-            }
-
+            
             return container;
         }
+
 
 
     }
