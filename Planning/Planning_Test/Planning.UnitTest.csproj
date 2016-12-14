@@ -50,15 +50,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Address_Test.cs" />
+    <Compile Include="Model\CitizenChange_Test.cs" />
+    <Compile Include="Model\CitizenContainer_Test.cs" />
     <Compile Include="Model\Citizen_Test.cs" />
+    <Compile Include="Model\EmployeeSchedule_Test.cs" />
     <Compile Include="Model\Employee_Test.cs" />
+    <Compile Include="Model\GroupSchedule_Test.cs" />
     <Compile Include="Model\Group_Test.cs" />
     <Compile Include="Model\PersonalSchedule_Test.cs" />
     <Compile Include="Model\Program.cs" />
+    <Compile Include="Model\TaskDescriptionChange_Test.cs" />
+    <Compile Include="Model\TaskDescription_Test.cs" />
+    <Compile Include="Model\TaskItem_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\RouteItem_Test.cs" />
     <Compile Include="Model\Schedule_Test.cs" />
-    <Compile Include="Model\Task_Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

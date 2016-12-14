@@ -11,46 +11,38 @@ namespace Planning.UnitTest.Model
 {
     class RouteItem_Test
     {
-        private RouteItem _routeItem;
-
-        #region Set up
-        [OneTimeSetUp]
-        public void InstRouteItem()
-        {
-            _routeItem = new RouteItem(new Address("Snerlevej 11, Aalborg"), new Address("Niels Bohrs Vej 36, Aalborg"));
-        }
-        #endregion
-
         #region Constructor
-        [Test]
-        [Category("Constructor")]
-        public void RouteConstructor_RouteWaypointIsSet_True()
+        [TestCase("testStartAddressName", "testEndAddressName", "00:00:01")]
+        [TestCase("", "", "00:00:00")]
+        [TestCase("testStartAddressName", "testEndAddressName", "23:59:59")]
+        public void RouteItemConstructor_SetsWaypoints_AreEqual(string startAddress, string endAddress, TimeSpan duration)
         {
-            Assert.AreEqual(new string[] { "Snerlevej 11, Aalborg", "Niels Bohrs Vej 36, Aalborg" }, _routeItem.Waypoints);
+            RouteItem routeItem = new RouteItem(startAddress, endAddress, duration);
+
+            Assert.AreEqual(new string[] { startAddress, endAddress }, routeItem.Waypoints);
         }
 
-        [Test]
-        [Category("Constructor")]
-        public void RouteConstructor_RouteDurationIsSet_True()
+        [TestCase("testStartAddressName", "testEndAddressName", "00:00:01")]
+        [TestCase("", "", "00:00:00")]
+        [TestCase("testStartAddressName", "testEndAddressName", "23:59:59")]
+        public void RouteItemConstructor_SetDuration_AreEqual(string startAddress, string endAddress, TimeSpan duration)
         {
-            Assert.AreEqual(new TimeSpan(0, 12, 0), _routeItem.Duration);
-        }
+            RouteItem routeItem = new RouteItem(startAddress, endAddress, duration);
 
-        [Test]
-        [Category("Constructor")]
-        public void RouteConstructor_WrongAddressGiven_ExceptionThrown()
-        {
-            Assert.Throws<NullReferenceException>(new TestDelegate(() => new RouteItem(null, null)));
-        }
-
-        [Test]
-        [Category("Constructor")]
-        public void RouteConstructor_CreateNewRoute_NotReferenceEqual()
-        {
-            RouteItem routeItem = new RouteItem(new Address("Snerlevej 11, Aalborg"), new Address("Niels Bohrs Vej 36, Aalborg"));
-
-            Assert.AreNotEqual(_routeItem, routeItem);
+            Assert.AreEqual(duration, routeItem.Duration);
         }
         #endregion
+
+        [TestCase("testStartAddressName", "testEndAddressName", "00:00:01")]
+        [TestCase("", "", "00:00:00")]
+        [TestCase("testStartAddressName", "testEndAddressName", "23:59:59")]
+        [Category("ToString Method")]
+        public void ToString_ReturnsString_AreEqual(string startAddress, string endAddress, TimeSpan duration)
+        {
+            RouteItem routeItem = new RouteItem(startAddress, endAddress, duration);
+
+            Assert.AreEqual(duration.ToString() + startAddress + ", " + endAddress, routeItem.ToString());
+        }
+
     }
 }

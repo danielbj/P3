@@ -29,7 +29,7 @@ namespace Planning.ViewModel
         {
             if (_citizenContainer.AdmittedCitizens.Contains(citizen))
             {
-                TaskDescription newTask = new TaskDescription(duration, description, citizen, timeFrame, startDate, assignment, count);
+                //TaskDescription newTask = new TaskDescription(duration, description, citizen, timeFrame, startDate, assignment, count);
             }
             else if (_citizenContainer.DischargedCitizens.Contains(citizen))
             {
@@ -127,7 +127,7 @@ namespace Planning.ViewModel
         /// <returns></returns>
         private Address CreateAddress(string address, DateTime date)
         {
-            if (ValidateAddress(address))
+            if (true)//ValidateAddress(address))
             {
                 var adr = new Address(address);
                 return adr;

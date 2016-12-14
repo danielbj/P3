@@ -40,7 +40,8 @@ namespace Planning.Model
             TaskItems.Add(new TaskItem(this)); 
         }
 
-        public void AddNote(string note)
+
+        public void SetNote(string note)
         {
             NoteFromPlanner = note;
         }

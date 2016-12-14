@@ -25,7 +25,7 @@ namespace Planning.Model
 
         public override string ToString()
         {
-            return Duration.ToString() + Waypoints.Aggregate(new Func<string, string, string>((s1,s2) => s1 + ", " + s2));
+            return Duration.ToString() + Waypoints.Aggregate((s1,s2) => s1 + ", " + s2);
         }
     }
 }

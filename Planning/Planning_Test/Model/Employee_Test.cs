@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Planning;
 using NUnit.Framework;
-using Planning.Model.Employees;
-using Planning.Model.Modules;
+using Planning.Model;
 
 namespace Planning.UnitTest.Model
 {
@@ -16,6 +15,12 @@ namespace Planning.UnitTest.Model
         #region Fields
         Employee _employee;
         TimePeriod _timePeriod;
+
+        static Employee[] EmployeeCases =
+        {
+            new Employee("", "", new DateTime(1,1,1), "", ""),
+            new Employee("ThisIsAVeryLongFirstname", "ThisIsAVeryLongLastName", new DateTime(9999,12,31), "ThisIsAVeryLongNoteAboutAbsolutelyNothing", "99999999")
+        };
         #endregion
 
         #region Set Up
@@ -86,7 +91,10 @@ namespace Planning.UnitTest.Model
         }
         #endregion
 
+        #region Edit work hours
         [TestCase("2016-12-21")]
+        [TestCase("0001-01-01")]
+        [TestCase("9999-12-31")]
         [Category("Edit WorkHours")]
         public void SetWorkHours_CorrectInput_WorkHoursSet(DateTime dateTime)
         {
@@ -95,6 +103,37 @@ namespace Planning.UnitTest.Model
             Assert.AreEqual(_timePeriod, _employee.GetWorkHours(dateTime));
         }
 
-        //TODO: TestCase for edit employee
+        [TestCase("2016-12-21")]
+        [TestCase("0001-01-01")]
+        [TestCase("9999-12-31")]
+        [Category("Edit WorkHours")]
+        public void GetWorkHours_GetsWorkHours_True(DateTime dateTime)
+        {
+            TimePeriod time;
+            _employee.SetWorkhours(dateTime, _timePeriod);
+
+            time = _employee.GetWorkHours(dateTime);
+
+            Assert.AreEqual(_timePeriod, time);
+        }
+
+        [TestCase("2016-12-21")]
+        [TestCase("0001-01-01")]
+        [TestCase("9999-12-31")]
+        [Category("Edit WorkHours")]
+        public void IsWorking_ChecksIfWorking_True(DateTime dateTime)
+        {
+            _employee.SetWorkhours(dateTime, _timePeriod);
+
+            Assert.IsTrue(_employee.IsWorking(dateTime));
+        } 
+        #endregion
+
+        [Test, TestCaseSource("EmployeeCases")]
+        [Category("ToString Method")]
+        public void ToString_GetsFirstnameAndLastName_AreEqual(Employee employee)
+        {
+            Assert.AreEqual(employee.Firstname + " " + employee.Lastname, employee.ToString());
+        }
     }
 }
