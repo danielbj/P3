@@ -143,7 +143,7 @@
                                                                     <ColumnDefinition Width="auto"/>
                                                                 </Grid.ColumnDefinitions>
                                                                 <TextBlock x:Name="Citizen" Grid.Column="0" HorizontalAlignment="Center" Text="{Binding TaskDescription.Citizen}" FontStyle="Italic"/>
-                                                                <ToggleButton Grid.Column="1" Content="L" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.LockTaskCommand}" CommandParameter="{Binding}" IsChecked="{Binding Locked}">
+                                                                <ToggleButton Grid.Column="1" Content="L" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.LockTaskCommand}" CommandParameter="{Binding}" >
                                                                     <ToggleButton.Template>
                                                                         <ControlTemplate TargetType="ToggleButton">
                                                                             <Border CornerRadius="3" Background="{TemplateBinding Background}">

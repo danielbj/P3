@@ -24,11 +24,11 @@ namespace Planning.ViewModel
 
         #region Properties
 
-        public ObservableCollection<TaskItem> UnplannedTaskItems
+        public List<TaskItem> UnplannedTaskItems
         {
             get
             {
-                return new ObservableCollection<TaskItem>(_scheduleAdmin.GetTaskClipBoard());
+                return _scheduleAdmin.GetTaskClipBoard();
             }
         }
 
@@ -205,6 +205,7 @@ namespace Planning.ViewModel
         {
             _scheduleAdmin.RemoveEmployeeSchedule(SelectedSchedule, employeeSchedule);
             UpdateSchedule();
+            OnPropertyChanged(nameof(UnplannedTaskItems));
         }
 
         public void StartDrag(object source, object item)
