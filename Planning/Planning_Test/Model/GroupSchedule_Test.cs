@@ -14,18 +14,6 @@ namespace Planning.UnitTest.Model
         #region Constructor
         [TestCase("description")]
         [Category("Constructor")]
-        public void GroupscheduleConstructor_SetsDescription_AreEqual(string description)
-        {
-            GroupSchedule group = new GroupSchedule(description);
-
-            string actual = group.Description;
-            string expected = description;
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestCase("description")]
-        [Category("Constructor")]
         public void GroupscheduleConstructor_SetsApprovedTofalse_AreEqual(string description)
         {
             GroupSchedule group = new GroupSchedule(description);

@@ -31,8 +31,6 @@ namespace Planning.Model
 
         }
 
-        
-
         public void AddEmployee(Employee employee)
         {
             Employees.Add(employee);

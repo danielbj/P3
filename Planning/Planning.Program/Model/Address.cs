@@ -37,7 +37,7 @@ namespace Planning.Model
 
         public override bool Equals(Object obj)
         {
-            Address address = (Address)obj;
+            Address address = obj as Address;
             if (address == null)
                 return false;
 
