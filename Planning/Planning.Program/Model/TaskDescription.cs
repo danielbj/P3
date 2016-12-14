@@ -58,7 +58,7 @@ namespace Planning.Model
 
         public override string ToString()
         {
-            return Citizen.LastName + ", " + Citizen.FirstName + ", " + AssignmentType + ", " + Duration.ToString();
+            return Citizen.FirstName + ", " + Citizen.LastName + ", " + Description + ", " + Duration.ToString();
         }
 
 

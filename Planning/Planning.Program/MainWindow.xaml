@@ -9,7 +9,7 @@
     <Grid>
         <TabControl Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <TabItem Header="Post">
-
+                <local:Mailbox></local:Mailbox>
             </TabItem>
             <TabItem Header="Planer">
                 <local:ScheduleView/>
