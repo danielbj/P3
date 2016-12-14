@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Planning.Model;
+using Planning.ViewModel;
 
 namespace Planning.Model
 {
@@ -122,6 +123,29 @@ namespace Planning.Model
 
 
             return container;
+        }
+
+        public static List<Message> LoadMessages() {
+            List<Message> mList = new List<Message>();
+
+            var adrA = new Address("James Tobins Alle 24, 9220, Aalborg Øst, Denmark");
+            var adrB = new Address("Egevej 14, 9620, Aalestrup, Denmark");
+
+
+            var citizenA = new Citizen("1712920000", "Palle", "Larsen", adrA, new DateTime(2016, 12, 1));
+            var citizenB = new Citizen("1234567800", "Gerda", "Olsen", adrB, new DateTime(2016, 2, 4));
+
+
+            TaskDescriptionstringChange tdC = new TaskDescriptionstringChange(new TaskDescription(30, "Bad", citizenA, new TimePeriod(TimeSpan.FromHours(8)), DateTime.Today, "bad", 1), "Bad inkl barbering", "Ændrede beskrivelse");
+            TaskDurationChange tdc2 = new TaskDurationChange(new TaskDescription(15, "Støvsugning", citizenB, new TimePeriod(TimeSpan.FromHours(12)), DateTime.Today, "Tandbørstning", 1), new TimeSpan(0,30,0), "Ændrede visiteret tid");
+
+            TaskDescriptionMessage tdM = new TaskDescriptionMessage(tdC, "Hej planlæggere. Palle har fået tilføjet en barbering til sit bad, jeg håber det er ok at tiden ikke er forlænget.");
+            TaskDescriptionMessage tdM2 = new TaskDescriptionMessage(tdc2, "Hej. Jeg har visitereret 15 min. mere til støvsugning hos Gerda, da hun gerne vil have støvsuget græsplænen også.");
+
+            mList.Add(tdM);
+            mList.Add(tdM2);
+
+            return mList;
         }
     }
 }

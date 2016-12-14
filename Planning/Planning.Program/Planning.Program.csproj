@@ -69,6 +69,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\MailboxViewModel.cs" />
+    <Compile Include="ViewModel\MessageAdmin.cs" />
+    <Compile Include="View\Mailbox.xaml.cs">
+      <DependentUpon>Mailbox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\CitizenAdmin.cs" />
     <Compile Include="ViewModel\CitizenOverviewViewModel.cs" />
     <Compile Include="ViewModel\DatabaseContext.cs" />
@@ -76,7 +81,6 @@
     <Compile Include="ViewModel\EmployeeOverviewViewModel.cs" />
     <Compile Include="ViewModel\EmployeeSelectionViewModel.cs" />
     <Compile Include="ViewModel\GroupAdmin.cs" />
-    <Compile Include="ViewModel\InboxViewModel.cs" />
     <Compile Include="ViewModel\Message.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\RouteCalculator.cs" />
@@ -102,6 +106,10 @@
     <Compile Include="View\TemplateSelectionWindow.xaml.cs">
       <DependentUpon>TemplateSelectionWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\Mailbox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
