@@ -22,7 +22,10 @@ namespace Planning.Model
         public bool Locked;
         public RouteItem Route { get; set; }        
         public TimePeriod TimePeriod { get; set; }
-        public TaskDescription TaskDescription { get; }
+        public TaskDescription TaskDescription { get; private set; }
+
+        [Obsolete("Only needed for serialization and materialization in Entity Framework", true)]
+        public TaskItem() { }
 
         public TaskItem(TaskDescription taskDescription)
         {

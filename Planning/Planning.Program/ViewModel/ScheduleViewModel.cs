@@ -309,20 +309,29 @@ namespace Planning.ViewModel
 
         public void FlushToDatabaseAction(object input)
         {
-            _databaseControl.EraseDatabaseContent(); 
+            _databaseControl.EraseDatabaseContent();
 
-            foreach (Group g in _groupAdmin.GetAllGroups()) {  
+            foreach (Group g in _groupAdmin.GetAllGroups())
+            {
                 _databaseControl.AddGroup(g);
+                //Store Daily Schedules 
+                //foreach (KeyValuePair<string, GroupSchedule> KVgs in g.TemplateSchedules) { 
+                //    DatabaseControl.AddGroupSchedule(KVgs.Value); 
+                //} 
+                //foreach (KeyValuePair<DateTime, GroupSchedule> KVgs in g.DailySchedules) { 
+                //    DatabaseControl.AddGroupSchedule(KVgs.Value); 
+                //} 
             }
 
-            foreach (EmployeeSchedule es in EmployeeSchedules) {
-                _databaseControl.AddEmployeeSchedule(es);
+            //foreach (EmployeeSchedule es in EmployeeSchedules) {
+            //    _databaseControl.AddEmployeeSchedule(es);
+            //}
+
+            foreach (TaskItem ti in _scheduleAdmin.GetTaskClipBoard())
+            {
+                _databaseControl.AddTaskItem(ti);
             }
 
-            foreach (TaskItem ti in _scheduleAdmin.GetTaskClipBoard()) {
-
-            }
-            
         }
     }
 }

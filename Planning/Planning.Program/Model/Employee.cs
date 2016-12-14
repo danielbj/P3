@@ -9,15 +9,16 @@ namespace Planning.Model
     public class Employee //: IEmployee
     {
         public int EmployeeId { get; set; }
-        public DateTime DateHired { get; private set; } = DateTime.MinValue;
+        public DateTime DateHired { get; private set; } = DateTime.MaxValue;
         public DateTime DateResigned { get; private set; } = DateTime.MaxValue;      
         public string Firstname { get; private set; }
         public string Lastname { get; private set; }
         public string Notes { get; private set; }
         public string PhoneNumber { get; private set; }
         private Dictionary<DayOfWeek, TimePeriod> _workhours;
-        
-        
+
+        [Obsolete("Only needed for serialization and materialization in Entity Framework", true)]
+        public Employee() { }
 
         public Employee(string firstname, string lastname, DateTime dateHired, string notes, string phoneNumber, TimeSpan startTime, TimeSpan endTime) {
             Firstname = firstname;
@@ -46,7 +47,7 @@ namespace Planning.Model
             }
             else
             {
-                throw new ArgumentException("WOrk hours not found.");
+                throw new KeyNotFoundException("Work hours not found.");
                 //return defaultWorkHours;
             }
         }

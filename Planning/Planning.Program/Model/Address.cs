@@ -54,9 +54,9 @@ namespace Planning.Model
             return AddressName;
         }
 
-        public static explicit operator Address(String input)
+        public static explicit operator Address(string addressName)
         {
-            return new Address(input);
+            return new Address(addressName);
         }
     }
 }

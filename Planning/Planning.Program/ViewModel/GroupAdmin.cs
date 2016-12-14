@@ -17,13 +17,9 @@ namespace Planning.ViewModel
            
         public GroupAdmin()
         {
-            //GroupContainer grC = new GroupContainer();
-            //foreach (var g in DatabaseControl.ReadGroups()) {
-            //    grC.AddGroup(g);
-            //}
+            //_groupContainer = DataBaseMockUp.LoadGroups();
+            _groupContainer = DatabaseControl.ReadAll();//DataBaseMockUp.LoadGroups();
 
-            _groupContainer = DataBaseMockUp.LoadGroups(); // TODO rigtig database
-            //_groupContainer = new GroupContainer();
             _taskDescriptionsClipBoard = new List<TaskDescription>();
             _employeeClipBoard = new List<Employee>();
         }

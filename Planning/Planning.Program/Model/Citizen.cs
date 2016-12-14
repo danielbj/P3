@@ -10,7 +10,7 @@ namespace Planning.Model
         public int CitizenId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime DateAdmitted { get; set; } = DateTime.MinValue;
+        public DateTime DateAdmitted { get; set; } = DateTime.MaxValue;
         public DateTime DateDischarged { get; set; } = DateTime.MaxValue;
         private List<Address> _addresses;
         public List<TaskDescription> Tasks { get; set; }
@@ -27,7 +27,8 @@ namespace Planning.Model
         }
         #endregion
 
-
+        [Obsolete("Only needed for serialization and materialization in Entity Framework", true)]
+        public Citizen() { }
 
         public Citizen (string cpr, string firstname, string lastname, Address address, DateTime dateAdmitted)
         {

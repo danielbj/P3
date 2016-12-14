@@ -9,9 +9,9 @@ namespace Planning.Model
     public class TaskDescription 
     {
         #region Fields
-        public DateTime StartDate { get; set; } = DateTime.MinValue;
+        public DateTime StartDate { get; set; } = DateTime.MaxValue;
         public int TaskDescriptionID { get; set; }
-        public DateTime DateCreated { get; set; } = DateTime.MinValue;
+        public DateTime DateCreated { get; set; } = DateTime.MaxValue;
         public DateTime DateDeleted { get; set; } = DateTime.MaxValue;
         public Citizen Citizen { get; set; }
         public string AssignmentType { get; set; }
@@ -23,6 +23,9 @@ namespace Planning.Model
         private List<ITaskdescritpionChange> _changes;
 
         #endregion
+
+        [Obsolete("Only needed for serialization and materialization in Entity Framework", true)]
+        public TaskDescription() { }
 
         public TaskDescription(int duration, string description, Citizen citizen, TimePeriod timeFrame, DateTime startDate, string assignment, int frequencyPerWeek)
         { 

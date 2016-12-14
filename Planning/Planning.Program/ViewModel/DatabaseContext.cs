@@ -14,6 +14,7 @@ namespace Planning.ViewModel
     public class DatabaseContext : DbContext
     {
         public DbSet<Citizen> CitizenDB { get; set; }
+        public DbSet<GroupSchedule> GroupScheduleDB { get; set; }
         public DbSet<Employee> EmployeeDB { get; set; }
         public DbSet<EmployeeSchedule> EScheduleDB { get; set; }
         public DbSet<Group> GroupDB { get; set; }

@@ -83,12 +83,12 @@ namespace Planning.Model
 
         public GroupSchedule GetSchedule(DateTime date) //validering
         {
-            return DailySchedules.Find(e => e.Date.Equals(date));
+            return DailySchedules.Find(g => g.Date.Equals(date));
         }
 
         public GroupSchedule GetSchedule(string name) //validering
         {
-            return TemplateSchedules.Find(e => e.Name == name);
+            return TemplateSchedules.Find(g => String.Equals(g.Name, name));
         }
 
         public override string ToString()
