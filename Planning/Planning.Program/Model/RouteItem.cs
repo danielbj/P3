@@ -19,7 +19,7 @@ namespace Planning.Model
         }
         public TimePeriod TimePeriod { get; set; }
 
-        public string[] Waypoints = new string[] { }; //og hvorfor skal vi lagre den samme addresse to forskellige steder?
+        public string[] Waypoints = new string[2]; //og hvorfor skal vi lagre den samme addresse to forskellige steder?
 
         public RouteItem(string startAddressName, string endAddressName, TimeSpan duration)
         {

@@ -15,6 +15,7 @@ namespace Planning.ViewModel
     {
 
         #region Properties
+        private TaskItem _optimalPlaceMentTaskItem;
 
         public ObservableCollection<TaskItem> UnplannedTaskItems
         {
@@ -205,10 +206,19 @@ namespace Planning.ViewModel
             {
                 var employeeSchedule = _scheduleAdmin.FindTask(taskItem, SelectedSchedule);
                 _scheduleAdmin.UnPlan(SelectedGroup, employeeSchedule, taskItem);
+                if (SelectedCalendarType == "Kalenderplaner")
+                {
+                    ShowBestPlacement(taskItem, SelectedDate);
+                }
                 UpdateSchedule();
                 
                 
                 DragDrop.DoDragDrop((DependencyObject)source, taskItem, DragDropEffects.Move);
+                if (_optimalPlaceMentTaskItem != null)
+                {
+                    _optimalPlaceMentTaskItem.Color = "LightSteelBlue";
+                    _optimalPlaceMentTaskItem = null;
+                }
                 OnPropertyChanged(nameof(UnplannedTaskItems));
             }
         }
@@ -219,9 +229,25 @@ namespace Planning.ViewModel
 
             if (taskItem != null)
             {
+                if (SelectedCalendarType == "Kalenderplaner")
+                {
+                    ShowBestPlacement(taskItem, SelectedDate);
+                }
                 DragDrop.DoDragDrop((DependencyObject)source, taskItem, DragDropEffects.Move);
+                if (_optimalPlaceMentTaskItem != null)
+                {
+                    _optimalPlaceMentTaskItem.Color = "LightSteelBlue";
+                    _optimalPlaceMentTaskItem = null;
+                }
             }
 
+        }
+
+        public void ShowBestPlacement(TaskItem taskItem, DateTime dateTime)
+        {
+            _optimalPlaceMentTaskItem = _scheduleAdmin.FindOptimalPlacement(SelectedGroup, dateTime, taskItem);
+
+            _optimalPlaceMentTaskItem.Color = "Lime";
         }
 
         public void DropTask(TaskItem draggedTaskItem, object dropTarget)
@@ -229,6 +255,12 @@ namespace Planning.ViewModel
             TaskItem taskItem = draggedTaskItem;
             TaskItem taskItem2 = dropTarget as TaskItem;
             EmployeeSchedule emplTarget = dropTarget as EmployeeSchedule;
+
+            //if (_optimalPlaceMentTaskItem != null)
+            //{
+            //    _optimalPlaceMentTaskItem.Color = "LightSteelBlue";
+            //    _optimalPlaceMentTaskItem = null;
+            //}
 
             if (taskItem != null && taskItem2 != null)
             {

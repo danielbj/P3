@@ -20,28 +20,28 @@
             <ComboBox x:Name="GroupComboBox" Margin="3" Width ="160" ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}" SelectedIndex="0"/>
             <ComboBox x:Name="ScheduleComboBox" Margin="3" Width="160" ItemsSource="{Binding CalendarTypes}" SelectedItem="{Binding SelectedCalendarType}" SelectedIndex="0"/>
             <Grid x:Name="DateGrid">
-                <DatePicker x:Name="CurrentDatePicker" Margin="3" SelectedDate="{Binding SelectedDate}"/>
                 <Grid.Style>
-                    <Style TargetType="Grid">
+                    <Style TargetType="{x:Type Grid}">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName=ScheduleComboBox, Path = SelectedIndex}" Value="0">
+                            <DataTrigger Binding="{Binding SelectedIndex, ElementName=ScheduleComboBox}" Value="0">
                                 <Setter Property="Visibility" Value="Visible"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding ElementName=ScheduleComboBox, Path = SelectedIndex}" Value="1">
+                            <DataTrigger Binding="{Binding SelectedIndex, ElementName=ScheduleComboBox}" Value="1">
                                 <Setter Property="Visibility" Value="Collapsed"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </Grid.Style>
+                <DatePicker x:Name="CurrentDatePicker" Margin="3" SelectedDate="{Binding SelectedDate}"/>
             </Grid>
             <ComboBox x:Name="TemplateComboBox" Margin="3" Width="160" ItemsSource="{Binding Templates}" SelectedItem="{Binding SelectedTemplate}" SelectedIndex="0">
                 <ComboBox.Style>
-                    <Style TargetType="ComboBox">
+                    <Style TargetType="{x:Type ComboBox}">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName=ScheduleComboBox, Path = SelectedIndex}" Value="1">
+                            <DataTrigger Binding="{Binding SelectedIndex, ElementName=ScheduleComboBox}" Value="1">
                                 <Setter Property="Visibility" Value="Visible"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding ElementName=ScheduleComboBox, Path = SelectedIndex}" Value="0">
+                            <DataTrigger Binding="{Binding SelectedIndex, ElementName=ScheduleComboBox}" Value="0">
                                 <Setter Property="Visibility" Value="Collapsed"/>
                             </DataTrigger>
                         </Style.Triggers>
@@ -122,10 +122,18 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <Button Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="{Binding}" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ChangeEmployeeCommand}" CommandParameter="{Binding}"/>
+                                        <Button Grid.Column="0" 
+                                                VerticalAlignment="Stretch" 
+                                                HorizontalAlignment="Stretch" 
+                                                Content="{Binding}" 
+                                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ChangeEmployeeCommand}" 
+                                                CommandParameter="{Binding}"/>
                                         <Menu Grid.Column="1">
                                             <MenuItem Header="...">
                                                 <MenuItem Header="Fjern Kolonne" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.RemoveEmployeeScheduleCommand}" CommandParameter="{Binding}"/>
+                                                <!--MenuItem x:Name="ColorMenuItem" Header="Vælg Farve">
+                                                    <MenuItem Header="Red"/>
+                                                </MenuItem-->
                                             </MenuItem>
                                         </Menu>
                                     </Grid>
@@ -146,11 +154,11 @@
                                                         <Border.Height>
                                                             <MultiBinding Converter="{StaticResource MinutesToHeight}">
                                                                 <Binding Path="Route.Duration.TotalMinutes"></Binding>
-                                                                    <Binding ElementName="UISlider" Path="Value"></Binding>
+                                                                <Binding ElementName="UISlider" Path="Value"></Binding>
                                                             </MultiBinding>
                                                         </Border.Height>
                                                     </Border>
-                                                    <Border x:Name="TaskItemBorder" Grid.Row="1" Grid.Column="0" Width="auto" Background="LightSteelBlue">
+                                                    <Border x:Name="TaskItemBorder" Grid.Row="1" Grid.Column="0" Width="auto" Background="{Binding Color}">
                                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Width="auto">
                                                             <Grid>
                                                                 <Grid.ColumnDefinitions>
@@ -220,7 +228,7 @@
                         </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-            </ListBox>       
+            </ListBox>
         </Grid>
     </Grid>
 </UserControl>

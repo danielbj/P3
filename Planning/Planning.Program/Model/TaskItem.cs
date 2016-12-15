@@ -1,13 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Planning.Model
 {
-    public class TaskItem
+    public class TaskItem : INotifyPropertyChanged
     {
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
+
         public int TaskItemId { get; set; }
 
         public enum Status
@@ -18,8 +26,29 @@ namespace Planning.Model
             Planned
         }
 
+        private string _color = "LightSteelBlue";
+
+        public string Color
+        {
+            get { return _color; }
+            set
+            {
+                if (_color != value)
+                {
+                    _color = value;
+                    OnPropertyChanged(nameof(Color));
+                }
+                
+            }
+        }
+
+
+
         public Status State { get; set; }
         public bool Locked;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public RouteItem Route { get; set; }        
         public TimePeriod TimePeriod { get; set; }
         public TaskDescription TaskDescription { get; private set; }
