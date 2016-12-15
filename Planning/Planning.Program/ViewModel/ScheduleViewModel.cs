@@ -203,7 +203,7 @@ namespace Planning.ViewModel
 
             LockTaskCommand = new RelayCommand(p => LockTask(p as TaskItem), p => true);
 
-            LoadTemplateScheduleCommand = new RelayCommand(parameter => ImportTemplate(), parameter => (SelectedDate != null && SelectedCalendarType == CalendarTypes[0]));
+            LoadTemplateScheduleCommand = new RelayCommand(p => ImportTemplate(), p => (SelectedDate != null && SelectedCalendarType == CalendarTypes[0]));
 
             RemoveEmployeeScheduleCommand = new RelayCommand(p => RemoveEmployeeSchedule(p as EmployeeSchedule), p=> true);
 
@@ -217,7 +217,6 @@ namespace Planning.ViewModel
         {
             _scheduleAdmin.RemoveEmployeeSchedule(SelectedGroup,SelectedSchedule, employeeSchedule);
             UpdateSchedule();
-            // OnPropertyChanged(nameof(UnplannedTaskItems));
             OnPropertyChanged(nameof(UnplannedTaskItems));
 
         }
@@ -279,7 +278,6 @@ namespace Planning.ViewModel
 
         private void UpdateSchedule()
         {
-           // SelectedSchedule.EmployeeSchedules = EmployeeSchedules.ToList<EmployeeSchedule>(); 
             OnPropertyChanged(nameof(SelectedSchedule));
             OnPropertyChanged(nameof(EmployeeSchedules));
         }
@@ -293,7 +291,9 @@ namespace Planning.ViewModel
         private void ChangeEmployee(EmployeeSchedule es)
         {
             var window = new EmployeeSelectionWindow();
-            var viewModel = new EmployeeSelectionViewModel(_groupAdmin.GetEmployeesOnDuty(SelectedGroup,SelectedDate),window);
+            // var viewModel = new EmployeeSelectionViewModel(_groupAdmin.GetEmployeesOnDuty(SelectedGroup,SelectedDate),window);  // TODO dette burde være det rigtige
+            var viewModel = new EmployeeSelectionViewModel(_groupAdmin.GetEmployeeClipBoard(),window);    // Workaround
+
             window.DataContext = viewModel;
             window.ShowDialog();
 
@@ -314,15 +314,10 @@ namespace Planning.ViewModel
 
             if (viewModel.Excecute && viewModel.SelectedTemplate != null)
             {
-                _scheduleAdmin.CreateSchedule(SelectedDate, SelectedGroup);
-                var template = viewModel.SelectedTemplate; ;
-
-                var daily = _selectedGroup.GetSchedule(SelectedDate);
-               
-                daily = _scheduleAdmin.CopyTemplateScheduleToDailySchedule(template);
-
-                _selectedSchedule = daily;
-                
+                var template = viewModel.SelectedTemplate;
+                var daily = _scheduleAdmin.CopyTemplateScheduleToDailySchedule(template);
+                daily.Date = SelectedDate;
+                SelectedGroup.AddDailySchedule(daily);
             }
             UpdateSchedule();
         }

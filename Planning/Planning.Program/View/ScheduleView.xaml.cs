@@ -23,6 +23,7 @@ namespace Planning.View
     public partial class ScheduleView : UserControl
     {
         private Point _startpoint;
+        private bool IsDragging;
 
         public ScheduleView()
         {
@@ -45,6 +46,7 @@ namespace Planning.View
                 var ys = SystemParameters.MinimumVerticalDragDistance;
                 if (x > xs || y > ys)
                 {
+                    IsDragging = true;
                     vm.StartDrag(sender, item);
                 }
             }
@@ -102,6 +104,23 @@ namespace Planning.View
                     vm.StartDragPlan(sender, item);
                 }
             }
+        }
+
+        private void DragCanvas_PreviewDragOver(object sender, DragEventArgs e)
+        {
+            //if (IsDragging)
+            //{
+            //    var taskItem = e.Data.GetData(typeof(TaskItem)) as TaskItem;
+
+            //    if (taskItem != null)
+            //    {
+            //        var textBlock = new TextBlock();
+            //        textBlock.Text = taskItem.TaskDescription.Citizen.ToString();
+            //        DragCanvas.Children.Add(textBlock);
+
+            //        Canvas.SetLeft(textBlock, )
+            //    }
+            //}
         }
     }
 }

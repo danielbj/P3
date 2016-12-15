@@ -25,6 +25,19 @@ namespace Planning.Model
             //SetRelevantTasks(TaskItems); //Skal ske når du laver en kalenderplan
         }
 
+        public override string ToString()
+        {
+            if (Employee != null)
+            {
+                return Employee.ToString();
+            }
+            else
+            {
+                return "Vælg Medarbejder";
+            }
+        }
+
+
         public EmployeeSchedule(TimeSpan startTime) //empl sche i template har ingen dato
         {
             TaskItems = new List<TaskItem>();

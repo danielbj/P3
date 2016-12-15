@@ -12,7 +12,8 @@ namespace Planning.Model
         {
             get
             {
-                return TimePeriod.Duration;
+                int m = (int)(TimePeriod.Duration.TotalMinutes + 0.5);
+                return new TimeSpan(0,m,0);
             }
         }
         public TimePeriod TimePeriod { get; set; }

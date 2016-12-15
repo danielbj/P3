@@ -12,6 +12,8 @@ namespace Planning.ViewModel
 {
     public static class RouteCalculator
     {
+        private static int p = 0;
+
         #region Fields
         /// <summary>
         /// List of all routes as dictionary with waypoints as key and duration as value.
@@ -42,6 +44,7 @@ namespace Planning.ViewModel
         #endregion
         public static TimeSpan CalculateRouteDuration(string address1, string address2)
         {
+            Console.WriteLine("ping" + p++);
             string url = CreateRequestURL(address1, address2);
             WebResponse response = MakeRequest(url);
             JObject jsonFile = ProcessRequest(response);
@@ -95,6 +98,7 @@ namespace Planning.ViewModel
         /// <returns>Returns RouteItem.</returns>
         private static RouteItem CalculateAndAddToList(string startAddressName, string endAddressName)
         {
+           
             Waypoints = new string[] { startAddressName, endAddressName };
 
             WebResponse response = MakeRequest(CreateRequestURL());

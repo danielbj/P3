@@ -62,9 +62,17 @@ namespace Planning.Model
 
         public void AddDailySchedule(GroupSchedule dailySchedule) 
         {
-            DailySchedules.Add(dailySchedule);
-            
+            int index = DailySchedules.FindIndex(g => g.Date.Equals(dailySchedule.Date));
+            if (index < 0)
+            {
+                DailySchedules.Add(dailySchedule);
+            }
+            else
+            {
+                DailySchedules[index] = dailySchedule;
+            }           
         }
+
         public void AddScheduleTemplate(GroupSchedule scheduleTemplate)
         {
             TemplateSchedules.Add(scheduleTemplate);

@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:Planning.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600">
+    <UserControl.Resources>
+        <local:MinutesToHeightConverter x:Key="MinutesToHeight"></local:MinutesToHeightConverter>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -72,6 +75,9 @@
                         <ColumnDefinition Width ="auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+                    <Canvas x:Name="DragCanvas" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" PreviewDragOver="DragCanvas_PreviewDragOver">
+                        
+                    </Canvas>
                     <Grid VerticalAlignment="Stretch" x:Name="TimePanel" Grid.Row="1" Grid.Column="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -116,14 +122,18 @@
                                         <RowDefinition Height="auto"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <StackPanel Grid.Row="0" Orientation="Horizontal" Width="160">
-                                        <Button  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="{Binding Employee}" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ChangeEmployeeCommand}" CommandParameter="{Binding}"/>
-                                        <Menu>
+                                    <Grid Grid.Row="0" Width="170">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="{Binding}" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ChangeEmployeeCommand}" CommandParameter="{Binding}"/>
+                                        <Menu Grid.Column="1">
                                             <MenuItem Header="...">
                                                 <MenuItem Header="Fjern Kolonne" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.RemoveEmployeeScheduleCommand}" CommandParameter="{Binding}"/>
                                             </MenuItem>
                                         </Menu>
-                                    </StackPanel>
+                                    </Grid>
                                     <ListBox Grid.Row="1" ItemsSource="{Binding Path=TaskItems}" AllowDrop="True" Drop="ListBox_Drop">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
@@ -136,10 +146,16 @@
                                                         <ColumnDefinition Width="*"/>
                                                         <ColumnDefinition Width="auto"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Border x:Name="RouteItemBorder" Grid.Row="0" Grid.Column="0" Background="Lavender" Height="{Binding Route.Duration.TotalMinutes}">
+                                                    <Border x:Name="RouteItemBorder" Grid.Row="0" Grid.Column="0" Background="Lavender">
                                                         <TextBlock Text="{Binding Route.Duration.TotalMinutes}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        <Border.Height>
+                                                            <MultiBinding Converter="{StaticResource MinutesToHeight}">
+                                                                <Binding Path="Route.Duration.TotalMinutes"></Binding>
+                                                                    <Binding ElementName="UISlider" Path="Value"></Binding>
+                                                            </MultiBinding>
+                                                        </Border.Height>
                                                     </Border>
-                                                    <Border x:Name="TaskItemBorder" Grid.Row="1" Grid.Column="0" Width="auto" Height="{Binding TaskDescription.Duration.TotalMinutes}" Background="LightSteelBlue">
+                                                    <Border x:Name="TaskItemBorder" Grid.Row="1" Grid.Column="0" Width="auto" Background="LightSteelBlue">
                                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Width="auto">
                                                             <Grid>
                                                                 <Grid.ColumnDefinitions>
@@ -168,6 +184,12 @@
                                                             <TextBlock x:Name="Description" HorizontalAlignment="Center" Text="{Binding TaskDescription.AssignmentType}" FontWeight="Bold" FontSize="14"/>
                                                             <TextBlock x:Name="Duration"  HorizontalAlignment="Center" Text="{Binding TaskDescription.Duration.TotalMinutes}">-Minutter</TextBlock>
                                                         </StackPanel>
+                                                        <Border.Height>
+                                                            <MultiBinding Converter="{StaticResource MinutesToHeight}">
+                                                                <Binding Path="TaskDescription.Duration.TotalMinutes"></Binding>
+                                                                <Binding ElementName="UISlider" Path="Value"></Binding>
+                                                            </MultiBinding>
+                                                        </Border.Height>
                                                     </Border>
                                                 </Grid>
                                             </DataTemplate>

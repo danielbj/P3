@@ -21,7 +21,8 @@ namespace Planning.ViewModel
             //_groupContainer = DatabaseControl.ReadAll();
 
             _taskDescriptionsClipBoard = new List<TaskDescription>();
-            _employeeClipBoard = new List<Employee>();
+            _employeeClipBoard = DataBaseMockUp.LoadEmployees();
+            //_employeeClipBoard = new List<Employee>();
         }
         /// <summary>
         /// Gets all groups in the group container
@@ -51,6 +52,12 @@ namespace Planning.ViewModel
 
             return result;
         }
+
+        public List<Employee> GetEmployeeClipBoard()
+        {
+            return _employeeClipBoard;
+        }
+
         /// <summary>
         /// Gets information about a group.
         /// </summary>
