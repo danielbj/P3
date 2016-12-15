@@ -14,29 +14,7 @@ namespace Planning.ViewModel
     public class ScheduleViewModel : ViewModelBase
     {
 
-        #region Events
-        public delegate void ButtonClickEventHandler();
-        //public delegate void LoadTemplateButtonClickEventHandler(List<EmployeeScheduleViewModel> vM);
-        public event ButtonClickEventHandler AddEmployeeButtonClicked;
-        //  public event LoadTemplateButtonClickEventHandler LoadTemplateScheduleButtonClicked;
-
-        #endregion
-
         #region Properties
-
-        //private List<TaskItem> _unplannedTaskItems;
-        //public List<TaskItem> UnplannedTaskItems
-        //{
-        //    get
-        //    {
-        //        return _unplannedTaskItems;
-        //    }
-        //    set
-        //    {
-        //        _unplannedTaskItems = value;
-        //        OnPropertyChanged(nameof(UnplannedTaskItems));
-        //    }
-        //}
 
         public ObservableCollection<TaskItem> UnplannedTaskItems
         {
@@ -59,6 +37,7 @@ namespace Planning.ViewModel
             {
                 _selectedCalendarType = value;
                 OnPropertyChanged(nameof(SelectedCalendarType));
+                OnPropertyChanged(nameof(SelectedTemplate));
                 OnPropertyChanged(nameof(SelectedSchedule));
                 OnPropertyChanged(nameof(EmployeeSchedules));
             }
@@ -84,10 +63,7 @@ namespace Planning.ViewModel
 
         public List<GroupSchedule> Templates
         {
-            get
-            {
-                return SelectedGroup.TemplateSchedules;
-            }
+            get;set;
         }
 
         private GroupSchedule _selectedTemplate;
@@ -100,7 +76,7 @@ namespace Planning.ViewModel
             set
             {
                 _selectedTemplate = value;
-                OnPropertyChanged(nameof(SelectedTemplate));
+
                 OnPropertyChanged(nameof(SelectedSchedule));
                 OnPropertyChanged(nameof(EmployeeSchedules));
             }
@@ -154,8 +130,8 @@ namespace Planning.ViewModel
                     _selectedGroup = value;
 
                     OnPropertyChanged(nameof(SelectedGroup));
-                    OnPropertyChanged(nameof(Templates));
-                    OnPropertyChanged(nameof(SelectedTemplate));
+                    Templates = SelectedGroup.TemplateSchedules;
+                    SelectedTemplate = Templates[0];
                     OnPropertyChanged(nameof(SelectedSchedule));
                     OnPropertyChanged(nameof(EmployeeSchedules));
                 }
@@ -230,6 +206,7 @@ namespace Planning.ViewModel
                 var employeeSchedule = _scheduleAdmin.FindTask(taskItem, SelectedSchedule);
                 _scheduleAdmin.UnPlan(SelectedGroup, employeeSchedule, taskItem);
                 UpdateSchedule();
+                
                 
                 DragDrop.DoDragDrop((DependencyObject)source, taskItem, DragDropEffects.Move);
                 OnPropertyChanged(nameof(UnplannedTaskItems));
