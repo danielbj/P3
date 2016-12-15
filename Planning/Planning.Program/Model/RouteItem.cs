@@ -8,6 +8,7 @@ namespace Planning.Model
 {
     public class RouteItem
     {
+        public int RouteItemId { get; set; }
         public TimeSpan Duration
         {
             get
