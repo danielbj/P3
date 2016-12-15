@@ -36,6 +36,7 @@ namespace Planning.UnitTest.Model
         #endregion
 
         [Test, TestCaseSource("AddressCases")]
+        [Category("Edit Address")]
         public void NewAddressChange_AddressChangedForAllCases_True(Address address)
         {
             CitizenAddAddressChange change = new CitizenAddAddressChange(_citizen, address, "Address changed to 'Niels Bohrs Vej 36, Aalborg'");
