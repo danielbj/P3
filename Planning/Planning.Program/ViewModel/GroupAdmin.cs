@@ -9,13 +9,29 @@ namespace Planning.ViewModel
 {
     public class GroupAdmin
     {
+        private static GroupAdmin _instance;
+
+        public static GroupAdmin Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new GroupAdmin();
+                }
+                return _instance;
+            }
+        }
+
         GroupContainer _groupContainer;
         ScheduleAdmin _scheduleAdmin; 
         List<TaskDescription> _taskDescriptionsClipBoard; //unassigned taskdescriptions
         List<Employee> _employeeClipBoard;                //unassigned employees
         private DatabaseControl DatabaseControl = new DatabaseControl();
            
-        public GroupAdmin()
+
+
+        private GroupAdmin()
         {
             _groupContainer = DataBaseMockUp.LoadGroups();
             //_groupContainer = DatabaseControl.ReadAll();
