@@ -38,8 +38,6 @@ namespace Planning.ViewModel
             
             targetEmployeeSchedule.TaskItems.Insert(index, taskToPlan);
             taskToPlan.State = TaskItem.Status.Planned;
-            
-            
 
             if (index == 0) 
             {
@@ -140,8 +138,23 @@ namespace Planning.ViewModel
         /// <param name="currentTask"></param>
         private void AdjustStartTime(TaskItem previousTask, TaskItem currentTask) 
         {
-            currentTask.Route.TimePeriod.StartTime = previousTask.TimePeriod.EndTime;
-            currentTask.TimePeriod.StartTime = currentTask.Route.TimePeriod.EndTime;                 
+            if (currentTask.Locked)
+            {
+                if (currentTask.Route.TimePeriod.StartTime < previousTask.TimePeriod.EndTime)
+                {
+                    var temp = currentTask;
+
+                    currentTask = previousTask;
+                    previousTask = temp;
+
+                    AdjustStartTime(previousTask, currentTask);
+                }
+            }
+            else
+            {
+                currentTask.Route.TimePeriod.StartTime = previousTask.TimePeriod.EndTime;
+                currentTask.TimePeriod.StartTime = currentTask.Route.TimePeriod.EndTime;
+            }              
         }
 
         public void ToggleLockStatusTask(TaskItem task) //TODO

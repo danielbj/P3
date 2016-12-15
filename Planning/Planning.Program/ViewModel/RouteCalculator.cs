@@ -45,6 +45,7 @@ namespace Planning.ViewModel
         public static TimeSpan CalculateRouteDuration(string address1, string address2)
         {
             Console.WriteLine("ping" + p++);
+            
             string url = CreateRequestURL(address1, address2);
             WebResponse response = MakeRequest(url);
             JObject jsonFile = ProcessRequest(response);
@@ -130,9 +131,19 @@ namespace Planning.ViewModel
             //creating a web request with the url
             var request = WebRequest.Create(requestURL);
             //get response 
-            var response = request.GetResponse();
+            try
+            {
+                return request.GetResponse();
+            }
+            catch (Exception)
+            {
+                Console.Beep();
+                Console.WriteLine("d'oh!");
+                return MakeRequest(requestURL);
+            }
+            
 
-            return response;
+            
         }
 
         /// <summary>
