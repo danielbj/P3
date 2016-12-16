@@ -50,6 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\CitizenAdmin_Test.cs" />
+    <Compile Include="Admin\GroupAdmin_Test.cs" />
+    <Compile Include="Admin\ScheduleAdmin_Test.cs" />
+    <Compile Include="Admin\Visitator_Test.cs" />
     <Compile Include="Model\Address_Test.cs" />
     <Compile Include="Model\CitizenChange_Test.cs" />
     <Compile Include="Model\CitizenContainer_Test.cs" />

@@ -157,6 +157,18 @@ namespace Planning.ViewModel
         {            
             groupSchedule.Approval(status);
         }
+
+        public List<Citizen> GetAllAdmittedCitizens()
+        {
+            return _citizenContainer.AdmittedCitizens;
+        }
+
+        public List<Citizen> GetAllDischargedCitizens()
+        {
+            return _citizenContainer.DischargedCitizens;
+        }
     }
+
+
 
 }
