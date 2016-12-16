@@ -50,6 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\CitizenAdmin_Test.cs" />
+    <Compile Include="Admin\GroupAdmin_Test.cs" />
+    <Compile Include="Admin\ScheduleAdmin_Test.cs" />
+    <Compile Include="Admin\Visitator_Test.cs" />
     <Compile Include="Model\Address_Test.cs" />
     <Compile Include="Model\CitizenChange_Test.cs" />
     <Compile Include="Model\CitizenContainer_Test.cs" />
@@ -72,13 +76,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Planning.ViewModel\Planning.ViewModel.csproj">
-      <Project>{751a1b9d-aa96-49a4-b8c7-cf063560c4d4}</Project>
-      <Name>Planning.ViewModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Planning\Planning.Model.csproj">
-      <Project>{fd6a781e-68cc-4c89-a4fd-3826259fb001}</Project>
-      <Name>Planning.Model</Name>
+    <ProjectReference Include="..\Planning.Program\Planning.Program.csproj">
+      <Project>{ee9dcea5-486f-4ef8-aec2-caca83e4c924}</Project>
+      <Name>Planning.Program</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

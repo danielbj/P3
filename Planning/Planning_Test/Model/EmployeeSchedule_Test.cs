@@ -30,6 +30,7 @@ namespace Planning.UnitTest.Model
 
         #region Get TaksItems
         [Test]
+        [Category("Edit Tasks")]
         public void GetTasks_GetsAllTasks_AreEqual()
         {
             _employeeSchedule.TaskItems = _externClass._taskItems;
@@ -41,6 +42,7 @@ namespace Planning.UnitTest.Model
         }
 
         [Test]
+        [Category("Edit Tasks")]
         public void GetTasks_GetTasksThatStartAt2016_12_21OrBefore_AreEqual()
         {
             _employeeSchedule.TaskItems = _externClass._taskItems;
@@ -122,9 +124,9 @@ namespace Planning.UnitTest.Model
 
         private void AddTaskDescriptions()
         {
-            _taskDescriptions.Add(new TaskDescription(1, "description", _citizens[0], _timePeriods[0], _startDates[0], _assignments[0]));
-            _taskDescriptions.Add(new TaskDescription(50, "Fancy", _citizens[1], _timePeriods[1], _startDates[1], _assignments[1]));
-            _taskDescriptions.Add(new TaskDescription(60, "notSoFancy", _citizens[2], _timePeriods[2], _startDates[2], _assignments[2]));
+            _taskDescriptions.Add(new TaskDescription(1, "description", _citizens[0], _timePeriods[0], _startDates[0], _assignments[0], 1));
+            _taskDescriptions.Add(new TaskDescription(50, "Fancy", _citizens[1], _timePeriods[1], _startDates[1], _assignments[1], 1));
+            _taskDescriptions.Add(new TaskDescription(60, "notSoFancy", _citizens[2], _timePeriods[2], _startDates[2], _assignments[2], 1));
         }
 
         public void AddTaskItems()

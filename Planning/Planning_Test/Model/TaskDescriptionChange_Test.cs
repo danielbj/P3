@@ -34,11 +34,12 @@ namespace Planning.UnitTest.Model
         [SetUp]
         public void InstTaskDescription()
         {
-            _taskDescription = new TaskDescription(30, "testTaskDescription", new Citizen("0000000000", "testFirstname", "testLastname", new Address("Snerlevej 11, 9000"), new DateTime(2016, 12, 21)), new TimePeriod(new TimeSpan(00, 30, 00)), new DateTime(2016, 12, 21), "testAssignment");
+            _taskDescription = new TaskDescription(30, "testTaskDescription", new Citizen("0000000000", "testFirstname", "testLastname", new Address("Snerlevej 11, 9000"), new DateTime(2016, 12, 21)), new TimePeriod(new TimeSpan(00, 30, 00)), new DateTime(2016, 12, 21), "testAssignment", 1);
         }
         #endregion
 
         [Test, TestCaseSource("TaskDurationChangeCases")]
+        [Category("Apply Changes")]
         public void ApplyChange_TaskDurationChangeForAllCases_True(TimeSpan duration)
         {
             TaskDurationChange change = new TaskDurationChange(_taskDescription, duration, "testDurationChange");
@@ -49,6 +50,7 @@ namespace Planning.UnitTest.Model
         }
 
         [Test, TestCaseSource("TaskDescriptionStringCases")]
+        [Category("Apply Changes")]
         public void ApplyChanges_TaskDescriptionStringChangeForAllCases_True(string description)
         {
             TaskDescriptionstringChange change = new TaskDescriptionstringChange(_taskDescription, description, "testDescription");

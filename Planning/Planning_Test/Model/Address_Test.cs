@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Planning;
 using Planning.Model;
 using System;
 using System.Collections.Generic;
@@ -122,6 +123,7 @@ namespace Planning.UnitTest.Model
 
         #region Convertion
         [TestCase("Snerlevej 11, Aalborg")]
+        [Category("Edit Address")]
         public void AddressConversionFromString_ÉxcplicitConversionToAddress_AreEqual(string addressName)
         {
             Address address;

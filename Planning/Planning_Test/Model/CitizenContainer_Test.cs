@@ -27,6 +27,7 @@ namespace Planning.UnitTest.Model
         }
 
         [TestCase("0000000000", "testName", "testName", "Snerlevej 11, Aalborg", "2016-12-21")]
+        [Category("Edit Citizen")]
         public void AddCitizen_CitizenAdded_ContainsCitizen(string cpr, string firstname, string lastname, string addressName, DateTime date)
         {
             Citizen citizen = new Citizen(cpr, firstname, lastname, new Address(addressName), date);
@@ -38,6 +39,7 @@ namespace Planning.UnitTest.Model
 
         [TestCase("0000000000", "testName", "testName", "Snerlevej 11, Aalborg", "2016-12-21")]
         [Ignore("Not implemented")]
+        [Category("Edit Citizen")]
         public void DeleteCitizen_CitizenAddedToDischarged_ContainsCitizen(string cpr, string firstname, string lastname, string addressName, DateTime date)
         {
             Citizen citizen = new Citizen(cpr, firstname, lastname, new Address(addressName), date);
@@ -48,6 +50,7 @@ namespace Planning.UnitTest.Model
         }
 
         [TestCase("0000000000", "testName", "testName", "Snerlevej 11, Aalborg", "2016-12-21")]
+        [Category("Edit Citizen")]
         public void GetCitizens_GetsAllCitizens_AreEqual(string cpr, string firstname, string lastname, string addressName, DateTime date)
         {
             Citizen citizen = new Citizen(cpr, firstname, lastname, new Address(addressName), date);
@@ -60,6 +63,7 @@ namespace Planning.UnitTest.Model
         }
 
         [TestCase("0000000000", "testName", "testName", "Snerlevej 11, Aalborg", "2016-12-21")]
+        [Category("Edit Citizen")]
         public void GetCitizens_GetsCitizensWithBInTheirFirstname_AreEqual(string cpr, string firstname, string lastname, string addressName, DateTime date)
         {
             Citizen citizen = new Citizen(cpr, firstname, lastname, new Address(addressName), date);
