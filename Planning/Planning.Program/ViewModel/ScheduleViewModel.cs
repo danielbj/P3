@@ -162,7 +162,7 @@ namespace Planning.ViewModel
 
         public ScheduleViewModel()
         {
-            _groupAdmin = new GroupAdmin();
+            _groupAdmin = GroupAdmin.Instance;
             _scheduleAdmin = new ScheduleAdmin();
             _databaseControl = new DatabaseControl();
 

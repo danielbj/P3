@@ -46,7 +46,7 @@ namespace Planning.ViewModel
 
         public EmployeeOverviewViewModel()
         {
-            groupAdmin = new GroupAdmin();
+            groupAdmin = GroupAdmin.Instance;
             _dateOfMonday = GetDateOfMonday(DateTime.Today);
         }
 
