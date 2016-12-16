@@ -266,16 +266,16 @@ namespace Planning.Model
                         for (int i = 0; i < 5; i++)
                         {
                             ran = rnd.Next(Tasks.Count);
-                            schedule.TaskItems.Add(Tasks[ran]);
+                            schedule.TaskItems.Add(Tasks[ran].Clone());
 
                             if (i > 0)
                             {
-                               // schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.CalculateRouteDuration(schedule.TaskItems[i - 1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
+                                //schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.CalculateRouteDuration(schedule.TaskItems[i - 1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
                             }
 
                             else if (i == 0)
                             {
-                               // schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.CalculateRouteDuration("Kærvej 3, 7752, Snedsted, Denmark", schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
+                                //schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.CalculateRouteDuration("Kærvej 3, 7752, Snedsted, Denmark", schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
                             }
                         }
                     }
