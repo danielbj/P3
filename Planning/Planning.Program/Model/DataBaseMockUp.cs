@@ -202,18 +202,18 @@ namespace Planning.Model
             var GroupSnedsted = new Group("Snedsted", "Kærvej 3, 7752, Snedsted, Denmark");
             var GroupHørdum = new Group("Hørdum", "Kærvej 3, 7752, Snedsted, Denmark");
             var GroupKoldby = new Group("Koldby", "Kærvej 3, 7752, Snedsted, Denmark");
-            var GroupHundborg = new Group("Hundborg", "Kærvej 3, 7752, Snedsted, Denmark");
-            var GroupStenbjerg = new Group("Stenbjerg", "Kærvej 3, 7752, Snedsted, Denmark");
-            var GroupVangså = new Group("Vangså", "Kærvej 3, 7752, Snedsted, Denmark");
-            var GroupSundby = new Group("Sundby", "Kærvej 3, 7752, Snedsted, Denmark");
+            //var GroupHundborg = new Group("Hundborg", "Kærvej 3, 7752, Snedsted, Denmark");
+            //var GroupStenbjerg = new Group("Stenbjerg", "Kærvej 3, 7752, Snedsted, Denmark");
+            //var GroupVangså = new Group("Vangså", "Kærvej 3, 7752, Snedsted, Denmark");
+            //var GroupSundby = new Group("Sundby", "Kærvej 3, 7752, Snedsted, Denmark");
 
             Groups.Add(GroupSnedsted);
-            Groups.Add(GroupHørdum);
-            Groups.Add(GroupKoldby);
-            Groups.Add(GroupHundborg);
-            Groups.Add(GroupStenbjerg);
-            Groups.Add(GroupVangså);
-            Groups.Add(GroupSundby);
+            //Groups.Add(GroupHørdum);
+            //Groups.Add(GroupKoldby);
+            //Groups.Add(GroupHundborg);
+            //Groups.Add(GroupStenbjerg);
+            //Groups.Add(GroupVangså);
+            //Groups.Add(GroupSundby);
             #endregion
 
             //templates
@@ -224,7 +224,7 @@ namespace Planning.Model
                 group.TemplateSchedules.Add(new GroupSchedule("Tirsdag"));
                 group.TemplateSchedules.Add(new GroupSchedule("Onsdag"));
                 group.TemplateSchedules.Add(new GroupSchedule("Torsdag"));
-                group.TemplateSchedules.Add(new GroupSchedule("fredag"));
+                group.TemplateSchedules.Add(new GroupSchedule("Fredag"));
                 group.TemplateSchedules.Add(new GroupSchedule("Lørdag"));
                 group.TemplateSchedules.Add(new GroupSchedule("Søndag"));
                 container.AddGroup(group);
@@ -270,12 +270,12 @@ namespace Planning.Model
 
                             if (i > 0)
                             {
-                                //schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.CalculateRouteDuration(schedule.TaskItems[i - 1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
+                                schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.CalculateRouteDuration(schedule.TaskItems[i - 1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
                             }
 
                             else if (i == 0)
                             {
-                                //schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.CalculateRouteDuration("Kærvej 3, 7752, Snedsted, Denmark", schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
+                                schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.CalculateRouteDuration("Kærvej 3, 7752, Snedsted, Denmark", schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
                             }
                         }
                     }

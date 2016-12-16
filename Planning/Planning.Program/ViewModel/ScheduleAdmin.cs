@@ -253,10 +253,10 @@ namespace Planning.ViewModel
         public TaskItem FindOptimalPlacement(Group group, DateTime selectedDate, TaskItem taskItem)
         {
             //List<TaskItem> tempList = new List<TaskItem>();
-            Tuple<int, TaskItem> tempItem = new Tuple<int, TaskItem>(int.MaxValue , null);
+            Tuple<double, TaskItem> tempItem = new Tuple<double, TaskItem>(double.MaxValue , null);
             List<EmployeeSchedule> employeeSchedules = group.GetSchedule(selectedDate).EmployeeSchedules;
             List<TaskItem> taskItemList = new List<TaskItem>();
-            int tempValue = 0;
+            double tempValue = 0;
             int length;
 
             foreach (EmployeeSchedule schedule in employeeSchedules)
@@ -266,22 +266,32 @@ namespace Planning.ViewModel
 
                 for (int i = 0; i < length; i++)
                 {
-                    tempValue = CompareRoutes(taskItem, taskItemList[i].Route.Waypoints[0], taskItemList[i].Route.Waypoints[1], selectedDate);
+                    if (taskItemList[i] != taskItem)
+                    {
+                        if (i != 0)
+                        {
+                            tempValue = CompareRoutes(taskItem, taskItemList[i - 1].TaskDescription.Citizen.GetAddress(selectedDate), taskItemList[i].TaskDescription.Citizen.GetAddress(selectedDate), selectedDate);
+                        }
+                        else
+                        {
+                            tempValue = CompareRoutes(taskItem, group.GroupAddress, taskItemList[i].TaskDescription.Citizen.GetAddress(selectedDate), selectedDate);
+                        }
 
-                    if (tempValue < tempItem.Item1)
-                        tempItem = new Tuple<int, TaskItem>(tempValue, taskItemList[i]);
+                        if (tempValue < tempItem.Item1)
+                            tempItem = new Tuple<double, TaskItem>(tempValue, taskItemList[i]);
+                    }
                 }
             }
 
             return tempItem.Item2;
         }
 
-        private int CompareRoutes(TaskItem taskItemClicked, string startAddress, string endAddress, DateTime selectedDate)
+        private double CompareRoutes(TaskItem taskItemClicked, Address startAddress, Address endAddress, DateTime selectedDate)
         {
-            RouteItem AC = RouteCalculator.GetRouteItem((Address)startAddress, taskItemClicked.TaskDescription.Citizen.GetAddress(selectedDate));
-            RouteItem CB = RouteCalculator.GetRouteItem(taskItemClicked.TaskDescription.Citizen.GetAddress(selectedDate), (Address)endAddress);
+            RouteItem AC = RouteCalculator.GetRouteItem(startAddress, taskItemClicked.TaskDescription.Citizen.GetAddress(selectedDate));
+            RouteItem CB = RouteCalculator.GetRouteItem(taskItemClicked.TaskDescription.Citizen.GetAddress(selectedDate), endAddress);
 
-            return AC.Duration.Seconds + CB.Duration.Seconds;
+            return AC.Duration.TotalMinutes + CB.Duration.TotalMinutes;
         }
 
         /// <summary>

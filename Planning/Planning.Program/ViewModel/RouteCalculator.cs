@@ -18,7 +18,7 @@ namespace Planning.ViewModel
         /// <summary>
         /// List of all routes as dictionary with waypoints as key and duration as value.
         /// </summary>
-        private static Dictionary<Tuple<string, string>, TimeSpan> _routeList = new Dictionary<Tuple<string, string>, TimeSpan>();
+        private static List<RouteItem> RouteItems = new List<RouteItem>();
 
         public static string[] Waypoints { get; set; }  //TODO slet
         private static string _startURLRoute = "http://dev.virtualearth.net/REST/V1/Routes/Driving?o=json";
@@ -78,12 +78,11 @@ namespace Planning.ViewModel
         /// <returns>Returns RouteItem.</returns>
         public static RouteItem GetRouteItem(Planning.Model.Address startAddress, Planning.Model.Address endAddress)  //TODO slet
         {
-        Tuple<string, string> tempTuple = new Tuple<string, string>(startAddress.AddressName, endAddress.AddressName);
-        KeyValuePair<Tuple<string, string>, TimeSpan> keyValuePair = _routeList.FirstOrDefault(r => r.Key.Equals(tempTuple));
+            RouteItem routeItem = RouteItems.FirstOrDefault(r => r.Waypoints[0] == startAddress.AddressName && r.Waypoints[1] == endAddress.AddressName);
 
-            if (!keyValuePair.Equals(default(KeyValuePair<Tuple<string, string>, TimeSpan>)))
+            if (routeItem != null)
             {
-                return GetExistingRoute(keyValuePair);
+                return routeItem;
             }
             else
             {
@@ -99,16 +98,19 @@ namespace Planning.ViewModel
         /// <returns>Returns RouteItem.</returns>
         private static RouteItem CalculateAndAddToList(string startAddressName, string endAddressName)
         {
-           
+            RouteItem routeItem;
+
             Waypoints = new string[] { startAddressName, endAddressName };
 
             WebResponse response = MakeRequest(CreateRequestURL());
             JObject jsonFile = ProcessRequest(response);
             DeserializeJSONObjects1(jsonFile);
 
-            _routeList.Add(new Tuple<string, string>(Waypoints[0], Waypoints[1]), Duration);
+            routeItem = new RouteItem(startAddressName, endAddressName, Duration);
 
-            return new RouteItem(startAddressName, endAddressName, Duration);
+            RouteItems.Add(routeItem);
+
+            return routeItem;
         }
 
         /// <summary>
@@ -137,8 +139,6 @@ namespace Planning.ViewModel
             }
             catch (Exception)
             {
-                Console.Beep();
-                Console.WriteLine("d'oh!");
                 return MakeRequest(requestURL);
             }
             
