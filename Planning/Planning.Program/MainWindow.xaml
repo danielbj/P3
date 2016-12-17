@@ -11,7 +11,7 @@
             <TabItem Header="Post">
                 <local:Mailbox></local:Mailbox>
             </TabItem>
-            <TabItem Header="Planer">
+            <TabItem Header="Planer" IsSelected="True">
                 <local:ScheduleView/>
             </TabItem>
             <TabItem Header="Grupper">

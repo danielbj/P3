@@ -28,7 +28,7 @@ namespace Planning.ViewModel
 
             int count = targetEmployeeSchedule.TaskItems.Count;
 
-            string toAddress = taskToPlan.TaskDescription.Citizen.GetAddress(CurrentDate).ToString();
+            Address toAddress = taskToPlan.TaskDescription.Citizen.GetAddress(CurrentDate);
 
             if (index > count)
             {
@@ -41,7 +41,7 @@ namespace Planning.ViewModel
 
             if (index == 0) 
             {
-                taskToPlan.Route.TimePeriod.Duration = RouteCalculator.CalculateRouteDuration(targetGroup.GroupAddress.ToString(), toAddress);
+                taskToPlan.Route.TimePeriod.Duration = RouteCalculator.GetRouteItem(targetGroup.GroupAddress, toAddress).Duration;
                 taskToPlan.Route.TimePeriod.StartTime = targetEmployeeSchedule.TimePeriod.StartTime;
                 taskToPlan.TimePeriod.StartTime = taskToPlan.Route.TimePeriod.EndTime;
             }
@@ -96,12 +96,12 @@ namespace Planning.ViewModel
             else
             {
                 TaskItem nextTask = targetEmployeeSchedule.TaskItems[index];
-                string nextTaskAddress = nextTask.TaskDescription.Citizen.GetAddress(CurrentDate).ToString();
+                Address nextTaskAddress = nextTask.TaskDescription.Citizen.GetAddress(CurrentDate);
 
                 if (index == 0)
                 {
                     nextTask.Route.TimePeriod.StartTime = targetEmployeeSchedule.TimePeriod.StartTime;
-                    nextTask.Route.TimePeriod.Duration = RouteCalculator.CalculateRouteDuration(targetGroup.GroupAddress.ToString(), nextTaskAddress);
+                    nextTask.Route.TimePeriod.Duration = RouteCalculator.GetRouteItem(targetGroup.GroupAddress, nextTaskAddress).Duration;
                 }
                 else
                 {
@@ -128,7 +128,7 @@ namespace Planning.ViewModel
         /// <param name="currentTask"></param>
         private void AdjustRouteDuration(TaskItem previousTask, TaskItem currentTask, DateTime date) 
         {
-            currentTask.Route.TimePeriod.Duration = RouteCalculator.CalculateRouteDuration(previousTask.TaskDescription.Citizen.GetAddress(date).ToString(), currentTask.TaskDescription.Citizen.GetAddress(date).ToString());
+            currentTask.Route.TimePeriod.Duration = RouteCalculator.GetRouteItem(previousTask.TaskDescription.Citizen.GetAddress(date), currentTask.TaskDescription.Citizen.GetAddress(date)).Duration;
         }
 
         /// <summary>
