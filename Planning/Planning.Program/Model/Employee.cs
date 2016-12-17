@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Planning.Model
 {
-    public class Employee //: IEmployee
+    public class Employee : IComparable<Employee>
     {
         public int EmployeeId { get; set; }
         public DateTime DateHired { get; private set; } = DateTime.MaxValue;
@@ -80,6 +80,11 @@ namespace Planning.Model
         public override string ToString()
         {
             return Firstname + " " + Lastname;
+        }
+
+        public int CompareTo(Employee other)
+        {
+            return string.Compare(this.Firstname, other.Firstname);
         }
     }
 }

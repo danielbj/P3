@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Planning.View"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="600">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -64,6 +64,8 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="NewEmployeeButton" Margin="3" Click="NewGroupButton_Click">Opret Medarbejder</Button>
+                <Button x:Name="NewGroupButton" Margin="3" Click="NewGroupButton_Click">Opret Gruppe</Button>
                 <Button x:Name="EditEmployeeButton" Margin="3">Rediger</Button>
                 <Button x:Name="DeleteEmployeeButton" Margin="3">Slet</Button>
             </StackPanel>

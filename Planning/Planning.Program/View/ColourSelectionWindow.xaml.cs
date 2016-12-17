@@ -10,26 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Planning.ViewModel;
 
-namespace Planning.View
+namespace Planning.Program.View
 {
     /// <summary>
-    /// Interaction logic for OverviewView.xaml
+    /// Interaction logic for ColourSelectionWindow.xaml
     /// </summary>
-    public partial class GroupView : UserControl
+    public partial class ColourSelectionWindow : Window
     {
-        public GroupView()
+        public ColourSelectionWindow()
         {
             InitializeComponent();
-            DataContext = new EmployeeOverviewViewModel();
-        }
-
-        private void NewGroupButton_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

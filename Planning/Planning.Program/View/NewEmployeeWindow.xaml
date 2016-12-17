@@ -1,0 +1,27 @@
+﻿<Page x:Class="Planning.View.NewEmployeeWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Planning.Program.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="185" d:DesignWidth="300"
+      Title="NewEmployeeWindow">
+    <Grid Margin="10,10,10,10">
+        <StackPanel Orientation="Vertical">
+            <TextBlock x:Name="EmployeeFirstname" Background="White" Margin="2" Text="Fornavn"/>
+            <TextBlock x:Name="EmployeeLastname" Background="White" Margin="2" Text="Efternavn"/>
+            <TextBlock x:Name="EmployeeNotes" Background="White" Height="50" Margin="2" Text="Noter"/>
+            <TextBlock x:Name="EmployeePhonenumber" Background="White" Margin="2" Text="Telefon nummer"/>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" >
+                <TextBlock x:Name="EmployeeStartime" Margin="2" Background="White" Text=" Start tid" Height="18" Width="50"></TextBlock>
+                <TextBlock Text="-" Margin="2"/>
+                <TextBlock x:Name="EmployeeEndtime" Text=" Slut tid" Margin="2" Background="White" Height="18" Width="50"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Button Name="CancelButton" Content="Anuller" Margin="2" Height="20" Width="50" Click="CancelButton_Click" ></Button>
+            <Button Name="CreateButton" Content="Opret" Margin="2" Height="20" Width="50" Click="CreateButton_Click" ></Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -28,9 +28,7 @@ namespace Planning.ViewModel
         List<TaskDescription> _taskDescriptionsClipBoard; //unassigned taskdescriptions
         List<Employee> _employeeClipBoard;                //unassigned employees
         private DatabaseControl DatabaseControl = new DatabaseControl();
-           
-
-
+        
         private GroupAdmin()
         {
             _groupContainer = DataBaseMockUp.LoadGroups();
@@ -71,7 +69,10 @@ namespace Planning.ViewModel
 
         public List<Employee> GetEmployeeClipBoard()
         {
-            return _employeeClipBoard;
+            List<Employee> result = new List<Employee>();
+            result = _employeeClipBoard;
+            result.Sort();
+            return result;
         }
 
         /// <summary>

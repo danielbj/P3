@@ -12,19 +12,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Planning.ViewModel;
 
-namespace Planning.View
+namespace Planning.Program.View
 {
     /// <summary>
-    /// Interaction logic for CitizenView.xaml
+    /// Interaction logic for NewEmployeeWindow.xaml
     /// </summary>
-    public partial class CitizenView : UserControl
+    public partial class NewEmployeeWindow : Page
     {
-        public CitizenView()
+        public NewEmployeeWindow()
         {
-            DataContext = new CitizenOverviewViewModel();
             InitializeComponent();
+        }
+
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

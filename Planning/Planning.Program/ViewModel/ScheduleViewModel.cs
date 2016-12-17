@@ -17,6 +17,8 @@ namespace Planning.ViewModel
         #region Properties
         private TaskItem _optimalPlaceMentTaskItem;
 
+
+
         public ObservableCollection<TaskItem> UnplannedTaskItems
         {
             get
@@ -59,8 +61,6 @@ namespace Planning.ViewModel
                 OnPropertyChanged(nameof(EmployeeSchedules));
             }
         }
-
-   
 
         public List<GroupSchedule> Templates
         {
@@ -109,6 +109,20 @@ namespace Planning.ViewModel
             }
         }
 
+        private Visibility _employeeButtonVisibility;
+        public Visibility EmployeeButtonVisibility
+        {
+            get
+            {
+                return _employeeButtonVisibility;
+            }
+            set
+            {
+                _employeeButtonVisibility = value;
+                OnPropertyChanged(nameof(SelectedCalendarType));
+            }
+        }
+
         public ObservableCollection<EmployeeSchedule> EmployeeSchedules
         {
             get
@@ -147,6 +161,7 @@ namespace Planning.ViewModel
         public RelayCommand LoadTemplateScheduleCommand { get; }
         public RelayCommand RemoveEmployeeScheduleCommand { get; }
         public RelayCommand ToggleUnplannedTaskItemPanelCommand { get; }
+
 
         public RelayCommand FlushToDatabase { get; }
 

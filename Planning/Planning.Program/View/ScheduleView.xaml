@@ -51,7 +51,7 @@
         </StackPanel>
         <Border BorderBrush="Black" BorderThickness="0 0 0 2" Grid.Row="1">
             <StackPanel x:Name="ButtonStackPanel" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
-                <Button x:Name="LoadButton" Content="Importer Grundplan" Padding="2" Margin="2" Command="{Binding LoadTemplateScheduleCommand}"/>
+                <Button x:Name="LoadButton" Content="Importer Grundplan" Padding="2" Margin="2" Command="{Binding LoadTemplateScheduleCommand}" Click="LoadButton_Click"/>
                 <Button x:Name="AddEmployeeButton" Content="Tilføj Kolonne" Padding="2" Margin="2" Command="{Binding AddEmployeeScheduleCommand}"/>
                 <ToggleButton x:Name="UnplannedTaskItemToggleButton" Content="Uplanlagte Opgaver" Padding="2" Margin="2" IsChecked="False"/>
                 <Slider x:Name="UISlider" Margin="2" Padding="2" Maximum="10" Minimum="0.5" Orientation="Horizontal" Width="200" Value="1"/>
@@ -125,15 +125,15 @@
                                         <Button Grid.Column="0" 
                                                 VerticalAlignment="Stretch" 
                                                 HorizontalAlignment="Stretch" 
-                                                Content="{Binding}" 
-                                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ChangeEmployeeCommand}" 
-                                                CommandParameter="{Binding}"/>
-                                        <Menu Grid.Column="1">
-                                            <MenuItem Header="...">
+                                                Content="{Binding}" Visibility="{Binding EmployeeButtonVisibility}"
+                                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ChangeEmployeeCommand}"
+                                                
+                                                CommandParameter="{Binding}" 
+                                                />
+                                        <Menu Grid.Column="2">
+                                            <MenuItem Header="\/">
                                                 <MenuItem Header="Fjern Kolonne" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.RemoveEmployeeScheduleCommand}" CommandParameter="{Binding}"/>
-                                                <!--MenuItem x:Name="ColorMenuItem" Header="Vælg Farve">
-                                                    <MenuItem Header="Red"/>
-                                                </MenuItem-->
+                                                <MenuItem Header="Skift farve" />
                                             </MenuItem>
                                         </Menu>
                                     </Grid>
