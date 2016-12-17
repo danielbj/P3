@@ -12,7 +12,7 @@ namespace Planning.Model
         public string LastName { get; set; }
         public DateTime DateAdmitted { get; set; } = DateTime.MaxValue;
         public DateTime DateDischarged { get; set; } = DateTime.MaxValue;
-        private List<Address> _addresses;
+        public List<Address> _addresses { get; private set; }
         public List<TaskDescription> Tasks { get; set; }
 
         private string _cpr;
@@ -73,6 +73,20 @@ namespace Planning.Model
             Address addr = _addresses.Find(a => a.StartDate <= date);
             return addr;
         }
-             
+
+        public override bool Equals(object obj) {
+            Citizen tempC = obj as Citizen;
+
+            if (tempC != null) {
+                return String.Equals(tempC.ToString(), this.ToString());
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode() {
+            return this.ToString().GetHashCode();
+        }
+
     }
 }    

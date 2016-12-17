@@ -9,15 +9,16 @@ namespace Planning.ViewModel
 {
     public class CitizenAdmin
     {
+        DatabaseControl DatabaseControl = new DatabaseControl();
 
         private CitizenContainer _citizenContainer;
 
         public CitizenAdmin()
         {
-            // TODO rigtig database
-            _citizenContainer = DataBaseMockUp.LoadCitizens();
+            //_citizenContainer = DataBaseMockUp.LoadCitizens();
+            _citizenContainer = DatabaseControl.ReadDistinctCitizens();
 
-            
+
         }
 
         public List<Citizen> GetCitizens()

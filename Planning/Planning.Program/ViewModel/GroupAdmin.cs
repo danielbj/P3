@@ -33,12 +33,14 @@ namespace Planning.ViewModel
 
         private GroupAdmin()
         {
-            _groupContainer = DataBaseMockUp.LoadGroups();
-            //_groupContainer = DatabaseControl.ReadAll();
+            //_groupContainer = DataBaseMockUp.LoadGroups();
+            _groupContainer = DatabaseControl.ReadAll();
 
             _taskDescriptionsClipBoard = new List<TaskDescription>();
-            _employeeClipBoard = DataBaseMockUp.LoadEmployees();
-            //_employeeClipBoard = new List<Employee>();
+            
+            //_employeeClipBoard = DataBaseMockUp.LoadEmployees();
+            _employeeClipBoard = DatabaseControl.ReadDistinctEmployees();
+            
         }
         /// <summary>
         /// Gets all groups in the group container

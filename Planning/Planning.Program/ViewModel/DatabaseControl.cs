@@ -9,8 +9,7 @@ using Planning.Model;
 
 namespace Planning.ViewModel
 {
-    public class DatabaseControl
-    {
+    public class DatabaseControl {
         public DatabaseControl() {
 
         }
@@ -24,10 +23,8 @@ namespace Planning.ViewModel
             return succes;
         }
 
-        public void InputQuery(string query)
-        {
-            using (DatabaseContext ctx = new DatabaseContext())
-            {
+        public void InputQuery(string query) {
+            using (DatabaseContext ctx = new DatabaseContext()) {
                 ctx.Database.ExecuteSqlCommand(query);
                 ctx.SaveChanges();
             }
@@ -36,37 +33,49 @@ namespace Planning.ViewModel
         public List<Citizen> CitizenQuery(string query) //Remember tablenames are dbo.[namefromServerObjectExplorer] 
         {
             List<Citizen> cList = new List<Citizen>();
-            using (DatabaseContext ctx = new DatabaseContext())
-            {
+            using (DatabaseContext ctx = new DatabaseContext()) {
                 cList = ctx.CitizenDB.SqlQuery(query).ToList();
             }
 
             return cList;
         }
 
-        public void AddCitizen(Citizen c)
-        {
-            using (DatabaseContext ctx = new DatabaseContext())
-            {
+        public void AddCitizen(Citizen c) {
+            using (DatabaseContext ctx = new DatabaseContext()) {
                 ctx.CitizenDB.Add(c);
                 ctx.SaveChanges();
             }
         }
 
-        public List<Citizen> ReadCitizens()
+        public List<Citizen> ReadCitizens() {
+            List<Citizen> cList = new List<Citizen>();
+            using (DatabaseContext ctx = new DatabaseContext()) {
+                if (ctx.CitizenDB != null) {
+                    foreach (Citizen c in ctx.CitizenDB) {
+                        cList.Add(c);
+                    }
+                }
+
+                return cList;
+            }
+        }
+
+        public CitizenContainer ReadDistinctCitizens()
         {
+            CitizenContainer cCont = new CitizenContainer();
             List<Citizen> cList = new List<Citizen>();
             using (DatabaseContext ctx = new DatabaseContext())
             {
                 if (ctx.CitizenDB != null)
                 {
-                    foreach (Citizen c in ctx.CitizenDB)
-                    {
-                        cList.Add(c);
-                    }
+                    cList = ctx.CitizenDB.Include(c => c._addresses).Include(c => c.Tasks).ToList();
                 }
             }
-            return cList;
+            foreach (Citizen c in cList.Distinct()) {
+                cCont.AddCitizen(c);
+            }
+
+            return cCont;
         }
 
         public void AddGroupSchedule(GroupSchedule gs)
@@ -130,6 +139,15 @@ namespace Planning.ViewModel
             return eList;
         }
 
+        public List<Employee> ReadDistinctEmployees() {
+            List<Employee> eList = new List<Employee>();
+            using (DatabaseContext ctx = new DatabaseContext()) {
+                if (ctx.EmployeeDB != null) {
+                    eList = ctx.EmployeeDB.ToList();
+                }
+            }
+            return eList.Distinct().ToList();
+        }
 
         public void AddEmployeeSchedule(EmployeeSchedule es)
         {
@@ -184,21 +202,54 @@ namespace Planning.ViewModel
 
         public void AddTaskItem(TaskItem ti) {
             using (DatabaseContext ctx = new DatabaseContext()) {
-                ctx.TaskItemDB.Add(ti);
+                if (ctx.TaskDescDB.Find(ti.TaskItemId) == null)
+                    ctx.TaskItemDB.Add(ti);
                 ctx.SaveChanges();
             }
         }
 
         public List<TaskItem> ReadTaskItems() {
-            List<TaskItem> tdList = new List<TaskItem>();
+            List<TaskItem> tiList = new List<TaskItem>();
             using (DatabaseContext ctx = new DatabaseContext()) {
                 if (ctx.TaskItemDB != null) {
                     foreach (TaskItem ti in ctx.TaskItemDB) {
-                        tdList.Add(ti);
+                        tiList.Add(ti);
                     }
                 }
             }
-            return tdList;
+            return tiList;
+        }
+
+
+        public List<TaskItem> ReadClipboardTaskItems() { 
+            List<TaskItem> tiList = new List<TaskItem>();
+            IEnumerable<int> intL = new List<int>();
+            using (DatabaseContext ctx = new DatabaseContext()) {
+                if (ctx.TaskItemDB != null) {
+                    tiList = ctx.TaskItemDB.Include(ti => ti.Route)
+                                            .Include(ti => ti.TaskDescription)
+                                                .Include("TaskDescription.Citizen")
+                                                    .Include("TaskDescription.Citizen._addresses").Where(e => e.State == TaskItem.Status.Unplanned).ToList();
+                }
+            }
+
+            tiList = tiList.Where(t => (t.Route != null && t.TaskDescription != null && t.TimePeriod != null && t.TaskDescription.Citizen != null)).ToList();//Better filter TODO.
+
+
+            return new List<TaskItem>();
+        }
+
+        public List<TaskItem> ReadCancelledClipboardTaskItems() {
+            List<TaskItem> tiList = new List<TaskItem>();
+            using (DatabaseContext ctx = new DatabaseContext()) {
+                if (ctx.TaskItemDB != null) {
+                    tiList = ctx.TaskItemDB.Include(ti => ti.Route)
+                                            .Include(ti => ti.TaskDescription)
+                                                .Include("TaskDescription.Citizen")
+                                                    .Include("TaskDescription.Citizen._addresses").Where(e => e.State == TaskItem.Status.Cancelled).ToList();
+                }
+            }
+            return tiList;
         }
 
 
@@ -235,8 +286,37 @@ namespace Planning.ViewModel
             List<Group> gList2 = new List<Group>();
             using (DatabaseContext ctx = new DatabaseContext())
             {
-                gList = ctx.GroupDB.Include(g => g.DailySchedules.Select(gs => gs.EmployeeSchedules.Select(es => es.TaskItems.Select(ti => ti.TaskDescription).Select(td => td.Citizen)))).Include(g => g.Employees).Include(g => g.TaskDescriptions).ToList<Group>();
-                gList2 = ctx.GroupDB.Include(g => g.TemplateSchedules.Select(gs => gs.EmployeeSchedules.Select(es => es.TaskItems.Select(ti => ti.TaskDescription).Select(td => td.Citizen)))).Include(g => g.TaskDescriptions).ToList<Group>();
+                gList = ctx.GroupDB.Include(g => g.DailySchedules
+                                                    .Select(gs => gs.EmployeeSchedules
+                                                        .Select(es => es.TaskItems
+                                                            .Select(ti => ti.TaskDescription)
+                                                                .Select(td => td.Citizen)
+                                                                    .Select(c => c.Tasks))))
+                                                        .Include("DailySchedules.EmployeeSchedules.Employee")
+                                                            .Include("DailySchedules.EmployeeSchedules.TaskItems.Route")
+                                                            .Include("DailySchedules.EmployeeSchedules.TaskItems.TaskDescription.TaskItems")
+                                                            .Include("DailySchedules.EmployeeSchedules.TaskItems.TaskDescription.TaskItems.Route")
+                                                            .Include("DailySchedules.EmployeeSchedules.TaskItems.TaskDescription.Citizen._addresses")
+                                    .Include(g => g.Employees)
+                                    .Include(g=> g.GroupAddress)
+                                    .Include(g => g.TaskDescriptions)
+                                    .Include(g => g.TemplateSchedules
+                                                    .Select(gs => gs.EmployeeSchedules
+                                                        .Select(es => es.TaskItems
+                                                            .Select(ti => ti.TaskDescription)
+                                                                .Select(td => td.Citizen)
+                                                                    .Select(c=> c.Tasks))))
+                                                            .Include("TemplateSchedules.EmployeeSchedules.TaskItems.Route")
+                                                            .Include("TemplateSchedules.EmployeeSchedules.TaskItems.TaskDescription.TaskItems")
+                                                            .Include("TemplateSchedules.EmployeeSchedules.TaskItems.TaskDescription.TaskItems.Route")
+                                                            .Include("TemplateSchedules.EmployeeSchedules.TaskItems.TaskDescription.Citizen._addresses").ToList<Group>();
+
+                //gList2 = ctx.GroupDB.Include(g => g.TemplateSchedules
+                //                                    .Select(gs => gs.EmployeeSchedules
+                //                                        .Select(es => es.TaskItems
+                //                                            .Select(ti => ti.TaskDescription)
+                //                                                .Select(td => td.Citizen))))
+                //                    .Include(g => g.TaskDescriptions).ToList<Group>();
             }
 
             foreach (Group g in gList)
@@ -251,5 +331,35 @@ namespace Planning.ViewModel
             return grC;
 
         }
+
+        public void AddRouteItem(RouteItem ri) {
+            RouteItem found;
+            using (DatabaseContext ctx = new DatabaseContext()) {
+                found = ctx.RouteItemDB.Find(ri.RouteItemId);
+                if (found == null)
+                    ctx.RouteItemDB.Add(ri);
+                else if (!found.Equals(ri))
+                    ctx.RouteItemDB.Add(ri);
+                ctx.SaveChanges();
+            }
+        }
+
+        public List<RouteItem> ReadRouteItems() {
+            List<RouteItem> riList = new List<RouteItem>();
+            using (DatabaseContext ctx = new DatabaseContext()) {
+                if (ctx.RouteItemDB != null) {
+                    foreach (RouteItem ri in ctx.RouteItemDB) {
+                        ri.GenerateWayPointsFromDatabase();
+                        riList.Add(ri);
+                    }
+                }
+            }
+
+
+            return riList.Where(r => r.WaypointsForDatabase != null).ToList() ;
+        }
+
+
+
     }
 }

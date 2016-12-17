@@ -309,6 +309,7 @@ namespace Planning.ViewModel
             if (viewModel.Excecute && viewModel.SelectedEmployee != null)
             {
                 _scheduleAdmin.AssignEmployeeToEmployeeSchedule(viewModel.SelectedEmployee, es);
+
             }
             UpdateSchedule();
 
@@ -332,12 +333,10 @@ namespace Planning.ViewModel
         }
 
 
-        public void FlushToDatabaseAction(object input)
-        {
+        public void FlushToDatabaseAction(object input) {
             _databaseControl.EraseDatabaseContent();
 
-            foreach (Group g in _groupAdmin.GetAllGroups())
-            {
+            foreach (Group g in _groupAdmin.GetAllGroups()) {
                 _databaseControl.AddGroup(g);
                 //Store Daily Schedules 
                 //foreach (KeyValuePair<string, GroupSchedule> KVgs in g.TemplateSchedules) { 
@@ -352,11 +351,19 @@ namespace Planning.ViewModel
             //    _databaseControl.AddEmployeeSchedule(es);
             //}
 
-            foreach (TaskItem ti in _scheduleAdmin.GetTaskClipBoard())
-            {
+            foreach (TaskItem ti in _scheduleAdmin.GetTaskClipBoard()) {
                 _databaseControl.AddTaskItem(ti);
             }
 
+            foreach (Employee em in _groupAdmin.GetEmployeeClipBoard()) {
+                _databaseControl.AddEmployee(em);
+            }
+
+            foreach (RouteItem ri in RouteCalculator.GetAllRouteItems()) {
+                _databaseControl.AddRouteItem(ri);
+            }
+
+            MessageBox.Show("Gemt..!");
         }
     }
 }

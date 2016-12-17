@@ -32,34 +32,34 @@
                 <Button x:Name="AcceptButton" Margin="3" Padding ="5" Content="Godkend" Command="{Binding AcceptChanges}" FontSize="20" FontFamily="Calibri Light" Background="#FF72CB86" BorderBrush="Black"/>
             </StackPanel>
             <Border Grid.Row="1" BorderThickness="2" BorderBrush="#FF787878">
-                <TextBlock TextWrapping="Wrap" Margin="3" Text="{Binding SelectedMessage.Content, Mode=OneWay}" FontSize="30" Background="#FFE2E2E2"></TextBlock>
+                <TextBlock TextWrapping="Wrap" Margin="3" Text="{Binding SelectedMessage.Content, Mode=OneWay}" FontSize="20" Background="#FFE2E2E2"></TextBlock>
             </Border>
             <ScrollViewer Grid.Row="2" Margin="3">
                 <StackPanel xml:space="preserve">
-                    <Label Content="Beskrivelse af ændring:" FontSize="24" FontWeight="Bold"/>
-                    <TextBlock  Margin="20,0,0,0" Padding="5" FontSize="20">
+                    <Label Content="Beskrivelse af ændring:" FontSize="18" FontWeight="Bold"/>
+                    <TextBlock  Margin="20,0,0,0" Padding="5" FontSize="14">
                         <Run FontStyle="Italic">Info:</Run>
                         <Run Text="{Binding SelectedMessage.Change.Description, Mode=OneWay}"/>
                     </TextBlock>
-                    <TextBlock Margin="20,0,0,0" Padding="5" FontSize="20">
+                    <TextBlock Margin="20,0,0,0" Padding="5" FontSize="14">
                         <Run FontStyle="Italic">Ny Værdi:</Run>
                         <Run Text="{Binding SelectedMessage.Change.NewValue, Mode=OneWay}" FontWeight="Bold"/>
                     </TextBlock>
-                    <TextBlock Margin="20,0,0,0" Padding="5" FontSize="20">
+                    <TextBlock Margin="20,0,0,0" Padding="5" FontSize="14">
                         <Run FontStyle="Italic">Ændring Oprettet:    </Run>
                         <Run Text="{Binding SelectedMessage.Change.DateCreated, Mode=OneWay}"/>
                     </TextBlock>
-                    <TextBlock Margin="20,0,0,0" Padding="5" FontSize="20">
+                    <TextBlock Margin="20,0,0,0" Padding="5" FontSize="14">
                         <Run FontStyle="Italic">Ændring accepteret:    </Run>
                         <Run Text="{Binding SelectedMessage.Change.IsApplied, Mode=OneWay}"/>
                     </TextBlock>
-                    <TextBlock Margin="20,0,0,0" Padding="5" FontSize="20">
+                    <TextBlock Margin="20,0,0,0" Padding="5" FontSize="14">
                         <Run FontStyle="Italic">Tid for accept:    </Run>
                         <Run Text="{Binding SelectedMessage.Change.DateApplied, Mode=OneWay}"/>
                     </TextBlock>
-                    <Label Content="Beskrivelse af påvirket element:" FontWeight="Bold" FontSize="24"/>
+                    <Label Content="Beskrivelse af påvirket element:" FontWeight="Bold" FontSize="18"/>
                     <Border Margin="25,0,0,0" BorderBrush="Gray" BorderThickness="2" HorizontalAlignment="Left">
-                        <TextBlock Margin="20,0,0,0" Padding="3" Text="{Binding SelectedMessage.Change.Obj, Mode=OneWay}" FontSize="26" HorizontalAlignment="Left" Foreground="#FF01067A"/>
+                        <TextBlock Margin="20,0,0,0" Padding="3" Text="{Binding SelectedMessage.Change.Obj, Mode=OneWay}" FontSize="20" HorizontalAlignment="Left" Foreground="#FF01067A"/>
                     </Border>
                     <!--<Label Content="Addresse"/>
                     <Label Margin="20,0,0,0" Content="Badevej 10, 7752 Snedsted"/>

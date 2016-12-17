@@ -9,6 +9,7 @@ namespace Planning.Model
 {
     public class Address : IComparable
     {
+        public int AddressId { get; set; }
         public DateTime StartDate = DateTime.MinValue;
         private string _address;
         public string AddressName { //TODO validate that it is string?

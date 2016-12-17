@@ -13,11 +13,13 @@ namespace Planning.ViewModel
 {
     public class DatabaseContext : DbContext
     {
+        public DbSet<Address> AddressDB { get; set; }
         public DbSet<Citizen> CitizenDB { get; set; }
         public DbSet<GroupSchedule> GroupScheduleDB { get; set; }
         public DbSet<Employee> EmployeeDB { get; set; }
         public DbSet<EmployeeSchedule> EScheduleDB { get; set; }
         public DbSet<Group> GroupDB { get; set; }
+        public DbSet<RouteItem> RouteItemDB { get; set; }
         public DbSet<TaskDescription> TaskDescDB { get; set; }
         public DbSet<TaskItem> TaskItemDB { get; set; }
 

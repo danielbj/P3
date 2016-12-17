@@ -81,6 +81,17 @@ namespace Planning.Model
         {
             return Firstname + " " + Lastname;
         }
+
+        public override bool Equals(object obj) {
+            Employee tempEmpl = obj as Employee;
+            if (tempEmpl != null)
+                return String.Equals(tempEmpl.ToString(), this.ToString());
+            return false;
+        }
+
+        public override int GetHashCode() {
+            return this.ToString().GetHashCode();
+        }
     }
 }
 
