@@ -109,16 +109,5 @@ namespace Planning.UnitTest.Model
             Assert.AreEqual(note, taskDescription.NoteFromPlanner);
         }
 
-        [TestCase(30, "testDescription", "2016-12-21", "testAssignmet", 1, "testNote")]
-        [Category("ToString Method")]
-        public void ToString_GetsToString_AreEqual(int duration, string description, DateTime startDate, string assignment, int frequency, string note)
-        {
-            TaskDescription taskDescription = new TaskDescription(duration, description, _citizen, _timePeriod, startDate, assignment, frequency);
-
-            string actual = taskDescription.ToString();
-            string expected = _citizen.LastName + ", " + _citizen.FirstName + ", " + assignment + ", " + TimeSpan.FromMinutes(duration).ToString();
-
-            Assert.AreEqual(expected, actual);
-        }
     }
 }

@@ -112,21 +112,16 @@ namespace Planning.UnitTest.Admin
 
     #region AdmitCitizen        
 
-        [TestCase(4, 5, 6)]
+        [TestCase(4)]
+        [TestCase(5)]
+        [TestCase(6)]
         public void AdmitCitien_CitizenIsDischarged_CitizenAdmitted(int citizen)
         {
-            //arrange
-            
 
-
-            //act
-            _visitator.AdmitCitizen(NewTestCitizen(citizen));
-
-            //assert
             
         }
 
-        [TestCase(1, 2, 3)]
+        [TestCase(1)]
         public void AdmitCitizen_CitizenAlreadyAdmitted_ContinueWithoutAdmitting(int citizen)
         {
 

@@ -75,6 +75,7 @@ namespace Planning.Model
             var clone = new TaskItem(this.TaskDescription);
             clone.TimePeriod.StartTime = TimeSpan.FromSeconds(this.TimePeriod.StartTime.TotalSeconds);
             clone.Route.TimePeriod.Duration = TimeSpan.FromSeconds(this.Route.Duration.TotalSeconds);
+            this.TaskDescription.TaskItems.Add(clone); // New
             return clone;
         }
 

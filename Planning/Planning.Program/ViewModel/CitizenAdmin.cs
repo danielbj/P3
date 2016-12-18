@@ -16,8 +16,11 @@ namespace Planning.ViewModel
         {
             // TODO rigtig database
             _citizenContainer = DataBaseMockUp.LoadCitizens();
+        }
 
-            
+        public CitizenAdmin(CitizenContainer citizenContainer)
+        {
+            _citizenContainer = citizenContainer;
         }
 
         public List<Citizen> GetCitizens()

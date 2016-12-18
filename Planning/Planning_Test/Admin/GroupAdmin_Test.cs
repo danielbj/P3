@@ -13,18 +13,14 @@ namespace Planning.UnitTest.Admin
     [TestFixture]
     class GroupAdmin_Test
     {
-        //GetAllGroups()
-        //GetEmployeesOnDuty(Group group, DateTime date) 
-        //GetEmployeeClipBoard()
-        //GetGroupInfo(Group group)
-        //GetAllEmployeesInGroup(Group group)
-        //AssignTaskDecriptionToGroup(TaskDescription taskDescription, Group targetGroup) //taskItems skal i taskClipBoard i scheduleAdmin
-        //AddNewGroup(string name)
-        //DeleteGroup(Group group)
-        //NewEmployee(string firstname, string lastname, string notes, string phoneNumber, Group group, TimeSpan startTime, TimeSpan endTime)
-        //RemoveEmployeeFromGroup(Group group, Employee employee)
-        //AssignEmployeeToGroup(Group group, Employee employee)
-        //AddNotesToEmployee(Employee employee, string note)
+
+        private GroupAdmin _groupAdmin;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _groupAdmin = GroupAdmin.Instance;
+        }
 
 
         #region TestGroups
@@ -71,8 +67,94 @@ namespace Planning.UnitTest.Admin
 
         #endregion
 
+        ////GetAllGroups()
 
+        [Test]
+        public void GetAllGroups_ThereAreGroups_ReturnsAllGroups()
+        {
+           
+            int expected = 7;
+            int actual;
 
+            var groups = _groupAdmin.GetAllGroups();
 
+            actual = groups.Count;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void GetEmployeesOnDuty_NoEmployeesOnDuty_ReturnsEmptyList()
+        {
+            int expected = 0;
+
+            // var employees = _groupAdmin.GetEmployeesOnDuty(group,new DateTime(2016,1,1));
+
+            //int actual = employees.Count;
+
+            // Assert.AreEqual(expected, actual);
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GetEmployeesOnDuty_EmployeesOnDuty_ReturnsList()
+        {
+            int expected = 0;
+
+            // var employees = _groupAdmin.GetEmployeesOnDuty(group,new DateTime(2016,1,1));
+
+            //int actual = employees.Count;
+
+            // Assert.AreEqual(expected, actual);
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GetEmployeesOnDuty_GroupDoesNotExistInGroupContainer_ThrowException()
+        {
+            Assert.Throws<ArgumentException>(() => _groupAdmin.GetEmployeesOnDuty(new Group("group","address"), new DateTime(2016, 1, 1)));
+        }
+
+        [Test]
+        public void GetGroupInfo_GroupDoesNotExistInGroupContainer_ThrowException()
+        {
+            Assert.Throws<ArgumentException>(() => _groupAdmin.GetGroupInfo(new Group("group", "address")));
+        }
+
+        [Test]
+        public void GetGroupInfo_GroupDoesExistInGroupContainer_ReturnsString()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void GetAllEmployeesInGroup_GroupDoesNotExistInGroupContainer_ThrowException()
+        {
+            Assert.Throws<ArgumentException>(() => _groupAdmin.GetAllEmployeesInGroup(new Group("group", "address")));
+        }
+
+        [Test]
+        public void GetAllEmployeesInGroup_GroupDoesExistInGroupContainer_ReturnsString()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void DeleteGroup_GroupDoesNotExistInGroupContainer_ReturnsString()
+        {
+            Assert.Throws<ArgumentException>(() => _groupAdmin.DeleteGroup(new Group("group", "address")));
+        }
+
+        [Test]
+        public void DeleteGroup_GroupDoesExistInGroupContainer_GroupIsRemoved()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void DeleteGroup_GroupDoesExistInGroupContainer_EmployeesAddedToClipBoard()
+        {
+            Assert.Fail();
+        }
     }
 }

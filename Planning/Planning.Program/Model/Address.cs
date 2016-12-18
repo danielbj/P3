@@ -46,7 +46,7 @@ namespace Planning.Model
 
         public override int GetHashCode()
         {
-            return (int)(Math.Pow(StartDate.Day + StartDate.Month + StartDate.Year, 2) + AddressName.Length); // Used to minimize change of coincidence between two hash codes.
+            return AddressName.GetHashCode();
         }
 
         public override string ToString()

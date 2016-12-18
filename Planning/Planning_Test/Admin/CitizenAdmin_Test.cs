@@ -13,9 +13,18 @@ namespace Planning.UnitTest.Admin
     class CitizenAdmin_Test
     {
 
+        //CitizenAdmin CitizenAdmin;
+
+        //[SetUp]
+        //public void SetUpTestClass()
+        //{
+        //   // CitizenAdmin = new CitizenAdmin(new CitizenContainer());
+        //}
+
         //GetCitizens()
         //DeleteCitizen(Citizen citizen)
 
+        
 
         #region TestAddresses
 
@@ -47,10 +56,13 @@ namespace Planning.UnitTest.Admin
 
 
         #region GetCitizens
+        [Test]
         public void GetCitizens_ThereExistsCitizensInTheContainer_ReturnAListOfCitizens()
         {
 
         }
+
+        [Test]
         public void GetCitizens_CitizenContainerIsEMpty_ReturnAEmptyList()
         {
 
@@ -61,10 +73,13 @@ namespace Planning.UnitTest.Admin
 
         #region DeleteCitizen
 
-        public void DeleteCitizen_CitizenNotFoundInCitizenContainer_SignalError()
+        [Test]
+        public void DeleteCitizen_CitizenNotFoundInCitizenContainer_ThrowException()
         {
 
         }
+
+        [Test]
         public void DeleteCitizen_CitizenIsInCitizenContainer_RemoveCitizenFromCitizenContainer()
         {
 

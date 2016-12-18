@@ -7,15 +7,15 @@ using Planning.Model;
 
 namespace Planning.ViewModel
 {
-    class ScheduleAdmin
+    public class ScheduleAdmin
     {
         private List<TaskItem> _unplannedTaskClipBoard;
         private List<TaskItem> _cancelledTaskClipBoard;     
         
         public ScheduleAdmin()
         {
-            _unplannedTaskClipBoard = new List<TaskItem>();
-            _cancelledTaskClipBoard = new List<TaskItem>();
+           // _unplannedTaskClipBoard = new List<TaskItem>();
+          //  _cancelledTaskClipBoard = new List<TaskItem>();
         }
 
         //new
@@ -227,7 +227,7 @@ namespace Planning.ViewModel
             return _unplannedTaskClipBoard;
         }
 
-        public void AddTasksToClipBoard(List<TaskItem> tasksToClipBoard) //fx når en ny taskDescription assignes til en gruppe. unplanned TaskItems lægges i clipboard.
+        public void AddTasksToClipBoard(List<TaskItem> tasksToClipBoard)
         {
             foreach (TaskItem task in tasksToClipBoard)
             {
