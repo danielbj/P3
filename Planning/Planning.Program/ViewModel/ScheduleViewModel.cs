@@ -17,8 +17,6 @@ namespace Planning.ViewModel
         #region Properties
         private TaskItem _optimalPlaceMentTaskItem;
 
-
-
         public ObservableCollection<TaskItem> UnplannedTaskItems
         {
             get
@@ -161,8 +159,6 @@ namespace Planning.ViewModel
         public RelayCommand LoadTemplateScheduleCommand { get; }
         public RelayCommand RemoveEmployeeScheduleCommand { get; }
         public RelayCommand ToggleUnplannedTaskItemPanelCommand { get; }
-
-
         public RelayCommand FlushToDatabase { get; }
 
         #endregion
@@ -174,7 +170,6 @@ namespace Planning.ViewModel
         private DatabaseControl _databaseControl;
 
         #endregion
-
 
         public ScheduleViewModel()
         {
@@ -345,7 +340,6 @@ namespace Planning.ViewModel
             }
             UpdateSchedule();
         }
-
 
         public void FlushToDatabaseAction(object input)
         {

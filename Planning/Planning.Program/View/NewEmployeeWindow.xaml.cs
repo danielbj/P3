@@ -10,15 +10,14 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Planning.Program.View
+namespace Planning.View
 {
     /// <summary>
     /// Interaction logic for NewEmployeeWindow.xaml
     /// </summary>
-    public partial class NewEmployeeWindow : Page
+    public partial class NewEmployeeWindow : Window
     {
         public NewEmployeeWindow()
         {

@@ -71,9 +71,13 @@
     </ApplicationDefinition>
     <Compile Include="Converters\StringToColorConverter.cs" />
     <Compile Include="Converters\MinutesToHeightConverter.cs" />
+    <Compile Include="ViewModel\EmployeeCreationWindowViewModel.cs" />
     <Compile Include="ViewModel\GroupViewModel.cs" />
     <Compile Include="ViewModel\MailboxViewModel.cs" />
     <Compile Include="ViewModel\MessageAdmin.cs" />
+    <Compile Include="View\ColourSelectionWindow.xaml.cs">
+      <DependentUpon>ColourSelectionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Mailbox.xaml.cs">
       <DependentUpon>Mailbox.xaml</DependentUpon>
     </Compile>
@@ -103,9 +107,6 @@
     <Compile Include="View\GroupView.xaml.cs">
       <DependentUpon>GroupView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ColourSelectionWindow.xaml.cs">
-      <DependentUpon>ColourSelectionWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\NewEmployeeWindow.xaml.cs">
       <DependentUpon>NewEmployeeWindow.xaml</DependentUpon>
     </Compile>
@@ -115,6 +116,10 @@
     <Compile Include="View\TemplateSelectionWindow.xaml.cs">
       <DependentUpon>TemplateSelectionWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\ColourSelectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Mailbox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -142,10 +147,6 @@
     <Page Include="View\GroupView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\ColourSelectionWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\NewEmployeeWindow.xaml">
       <SubType>Designer</SubType>

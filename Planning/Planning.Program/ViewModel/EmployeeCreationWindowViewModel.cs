@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Planning.View;
 using Planning.Model;
+using Planning.View;
 
 namespace Planning.ViewModel
 {
-    class TemplateSelectionViewModel : ViewModelBase
+    class EmployeeCreationWindowViewModel : ViewModelBase
     {
-        private List<GroupSchedule> _templates;
-        public List<GroupSchedule> Templates
+        private List<Employee> _employees;
+        public List<Employee> Templates
         {
-            get { return _templates; }
-            set { _templates = value; }
+            get { return _employees; }
+            set { _employees = value; }
         }
 
         private GroupSchedule _selectedTemplate;
@@ -35,11 +35,11 @@ namespace Planning.ViewModel
         public RelayCommand ImportCommand { get; }
         public bool Excecute { get; private set; }
 
-        private TemplateSelectionWindow _window;
+        private NewEmployeeWindow _window;
 
-        public TemplateSelectionViewModel(List<GroupSchedule> templates, TemplateSelectionWindow window)
+        public EmployeeCreationWindowViewModel(List<Employee> Employees, NewEmployeeWindow window)
         {
-            _templates = templates;
+            _employees = Employees;
             CancelCommand = new RelayCommand(p => Cancel(), p => true);
             ImportCommand = new RelayCommand(p => Import(), p => true);
 
@@ -56,7 +56,6 @@ namespace Planning.ViewModel
         {
             Excecute = false;
             _window.Close();
-        } 
-
+        }
     }
 }
