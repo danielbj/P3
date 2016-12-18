@@ -102,7 +102,18 @@ namespace Planning.Model
             return Name;
         }
 
+        public override bool Equals(object obj) {
+            Group tempG = obj as Group;
 
+            if (tempG != null)
+                return String.Equals(this.Name, tempG.Name);
+
+            return false;
+        }
+
+        public override int GetHashCode() {
+            return this.Name.GetHashCode();
+        }
 
 
     }

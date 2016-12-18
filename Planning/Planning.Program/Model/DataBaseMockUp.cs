@@ -208,7 +208,7 @@ namespace Planning.Model
             //var GroupSundby = new Group("Sundby", "Kærvej 3, 7752, Snedsted, Denmark");
 
             Groups.Add(GroupSnedsted);
-            //Groups.Add(GroupHørdum);
+            Groups.Add(GroupHørdum);
             //Groups.Add(GroupKoldby);
             //Groups.Add(GroupHundborg);
             //Groups.Add(GroupStenbjerg);

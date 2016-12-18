@@ -156,6 +156,7 @@ namespace Planning.ViewModel
 
         private GroupAdmin _groupAdmin;
         private ScheduleAdmin _scheduleAdmin;
+        private CitizenAdmin _citizenAdmin;
         private DatabaseControl _databaseControl;
 
         #endregion
@@ -187,8 +188,8 @@ namespace Planning.ViewModel
       
 
             FlushToDatabase = new RelayCommand(FlushToDatabaseAction, null);
-        }
 
+        }
 
         private void RemoveEmployeeSchedule(EmployeeSchedule employeeSchedule)
         {

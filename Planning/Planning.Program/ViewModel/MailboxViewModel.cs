@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Planning.Model;
 
 namespace Planning.ViewModel
 {
@@ -46,17 +47,38 @@ namespace Planning.ViewModel
 
         #region Fields
         MessageAdmin _messageAdmin;
+        GroupAdmin _groupAdmin;
         #endregion
 
 
 
         public MailboxViewModel() {
             _messageAdmin = new MessageAdmin();
+            _groupAdmin = GroupAdmin.Instance;
+            MakeMessagesMockup();
+
             Messages = _messageAdmin.GetAllMessages();
             SelectedMessage = Messages.First();
 
             AcceptChanges = new RelayCommand(p => AcceptChangeHandling(), p => SelectedMessage.IsRead);
 
+        }
+
+        public void MakeMessagesMockup() {
+            List<TaskDescription> tdList = new List<TaskDescription>();
+            List<EmployeeSchedule> empSchList;
+            ITaskdescritpionChange change;
+            empSchList = _groupAdmin.GetAllGroups().FirstOrDefault().TemplateSchedules.FirstOrDefault().EmployeeSchedules.Take(4).ToList();
+
+            foreach (EmployeeSchedule empSch in empSchList) {
+                empSch.TaskItems.Take(2).ToList().ForEach(t => tdList.Add(t.TaskDescription));
+            }
+
+            foreach (TaskDescription td in tdList) {
+                change = new TaskDurationChange(td, TimeSpan.FromMinutes(60), "Ændredede visiteret varighed");
+                _messageAdmin.AddMessage(change, "Hej planlæggere, her er en ændring til varighed. God jul!");
+                td.AddChange(change);
+            }
         }
 
         private void AcceptChangeHandling() {

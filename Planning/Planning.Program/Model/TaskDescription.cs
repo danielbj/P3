@@ -20,7 +20,7 @@ namespace Planning.Model
         public List<TaskItem> TaskItems { get; set; } = new List<TaskItem>();
         public TimeSpan Duration { get; set; }        
         public TimePeriod TimeFrame;
-        private List<ITaskdescritpionChange> _changes;
+        private List<ITaskdescritpionChange> _changes  = new List<ITaskdescritpionChange>();
 
         #endregion
 
@@ -31,8 +31,7 @@ namespace Planning.Model
         { 
             Duration = TimeSpan.FromMinutes(duration);
             Description = description;
-            TaskItems = new List<TaskItem>();
-            _changes = new List<ITaskdescritpionChange>();            
+            TaskItems = new List<TaskItem>();                        
             Citizen = citizen;
             TimeFrame = timeFrame;
             StartDate = startDate;
@@ -56,9 +55,13 @@ namespace Planning.Model
             return _changes.FindAll(t => Filter(t));
         }
 
+        public void AddChange(ITaskdescritpionChange tdChange) {
+            _changes.Add(tdChange);
+        }
+
         public override string ToString()
         {
-            return Citizen.FirstName + ", " + Citizen.LastName + ", " + Description + ", " + Duration.ToString();
+            return Citizen.FirstName + ", " + Citizen.LastName + ", " + AssignmentType + ", " + Duration.ToString();
         }
 
 

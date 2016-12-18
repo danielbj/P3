@@ -68,7 +68,7 @@ namespace Planning.ViewModel
             {
                 if (ctx.CitizenDB != null)
                 {
-                    cList = ctx.CitizenDB.Include(c => c._addresses).Include(c => c.Tasks).ToList();
+                    cList = ctx.CitizenDB.Include(c => c._addresses).Include(c => c.Tasks).Include(c => c.Tasks.Select(t => t.TaskItems)).ToList();
                 }
             }
             foreach (Citizen c in cList.Distinct()) {
@@ -283,7 +283,6 @@ namespace Planning.ViewModel
         {
             GroupContainer grC = new GroupContainer();
             List<Group> gList = new List<Group>();
-            List<Group> gList2 = new List<Group>();
             using (DatabaseContext ctx = new DatabaseContext())
             {
                 gList = ctx.GroupDB.Include(g => g.DailySchedules
@@ -310,21 +309,9 @@ namespace Planning.ViewModel
                                                             .Include("TemplateSchedules.EmployeeSchedules.TaskItems.TaskDescription.TaskItems")
                                                             .Include("TemplateSchedules.EmployeeSchedules.TaskItems.TaskDescription.TaskItems.Route")
                                                             .Include("TemplateSchedules.EmployeeSchedules.TaskItems.TaskDescription.Citizen._addresses").ToList<Group>();
-
-                //gList2 = ctx.GroupDB.Include(g => g.TemplateSchedules
-                //                                    .Select(gs => gs.EmployeeSchedules
-                //                                        .Select(es => es.TaskItems
-                //                                            .Select(ti => ti.TaskDescription)
-                //                                                .Select(td => td.Citizen))))
-                //                    .Include(g => g.TaskDescriptions).ToList<Group>();
             }
 
-            foreach (Group g in gList)
-            {
-                grC.AddGroup(g);
-            }
-
-            foreach (Group g in gList2)
+            foreach (Group g in gList.Distinct())
             {
                 grC.AddGroup(g);
             }
