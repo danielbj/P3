@@ -20,7 +20,7 @@ namespace Planning.UnitTest.Model
         [SetUp]
         public void InstCitizen()
         {
-            _citizen = new Citizen("0000000000", "testFirstname", "testLastname", new Address("Snerlevej 11, Aalborg"), new DateTime(2016, 12, 21));
+            _citizen = new Citizen("0000000000", "testFirstname", "testLastname", new Address("Snerlevej 11, Aalborg", new DateTime(2016, 1, 1)), new DateTime(2016, 12, 21));
         }
 
         [SetUp]

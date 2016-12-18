@@ -26,7 +26,7 @@ namespace Planning.Model
             DailySchedules = new List<GroupSchedule>();
             TemplateSchedules = new List<GroupSchedule>();
             Name = name;
-            GroupAddress = new Address(address);
+            GroupAddress = new Address(address, DateTime.Today);
             TaskDescriptions = new List<TaskDescription>();
 
         }

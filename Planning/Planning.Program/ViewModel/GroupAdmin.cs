@@ -24,19 +24,22 @@ namespace Planning.ViewModel
         }
 
         GroupContainer _groupContainer;
-        ScheduleAdmin _scheduleAdmin; 
-        List<TaskDescription> _taskDescriptionsClipBoard; //unassigned taskdescriptions
-        List<Employee> _employeeClipBoard;                //unassigned employees
+        List<Employee> _employeeClipBoard;  
         private DatabaseControl DatabaseControl = new DatabaseControl();
 
         private GroupAdmin()
         {
             _groupContainer = DataBaseMockUp.LoadGroups();
             //_groupContainer = DatabaseControl.ReadAll();
-
-            _taskDescriptionsClipBoard = new List<TaskDescription>();
             _employeeClipBoard = DataBaseMockUp.LoadEmployees();
             //_employeeClipBoard = new List<Employee>();
+        }
+
+        public GroupAdmin(GroupContainer groupContainer)
+        {
+            _groupContainer = groupContainer;
+            _employeeClipBoard = new List<Employee>();
+            _instance = this;
         }
 
         /// <summary>
@@ -105,26 +108,17 @@ namespace Planning.ViewModel
                 throw new ArgumentException("Group not found.");
             }
         }
-        /// <summary>
-        /// Assigns a TaskDescription to a group.
-        /// </summary>
-        /// <param name="taskDescription"></param>
-        /// <param name="targetGroup"></param>
-        public void AssignTaskDecriptionToGroup(TaskDescription taskDescription, Group targetGroup) //taskItems skal i taskClipBoard i scheduleAdmin
-        {
-            targetGroup.TaskDescriptions.Add(taskDescription);
-            _scheduleAdmin.AddTasksToClipBoard(taskDescription.TaskItems);
-        }
 
         /// <summary>
         /// Adds a new group to the group container.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="address"></param>
-        public void AddNewGroup(string name)
+        public Group AddNewGroup(string name)
         {
             Group group = new Group(name, "Kærvej 2, 7752 Snedsted");
             _groupContainer.AddGroup(group);
+            return group;
         }
         /// <summary>
         /// Deletes a group from groupcontainer
@@ -132,11 +126,6 @@ namespace Planning.ViewModel
         /// <param name="group"></param>
         public void DeleteGroup(Group group)
         {
-            foreach (TaskDescription taskDesription in group.TaskDescriptions)
-            {
-                _taskDescriptionsClipBoard.Add(taskDesription);
-            }
-
             foreach (Employee employee in group.Employees)
             {
                 _employeeClipBoard.Add(employee);

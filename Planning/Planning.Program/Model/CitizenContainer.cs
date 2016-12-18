@@ -14,25 +14,15 @@ namespace Planning.Model
         public List<Citizen> AdmittedCitizens { get; set; }
         public List<Citizen> DischargedCitizens { get; set; }
 
-        public event CitizenContainerCitizenChangeHandler OnCitizenAdded;
-        public event CitizenContainerCitizenChangeHandler OnCitizenRemoved;
-
         public CitizenContainer()
         {
             AdmittedCitizens = new List<Citizen>();
+            DischargedCitizens = new List<Citizen>();
         }
 
         public void AddCitizen(Citizen citizen)
         {
             AdmittedCitizens.Add(citizen); // Check with lists
-            OnCitizenAdded?.Invoke(citizen);
-        }
-
-        public void DeleteCitizen(Citizen citizen, DateTime dateDischarged)
-        {
-            citizen.DateDischarged = dateDischarged;
-            AdmittedCitizens.Remove(citizen); // Check with lists
-            OnCitizenRemoved?.Invoke(citizen);
         }
 
         public List<Citizen> GetCitizens(Predicate<Citizen> Filter) //hvornår skal vi egentlig det?

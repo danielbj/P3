@@ -88,7 +88,6 @@
     <Compile Include="ViewModel\RouteCalculator.cs" />
     <Compile Include="ViewModel\ScheduleAdmin.cs" />
     <Compile Include="ViewModel\ScheduleViewModel.cs" />
-    <Compile Include="ViewModel\SignalingClass.cs" />
     <Compile Include="ViewModel\TaskAdmin.cs" />
     <Compile Include="ViewModel\TemplateSelectionViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />

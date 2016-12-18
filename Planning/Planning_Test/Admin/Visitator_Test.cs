@@ -12,270 +12,136 @@ namespace Planning.UnitTest.Admin
     [TestFixture]
     class Visitator_Test
     {
-        //NewTask(int duration, string description, Citizen citizen, TimePeriod timeFrame, DateTime startDate, string assignment, int count)
-        //AdmitCitizen(Citizen citizen) 
-        //DischargeCitizen(Citizen citizen, DateTime dateDischarged)
-        //ChangeTask(TaskDescription task, DateTime date)   
-        //CreateCitizen(string cpr, string firstname, string lastname, string addressString)
-        //ChangeCitizenAddress(Citizen citizen, string addressString, DateTime fromDate)
-        //CreateAddress(string address, DateTime date)
-        //ValidateAddress(string address)
-        //ApproveSchedule(GroupSchedule groupSchedule, bool status)
 
-        //GetAllAdmittedCitizens()
-        //GetAllDischargedCitizens()
-
-        //[UnitOfWork_StateUnderTest_ExpectedBehavior]
+        Visitator visitator;
+        CitizenContainer container;
+        Citizen citizen1;
+        Citizen citizen2;
 
 
-        #region TestAddresses
-
-        Address SnedstedKolonihavevej16 = new Address("Kolonihavevej 16, 7752, Snedsted, Denmark");
-        Address SnedstedVandhøjvej9 = new Address("Vandhøjvej 9, 7752, Snedsted, Denmark");
-        Address SnedstedRosenvænget22 = new Address("Rosenvænget 22, 7752, Snedsted, Denmark");
-        Address Snedstedkærvej9 = new Address("Kærvej 9, 7752, Snedsted, Denmark");
-        Address SnedstedVandhøjvej19 = new Address("Vandhøjvej 19, 7752, Snedsted, Denmark");
-        Address SnedstedGartnervænget7 = new Address("Gartnervænget 7, 7752, Snedsted, Denmark");
-        Address SnedstedIdrætsvej13 = new Address("Idrætsvej 13, 7752, Snedsted, Denmark");
-        #endregion
-
-        #region TestCitizens
-        private Citizen NewTestCitizen(int i)
+        [SetUp]
+        public void Setup()
         {
-            List<Citizen> Citizens = new List<Citizen>();            
-            Citizens.Add(new Citizen("1111111111", "Kathy", "Peterson", SnedstedKolonihavevej16, DateTime.Today));
-            Citizens.Add(new Citizen("1111111111", "Emily", "Simmons", SnedstedVandhøjvej9, DateTime.Today));
-            Citizens.Add(new Citizen("1111111111", "Scott", "Hill", Snedstedkærvej9, DateTime.Today));
-            Citizens.Add(new Citizen("1111111111", "Harry", "Morgan", SnedstedRosenvænget22, DateTime.Today));
-            Citizens.Add(new Citizen("1111111111", "Anthony", "Smith", SnedstedVandhøjvej19, DateTime.Today));
-            Citizens.Add(new Citizen("1111111111", "John", "Morris", SnedstedGartnervænget7, DateTime.Today));
-            Citizens.Add(new Citizen("1111111111", "Judith", "Miller", SnedstedIdrætsvej13, DateTime.Today));
+            container = new CitizenContainer();
 
-            return Citizens[i];
+            var addr = new Address("address 1", new DateTime(2016,1,1));
+            citizen1 = new Citizen("0000000001", "Kathy", "Peterson", addr, new DateTime(2016, 1, 1));
+            citizen2 = new Citizen("0000000002", "Hanne", "Hansen", addr, new DateTime(2016, 1, 1));
+
+            container.AdmittedCitizens.Add(citizen1);
+            container.DischargedCitizens.Add(citizen2);
+
+            visitator = new Visitator(container);
         }
 
-        #endregion
-
-        #region TestSchedules
-        private GroupSchedule NewTestTempSchedule(int i)
+        [Test]
+        public void NewTask_CitizenIsAdmitted_NewTaskAddedToCitizen()
         {
-            List<GroupSchedule> TempSchedules = new List<GroupSchedule>();
-            TempSchedules.Add(new GroupSchedule(new DateTime(2016, 12, 21)));
-            TempSchedules.Add(new GroupSchedule(new DateTime(2016, 12, 20)));
-            TempSchedules.Add(new GroupSchedule(new DateTime(2016, 12, 22)));
-            TempSchedules.Add(new GroupSchedule(new DateTime(2016, 12, 23)));
-            TempSchedules.Add(new GroupSchedule(new DateTime(2016, 12, 24)));
-            return TempSchedules[i];
+            int expected = 1;
+            visitator.NewTask(10, "Task", citizen1, new TimePeriod(TimeSpan.FromHours(1)), DateTime.Today, "assignment", 1);
+
+            int actual = citizen1.Tasks.Count;
+
+            Assert.AreEqual(expected, actual);
         }
 
-        private GroupSchedule NewTestDailySchedule(int i)
+        [Test]
+        public void NewTask_CitizenIsNotAdmitted_ThrowException()
         {
-            List<GroupSchedule> DailySchedules = new List<GroupSchedule>();
-            DailySchedules.Add(new GroupSchedule("Monday"));
-            DailySchedules.Add(new GroupSchedule("Wednesday"));
-            DailySchedules.Add(new GroupSchedule("Thursday"));
-            DailySchedules.Add(new GroupSchedule("Friday"));
-            DailySchedules.Add(new GroupSchedule("Saturday"));
-            DailySchedules.Add(new GroupSchedule("Sunday"));
-            return DailySchedules[i];
+            Assert.Throws<ArgumentException>(()=> visitator.NewTask(10, "Task", citizen2, new TimePeriod(TimeSpan.FromHours(1)), DateTime.Today, "assignment", 1));
         }
 
-        #endregion
-
-        #region CitizenContainers
-        private List<Citizen> AdmittedTestCitizens()
+        [Test]
+        public void NewTask_CitizenIsNotInSystem_ThrowException()
         {
-            List<Citizen> admittedCitizens = new List<Citizen>();            
-            admittedCitizens.Add(NewTestCitizen(1));
-            admittedCitizens.Add(NewTestCitizen(2));
-            admittedCitizens.Add(NewTestCitizen(3));
-            return admittedCitizens;
+            var addr = new Address("address 1", new DateTime(2016, 1, 1));
+            var citizen3 = new Citizen("1111111111", "Jack", "Jackson", addr, DateTime.Today);
+            Assert.Throws<ArgumentException>(() => visitator.NewTask(10, "Task", citizen3 , new TimePeriod(TimeSpan.FromHours(1)), DateTime.Today, "assignment", 1));
         }
 
-        private List<Citizen> DischargedTestCitizens()
+        [Test]
+        public void AdmidCitizen_CitizenIsDiscarged_CitizenAdmitted()
         {
-            List<Citizen> dischargedCitizens = new List<Citizen>();
-            dischargedCitizens.Add(NewTestCitizen(4));
-            dischargedCitizens.Add(NewTestCitizen(5));
-            dischargedCitizens.Add(NewTestCitizen(6));
-            
-            return dischargedCitizens;
+            visitator.AdmitCitizen(citizen2);
+            bool result = container.AdmittedCitizens.Contains(citizen2);
+
+            Assert.IsTrue(result);
         }
 
-        #endregion
-
-        private Visitator _visitator = new Visitator();
-
-
-
-
-
-    #region AdmitCitizen        
-
-        [TestCase(4)]
-        [TestCase(5)]
-        [TestCase(6)]
-        public void AdmitCitien_CitizenIsDischarged_CitizenAdmitted(int citizen)
+        [Test]
+        public void AdmidCitizen_CitizenIsDiscarged_CitizenRemovedFromDischagedList()
         {
+            visitator.AdmitCitizen(citizen2);
+            bool result = container.DischargedCitizens.Contains(citizen2);
 
-            
+            Assert.IsFalse(result);
         }
 
-        [TestCase(1)]
-        public void AdmitCitizen_CitizenAlreadyAdmitted_ContinueWithoutAdmitting(int citizen)
-        {
-
+        [Test]
+        public void AdmidCitizen_CitizenIsNotDiscarged_ThrowsException()
+        { 
+            Assert.Throws<ArgumentException>(()=> visitator.AdmitCitizen(citizen1));
         }
 
-        [TestCase(0)]
-        public void AdmitCitizen_CitizenNotFoundInTheSystem_SignalError(int citizen)
-        {
-
-        }
-    #endregion
-
-        #region DischargeCitizen
-        public void DischargeCitizen_CitizenAlreadyDischarged_ContinueWithoutDischarging()
-        {
-
-        }
-
+        [Test]
         public void DischargeCitizen_CitizenIsAdmitted_CitizenDischarged()
         {
+            visitator.DischargeCitizen(citizen1, DateTime.Today);
+            bool result = container.DischargedCitizens.Contains(citizen1);
 
+            Assert.IsTrue(result);
         }
 
-        public void DischargeCitizen_CitizenNotFound_SignalError()
+        [Test]
+        public void DischargeCitizen_CitizenIsAdmitted__CitizenRemovedFromAdmittedList()
         {
+            visitator.DischargeCitizen(citizen1, DateTime.Today);
+            bool result = container.AdmittedCitizens.Contains(citizen1);
 
+            Assert.IsFalse(result);
         }
 
-        #endregion
-
-        #region ChangeTask!MethodNotImplemented!
-        //not implemented
-        #endregion
-
-        #region NewTask
-
-        public void NewTask_ValidInput_TaskDescriptionAddedToCitizen()
+        [Test]
+        public void DischargeCitizen_CitizenIsNotAdmitted__ThrowsException()
         {
-
+            Assert.Throws<ArgumentException>(() => visitator.DischargeCitizen(citizen2, DateTime.Today));
         }
-        public void NewTask_ValidInput_TaskItemGenerated() 
+
+        [Test]
+        public void CreateCitizen_CitizenIsNew_CitizenAdmitted()
         {
+            var citizen = visitator.CreateCitizen("0000000003", "Adam", "Adamson", "Adamroad 1");
 
+            bool result = container.AdmittedCitizens.Contains(citizen);
+
+            Assert.IsTrue(result);
         }
 
-        public void NewTask_CountIsLessThanOne_SignalInputError()
+        [Test]
+        public void CreateCitizen_CitizenAlreadyInSystem_ThrowsException()
         {
-
+            Assert.Throws<ArgumentException>(() => visitator.CreateCitizen("0000000001", "Kathy", "Peterson", "address"));
         }
-        public void NewTask_CitizenNotFound_SignalError()
+
+        [Test]
+        public void ChangeCitzenAddress_ValidAddress_AddressAdded()
         {
+            //string addressString = "Selma Lagerløfsvej 300, 9220 Aalborg Øst, Danmark";
 
+            //visitator.ChangeCitizenAddress(citizen1, addressString, new DateTime(2016, 1, 2));
+
+            //var address = citizen1.GetAddress(new DateTime(2016, 1, 2));
+            //Assert.AreEqual(addressString, address.AddressName);
         }
 
-        public void NewTask_DurationIsLessThanOne_SignalInputError()
+        [Test]
+        public void ChangeCitzenAddress_InValidAddress_ThrowsException()
         {
+            //string addressString = "Invalid -1";
+
+            //Assert.Throws<ArgumentException>(() => visitator.ChangeCitizenAddress(citizen1, addressString, new DateTime(2016, 1, 2)));
 
         }
-
-        public void NewTask_DurationNegative_SignalInputError()
-        {
-
-        }
-
-        #endregion
-
-        #region CreateCitizen
-        public void CreateCitizen_ValidInput_CitizenAddedToCitizenContainer()
-        {
-
-        }
-
-        public void CreateCitizen_InvalidAddress_SignalInputError()
-        {
-
-        }
-
-        public void CreateCitizen_InvalidCPRNumber_SignalInputError()
-        {
-
-        }
-
-        public void CreateCitizen_CPRContainsHyphen_FormatCPRString()
-        {
-
-        }
-
-        public void CreateCitizen_LastNameEmpty_SignalInputError()
-        {
-
-        }
-
-        public void CreateCitizen_FirstNameEmpty_SignalInputError()
-        {
-
-        }
-
-
-
-        #endregion
-
-        #region ChangeCitizenAddress
-
-        public void ChangeCitizenAddress_ValidInput_AddAddressToCitizen()
-        {
-
-        }
-        public void ChangeCitizenAddress_CitizenNotFound_SignalError()
-        {
-
-        }
-
-        public void ChangeCitizenAddress_InvalidAddress_SignalInputError()
-        {
-
-        }
-
-        public void ChangeCitizenAddress_AddressEmpty_SignalInputError()
-        {
-
-        }
-
-
-
-
-        #endregion
-
-        #region ApproveSchedule
-
-        public void ApproveSchedule_ApproveStatusTrue_SetApprovalStatusToTrue()
-        {
-
-        }
-
-        public void ApproveSchedule_ApproveStatusFalse_SetApprovalStatusToFalse()
-        {
-
-        }
-
-        public void ApproveSchedule_ScheduleNotFound_SignalError()
-        {
-
-        }
-
-        public void ApproveSchedule_ScheduleAlreadyApproved_Continue()
-        {
-
-        }
-
-        #endregion
-
-
-
-
 
 
 

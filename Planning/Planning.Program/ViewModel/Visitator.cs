@@ -11,9 +11,9 @@ namespace Planning.ViewModel
     {
         private CitizenContainer _citizenContainer;
         
-        public Visitator()
+        public Visitator(CitizenContainer citizenContainer)
         {
-
+            _citizenContainer = citizenContainer;
         }
         /// <summary>
         /// Adds a new TaskDescription to a citizen.
@@ -30,6 +30,7 @@ namespace Planning.ViewModel
             if (_citizenContainer.AdmittedCitizens.Contains(citizen))
             {
                 TaskDescription newTask = new TaskDescription(duration, description, citizen, timeFrame, startDate, assignment, count);
+                citizen.AddTask(newTask);
             }
             else if (_citizenContainer.DischargedCitizens.Contains(citizen))
             {
@@ -85,15 +86,28 @@ namespace Planning.ViewModel
             }            
         } 
 
-        /// <summary>
-        /// Changes the TaskDescription.
-        /// </summary>
-        /// <param name="task">Task description that is changed</param>
-        /// <param name="date">Date for the change</param>
-        public void ChangeTask(TaskDescription task, DateTime date)
+        public TaskDescriptionstringChange MakeTaskDescriptionStringChange(TaskDescription taskDescription, string descriptionString)
         {
-            //taskChangeskal implementeres inden
+            return new TaskDescriptionstringChange(taskDescription, descriptionString, "");
         }
+
+        public TaskDurationChange MakeTaskDurationChange(TaskDescription taskDescription, TimeSpan duration)
+        {
+            return new TaskDurationChange(taskDescription, duration, "");
+        }
+
+        public TaskFrequencyChange MakeTaskFrequencyChange(TaskDescription taskDescription, int frequency)
+        {
+            return new TaskFrequencyChange(taskDescription, frequency, "");
+        }
+
+        public CitizenAddTaskChange MakeCitizenAddTaskChange(Citizen citizen, TaskDescription taskDescription)
+        {
+            return new CitizenAddTaskChange(citizen, taskDescription, "");
+        }
+
+
+
         /// <summary>
         /// Creates a new citizen in the system. Admits the citizen automatically.
         /// </summary>
@@ -101,11 +115,21 @@ namespace Planning.ViewModel
         /// <param name="firstname">First name</param>
         /// <param name="lastname">Last name</param>
         /// <param name="addressString">Address</param>
-        public void CreateCitizen(string cpr, string firstname, string lastname, string addressString)
+        public Citizen CreateCitizen(string cpr, string firstname, string lastname, string addressString)
         {
+            int index1 = _citizenContainer.AdmittedCitizens.FindIndex(c => c.CPR == cpr);
+            int index2 = _citizenContainer.DischargedCitizens.FindIndex(c => c.CPR == cpr);
+
+            if (index1 > 0 || index2 > 0)
+            {
+                throw new ArgumentException("Citizen already exists in the system!");
+            }
+
             Address address = CreateAddress(addressString, DateTime.Today);
             Citizen citizen = new Citizen(cpr, firstname, lastname, address, DateTime.Today);
             _citizenContainer.AdmittedCitizens.Add(citizen);
+
+            return citizen;
         }
         /// <summary>
         /// Changes the address of a citizen.
@@ -113,11 +137,20 @@ namespace Planning.ViewModel
         /// <param name="citizen">Citizen that has changed address.</param>
         /// <param name="addressString">The new address.</param>
         /// <param name="fromDate">The date address is valid from.</param>
-        public void ChangeCitizenAddress(Citizen citizen, string addressString, DateTime fromDate)
+        public CitizenAddAddressChange ChangeCitizenAddress(Citizen citizen, string addressString, DateTime fromDate)
         {
-            Address newAddress = CreateAddress(addressString, fromDate);
-            citizen.AddAddress(newAddress);
+            try
+            {
+                Address newAddress = CreateAddress(addressString, fromDate);
+                return new CitizenAddAddressChange(citizen, newAddress, "");
+            }
+            catch (ArgumentException e)
+            {
+                throw e;
+            }   
         }
+
+
 
         /// <summary>
         /// Creates a new Address from a string and date
@@ -129,9 +162,8 @@ namespace Planning.ViewModel
         {
             if (ValidateAddress(address))
             {
-                var adr = new Address(address);
+                var adr = new Address(address, date);
                 return adr;
-                // return new Address(address, date);
             }
             else
             {

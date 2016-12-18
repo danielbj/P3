@@ -20,12 +20,12 @@ namespace Planning.UnitTest.Model
         [SetUp]
         public void InitCitizen()
         {
-            _citizen = new Citizen("0000000000", "testFirstname", "testLastname", new Address("Snerlevej 11, Aalborg"), new DateTime(2016, 12, 21));
+            _citizen = new Citizen("0000000000", "testFirstname", "testLastname", new Address("Snerlevej 11, Aalborg", new DateTime(2016, 1, 1)), new DateTime(2016, 12, 21));
         }
         [SetUp]
         public void InstTaskDescription()
         {
-            _taskDescription = new TaskDescription(30, "testTaskDescription", new Citizen("0000000000", "testFirstname", "testLastname", new Address("Snerlevej 11, 9000"), new DateTime(2016, 12, 21)), new TimePeriod(new TimeSpan(00, 30, 00)), new DateTime(2016, 12, 21), "testAssignment", 1);
+            _taskDescription = new TaskDescription(30, "testTaskDescription", new Citizen("0000000000", "testFirstname", "testLastname", new Address("Snerlevej 11, 9000", new DateTime(2016, 1, 1)), new DateTime(2016, 12, 21)), new TimePeriod(new TimeSpan(00, 30, 00)), new DateTime(2016, 12, 21), "testAssignment", 1);
         }
         #endregion
 
@@ -92,21 +92,21 @@ namespace Planning.UnitTest.Model
         public void GetTasks_CorrectDate_ReturnsExpectedAddress()
         {
             //Arrange 
-            Address address = new Address("Snerlevej 11, Aalborg") { StartDate = new DateTime(2015, 12, 31) };
+            Address address = new Address("Snerlevej 11, Aalborg", new DateTime(2016, 1, 1)) { StartDate = new DateTime(2015, 12, 31) };
 
             Citizen c = new Citizen("1234567890", "bo", "bosen", address, new DateTime(2012, 1, 1));
 
             for (int i = 1; i < 10; i += 2)
             {
                 DateTime d = new DateTime(2016, 1, i);
-                Address a = new Address("Snerlevej 11, Aalborg") { StartDate = d };
+                Address a = new Address("Snerlevej 11, Aalborg", new DateTime(2016, 1, 1)) { StartDate = d };
                 c.AddAddress(a);
             }
 
             //Act 
             Address actualAddress = c.GetAddress(new DateTime(2016, 1, 4));
 
-            Address expectedAdress = new Address("Snerlevej 11, Aalborg") { StartDate = new DateTime(2016, 1, 3) };
+            Address expectedAdress = new Address("Snerlevej 11, Aalborg", new DateTime(2016, 1, 1)) { StartDate = new DateTime(2016, 1, 3) };
 
             //assert 
             Assert.AreEqual(expectedAdress, actualAddress);
@@ -119,18 +119,18 @@ namespace Planning.UnitTest.Model
         [Category("Edit Address")]
         public void AddAddress_AddressAdded_True(string addressName)
         {
-            Address address = new Address(addressName);
+            Address address = new Address(addressName, new DateTime(2016, 1, 1));
 
             _citizen.AddAddress(address);
 
-            Assert.AreEqual(address, _citizen.GetAddress(new DateTime()));
+            Assert.AreEqual(address, _citizen.GetAddress(new DateTime(2016, 1, 1)));
         }
 
         [TestCase("2016-12-21", "Snerlevej 11, Aalborg")]
         [Category("Edit Address")]
         public void GetAddress_AddressFetched_True(DateTime dateTime, string addressName)
         {
-            Address expectedAddress = new Address(addressName);
+            Address expectedAddress = new Address(addressName, new DateTime(2016, 1, 1));
             _citizen.AddAddress(expectedAddress);
 
             Address actualAddress = _citizen.GetAddress(dateTime);

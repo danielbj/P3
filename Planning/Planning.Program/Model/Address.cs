@@ -24,9 +24,15 @@ namespace Planning.Model
         [Obsolete("Only needed for serialization and materialization in Entity Framework", true)]
         public Address() {    }
 
-        public Address(string addressName)
+        //public Address(string addressName)
+        //{
+        //    AddressName = addressName;
+        //}
+
+        public Address(string addressName, DateTime fromDate)
         {
             AddressName = addressName;
+            StartDate = fromDate;
         }
 
         public int CompareTo(object obj)
@@ -54,9 +60,9 @@ namespace Planning.Model
             return AddressName;
         }
 
-        public static explicit operator Address(string addressName)
-        {
-            return new Address(addressName);
-        }
+        //public static explicit operator Address(string addressName)
+        //{
+        //    return new Address(addressName);
+        //}
     }
 }

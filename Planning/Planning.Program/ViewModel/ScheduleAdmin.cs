@@ -14,8 +14,8 @@ namespace Planning.ViewModel
         
         public ScheduleAdmin()
         {
-           // _unplannedTaskClipBoard = new List<TaskItem>();
-          //  _cancelledTaskClipBoard = new List<TaskItem>();
+            _unplannedTaskClipBoard = new List<TaskItem>();
+            _cancelledTaskClipBoard = new List<TaskItem>();
         }
 
         //new
@@ -213,6 +213,12 @@ namespace Planning.ViewModel
         /// <param name="employeeSchedule"></param>
         public void RemoveEmployeeSchedule(Group group, GroupSchedule groupSchedule, EmployeeSchedule employeeSchedule)  //from template
         {
+
+            if (!groupSchedule.EmployeeSchedules.Contains(employeeSchedule))
+            {
+                throw new ArgumentException();
+            }
+
             List<TaskItem> tasks = employeeSchedule.TaskItems.ToList();
 
             foreach (TaskItem task in tasks)
@@ -245,8 +251,7 @@ namespace Planning.ViewModel
         /// <param name="employee"></param>
         /// <param name="employeeSchedule"></param>
         public void AssignEmployeeToEmployeeSchedule(Employee employee, EmployeeSchedule employeeSchedule)
-        {
-            //Employee skal være en del af den gruppe som har den employee schedule
+        { 
             employeeSchedule.Employee = employee;            
         } 
 
@@ -295,24 +300,15 @@ namespace Planning.ViewModel
         }
 
         /// <summary>
-        /// Makes a clone of the template and assigns it to a daily schedule
+        /// Makes a clone of the template
         /// </summary>
         /// <param name="template"></param>
         /// <param name="daily"></param>
         public GroupSchedule CopyTemplateScheduleToDailySchedule(GroupSchedule template)
         {
-            return CloneSchedule(template);
+            return template.CloneSchedule();
         }
 
-        /// <summary>
-        /// Clones a schedule
-        /// </summary>
-        /// <param name="schedule"></param>
-        /// <returns></returns>
-        private GroupSchedule CloneSchedule(GroupSchedule schedule)
-        {
-            return GroupSchedule.CloneSchedule(schedule);
-        }
         public void LockTaskInEmployeeSchedule(TaskItem task, TimeSpan time, EmployeeSchedule employeeschedule)
         {
             throw new NotImplementedException();

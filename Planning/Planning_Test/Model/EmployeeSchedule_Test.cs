@@ -110,9 +110,9 @@ namespace Planning.UnitTest.Model
 
         private void AddAddresses()
         {
-            _addresses.Add(new Address("Snerlevej 11, Aalborg"));
-            _addresses.Add(new Address("Niels Bohrs Vej 36, Aalborg"));
-            _addresses.Add(new Address("Alfred Christensens Vej 7B, Nærum"));
+            _addresses.Add(new Address("Snerlevej 11, Aalborg", new DateTime(2016, 1, 1)));
+            _addresses.Add(new Address("Niels Bohrs Vej 36, Aalborg", new DateTime(2016, 1, 1)));
+            _addresses.Add(new Address("Alfred Christensens Vej 7B, Nærum", new DateTime(2016, 1, 1)));
         }
 
         private void AddCitizen()

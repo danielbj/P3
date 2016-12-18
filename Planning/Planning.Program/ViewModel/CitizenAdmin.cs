@@ -33,11 +33,7 @@ namespace Planning.ViewModel
         /// <param name="citizen"></param>
         public void DeleteCitizen(Citizen citizen)
         {
-            if (_citizenContainer.AdmittedCitizens.Contains(citizen))
-            {
-                _citizenContainer.AdmittedCitizens.Remove(citizen);
-            }
-            else if (_citizenContainer.DischargedCitizens.Contains(citizen))
+            if (_citizenContainer.DischargedCitizens.Contains(citizen))
             {
                 _citizenContainer.DischargedCitizens.Remove(citizen);
             }

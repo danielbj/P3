@@ -54,10 +54,10 @@ namespace Planning.Model
             return Name;
         }
 
-        public static GroupSchedule CloneSchedule(GroupSchedule schedule)
+        public GroupSchedule CloneSchedule()
         {
-            var clone = new GroupSchedule(schedule.Name);
-            foreach (EmployeeSchedule item in schedule.EmployeeSchedules)
+            var clone = new GroupSchedule(this.Name);
+            foreach (EmployeeSchedule item in this.EmployeeSchedules)
             {
                 clone.EmployeeSchedules.Add(item.Clone());
             }

@@ -67,73 +67,73 @@ namespace Planning.Model
             //Addresses
             #region 
             //Snedsted
-            Address SnedstedLunegårdsvej5 = new Address("Lunegårdsvej 5, 7752, Snedsted, Denmark");
-            Address SnedstedKolonihavevej16 = new Address("Kolonihavevej 16, 7752, Snedsted, Denmark");
-            Address SnedstedVandhøjvej9 = new Address("Vandhøjvej 9, 7752, Snedsted, Denmark");
-            Address SnedstedRosenvænget22 = new Address("Rosenvænget 22, 7752, Snedsted, Denmark");
-            Address Snedstedkærvej9 = new Address("Kærvej 9, 7752, Snedsted, Denmark");
-            Address SnedstedVandhøjvej19 = new Address("Vandhøjvej 19, 7752, Snedsted, Denmark");
-            Address SnedstedGartnervænget7 = new Address("Gartnervænget 7, 7752, Snedsted, Denmark");
-            Address SnedstedIdrætsvej13 = new Address("Idrætsvej 13, 7752, Snedsted, Denmark");
+            Address SnedstedLunegårdsvej5 = new Address("Lunegårdsvej 5, 7752, Snedsted, Denmark", new DateTime(2016, 1, 1));
+            Address SnedstedKolonihavevej16 = new Address("Kolonihavevej 16, 7752, Snedsted, Denmark", new DateTime(2016, 1, 1));
+            Address SnedstedVandhøjvej9 = new Address("Vandhøjvej 9, 7752, Snedsted, Denmark", new DateTime(2016, 1, 1));
+            Address SnedstedRosenvænget22 = new Address("Rosenvænget 22, 7752, Snedsted, Denmark", new DateTime(2016, 1, 1));
+            Address Snedstedkærvej9 = new Address("Kærvej 9, 7752, Snedsted, Denmark", new DateTime(2016, 1, 1));
+            Address SnedstedVandhøjvej19 = new Address("Vandhøjvej 19, 7752, Snedsted, Denmark", new DateTime(2016, 1, 1));
+            Address SnedstedGartnervænget7 = new Address("Gartnervænget 7, 7752, Snedsted, Denmark", new DateTime(2016, 1, 1));
+            Address SnedstedIdrætsvej13 = new Address("Idrætsvej 13, 7752, Snedsted, Denmark", new DateTime(2016, 1, 1));
             
             //Sundby
-            Address SundbyILiljevej6 = new Address("Liljevej 6, 7752, Sundby, Denmark");
-            Address SundbyILiljevej14 = new Address("Liljevej 14, 7752, Sundby, Denmark");
-            Address SundbyElstedvej8 = new Address("Elstedvej 8, 7752, Sundby, Denmark");
-            Address SundbyElstedvej17 = new Address("Elstedvej 17, 7752, Sundby, Denmark");
-            Address SundbyMøgelvej9 = new Address("Møgelvej 9, 7752, Sundby, Denmark");
-            Address SundbyMøgelvej13 = new Address("Møgelvej 13, 7752, Sundby, Denmark");
+            Address SundbyILiljevej6 = new Address("Liljevej 6, 7752, Sundby, Denmark", new DateTime(2016, 1, 1));
+            Address SundbyILiljevej14 = new Address("Liljevej 14, 7752, Sundby, Denmark", new DateTime(2016, 1, 1));
+            Address SundbyElstedvej8 = new Address("Elstedvej 8, 7752, Sundby, Denmark", new DateTime(2016, 1, 1));
+            Address SundbyElstedvej17 = new Address("Elstedvej 17, 7752, Sundby, Denmark", new DateTime(2016, 1, 1));
+            Address SundbyMøgelvej9 = new Address("Møgelvej 9, 7752, Sundby, Denmark", new DateTime(2016, 1, 1));
+            Address SundbyMøgelvej13 = new Address("Møgelvej 13, 7752, Sundby, Denmark", new DateTime(2016, 1, 1));
 
             //Hundborg
-            Address HundborgMosevej2 = new Address("Mosevej 2, 7700, Hundborg, Denmark");
-            Address HundborgLarsKjærsvej5 = new Address("Lars Kjærs Vej 5, 7700, Hundborg, Denmark");
-            Address HundborgRødeAnesVej19 = new Address("Røde Anes Vej 19, 7700, Hundborg, Denmark");
-            Address HundborgSolgårdsvej1 = new Address("Solgårdsvej 1, 7700, Hundborg, Denmark");
-            Address HundborgMøllestien22 = new Address("Møllestien 22, 7700, Hundborg, Denmark");
-            Address HundborgKirkevej16 = new Address("Kirkevej 16, 7700, Hundborg, Denmark");
-            Address HundborgLarsKjærsVej6 = new Address("Lars Kjærs Vej 6, 7700, Hundborg, Denmark");
-            Address HundborgThadetoftvej14 = new Address("Thadetoftvej 14, 7700, Hundborg, Denmark");
+            Address HundborgMosevej2 = new Address("Mosevej 2, 7700, Hundborg, Denmark", new DateTime(2016, 1, 1));
+            Address HundborgLarsKjærsvej5 = new Address("Lars Kjærs Vej 5, 7700, Hundborg, Denmark", new DateTime(2016, 1, 1));
+            Address HundborgRødeAnesVej19 = new Address("Røde Anes Vej 19, 7700, Hundborg, Denmark", new DateTime(2016, 1, 1));
+            Address HundborgSolgårdsvej1 = new Address("Solgårdsvej 1, 7700, Hundborg, Denmark", new DateTime(2016, 1, 1));
+            Address HundborgMøllestien22 = new Address("Møllestien 22, 7700, Hundborg, Denmark", new DateTime(2016, 1, 1));
+            Address HundborgKirkevej16 = new Address("Kirkevej 16, 7700, Hundborg, Denmark", new DateTime(2016, 1, 1));
+            Address HundborgLarsKjærsVej6 = new Address("Lars Kjærs Vej 6, 7700, Hundborg, Denmark", new DateTime(2016, 1, 1));
+            Address HundborgThadetoftvej14 = new Address("Thadetoftvej 14, 7700, Hundborg, Denmark", new DateTime(2016, 1, 1));
 
             //Stenbjerg
-            Address StenbjergIstrupvej8 = new Address("Istrupvej 8, 7752, Stenbjerg, Denmark");
-            Address StenbjergSømærkevej17 = new Address("Sømærkevej 17, 7752, Stenbjerg, Denmark");
-            Address StenbjergStrandgårdsvej5 = new Address("Strandgårdsvej5, 7752, Stenbjerg, Denmark");
-            Address StenbjergEbenezevej9= new Address("Ebenezevej 9, 7752, Stenbjerg, Denmark");
-            Address StenbjergNielsJulesVej21 = new Address("Niels Jules Vej 21, 7752, Stenbjerg, Denmark");
-            Address StenbjergStenbjergKirkevej7 = new Address("Stenbjerg Kirkevej 7, 7752, Stenbjerg, Denmark");
-            Address StenbjergGråhavrevej12 = new Address("Gråhavrevej 12, 7752, Stenbjerg, Denmark");
-            Address StenbjergSarasvej19= new Address("Sarasvej 19, 7752, Stenbjerg, Denmark");
+            Address StenbjergIstrupvej8 = new Address("Istrupvej 8, 7752, Stenbjerg, Denmark", new DateTime(2016, 1, 1));
+            Address StenbjergSømærkevej17 = new Address("Sømærkevej 17, 7752, Stenbjerg, Denmark", new DateTime(2016, 1, 1));
+            Address StenbjergStrandgårdsvej5 = new Address("Strandgårdsvej5, 7752, Stenbjerg, Denmark", new DateTime(2016, 1, 1));
+            Address StenbjergEbenezevej9= new Address("Ebenezevej 9, 7752, Stenbjerg, Denmark", new DateTime(2016, 1, 1));
+            Address StenbjergNielsJulesVej21 = new Address("Niels Jules Vej 21, 7752, Stenbjerg, Denmark", new DateTime(2016, 1, 1));
+            Address StenbjergStenbjergKirkevej7 = new Address("Stenbjerg Kirkevej 7, 7752, Stenbjerg, Denmark", new DateTime(2016, 1, 1));
+            Address StenbjergGråhavrevej12 = new Address("Gråhavrevej 12, 7752, Stenbjerg, Denmark", new DateTime(2016, 1, 1));
+            Address StenbjergSarasvej19= new Address("Sarasvej 19, 7752, Stenbjerg, Denmark", new DateTime(2016, 1, 1));
 
             //Vangså
-            Address VangsåTingbakken5 = new Address("Tingbakken 5, 7700, Vangså, Denmark");
-            Address VangsåTingbakken16 = new Address("Tingbakken 16, 7700, Vangså, Denmark");
-            Address VangsåTingbakken22 = new Address("Tingbakken 22, 7700, Vangså, Denmark");
-            Address VangsåSkjærbakken2 = new Address("Skjærbakken 2, 7700, Vangså, Denmark");
-            Address VangsåSkjærbakken13 = new Address("Skjærbakken 13, 7700, Vangså, Denmark");
-            Address VangsåSkjærbakken17 = new Address("Skjærbakken 17, 7700, Vangså, Denmark");
-            Address VangsåHvidbakken4 = new Address("Hvidbakken 4, 7700, Vangså, Denmark");
-            Address VangsåHvidbakken7 = new Address("Hvidbakken 7, 7700, Vangså, Denmark");
-            Address VangsåHvidbakken15 = new Address("Hvidbakken 15, 7700, Vangså, Denmark");
+            Address VangsåTingbakken5 = new Address("Tingbakken 5, 7700, Vangså, Denmark", new DateTime(2016, 1, 1));
+            Address VangsåTingbakken16 = new Address("Tingbakken 16, 7700, Vangså, Denmark", new DateTime(2016, 1, 1));
+            Address VangsåTingbakken22 = new Address("Tingbakken 22, 7700, Vangså, Denmark", new DateTime(2016, 1, 1));
+            Address VangsåSkjærbakken2 = new Address("Skjærbakken 2, 7700, Vangså, Denmark", new DateTime(2016, 1, 1));
+            Address VangsåSkjærbakken13 = new Address("Skjærbakken 13, 7700, Vangså, Denmark", new DateTime(2016, 1, 1));
+            Address VangsåSkjærbakken17 = new Address("Skjærbakken 17, 7700, Vangså, Denmark", new DateTime(2016, 1, 1));
+            Address VangsåHvidbakken4 = new Address("Hvidbakken 4, 7700, Vangså, Denmark", new DateTime(2016, 1, 1));
+            Address VangsåHvidbakken7 = new Address("Hvidbakken 7, 7700, Vangså, Denmark", new DateTime(2016, 1, 1));
+            Address VangsåHvidbakken15 = new Address("Hvidbakken 15, 7700, Vangså, Denmark", new DateTime(2016, 1, 1));
 
             //Koldby
-            Address KoldbyBorgergade9 = new Address("Borgergade 9, 7752, Koldby, Denmark");
-            Address KoldbyAlgade17 = new Address("Algade 17, 7752, Koldby, Denmark");
-            Address KoldbyThorsevej27 = new Address("Thorsevej 27, 7752, Koldby, Denmark");
-            Address KoldbyLavendelvej19 = new Address("Lavendelvej 19, 7752, Koldby, Denmark");
-            Address KoldbyBiblioteksvej1 = new Address("Biblioteksvej 1, 7752, Koldby, Denmark");
-            Address KoldbyKirsebærvænget6 = new Address("Kirsebærvænget 6, 7752, Koldby, Denmark");
-            Address KoldbyDegnevej13 = new Address("Degnevej13, 7752, Koldby, Denmark");
-            Address KoldbySvinget11 = new Address("Degnevej11, 7752, Koldby, Denmark");
+            Address KoldbyBorgergade9 = new Address("Borgergade 9, 7752, Koldby, Denmark", new DateTime(2016, 1, 1));
+            Address KoldbyAlgade17 = new Address("Algade 17, 7752, Koldby, Denmark", new DateTime(2016, 1, 1));
+            Address KoldbyThorsevej27 = new Address("Thorsevej 27, 7752, Koldby, Denmark", new DateTime(2016, 1, 1));
+            Address KoldbyLavendelvej19 = new Address("Lavendelvej 19, 7752, Koldby, Denmark", new DateTime(2016, 1, 1));
+            Address KoldbyBiblioteksvej1 = new Address("Biblioteksvej 1, 7752, Koldby, Denmark", new DateTime(2016, 1, 1));
+            Address KoldbyKirsebærvænget6 = new Address("Kirsebærvænget 6, 7752, Koldby, Denmark", new DateTime(2016, 1, 1));
+            Address KoldbyDegnevej13 = new Address("Degnevej13, 7752, Koldby, Denmark", new DateTime(2016, 1, 1));
+            Address KoldbySvinget11 = new Address("Degnevej11, 7752, Koldby, Denmark", new DateTime(2016, 1, 1));
 
             //Hørdum 
-            Address HørdumIdylvej6= new Address("Idylvej 6, 7752, Hørdum, Denmark");
-            Address HørdumMølbakkvej8 = new Address("Mølbakkevej 8, 7752, Hørdum, Denmark");
-            Address HørdumSportsvej13 = new Address("Sportsvej 13, 7752, Hørdum, Denmark");
-            Address HørdumBanevej22 = new Address("Banevej 22, 7752, Hørdum, Denmark");
-            Address HørdumDamsgårdvej14 = new Address("Damsgårdvej 14, 7752, Hørdum, Denmark");
-            Address HørdumTårnvej19 = new Address("Tårnvej 19, 7752, Hørdum, Denmark");
-            Address HørdumGisselbækvej22 = new Address("Gisselbækvej 22, 7752, Hørdum, Denmark");
-            Address HørdumLegindvej16 = new Address("Legindvej 16, 7752, Hørdum, Denmark");
+            Address HørdumIdylvej6= new Address("Idylvej 6, 7752, Hørdum, Denmark", new DateTime(2016, 1, 1));
+            Address HørdumMølbakkvej8 = new Address("Mølbakkevej 8, 7752, Hørdum, Denmark", new DateTime(2016, 1, 1));
+            Address HørdumSportsvej13 = new Address("Sportsvej 13, 7752, Hørdum, Denmark", new DateTime(2016, 1, 1));
+            Address HørdumBanevej22 = new Address("Banevej 22, 7752, Hørdum, Denmark", new DateTime(2016, 1, 1));
+            Address HørdumDamsgårdvej14 = new Address("Damsgårdvej 14, 7752, Hørdum, Denmark", new DateTime(2016, 1, 1));
+            Address HørdumTårnvej19 = new Address("Tårnvej 19, 7752, Hørdum, Denmark", new DateTime(2016, 1, 1));
+            Address HørdumGisselbækvej22 = new Address("Gisselbækvej 22, 7752, Hørdum, Denmark", new DateTime(2016, 1, 1));
+            Address HørdumLegindvej16 = new Address("Legindvej 16, 7752, Hørdum, Denmark", new DateTime(2016, 1, 1));
 
             #endregion
 
@@ -288,8 +288,8 @@ namespace Planning.Model
         public static List<Message> LoadMessages() {
             List<Message> mList = new List<Message>();
 
-            var adrA = new Address("James Tobins Alle 24, 9220, Aalborg Øst, Denmark");
-            var adrB = new Address("Egevej 14, 9620, Aalestrup, Denmark");
+            var adrA = new Address("James Tobins Alle 24, 9220, Aalborg Øst, Denmark", new DateTime(2016, 1, 1));
+            var adrB = new Address("Egevej 14, 9620, Aalestrup, Denmark", new DateTime(2016, 1, 1));
 
 
             var citizenA = new Citizen("1712920000", "Palle", "Larsen", adrA, new DateTime(2016, 12, 1));

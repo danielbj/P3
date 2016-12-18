@@ -19,61 +19,13 @@ namespace Planning.UnitTest.Admin
         [SetUp]
         public void SetUp()
         {
-            _groupAdmin = GroupAdmin.Instance;
+            _groupAdmin = new GroupAdmin(new GroupContainer());
         }
-
-
-        #region TestGroups
-        private Group NewTestGroup(int i)
-        {
-            List<Group> TestGroups = new List<Group>();
-            TestGroups.Add(new Group("Snedsted", "Kærvej 3, 7752, Snedsted, Denmark"));
-            TestGroups.Add(new Group("Hørdum", "Kærvej 3, 7752, Snedsted, Denmark"));
-            TestGroups.Add(new Group("Koldby", "Kærvej 3, 7752, Snedsted, Denmark"));
-
-            return TestGroups[i];
-        }
-
-
-        #endregion
-
-        #region GroupContainer
-        private GroupContainer NewTestGroupContainer()
-        {
-            GroupContainer grpContainer = new GroupContainer();
-            grpContainer.AddGroup(NewTestGroup(0));
-            grpContainer.AddGroup(NewTestGroup(1));
-            return grpContainer;
-        }
-
-        #endregion
-
-        #region TestEmployees
-
-        private Employee NewTestEmployee(int i)
-        {
-            List<Employee> TestEmployees = new List<Employee>();
-
-            TestEmployees.Add(new Employee("Hanne", "Hansen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
-            TestEmployees.Add(new Employee("Lars", "Larsen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
-            TestEmployees.Add(new Employee("Trine", "Trinesen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
-            TestEmployees.Add(new Employee("Grethe", "Grethesen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
-            TestEmployees.Add(new Employee("Kanokporn", "kanokpornsen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
-            TestEmployees.Add(new Employee("Sidse", "Sidsesen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
-            TestEmployees.Add(new Employee("Nico", "Nicosen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
-
-            return TestEmployees[i];
-        }
-
-        #endregion
-
-        ////GetAllGroups()
 
         [Test]
-        public void GetAllGroups_ThereAreGroups_ReturnsAllGroups()
+        public void GetAllGroups_ThereAreNoGroups_ReturnsEmptyList()
         {
-           
-            int expected = 7;
+            int expected = 0;
             int actual;
 
             var groups = _groupAdmin.GetAllGroups();
@@ -84,77 +36,73 @@ namespace Planning.UnitTest.Admin
         }
 
         [Test]
+        public void GetAllGroups_ThereAreGroups_ReturnsAllGroups()
+        {
+            _groupAdmin.AddNewGroup("Group 1");
+            _groupAdmin.AddNewGroup("Group 2");
+            int expected = 2;
+            int actual;
+
+            var groups = _groupAdmin.GetAllGroups();
+            actual = groups.Count;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
         public void GetEmployeesOnDuty_NoEmployeesOnDuty_ReturnsEmptyList()
         {
+            Group group1 =_groupAdmin.AddNewGroup("Group 1");
+            Employee employee = new Employee("Hanne", "Hansen", DateTime.Today, "12345678");
+            employee.SetWorkhours(new DateTime(2016, 1, 1), new TimePeriod(TimeSpan.FromHours(8)));
+            group1.AddEmployee(employee);
+
             int expected = 0;
 
-            // var employees = _groupAdmin.GetEmployeesOnDuty(group,new DateTime(2016,1,1));
+            var employees = _groupAdmin.GetEmployeesOnDuty(group1, new DateTime(2016, 1, 2));
 
-            //int actual = employees.Count;
+            int actual = employees.Count;
 
-            // Assert.AreEqual(expected, actual);
-            Assert.Fail();
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void GetEmployeesOnDuty_EmployeesOnDuty_ReturnsList()
+        public void GetEmployeesOnDuty_NoEmployeesInGroup_ReturnsEmptyList()
         {
+            Group group1 = _groupAdmin.AddNewGroup("Group 1");
+
             int expected = 0;
 
-            // var employees = _groupAdmin.GetEmployeesOnDuty(group,new DateTime(2016,1,1));
+            var employees = _groupAdmin.GetEmployeesOnDuty(group1, new DateTime(2016, 1, 2));
 
-            //int actual = employees.Count;
+            int actual = employees.Count;
 
-            // Assert.AreEqual(expected, actual);
-            Assert.Fail();
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void GetEmployeesOnDuty_GroupDoesNotExistInGroupContainer_ThrowException()
+        public void GetEmployeesOnDuty_GroupNotFoud_ThrowsException()
         {
-            Assert.Throws<ArgumentException>(() => _groupAdmin.GetEmployeesOnDuty(new Group("group","address"), new DateTime(2016, 1, 1)));
+            Group group1 = new Group("group1", "a 0");
+
+            Assert.Throws<ArgumentException>(() => _groupAdmin.GetEmployeesOnDuty(group1, new DateTime(2016, 1, 2)));
         }
 
         [Test]
-        public void GetGroupInfo_GroupDoesNotExistInGroupContainer_ThrowException()
+        public void GetEmployeesOnDuty_EmployeesOnDuty_ReturnsListOfEmployeesOnDuty()
         {
-            Assert.Throws<ArgumentException>(() => _groupAdmin.GetGroupInfo(new Group("group", "address")));
-        }
+            Group group1 = _groupAdmin.AddNewGroup("Group 1");
+            Employee employee = new Employee("Hanne", "Hansen", DateTime.Today, "12345678");
+            employee.SetWorkhours(new DateTime(2016, 1, 1), new TimePeriod(TimeSpan.FromHours(8)));
+            group1.AddEmployee(employee);
 
-        [Test]
-        public void GetGroupInfo_GroupDoesExistInGroupContainer_ReturnsString()
-        {
-            Assert.Fail();
-        }
+            int expected = 1;
 
-        [Test]
-        public void GetAllEmployeesInGroup_GroupDoesNotExistInGroupContainer_ThrowException()
-        {
-            Assert.Throws<ArgumentException>(() => _groupAdmin.GetAllEmployeesInGroup(new Group("group", "address")));
-        }
+            var employees = _groupAdmin.GetEmployeesOnDuty(group1, new DateTime(2016, 1, 1));
 
-        [Test]
-        public void GetAllEmployeesInGroup_GroupDoesExistInGroupContainer_ReturnsString()
-        {
-            Assert.Fail();
-        }
+            int actual = employees.Count;
 
-        [Test]
-        public void DeleteGroup_GroupDoesNotExistInGroupContainer_ReturnsString()
-        {
-            Assert.Throws<ArgumentException>(() => _groupAdmin.DeleteGroup(new Group("group", "address")));
-        }
-
-        [Test]
-        public void DeleteGroup_GroupDoesExistInGroupContainer_GroupIsRemoved()
-        {
-            Assert.Fail();
-        }
-
-        [Test]
-        public void DeleteGroup_GroupDoesExistInGroupContainer_EmployeesAddedToClipBoard()
-        {
-            Assert.Fail();
+            Assert.AreEqual(expected, actual);
         }
     }
 }

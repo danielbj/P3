@@ -13,9 +13,9 @@ namespace Planning.Model
         }
     }
 
-    public class CitzenAddTaskChange : CitizenChange<TaskDescription>
+    public class CitizenAddTaskChange : CitizenChange<TaskDescription>
     {
-        public CitzenAddTaskChange(Citizen obj, TaskDescription newValue, string desctription) : base(obj, newValue, desctription)
+        public CitizenAddTaskChange(Citizen obj, TaskDescription newValue, string desctription) : base(obj, newValue, desctription)
         {
         }
 

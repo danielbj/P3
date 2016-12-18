@@ -16,7 +16,7 @@ namespace Planning.UnitTest.Model
         [SetUp]
         public void InstTaskDescription()
         {
-            _taskDescription = new TaskDescription(30, "testDescription", new Citizen("0000000000", "testFirstname", "testLastname", new Address("Snerlevej 11, Aalborg"), new DateTime(2016, 12, 21)), new TimePeriod(new TimeSpan(0, 30, 0)), new DateTime(2016, 12, 21), "testAssignment", 1);
+            _taskDescription = new TaskDescription(30, "testDescription", new Citizen("0000000000", "testFirstname", "testLastname", new Address("Snerlevej 11, Aalborg", new DateTime(2016, 1, 1)), new DateTime(2016, 12, 21)), new TimePeriod(new TimeSpan(0, 30, 0)), new DateTime(2016, 12, 21), "testAssignment", 1);
         }
 
         #region Constructor

@@ -17,8 +17,8 @@ namespace Planning.UnitTest.Model
         // Add more addresses. Start date must be set to '2016, 12, 21'.
         static Address[] AddressCases =
         {
-            new Address("Niels Bohrs Vej 36, Aalborg") { StartDate = new DateTime(2016, 12, 21) },
-            new Address("Alfred Christensens Vej 7B, Nærum") { StartDate = new DateTime(2016, 12, 21) }
+            new Address("Niels Bohrs Vej 36, Aalborg", new DateTime(2016, 1, 1)) { StartDate = new DateTime(2016, 12, 21) },
+            new Address("Alfred Christensens Vej 7B, Nærum", new DateTime(2016, 1, 1)) { StartDate = new DateTime(2016, 12, 21) }
         };
 
         //static TaskDescription[] TaskDescriptionCases =
@@ -31,7 +31,7 @@ namespace Planning.UnitTest.Model
         [SetUp]
         public void InstCitizen()
         {
-            _citizen = new Citizen("0000000000", "testFirstname", "testLastName", new Address("Snerlevej 11, 9000"), new DateTime(2016, 12, 21));
+            _citizen = new Citizen("0000000000", "testFirstname", "testLastName", new Address("Snerlevej 11, 9000", new DateTime(2016, 1, 1)), new DateTime(2016, 12, 21));
         } 
         #endregion
 

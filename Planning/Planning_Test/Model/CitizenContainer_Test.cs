@@ -15,9 +15,9 @@ namespace Planning.UnitTest.Model
 
         static Citizen[] CitizenCases =
         {
-            new Citizen("0000000000", "Esben", "Jespersen", new Address("Snerlevej 11, Aalborg"), new DateTime(1,1,1)),
-            new Citizen("0102030405", "Bob", "Kennedy", new Address("Niels Bohrs Vej 36, Aalborg"), new DateTime(9999,12,31)),
-            new Citizen("9999999999", "Jones", "Johnson", new Address("Cassiopeia, Aalborg"), new DateTime(2015,12,21))
+            new Citizen("0000000000", "Esben", "Jespersen", new Address("Snerlevej 11, Aalborg", new DateTime(2016, 1, 1)), new DateTime(1,1,1)),
+            new Citizen("0102030405", "Bob", "Kennedy", new Address("Niels Bohrs Vej 36, Aalborg", new DateTime(2016, 1, 1)), new DateTime(9999,12,31)),
+            new Citizen("9999999999", "Jones", "Johnson", new Address("Cassiopeia, Aalborg", new DateTime(2016, 1, 1)), new DateTime(2015,12,21))
         };
 
         [SetUp]
@@ -30,7 +30,7 @@ namespace Planning.UnitTest.Model
         [Category("Edit Citizen")]
         public void AddCitizen_CitizenAdded_ContainsCitizen(string cpr, string firstname, string lastname, string addressName, DateTime date)
         {
-            Citizen citizen = new Citizen(cpr, firstname, lastname, new Address(addressName), date);
+            Citizen citizen = new Citizen(cpr, firstname, lastname, new Address(addressName, new DateTime(2016, 1, 1)), date);
 
             _container.AddCitizen(citizen);
 
@@ -42,7 +42,7 @@ namespace Planning.UnitTest.Model
         [Category("Edit Citizen")]
         public void DeleteCitizen_CitizenAddedToDischarged_ContainsCitizen(string cpr, string firstname, string lastname, string addressName, DateTime date)
         {
-            Citizen citizen = new Citizen(cpr, firstname, lastname, new Address(addressName), date);
+            Citizen citizen = new Citizen(cpr, firstname, lastname, new Address(addressName, new DateTime(2016, 1, 1)), date);
 
             _container.AddCitizen(citizen);
 
@@ -53,7 +53,7 @@ namespace Planning.UnitTest.Model
         [Category("Edit Citizen")]
         public void GetCitizens_GetsAllCitizens_AreEqual(string cpr, string firstname, string lastname, string addressName, DateTime date)
         {
-            Citizen citizen = new Citizen(cpr, firstname, lastname, new Address(addressName), date);
+            Citizen citizen = new Citizen(cpr, firstname, lastname, new Address(addressName, new DateTime(2016, 1, 1)), date);
             _container.AdmittedCitizens = CitizenCases.ToList();
 
             List<Citizen> actual = _container.GetCitizens();
@@ -66,7 +66,7 @@ namespace Planning.UnitTest.Model
         [Category("Edit Citizen")]
         public void GetCitizens_GetsCitizensWithBInTheirFirstname_AreEqual(string cpr, string firstname, string lastname, string addressName, DateTime date)
         {
-            Citizen citizen = new Citizen(cpr, firstname, lastname, new Address(addressName), date);
+            Citizen citizen = new Citizen(cpr, firstname, lastname, new Address(addressName, new DateTime(2016, 1, 1)), date);
             _container.AdmittedCitizens = CitizenCases.ToList();
 
             int actual = _container.GetCitizens(c => c.FirstName.Contains("b")).Count;

@@ -104,42 +104,42 @@ namespace Planning.UnitTest.Model
         #endregion
 
         #region Edit work hours
-        [TestCase("2016-12-21", 3)]
-        [TestCase("0001-01-01", 1)]
-        [TestCase("9999-12-31", 5)]
-        [Category("Edit WorkHours")]
-        public void SetWorkHours_CorrectInput_WorkHoursSet(DateTime dateTime, int dayOfWeekNumber)
-        {
-            DayOfWeek dayOfWeek = (DayOfWeek)dayOfWeekNumber;
-            _employee.SetWorkhours(dayOfWeek, _timePeriod);
-            Assert.AreEqual(dateTime.DayOfWeek, dayOfWeek);
-            //Assert.AreEqual(_timePeriod.Duration, _employee.GetWorkHours(dateTime).Duration);
-        }
+        //[TestCase("2016-12-21", 3)]
+        //[TestCase("0001-01-01", 1)]
+        //[TestCase("9999-12-31", 5)]
+        //[Category("Edit WorkHours")]
+        //public void SetWorkHours_CorrectInput_WorkHoursSet(DateTime dateTime, int dayOfWeekNumber)
+        //{
+        //    DayOfWeek dayOfWeek = (DayOfWeek)dayOfWeekNumber;
+        //    _employee.SetWorkhours(dayOfWeek, _timePeriod);
+        //    Assert.AreEqual(dateTime.DayOfWeek, dayOfWeek);
+        //    //Assert.AreEqual(_timePeriod.Duration, _employee.GetWorkHours(dateTime).Duration);
+        //}
 
-        [TestCase("2016-12-21", 3)]
-        [TestCase("0001-01-01", 1)]
-        [TestCase("9999-12-31", 5)]
-        [Category("Edit WorkHours")]
-        public void GetWorkHours_GetsWorkHours_True(DateTime dateTime, DayOfWeek dayOfWeek)
-        {
-            TimePeriod time;
-            _employee.SetWorkhours(dayOfWeek, _timePeriod);
+        //[TestCase("2016-12-21", 3)]
+        //[TestCase("0001-01-01", 1)]
+        //[TestCase("9999-12-31", 5)]
+        //[Category("Edit WorkHours")]
+        //public void GetWorkHours_GetsWorkHours_True(DateTime dateTime, DayOfWeek dayOfWeek)
+        //{
+        //    TimePeriod time;
+        //    _employee.SetWorkhours(dayOfWeek, _timePeriod);
 
-            time = _employee.GetWorkHours(dateTime);
+        //    time = _employee.GetWorkHours(dateTime);
 
-            Assert.AreEqual(_timePeriod.Duration, time.Duration);
-        }
+        //    Assert.AreEqual(_timePeriod.Duration, time.Duration);
+        //}
 
-        [TestCase("2016-12-21", 3)]
-        [TestCase("0001-01-01", 1)]
-        [TestCase("9999-12-31", 7)]
-        [Category("Edit WorkHours")]
-        public void IsWorking_ChecksIfWorking_True(DateTime dateTime, DayOfWeek dayOfWeek)
-        {
-            _employee.SetWorkhours(dayOfWeek, _timePeriod);
+        //[TestCase("2016-12-21", 3)]
+        //[TestCase("0001-01-01", 1)]
+        //[TestCase("9999-12-31", 7)]
+        //[Category("Edit WorkHours")]
+        //public void IsWorking_ChecksIfWorking_True(DateTime dateTime, DayOfWeek dayOfWeek)
+        //{
+        //    _employee.SetWorkhours(dayOfWeek, _timePeriod);
 
-            Assert.IsTrue(_employee.IsWorking(dateTime));
-        } 
+        //    Assert.IsTrue(_employee.IsWorking(dateTime));
+        //} 
         #endregion
 
         [Test, TestCaseSource("EmployeeCases")]

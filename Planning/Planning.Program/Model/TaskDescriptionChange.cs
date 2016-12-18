@@ -36,4 +36,16 @@ namespace Planning.Model
             Obj.Description = NewValue;
         }
     }
+
+    public class TaskFrequencyChange : TaskDescriptionChange<int>
+    {
+        public TaskFrequencyChange(TaskDescription obj, int newValue, string description) : base(obj, newValue, description)
+        {
+        }
+
+        protected override void ApplyChange()
+        {
+            Obj.Frequency = NewValue;
+        }
+    }
 }
