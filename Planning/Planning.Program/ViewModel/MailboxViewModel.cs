@@ -48,15 +48,12 @@ namespace Planning.ViewModel
         MessageAdmin _messageAdmin;
         #endregion
 
-
-
         public MailboxViewModel() {
             _messageAdmin = new MessageAdmin();
             Messages = _messageAdmin.GetAllMessages();
             SelectedMessage = Messages.First();
 
             AcceptChanges = new RelayCommand(p => AcceptChangeHandling(), p => SelectedMessage.IsRead);
-
         }
 
         private void AcceptChangeHandling() {

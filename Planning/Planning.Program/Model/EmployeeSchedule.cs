@@ -13,6 +13,7 @@ namespace Planning.Model
         public DateTime EffectiveDate = DateTime.MaxValue;
         public Employee Employee { get; set; }
         public TimePeriod TimePeriod { get; set; }
+        public string color { get; set; }
 
         [Obsolete("Only needed for serialization and materialization in Entity Framework", true)]
         public EmployeeSchedule() { }

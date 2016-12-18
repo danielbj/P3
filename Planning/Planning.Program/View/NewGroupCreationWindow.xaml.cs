@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Planning.Program.View
+namespace Planning.View
 {
     /// <summary>
-    /// Interaction logic for ColourSelectionWindow.xaml
+    /// Interaction logic for NewGroupCreationWindow.xaml
     /// </summary>
-    public partial class ColourSelectionWindow : Window
+    public partial class NewGroupCreationWindow : Window
     {
-        public ColourSelectionWindow()
+        public NewGroupCreationWindow()
         {
             InitializeComponent();
         }

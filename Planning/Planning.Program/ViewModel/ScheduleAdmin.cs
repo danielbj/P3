@@ -372,6 +372,10 @@ namespace Planning.ViewModel
             employeeSchedule.TaskItems.Remove(task);
         }
 
+        public void ChangeColor(EmployeeSchedule employeeSchedule, string color)
+        {
+            employeeSchedule.color = color;
+        }
     }
 
 

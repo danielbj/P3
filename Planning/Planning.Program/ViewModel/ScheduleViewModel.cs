@@ -62,7 +62,7 @@ namespace Planning.ViewModel
 
         public List<GroupSchedule> Templates
         {
-            get;set;
+            get; set;
         }
 
         private GroupSchedule _selectedTemplate;
@@ -98,26 +98,12 @@ namespace Planning.ViewModel
                     {
                         _scheduleAdmin.CreateSchedule(SelectedDate, SelectedGroup);
                         return SelectedGroup.GetSchedule(SelectedDate);
-                    } 
+                    }
                 }
                 else
                 {
                     return SelectedTemplate;
                 }
-            }
-        }
-
-        private Visibility _employeeButtonVisibility;
-        public Visibility EmployeeButtonVisibility
-        {
-            get
-            {
-                return _employeeButtonVisibility;
-            }
-            set
-            {
-                _employeeButtonVisibility = value;
-                OnPropertyChanged(nameof(SelectedCalendarType));
             }
         }
 
@@ -137,8 +123,8 @@ namespace Planning.ViewModel
                 return _selectedGroup;
             }
             set
-            { 
-                if(_selectedGroup != value)
+            {
+                if (_selectedGroup != value)
                 {
                     _selectedGroup = value;
 
@@ -160,6 +146,7 @@ namespace Planning.ViewModel
         public RelayCommand RemoveEmployeeScheduleCommand { get; }
         public RelayCommand ToggleUnplannedTaskItemPanelCommand { get; }
         public RelayCommand FlushToDatabase { get; }
+        public RelayCommand ChangeColourCommand { get;}   
 
         #endregion
 
@@ -194,11 +181,10 @@ namespace Planning.ViewModel
 
             RemoveEmployeeScheduleCommand = new RelayCommand(p => RemoveEmployeeSchedule(p as EmployeeSchedule), p=> true);
 
-      
+            ChangeColourCommand = new RelayCommand(p => ChangeColourOfEmployeeSchedule(p as EmployeeSchedule), p => SelectedCalendarType == CalendarTypes[1]);
 
             FlushToDatabase = new RelayCommand(FlushToDatabaseAction, null);
         }
-
 
         private void RemoveEmployeeSchedule(EmployeeSchedule employeeSchedule)
         {
@@ -321,7 +307,6 @@ namespace Planning.ViewModel
                 _scheduleAdmin.AssignEmployeeToEmployeeSchedule(viewModel.SelectedEmployee, es);
             }
             UpdateSchedule();
-
         }
 
         private void ImportTemplate()
@@ -366,6 +351,21 @@ namespace Planning.ViewModel
                 _databaseControl.AddTaskItem(ti);
             }
 
+        }
+
+        public void ChangeColourOfEmployeeSchedule(EmployeeSchedule es)
+        {
+            var window = new ColorSelectionWindow();
+            var viewModel = new ColorSelectionWindowViewModel(window);
+
+            window.DataContext = viewModel;
+            window.ShowDialog();
+
+            foreach (TaskItem task in es.TaskItems)
+            {
+                task.Color = viewModel.Color;
+            }
+            UpdateSchedule();
         }
     }
 }

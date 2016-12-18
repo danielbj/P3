@@ -24,14 +24,22 @@ namespace Planning.ViewModel
         public GroupViewModel()
         {
             _groupAdmin = GroupAdmin.Instance;
-
             NewEmployeeCommand = new RelayCommand(p => CreateNewEmployee());
+            NewGroupCommand = new RelayCommand(p => CreateNewGroup());
         }
 
         private void CreateNewEmployee()
         {
             var window = new NewEmployeeWindow();
-            var viewModel = new EmployeeCreationWindowViewModel(TempEmployees, window);
+            var viewModel = new EmployeeCreationViewModel(TempEmployees, window);
+            window.DataContext = viewModel;
+            window.ShowDialog();
+        }
+
+        private void CreateNewGroup()
+        {
+            var window = new NewGroupCreationWindow();
+            var viewModel = new GroupCreationViewModel(window);
             window.DataContext = viewModel;
             window.ShowDialog();
         }

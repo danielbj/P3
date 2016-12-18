@@ -21,11 +21,11 @@ namespace Planning.View
     /// </summary>
     public partial class GroupView : UserControl
     {
-        GroupView VM;
+        GroupViewModel VM;
         public GroupView()
         {
             InitializeComponent();
-            DataContext = VM = new GroupView();    
+            DataContext = VM = new GroupViewModel();    
         }
     }
 }

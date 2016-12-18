@@ -10,18 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Planning.ViewModel;
 
 namespace Planning.View
 {
     /// <summary>
-    /// Interaction logic for NewEmployeeWindow.xaml
+    /// Interaction logic for ColorSelectionWindow.xaml
     /// </summary>
-    public partial class NewEmployeeWindow : Window
+    public partial class ColorSelectionWindow : Window
     {
-        public NewEmployeeWindow()
+        public ColorSelectionWindow()
         {
             InitializeComponent();
+
         }
     }
 }

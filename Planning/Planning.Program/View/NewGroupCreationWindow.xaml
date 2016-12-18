@@ -1,0 +1,22 @@
+﻿<Window x:Class="Planning.View.NewGroupCreationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Planning.View"
+        mc:Ignorable="d"
+        Title="NewGroupCreationWindow" Height="300" Width="300">
+    <Grid Margin="10,10,10,10" Height="300" Width="300">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="65*"/>
+            <ColumnDefinition Width="65*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.ColumnSpan="2" Margin="0,0,25,0">
+            <TextBox x:Name="EmployeeFirstname" Background="White" Margin="5" Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <Button Name="CancelButton" Content="Anuller" Margin="5" Height="20" Width="50"  ></Button>
+                <Button Name="CreateButton" Content="Opret" Margin="5" Height="20" Width="50" Command="{Binding CreateButtonClicked}" ></Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

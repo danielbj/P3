@@ -132,7 +132,7 @@
                                         <Menu Grid.Column="2">
                                             <MenuItem Header="\/">
                                                 <MenuItem Header="Fjern Kolonne" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.RemoveEmployeeScheduleCommand}" CommandParameter="{Binding}"/>
-                                                <MenuItem Header="Skift farve" />
+                                                <MenuItem Header="Skift farve" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ChangeColourCommand}" CommandParameter="{Binding}"/>
                                             </MenuItem>
                                         </Menu>
                                     </Grid>
