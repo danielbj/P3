@@ -208,7 +208,7 @@ namespace Planning.Model
             //var GroupSundby = new Group("Sundby", "Kærvej 3, 7752, Snedsted, Denmark");
 
             Groups.Add(GroupSnedsted);
-            //Groups.Add(GroupHørdum);
+            Groups.Add(GroupHørdum);
             //Groups.Add(GroupKoldby);
             //Groups.Add(GroupHundborg);
             //Groups.Add(GroupStenbjerg);
@@ -252,7 +252,7 @@ namespace Planning.Model
 
                 TaskDescription tempTaskDesc = new TaskDescription(Tider[tid], "opgave", citizen, new TimePeriod(TimeSpan.FromHours(8)), DateTime.Today, Opgaver[opgave], tid);
 
-                Tasks.Add(new TaskItem(tempTaskDesc));
+                tempTaskDesc.TaskItems.ForEach(t => Tasks.Add(t));
                 citizen.Tasks.Add(tempTaskDesc);
             }
 
@@ -270,12 +270,12 @@ namespace Planning.Model
 
                             if (i > 0)
                             {
-                                schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.CalculateRouteDuration(schedule.TaskItems[i - 1].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString(), schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
+                                schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.GetRouteItem(schedule.TaskItems[i - 1].TaskDescription.Citizen.GetAddress(DateTime.Today), schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today)).Duration;
                             }
 
                             else if (i == 0)
                             {
-                                schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.CalculateRouteDuration("Kærvej 3, 7752, Snedsted, Denmark", schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today).ToString());
+                                schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.GetRouteItem((Address)"Kærvej 3, 7752, Snedsted, Denmark", schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today)).Duration;
                             }
                         }
                     }

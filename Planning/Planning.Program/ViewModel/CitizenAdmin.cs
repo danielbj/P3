@@ -9,13 +9,23 @@ namespace Planning.ViewModel
 {
     public class CitizenAdmin
     {
+        private static CitizenAdmin _instance;
+        public static CitizenAdmin Instance {
+            get {
+                if (_instance == null)
+                    _instance = new CitizenAdmin();
+                return _instance;
+            }
+        }
+
+        DatabaseControl DatabaseControl = new DatabaseControl();
 
         private CitizenContainer _citizenContainer;
 
         public CitizenAdmin()
         {
-            // TODO rigtig database
-            _citizenContainer = DataBaseMockUp.LoadCitizens();
+            //_citizenContainer = DataBaseMockUp.LoadCitizens();
+            _citizenContainer = DatabaseControl.ReadDistinctCitizens();
         }
 
         public CitizenAdmin(CitizenContainer citizenContainer)

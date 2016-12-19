@@ -33,7 +33,7 @@ namespace Planning.ViewModel
 
         public CitizenOverviewViewModel()
         {
-            CitizenAdmin = new CitizenAdmin();
+            CitizenAdmin = CitizenAdmin.Instance;
             Citizens = new ObservableCollection<Citizen>(CitizenAdmin.GetCitizens());
         }
 

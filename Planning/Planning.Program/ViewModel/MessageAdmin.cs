@@ -12,11 +12,23 @@ namespace Planning.ViewModel
         List<Message> Messages;
 
         public MessageAdmin() {
-            Messages = DataBaseMockUp.LoadMessages();
+            Messages = new List<Message>();
+            //Messages = DataBaseMockUp.LoadMessages();
         }
 
         public List<Message> GetAllMessages() {
             return Messages;
+        }
+
+        public void AddMessage(IChange change, string messagetext) {
+            Message message;
+            if (change is ITaskdescritpionChange)
+                message = new TaskDescriptionMessage(change as ITaskdescritpionChange, messagetext);
+            else
+                message = new CitizenMessage(change as ICitizenChange, messagetext);
+
+            Messages.Add(message);
+            
         }
     }
 }

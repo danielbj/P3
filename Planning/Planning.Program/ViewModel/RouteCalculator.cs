@@ -19,6 +19,7 @@ namespace Planning.ViewModel
         /// List of all routes as dictionary with waypoints as key and duration as value.
         /// </summary>
         private static List<RouteItem> RouteItems = new List<RouteItem>();
+        
 
         public static string[] Waypoints { get; set; }  //TODO slet
         private static string _startURLRoute = "http://dev.virtualearth.net/REST/V1/Routes/Driving?o=json";
@@ -42,33 +43,47 @@ namespace Planning.ViewModel
         }
 
         #endregion
-        public static TimeSpan CalculateRouteDuration(string address1, string address2)
-        {
-            Console.WriteLine("ping" + p++);
+
+        static RouteCalculator() {
+            DatabaseControl databaseControl = new DatabaseControl();
+            RouteItems = databaseControl.ReadRouteItems();
+        }
+        //public static TimeSpan CalculateRouteDuration(string address1, string address2)
+        //{
+        //    
             
-            string url = CreateRequestURL(address1, address2);
-            WebResponse response = MakeRequest(url);
-            JObject jsonFile = ProcessRequest(response);
-            Route route = DeserializeJSONObjects(jsonFile);
+        //    string url = CreateRequestURL(address1, address2);
+        //    WebResponse response = MakeRequest(url);
+        //    JObject jsonFile = ProcessRequest(response);
+        //    Route route = DeserializeJSONObjects(jsonFile);
 
-            return TimeSpan.FromSeconds(route.TravelDuration);
+        //    return TimeSpan.FromSeconds(route.TravelDuration);
+        //}
+
+        //private static string GetWaypoints(string[] waypoints) // TODO slet
+        //{
+        //    string name = string.Empty;
+
+        //    for (int i = 0; i < waypoints.Length; i++) {
+        //        if (i + 1 == waypoints.Length)
+        //            name += waypoints[i];
+        //        else if (i + 2 == waypoints.Length)
+        //            name += waypoints[i] + " & ";
+        //        else
+        //            name += waypoints[i] + ", ";
+        //    }
+
+        //    return name;
+        //}
+
+        /// <summary>
+        /// Method used to get routes and write to database
+        /// </summary>
+        /// <returns></returns>
+        public static List<RouteItem> GetAllRouteItems() {
+            return RouteItems;
         }
 
-        private static string GetWaypoints(string[] waypoints) // TODO slet
-        {
-            string name = string.Empty;
-
-            for (int i = 0; i < waypoints.Length; i++) {
-                if (i + 1 == waypoints.Length)
-                    name += waypoints[i];
-                else if (i + 2 == waypoints.Length)
-                    name += waypoints[i] + " & ";
-                else
-                    name += waypoints[i] + ", ";
-            }
-
-            return name;
-        }
 
         /// <summary>
         /// Checks if the Route already has been calculated and returns a new RouteItem.
@@ -130,6 +145,7 @@ namespace Planning.ViewModel
         /// <returns>Returns response.</returns>
         private static WebResponse MakeRequest(string requestURL)
         {
+            Console.WriteLine("ping" + p++);
             //creating a web request with the url
             var request = WebRequest.Create(requestURL);
             //get response 
@@ -161,13 +177,13 @@ namespace Planning.ViewModel
             return json;
         }
 
-        private static Route DeserializeJSONObjects(JObject jsonFile)
-        {
-            JToken resourceToken = jsonFile["resourceSets"][0]["resources"][0];
-            Route route = JsonConvert.DeserializeObject<BingMapsRESTService.Common.JSON.Route>(resourceToken.ToString());
+        //private static Route DeserializeJSONObjects(JObject jsonFile)
+        //{
+        //    JToken resourceToken = jsonFile["resourceSets"][0]["resources"][0];
+        //    Route route = JsonConvert.DeserializeObject<BingMapsRESTService.Common.JSON.Route>(resourceToken.ToString());
 
-            return route;
-        }
+        //    return route;
+        //}
 
         private static void DeserializeJSONObjects1(JObject jsonFile)
         {
