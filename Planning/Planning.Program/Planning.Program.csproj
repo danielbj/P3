@@ -69,6 +69,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\GreaterThanZeroConverter.cs" />
     <Compile Include="Converters\StringToColorConverter.cs" />
     <Compile Include="Converters\MinutesToHeightConverter.cs" />
     <Compile Include="ViewModel\MailboxViewModel.cs" />
