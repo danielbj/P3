@@ -11,16 +11,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Planning.ViewModel;
 
 namespace Planning.View
 {
     /// <summary>
-    /// Interaction logic for EmployeeDeleteWindow.xaml
+    /// Interaction logic for GroupDeleteWindow.xaml
     /// </summary>
-    public partial class EmployeeDeleteWindow : Window
+    public partial class GroupDeleteWindow : Window
     {
-        public EmployeeDeleteWindow()
+        public GroupDeleteWindow()
         {
             InitializeComponent();
         }

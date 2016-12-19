@@ -53,12 +53,12 @@
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="NewEmployeeButton" Margin="3" Width="110" Command="{Binding NewEmployeeCommand}">Opret Medarbejder</Button>
                     <!--<Button x:Name="EditEmployeeButton" Margin="3" Width="120">Rediger Medarbejder</Button>-->
-                    <Button x:Name="DeleteEmployeeButton" Margin="3" Width="95">Slet Medarbejder</Button>
+                    <Button x:Name="DeleteEmployeeButton" Margin="3" Width="95" Command="{Binding DeleteEmployeeCommand}">Slet Medarbejder</Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="NewGroupButton" Margin="3" Width="110" Command="{Binding NewGroupCommand}">Opret Gruppe</Button>
                     <!--<Button x:Name="EditGroupButton" Margin="3" Width="120">  Rediger Gruppe  </Button>-->
-                    <Button x:Name="DeleteGroupButton" Margin="3" Width="95">  Slet Gruppe  </Button>
+                    <Button x:Name="DeleteGroupButton" Margin="3" Width="95" Command="{Binding DeleteGroupCommand}">  Slet Gruppe  </Button>
                 </StackPanel>
             </StackPanel>
 

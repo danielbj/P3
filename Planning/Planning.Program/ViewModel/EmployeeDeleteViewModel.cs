@@ -12,6 +12,8 @@ namespace Planning.ViewModel
     {
         private GroupAdmin _groupAdmin;
         private EmployeeDeleteWindow _window;
+        public RelayCommand ConfirmCommand { get; }
+        public RelayCommand CancelCommand { get; }
 
         private List<Employee> _employees;
         public List<Employee> EmployeeList 
@@ -19,7 +21,10 @@ namespace Planning.ViewModel
             get { return _employees; }
             set 
             {
-
+                if (value == _employees)
+                    return;
+                _employees = value;
+                OnPropertyChanged(nameof(EmployeeList));
             }
         }
         private Employee _selectedEmployee;
@@ -38,7 +43,10 @@ namespace Planning.ViewModel
             get { return _groups; }
             set 
             {
-
+                if (value == _groups)
+                    return;
+                _groups = value;
+                OnPropertyChanged(nameof(GroupList));
             }
         }
         private Group _selectedGroup;
@@ -54,10 +62,28 @@ namespace Planning.ViewModel
 
         public EmployeeDeleteViewModel(EmployeeDeleteWindow window)
         {
+            _window = window;
             _groupAdmin = GroupAdmin.Instance;
             GroupList = _groupAdmin.GetAllGroups();
+            SelectedGroup = GroupList.First();
             EmployeeList = _groupAdmin.GetAllEmployeesInGroup(SelectedGroup);
+            SelectedEmployee = EmployeeList.FirstOrDefault();
 
+
+            ConfirmCommand = new RelayCommand(p => Confirm(), p => SelectedEmployee != null);
+            CancelCommand = new RelayCommand(p => Cancel(), p => true);
+
+        }
+
+        private void Confirm()
+        {
+            _groupAdmin.RemoveEmployeeFromGroup(SelectedGroup, SelectedEmployee);
+            _window.Close();
+        }
+
+        private void Cancel()
+        {
+            _window.Close();
         }
     }
 }

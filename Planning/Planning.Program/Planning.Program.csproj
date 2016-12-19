@@ -89,12 +89,20 @@
     <Compile Include="Converters\MinutesToHeightConverter.cs" />
     <Compile Include="ViewModel\ColorSelectionWindowViewModel.cs" />
     <Compile Include="ViewModel\EmployeeCreationViewModel.cs" />
+    <Compile Include="ViewModel\EmployeeDeleteViewModel.cs" />
     <Compile Include="ViewModel\GroupCreationViewModel.cs" />
+    <Compile Include="ViewModel\GroupDeleteViewModel.cs" />
     <Compile Include="ViewModel\GroupViewModel.cs" />
     <Compile Include="ViewModel\MailboxViewModel.cs" />
     <Compile Include="ViewModel\MessageAdmin.cs" />
     <Compile Include="View\ColorSelectionWindow.xaml.cs">
       <DependentUpon>ColorSelectionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EmployeeDeleteWindow.xaml.cs">
+      <DependentUpon>EmployeeDeleteWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GroupDeleteWindow.xaml.cs">
+      <DependentUpon>GroupDeleteWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Mailbox.xaml.cs">
       <DependentUpon>Mailbox.xaml</DependentUpon>
@@ -137,6 +145,14 @@
       <DependentUpon>TemplateSelectionWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="View\ColorSelectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EmployeeDeleteWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GroupDeleteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

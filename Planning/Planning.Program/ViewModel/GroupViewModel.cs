@@ -42,9 +42,9 @@ namespace Planning.ViewModel
             
 
             NewEmployeeCommand = new RelayCommand(p => CreateNewEmployee());
-            DeleteEmployeeCommand = new RelayCommand(p => DeleteEmployee(), p => true);
+            DeleteEmployeeCommand = new RelayCommand(p => DeleteEmployee(), p => Groups.Count != 0);
             NewGroupCommand = new RelayCommand(p => CreateNewGroup());
-            DeleteGroupCommand = new RelayCommand(p => DeleteGroup(), p => true);
+            DeleteGroupCommand = new RelayCommand(p => DeleteGroup(), p => Groups.Count != 0);
 
         }
 
@@ -57,7 +57,12 @@ namespace Planning.ViewModel
         }
         private void DeleteEmployee()
         {
+            var window = new EmployeeDeleteWindow();
+            var viewModel = new EmployeeDeleteViewModel(window);
+            window.DataContext = viewModel;
+            window.ShowDialog();
 
+            GroupChange?.Invoke();
         }
 
         private void CreateNewGroup()
@@ -73,7 +78,12 @@ namespace Planning.ViewModel
 
         private void DeleteGroup()
         {
+            var window = new GroupDeleteWindow();
+            var viewModel = new GroupDeleteViewModel(window);
+            window.DataContext = viewModel;
+            window.ShowDialog();
 
+            GroupChange?.Invoke();
         }
     }
 }
