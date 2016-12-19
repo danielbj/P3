@@ -8,6 +8,7 @@
              d:DesignHeight="300" d:DesignWidth="600">
     <UserControl.Resources>
         <local:MinutesToHeightConverter x:Key="MinutesToHeight"></local:MinutesToHeightConverter>
+        <local:GreaterThanZeroConverter x:Key="GreaterThanZero"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -51,9 +52,43 @@
         </StackPanel>
         <Border BorderBrush="Black" BorderThickness="0 0 0 2" Grid.Row="1">
             <StackPanel x:Name="ButtonStackPanel" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
-                <Button x:Name="LoadButton" Content="Importer Grundplan" Padding="2" Margin="2" Command="{Binding LoadTemplateScheduleCommand}"/>
+                <Button x:Name="LoadButton" Content="Importer Grundplan" Padding="2" Margin="2" Command="{Binding LoadTemplateScheduleCommand}">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedIndex, ElementName=ScheduleComboBox}" Value="1">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding SelectedIndex, ElementName=ScheduleComboBox}" Value="0">
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
                 <Button x:Name="AddEmployeeButton" Content="Tilføj Kolonne" Padding="2" Margin="2" Command="{Binding AddEmployeeScheduleCommand}"/>
-                <ToggleButton x:Name="UnplannedTaskItemToggleButton" Content="Uplanlagte Opgaver" Padding="2" Margin="2" IsChecked="False"/>
+                <ToggleButton x:Name="UnplannedTaskItemToggleButton" Padding="2" Margin="2" IsChecked="False">
+                    <ToggleButton.Content>
+                        <Binding ElementName="UnplannedTaskListBox" Path="Items.Count"/>
+                    </ToggleButton.Content>
+                    <ToggleButton.ContentStringFormat>
+                        Uplanlagte Opgaver: {0}
+                    </ToggleButton.ContentStringFormat>
+                    <ToggleButton.Style>
+                        <Style TargetType="{x:Type ToggleButton}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=UnplannedTaskListBox, Path=Items.Count, Converter={ StaticResource GreaterThanZero}}">
+                                    <DataTrigger.Value>true</DataTrigger.Value>
+                                    <Setter Property="BorderBrush" Value="Red"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=UnplannedTaskListBox, Path=Items.Count, Converter={ StaticResource GreaterThanZero}}">
+                                    <DataTrigger.Value>false</DataTrigger.Value>
+                                    <Setter Property="BorderBrush" Value="Gray"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ToggleButton.Style>
+                </ToggleButton>
                 <Slider x:Name="UISlider" Margin="2" Padding="2" Maximum="10" Minimum="0.5" Orientation="Horizontal" Width="200" Value="1"/>
                 <DockPanel Width="150">
                     <Button x:Name="SaveButton" Content="Gem" Width="50" Padding="2" Margin="2" Command="{Binding FlushToDatabase}" HorizontalAlignment="Right"/>
@@ -103,6 +138,7 @@
                         <TextBlock Grid.Row="8" Text="13.00" />
                         <TextBlock Grid.Row="9" Text="14.00" />
                         <TextBlock Grid.Row="10" Text="15.00" />
+                        <TextBlock Grid.Row="11" Text="16.00" />
                     </Grid>
                     <ItemsControl x:Name="SchedulePanel" Grid.Column="1" ItemsSource="{Binding EmployeeSchedules}">
                         <ItemsControl.ItemsPanel>
@@ -176,15 +212,18 @@
                                                                     <ColumnDefinition Width="auto"/>
                                                                 </Grid.ColumnDefinitions>
                                                                 <TextBlock x:Name="Citizen" Grid.Column="0" HorizontalAlignment="Center" Text="{Binding TaskDescription.Citizen}" FontStyle="Italic"/>
-                                                                <ToggleButton Grid.Column="1" Content="L" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.LockTaskCommand}" CommandParameter="{Binding}" >
+                                                                <ToggleButton x:Name="TaskItemToggleButton" Grid.Column="1" 
+                                                                              Content="L" 
+                                                                              Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.LockTaskCommand}" 
+                                                                              CommandParameter="{Binding}">
                                                                     <ToggleButton.Template>
                                                                         <ControlTemplate TargetType="ToggleButton">
                                                                             <Border CornerRadius="3" Background="{TemplateBinding Background}">
                                                                                 <ContentPresenter Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                                             </Border>
                                                                             <ControlTemplate.Triggers>
-                                                                                <Trigger Property="IsChecked" Value="True">
-                                                                                    <Setter Property="Background" Value="Red"/>
+                                                                                <Trigger Property="IsChecked" Value="True"> 
+                                                                                    <Setter Property="Background" Value="Red"/> 
                                                                                 </Trigger>
                                                                                 <Trigger Property="IsChecked" Value="False">
                                                                                     <Setter Property="Background" Value="Green"/>
@@ -214,7 +253,7 @@
                     </ItemsControl>
                 </Grid>
             </ScrollViewer>
-            <ListBox Grid.Column="1" Width="200" ItemsSource="{Binding UnplannedTaskItems}" AllowDrop="True" Drop="ListBox_Drop_1">
+            <ListBox x:Name="UnplannedTaskListBox" Grid.Column="1" Width="200" ItemsSource="{Binding UnplannedTaskItems}" AllowDrop="True" Drop="ListBox_Drop_1">
                 <ListBox.Style>
                     <Style TargetType="ListBox">
                         <Style.Triggers>

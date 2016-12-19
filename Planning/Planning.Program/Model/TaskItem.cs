@@ -42,7 +42,20 @@ namespace Planning.Model
 
 
         public Status State { get; set; }
-        public bool Locked;
+
+        private bool _locked;
+
+        public bool Locked
+        {
+            get { return _locked; }
+            set {
+                if (_locked != value)
+                {
+                    _locked = value;
+                    OnPropertyChanged(nameof(Locked));
+                }
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

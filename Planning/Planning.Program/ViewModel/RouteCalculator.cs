@@ -91,7 +91,7 @@ namespace Planning.ViewModel
         /// <param name="startAddress">Used as start address for route.</param>
         /// <param name="endAddress">Used as end address for route.</param>
         /// <returns>Returns RouteItem.</returns>
-        public static RouteItem GetRouteItem(Planning.Model.Address startAddress, Planning.Model.Address endAddress)  //TODO slet
+        public static RouteItem GetRouteItem(Model.Address startAddress, Model.Address endAddress)  //TODO slet
         {
             RouteItem routeItem = RouteItems.FirstOrDefault(r => r.Waypoints[0] == startAddress.AddressName && r.Waypoints[1] == endAddress.AddressName);
 
@@ -157,9 +157,6 @@ namespace Planning.ViewModel
             {
                 return MakeRequest(requestURL);
             }
-            
-
-            
         }
 
         /// <summary>
