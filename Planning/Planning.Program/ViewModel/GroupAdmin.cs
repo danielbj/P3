@@ -27,6 +27,7 @@ namespace Planning.ViewModel
         List<Employee> _employeeClipBoard;  
         private DatabaseControl DatabaseControl = new DatabaseControl();
 
+        
         private GroupAdmin()
         {
             _groupContainer = DataBaseMockUp.LoadGroups();
@@ -74,7 +75,10 @@ namespace Planning.ViewModel
 
         public List<Employee> GetEmployeeClipBoard()
         {
-            return _employeeClipBoard;
+            List<Employee> result = new List<Employee>();
+            result = _employeeClipBoard;
+            result.Sort();
+            return result;
         }
 
         /// <summary>

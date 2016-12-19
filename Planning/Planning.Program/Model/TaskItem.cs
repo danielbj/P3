@@ -13,9 +13,6 @@ namespace Planning.Model
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-
-
         public int TaskItemId { get; set; }
 
         public enum Status

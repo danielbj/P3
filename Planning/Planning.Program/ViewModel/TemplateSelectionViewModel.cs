@@ -39,7 +39,6 @@ namespace Planning.ViewModel
 
         public TemplateSelectionViewModel(List<GroupSchedule> templates, TemplateSelectionWindow window)
         {
-            
             _templates = templates;
             CancelCommand = new RelayCommand(p => Cancel(), p => true);
             ImportCommand = new RelayCommand(p => Import(), p => true);

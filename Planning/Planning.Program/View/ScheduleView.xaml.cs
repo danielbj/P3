@@ -24,6 +24,7 @@ namespace Planning.View
     {
         private Point _startpoint;
 
+
         public ScheduleView()
         {
             DataContext = new ScheduleViewModel();
@@ -104,6 +105,9 @@ namespace Planning.View
             }
         }
 
+        private void LoadButton_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }

@@ -195,13 +195,13 @@ namespace Planning.ViewModel
         {
             return groupSchedule.ToString(); 
         }
+        
         /// <summary>
         /// Creates a new daily schedule
         /// </summary>
         /// <param name="date"></param>
         /// <param name="groupschedule"></param>
         /// <param name="startTime"></param>
-        
         public void CreateNewEmployeeSchedule(GroupSchedule groupschedule, TimeSpan startTime)
         {
             EmployeeSchedule employeeSchedule = new EmployeeSchedule(startTime);
@@ -249,6 +249,7 @@ namespace Planning.ViewModel
         {
             //unassigned taskDescriptions needs to be placed in clipboard in groupAdmin
         }
+
         /// <summary>
         /// Assigns an employee to the employee schedule
         /// </summary>
@@ -370,6 +371,10 @@ namespace Planning.ViewModel
             employeeSchedule.TaskItems.Remove(task);
         }
 
+        public void ChangeColor(EmployeeSchedule employeeSchedule, string color)
+        {
+            employeeSchedule.color = color;
+        }
     }
 
 

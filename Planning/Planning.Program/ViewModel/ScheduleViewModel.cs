@@ -60,11 +60,9 @@ namespace Planning.ViewModel
             }
         }
 
-   
-
         public List<GroupSchedule> Templates
         {
-            get;set;
+            get; set;
         }
 
         private GroupSchedule _selectedTemplate;
@@ -100,7 +98,7 @@ namespace Planning.ViewModel
                     {
                         _scheduleAdmin.CreateSchedule(SelectedDate, SelectedGroup);
                         return SelectedGroup.GetSchedule(SelectedDate);
-                    } 
+                    }
                 }
                 else
                 {
@@ -125,8 +123,8 @@ namespace Planning.ViewModel
                 return _selectedGroup;
             }
             set
-            { 
-                if(_selectedGroup != value)
+            {
+                if (_selectedGroup != value)
                 {
                     _selectedGroup = value;
 
@@ -147,8 +145,8 @@ namespace Planning.ViewModel
         public RelayCommand LoadTemplateScheduleCommand { get; }
         public RelayCommand RemoveEmployeeScheduleCommand { get; }
         public RelayCommand ToggleUnplannedTaskItemPanelCommand { get; }
-
         public RelayCommand FlushToDatabase { get; }
+        public RelayCommand ChangeColourCommand { get;}   
 
         #endregion
 
@@ -160,7 +158,6 @@ namespace Planning.ViewModel
         private DatabaseControl _databaseControl;
 
         #endregion
-
 
         public ScheduleViewModel()
         {
@@ -185,7 +182,7 @@ namespace Planning.ViewModel
 
             RemoveEmployeeScheduleCommand = new RelayCommand(p => RemoveEmployeeSchedule(p as EmployeeSchedule), p=> true);
 
-      
+            ChangeColourCommand = new RelayCommand(p => ChangeColourOfEmployeeSchedule(p as EmployeeSchedule), p => SelectedCalendarType == CalendarTypes[1]);
 
             FlushToDatabase = new RelayCommand(FlushToDatabaseAction, null);
 
@@ -313,7 +310,6 @@ namespace Planning.ViewModel
 
             }
             UpdateSchedule();
-
         }
 
         private void ImportTemplate()
@@ -333,8 +329,8 @@ namespace Planning.ViewModel
             UpdateSchedule();
         }
 
-
-        public void FlushToDatabaseAction(object input) {
+        public void FlushToDatabaseAction(object input)
+        {
             _databaseControl.EraseDatabaseContent();
 
             foreach (Group g in _groupAdmin.GetAllGroups()) {
@@ -365,6 +361,21 @@ namespace Planning.ViewModel
             }
 
             MessageBox.Show("Gemt..!");
+        }
+
+        public void ChangeColourOfEmployeeSchedule(EmployeeSchedule es)
+        {
+            var window = new ColorSelectionWindow();
+            var viewModel = new ColorSelectionWindowViewModel(window);
+
+            window.DataContext = viewModel;
+            window.ShowDialog();
+
+            foreach (TaskItem task in es.TaskItems)
+            {
+                task.Color = viewModel.Color;
+            }
+            UpdateSchedule();
         }
     }
 }

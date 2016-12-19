@@ -12,20 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Planning.ViewModel; 
+using Planning.ViewModel;
 
 namespace Planning.View
 {
     /// <summary>
-    /// Interaction logic for OverviewView.xaml
+    /// Interaction logic for ColorSelectionWindow.xaml
     /// </summary>
-    public partial class GroupView : UserControl
+    public partial class ColorSelectionWindow : Window
     {
-        GroupViewModel VM;
-        public GroupView()
+        public ColorSelectionWindow()
         {
             InitializeComponent();
-            DataContext = VM = new GroupViewModel();    
+
         }
     }
 }

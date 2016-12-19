@@ -14,6 +14,11 @@ namespace Planning.ViewModel
 
         public event EventHandler CanExecuteChanged;
 
+        public RelayCommand(Action<object> executeAction)
+        {
+            this.executeAction = executeAction;
+        }
+
         public RelayCommand(Action<object> executeAction, Predicate<object> canExecutePredicate)
         {
             this.executeAction = executeAction;

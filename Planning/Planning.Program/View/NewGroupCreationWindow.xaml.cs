@@ -10,22 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Planning.ViewModel; 
 
 namespace Planning.View
 {
     /// <summary>
-    /// Interaction logic for OverviewView.xaml
+    /// Interaction logic for NewGroupCreationWindow.xaml
     /// </summary>
-    public partial class GroupView : UserControl
+    public partial class NewGroupCreationWindow : Window
     {
-        GroupViewModel VM;
-        public GroupView()
+        public NewGroupCreationWindow()
         {
             InitializeComponent();
-            DataContext = VM = new GroupViewModel();    
         }
     }
 }

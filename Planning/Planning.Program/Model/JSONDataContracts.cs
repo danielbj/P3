@@ -537,7 +537,8 @@ namespace BingMapsRESTService.Common.JSON
         public long lineColor { get; set; }
 
         [DataMember(Name = "lineTextColor", EmitDefaultValue = false)]
-        public long lineTextColor { get; set; }
+        public long lineText
+        { get; set; }
 
         [DataMember(Name = "uri", EmitDefaultValue = false)]
         public string uri { get; set; }

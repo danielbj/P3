@@ -18,9 +18,9 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button Content="Annuller" Command="{Binding CancelCommand}"/>
-            <Button Content="Importer" Command="{Binding ImportCommand}"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content=" Annuller " Command="{Binding CancelCommand}"/>
+            <Button Content=" Importer " Command="{Binding ImportCommand}"/>
         </StackPanel>
     </Grid>
 </Window>

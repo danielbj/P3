@@ -50,8 +50,6 @@ namespace Planning.ViewModel
         GroupAdmin _groupAdmin;
         #endregion
 
-
-
         public MailboxViewModel() {
             _messageAdmin = new MessageAdmin();
             _groupAdmin = GroupAdmin.Instance;
@@ -61,7 +59,6 @@ namespace Planning.ViewModel
             SelectedMessage = Messages.First();
 
             AcceptChanges = new RelayCommand(p => AcceptChangeHandling(), p => SelectedMessage.IsRead);
-
         }
 
         public void MakeMessagesMockup() {
