@@ -31,7 +31,7 @@ namespace Planning.UnitTest.Model
         {
             RouteItem routeItem = new RouteItem(startAddress, endAddress, duration);
 
-            Assert.AreEqual(duration, routeItem.TimePeriod.Duration);
+            Assert.AreEqual(duration.ToString(), routeItem.TimePeriod.Duration.ToString());
         }
         #endregion
 

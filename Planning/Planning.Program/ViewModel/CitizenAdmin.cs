@@ -24,8 +24,8 @@ namespace Planning.ViewModel
 
         public CitizenAdmin()
         {
-            //_citizenContainer = DataBaseMockUp.LoadCitizens();
-            _citizenContainer = DatabaseControl.ReadDistinctCitizens();
+            _citizenContainer = DataBaseMockUp.LoadCitizens();
+            //_citizenContainer = DatabaseControl.ReadDistinctCitizens();
         }
 
         public CitizenAdmin(CitizenContainer citizenContainer)

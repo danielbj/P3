@@ -12,8 +12,8 @@ namespace Planning.ViewModel
         List<Message> Messages;
 
         public MessageAdmin() {
-            Messages = new List<Message>();
-            //Messages = DataBaseMockUp.LoadMessages();
+            //Messages = new List<Message>();
+            Messages = DataBaseMockUp.LoadMessages();
         }
 
         public List<Message> GetAllMessages() {
