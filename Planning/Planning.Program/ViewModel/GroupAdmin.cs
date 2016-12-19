@@ -30,10 +30,7 @@ namespace Planning.ViewModel
         private GroupAdmin()
         {
             //_groupContainer = DataBaseMockUp.LoadGroups();
-            _groupContainer = DatabaseControl.ReadAll();
-
-            _taskDescriptionsClipBoard = new List<TaskDescription>();
-            
+            _groupContainer = DatabaseControl.ReadAll();            
             //_employeeClipBoard = DataBaseMockUp.LoadEmployees();
             _employeeClipBoard = DatabaseControl.ReadDistinctEmployees();
             
