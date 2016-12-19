@@ -31,7 +31,7 @@
                 <ComboBox x:Name="GroupComboBox" Margin="3" Width ="160" ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}" SelectedIndex="0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
-                <Button Name="CancelButton" Content="Anuller" Margin="2" Height="20" Width="50"  ></Button>
+                <Button Name="CancelButton" Content="Anuller" Margin="2" Height="20" Width="50" Command="{Binding CancelCommand}"></Button>
                 <Button Name="CreateButton" Content="Opret" Margin="2" Height="20" Width="50" Command="{Binding CreateButtonClicked}" ></Button>
             </StackPanel>
         </StackPanel>

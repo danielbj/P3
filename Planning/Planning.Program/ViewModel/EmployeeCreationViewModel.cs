@@ -57,7 +57,7 @@ namespace Planning.ViewModel
         }
 
         private string _phoneNumber;
-        public string Phonenumber
+        public string PhoneNumber
         {
             get
             {
@@ -112,11 +112,12 @@ namespace Planning.ViewModel
         }
 
         public RelayCommand CreateButtonClicked { get; }
+        public RelayCommand CancelCommand { get; }
 
 
         private NewEmployeeWindow _window;
 
-        public EmployeeCreationViewModel(List<Employee> Employees, NewEmployeeWindow window)
+        public EmployeeCreationViewModel(NewEmployeeWindow window)
         {
             _groupAdmin = GroupAdmin.Instance;
 
@@ -125,14 +126,21 @@ namespace Planning.ViewModel
             SelectedGroup = Groups[0];
 
             CreateButtonClicked = new RelayCommand(p => CreateEmployee(), p => true);
+            CancelCommand = new RelayCommand(p => Cancel(), p => true);
 
             _window = window;
         }
 
         public void CreateEmployee()
         {
-            _groupAdmin.NewEmployee(Firstname, Lastname, Notes, Phonenumber, SelectedGroup, StartTime, EndTime);
+            _groupAdmin.NewEmployee(Firstname, Lastname, Notes, PhoneNumber, SelectedGroup, StartTime, EndTime);
             _window.Close();
         }
+        public void Cancel()
+        {
+            _window.Close();
+        }
+
+
     }
 }

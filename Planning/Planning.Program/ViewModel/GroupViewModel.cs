@@ -15,40 +15,49 @@ namespace Planning.ViewModel
 {
     class GroupViewModel : ViewModelBase
     {
+
         public delegate void GroupsUpdatedHandler();
         public event GroupsUpdatedHandler GroupChange;
 
+        #region Properties
+        public List<Group> Groups { get; set; }
+        #endregion
+
+        #region Fields
         public RelayCommand NewGroupCommand { get; }
         public RelayCommand NewEmployeeCommand { get; }
-        //LoadTemplateScheduleCommand = new RelayCommand(p => ImportTemplate(), p => (SelectedDate != null && SelectedCalendarType == CalendarTypes[0]));
+        public RelayCommand DeleteEmployeeCommand { get; }
+        public RelayCommand DeleteGroupCommand { get; }
 
         private GroupAdmin _groupAdmin;
 
-        public List<Group> Groups { get; set; }
+        
 
-        private List<Employee> TempEmployees = new List<Employee>();
+        #endregion
 
         public GroupViewModel()
         {
             _groupAdmin = GroupAdmin.Instance;
             Groups = _groupAdmin.GetAllGroups();
-            //_groupAdmin._groupContainer.PropertyChanged += _groupContainer_PropertyChangedHandler;
+            
 
             NewEmployeeCommand = new RelayCommand(p => CreateNewEmployee());
+            DeleteEmployeeCommand = new RelayCommand(p => DeleteEmployee(), p => true);
             NewGroupCommand = new RelayCommand(p => CreateNewGroup());
-        }
+            DeleteGroupCommand = new RelayCommand(p => DeleteGroup(), p => true);
 
-        //private void _groupContainer_PropertyChangedHandler(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        //{
-        //    Groups = new ObservableCollection<Group>(_groupAdmin.GetAllGroups());
-        //}
+        }
 
         private void CreateNewEmployee()
         {
             var window = new NewEmployeeWindow();
-            var viewModel = new EmployeeCreationViewModel(TempEmployees, window);
+            var viewModel = new EmployeeCreationViewModel(window);
             window.DataContext = viewModel;
             window.ShowDialog();
+        }
+        private void DeleteEmployee()
+        {
+
         }
 
         private void CreateNewGroup()
@@ -59,6 +68,12 @@ namespace Planning.ViewModel
             window.ShowDialog();
             
             GroupChange?.Invoke();
+        }
+
+
+        private void DeleteGroup()
+        {
+
         }
     }
 }

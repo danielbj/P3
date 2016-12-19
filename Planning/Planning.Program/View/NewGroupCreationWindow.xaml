@@ -17,7 +17,7 @@
                 <TextBox x:Name="GroupNameTextbox" HorizontalAlignment="Stretch" Background="White" Margin="5"  Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
-                <Button Name="CancelButton" Content="Anuller" Margin="5" Height="20" Width="50"  ></Button>
+                <Button Name="CancelButton" Content="Anuller" Margin="5" Height="20" Width="50" Command="{Binding CancelCommand}"></Button>
                 <Button Name="CreateButton" Content="Opret" Margin="5" Height="20" Width="50" Command="{Binding CreateGroupButtonClicked}" ></Button>
             </StackPanel>
         </StackPanel>

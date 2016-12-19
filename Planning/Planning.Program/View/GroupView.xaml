@@ -17,16 +17,6 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal" Margin="3">
-                <Button x:Name="ExpandAll"  Padding="3" Margin="3">Åben alle</Button>
-                <Button x:Name="CollapseAll" Padding="3" Margin="3">Luk alle</Button>
-                <Label Margin="3">Sorter efter:</Label>
-                <ComboBox Margin="3">
-                    <ComboBoxItem Selector.IsSelected="True" Content="Grupper"/>
-                    <ComboBoxItem Content="Alfabetisk"/>
-                    <ComboBoxItem Content="Stilling"/>
-                </ComboBox>
-            </StackPanel>
             <ScrollViewer Grid.Row="1" Margin="3">
                 <ItemsControl x:Name="EmployeePanel" ItemsSource="{Binding Groups}">
                     <ItemsControl.ItemsPanel>
@@ -59,11 +49,17 @@
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="NewEmployeeButton" Margin="3" Command="{Binding NewEmployeeCommand}">Opret Medarbejder</Button>
-                <Button x:Name="NewGroupButton" Margin="3" Command="{Binding NewGroupCommand}">Opret Gruppe</Button>
-                <Button x:Name="EditEmployeeButton" Margin="3">Rediger</Button>
-                <Button x:Name="DeleteEmployeeButton" Margin="3">Slet</Button>
+            <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="NewEmployeeButton" Margin="3" Width="110" Command="{Binding NewEmployeeCommand}">Opret Medarbejder</Button>
+                    <!--<Button x:Name="EditEmployeeButton" Margin="3" Width="120">Rediger Medarbejder</Button>-->
+                    <Button x:Name="DeleteEmployeeButton" Margin="3" Width="95">Slet Medarbejder</Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="NewGroupButton" Margin="3" Width="110" Command="{Binding NewGroupCommand}">Opret Gruppe</Button>
+                    <!--<Button x:Name="EditGroupButton" Margin="3" Width="120">  Rediger Gruppe  </Button>-->
+                    <Button x:Name="DeleteGroupButton" Margin="3" Width="95">  Slet Gruppe  </Button>
+                </StackPanel>
             </StackPanel>
 
             <StackPanel Grid.Row="1" Margin="3">

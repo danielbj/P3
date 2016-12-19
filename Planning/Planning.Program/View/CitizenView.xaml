@@ -17,16 +17,6 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal" Margin="3">
-                <Button x:Name="ExpandAll"  Padding="3" Margin="3" >Åben alle</Button>
-                <Button x:Name="CollapseAll" Padding="3" Margin="3">Luk alle</Button>
-                <Label Margin="3">Sorter efter:</Label>
-                <ComboBox Margin="3">
-                    <ComboBoxItem Selector.IsSelected="True" Content="Navn"/>
-                    <ComboBoxItem Content="Type"/>
-                    <ComboBoxItem Content="Område"/>
-                </ComboBox>
-            </StackPanel>
             <ScrollViewer Grid.Row="1" Margin="3">
                 <ItemsControl x:Name="CitizenPanel" ItemsSource="{Binding Citizens}">
                     <ItemsControl.ItemsPanel>
@@ -58,10 +48,6 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="EditJobButton" Margin="3">Rediger</Button>
-                <Button x:Name="CancelJobButton" Margin="3">Aflys</Button>
-            </StackPanel>
             <ScrollViewer Grid.Row="1" Margin="3">
                 <StackPanel>
                     <Label Content="Service:"/>

@@ -32,6 +32,7 @@ namespace Planning.ViewModel
         }
 
         public RelayCommand CreateGroupButtonClicked { get; }
+        public RelayCommand CancelCommand { get; }
 
 
         private NewGroupCreationWindow _window;
@@ -43,6 +44,7 @@ namespace Planning.ViewModel
             Groups = new ObservableCollection<Group>(_groupAdmin.GetAllGroups());
 
             CreateGroupButtonClicked = new RelayCommand(p => CreateGroup(), p => true);
+            CancelCommand = new RelayCommand(p => Cancel(), p => true);
 
             _window = window;
         }
@@ -50,6 +52,11 @@ namespace Planning.ViewModel
         public void CreateGroup()
         {
             _groupAdmin.AddNewGroup(Name);
+            _window.Close();
+        }
+
+        public void Cancel()
+        {
             _window.Close();
         }
     }
