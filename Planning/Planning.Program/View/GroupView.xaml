@@ -4,8 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Planning.View"
+             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="cvsGroupAlphabetic" Source="{Binding Groups}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Name" Direction="Ascending"/>
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -28,7 +36,7 @@
                 </ComboBox>
             </StackPanel>
             <ScrollViewer Grid.Row="1" Margin="3">
-                <ItemsControl x:Name="EmployeePanel" ItemsSource="{Binding Groups}">
+                <ItemsControl x:Name="EmployeePanel" ItemsSource="{Binding Source={StaticResource cvsGroupAlphabetic}}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Height="auto" Width="auto" HorizontalAlignment="Stretch"/>
@@ -37,7 +45,19 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Expander Margin="3" Header="{Binding}">
-                                <ListBox x:Name="TaskList" ItemsSource="{Binding Path=Employees}" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedEmployee, Mode=TwoWay}">
+                                <Expander.Resources>
+                                    <CollectionViewSource x:Key="cvsEmployeesAlphabetic" Source="{Binding Path=Employees}">
+                                        <CollectionViewSource.SortDescriptions>
+                                            <scm:SortDescription PropertyName="Firstname" Direction="Ascending"/>
+                                            <scm:SortDescription PropertyName="Lastname" Direction="Ascending"/>
+                                        </CollectionViewSource.SortDescriptions>
+                                    </CollectionViewSource>
+                                </Expander.Resources>
+                                <ListBox x:Name="EmployeeList" 
+                                         ItemsSource="{Binding Source={StaticResource cvsEmployeesAlphabetic}}" 
+                                         SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, 
+                                                                Path=DataContext.SelectedEmployee, 
+                                                                Mode=TwoWay}">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding}"/>
@@ -59,6 +79,16 @@
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
 
+            <StackPanel Grid.Row="1" Margin="3">
+                <Label Content="Navn:"/>
+                <Label Name="NameDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedEmployee}"/>
+                
+                <Label Content="Telefon nummer:"/>
+                <Label Name="PhoneNumberDecriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedEmployee.PhoneNumber}"/>
+                
+                <Label Content="Noter"/>
+                <Label Name="GroupNameDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedEmployee.Notes}"/>
+            </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="NewEmployeeButton" Margin="3" Command="{Binding NewEmployeeCommand}">Opret Medarbejder</Button>
                 <Button x:Name="NewGroupButton" Margin="3" Command="{Binding NewGroupCommand}">Opret Gruppe</Button>
@@ -66,14 +96,6 @@
                 <Button x:Name="DeleteEmployeeButton" Margin="3">Slet</Button>
             </StackPanel>
 
-            <StackPanel Grid.Row="1" Margin="3">
-                <Label Content="Navn:"/>
-                <Label Name="NameDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedEmployee}"/>
-                <Label Content="Telefon nummer"/>
-                <Label Name="PhoneNumberDecriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedEmployee.PhoneNumber}"/>
-                <Label Content="Noter"/>
-                <Label Name="GroupNameDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedEmployee.Notes}"/>
-            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

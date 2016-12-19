@@ -207,9 +207,13 @@ namespace Planning.Model
             //var GroupVangså = new Group("Vangså", "Kærvej 3, 7752, Snedsted, Denmark");
             //var GroupSundby = new Group("Sundby", "Kærvej 3, 7752, Snedsted, Denmark");
 
+            GroupSnedsted.Employees.Add(new Employee("Hanne", "Hansen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            GroupSnedsted.Employees.Add(new Employee("Lars", "Larsen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+            GroupSnedsted.Employees.Add(new Employee("Lark", "Larsen", DateTime.Today, "Hjemmeplejer", "11111111", TimeSpan.FromHours(8), TimeSpan.FromHours(16)));
+
             Groups.Add(GroupSnedsted);
-            //Groups.Add(GroupHørdum);
-            //Groups.Add(GroupKoldby);
+            Groups.Add(GroupHørdum);
+            Groups.Add(GroupKoldby);
             //Groups.Add(GroupHundborg);
             //Groups.Add(GroupStenbjerg);
             //Groups.Add(GroupVangså);
@@ -268,15 +272,15 @@ namespace Planning.Model
                             ran = rnd.Next(Tasks.Count);
                             schedule.TaskItems.Add(Tasks[ran].Clone());
 
-                            if (i > 0)
-                            {
-                                schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.GetRouteItem(schedule.TaskItems[i - 1].TaskDescription.Citizen.GetAddress(DateTime.Today), schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today)).Duration;
-                            }
+                            //if (i > 0)
+                            //{
+                            //    schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.GetRouteItem(schedule.TaskItems[i - 1].TaskDescription.Citizen.GetAddress(DateTime.Today), schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today)).Duration;
+                            //}
 
-                            else if (i == 0)
-                            {
-                                schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.GetRouteItem(new Address("Kærvej 3, 7752, Snedsted, Denmark",DateTime.Now), schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today)).Duration;
-                            }
+                            //else if (i == 0)
+                            //{
+                            //    schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.GetRouteItem(new Address("Kærvej 3, 7752, Snedsted, Denmark",DateTime.Now), schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today)).Duration;
+                            //}
                         }
                     }
                 }
