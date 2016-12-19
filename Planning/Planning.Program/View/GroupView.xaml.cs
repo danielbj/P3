@@ -25,7 +25,13 @@ namespace Planning.View
         public GroupView()
         {
             InitializeComponent();
-            DataContext = VM = new GroupViewModel();    
+            DataContext = VM = new GroupViewModel();
+            VM.GroupChange += VM_GroupChangeHandler;   
+        }
+
+        private void VM_GroupChangeHandler()
+        {
+            EmployeePanel.Items.Refresh();
         }
     }
 }

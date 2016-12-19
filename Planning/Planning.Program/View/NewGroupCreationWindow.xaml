@@ -12,10 +12,13 @@
             <ColumnDefinition Width="65*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.ColumnSpan="2" Margin="0,0,25,0">
-            <TextBox x:Name="EmployeeFirstname" Background="White" Margin="5" Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <TextBlock>Gruppenavn: </TextBlock>
+                <TextBox x:Name="GroupNameTextbox" HorizontalAlignment="Stretch" Background="White" Margin="5"  Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
                 <Button Name="CancelButton" Content="Anuller" Margin="5" Height="20" Width="50"  ></Button>
-                <Button Name="CreateButton" Content="Opret" Margin="5" Height="20" Width="50" Command="{Binding CreateButtonClicked}" ></Button>
+                <Button Name="CreateButton" Content="Opret" Margin="5" Height="20" Width="50" Command="{Binding CreateGroupButtonClicked}" ></Button>
             </StackPanel>
         </StackPanel>
     </Grid>

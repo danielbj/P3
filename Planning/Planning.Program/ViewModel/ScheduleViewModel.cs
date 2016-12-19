@@ -199,6 +199,7 @@ namespace Planning.ViewModel
         public void StartDrag(object source, object item)
         {
             TaskItem taskItem = item as TaskItem;
+            string color = "LightSteelBlue";
 
             if (taskItem != null)
             {
@@ -206,7 +207,7 @@ namespace Planning.ViewModel
                 _scheduleAdmin.UnPlan(SelectedGroup, employeeSchedule, taskItem);
                 if (SelectedCalendarType == "Kalenderplaner")
                 {
-                    ShowBestPlacement(taskItem, SelectedDate);
+                    color = ShowBestPlacement(taskItem, SelectedDate);
                 }
                 UpdateSchedule();
                 
@@ -214,7 +215,7 @@ namespace Planning.ViewModel
                 DragDrop.DoDragDrop((DependencyObject)source, taskItem, DragDropEffects.Move);
                 if (_optimalPlaceMentTaskItem != null)
                 {
-                    _optimalPlaceMentTaskItem.Color = "LightSteelBlue";
+                    _optimalPlaceMentTaskItem.Color = color;
                     _optimalPlaceMentTaskItem = null;
                 }
                 OnPropertyChanged(nameof(UnplannedTaskItems));
@@ -224,28 +225,34 @@ namespace Planning.ViewModel
         public void StartDragPlan(object source, object item)
         {
             TaskItem taskItem = item as TaskItem;
+            string color = "LightSteelBlue";
 
             if (taskItem != null)
             {
                 if (SelectedCalendarType == "Kalenderplaner")
                 {
-                    ShowBestPlacement(taskItem, SelectedDate);
+                    color = ShowBestPlacement(taskItem, SelectedDate);
                 }
                 DragDrop.DoDragDrop((DependencyObject)source, taskItem, DragDropEffects.Move);
                 if (_optimalPlaceMentTaskItem != null)
                 {
-                    _optimalPlaceMentTaskItem.Color = "LightSteelBlue";
+                    _optimalPlaceMentTaskItem.Color = color;
                     _optimalPlaceMentTaskItem = null;
                 }
             }
 
         }
 
-        public void ShowBestPlacement(TaskItem taskItem, DateTime dateTime)
+        public string ShowBestPlacement(TaskItem taskItem, DateTime dateTime)
         {
+            string color = null;
             _optimalPlaceMentTaskItem = _scheduleAdmin.FindOptimalPlacement(SelectedGroup, dateTime, taskItem);
-
-            _optimalPlaceMentTaskItem.Color = "Lime";
+            if (_optimalPlaceMentTaskItem != null)
+            {
+                color = _optimalPlaceMentTaskItem.Color;
+                _optimalPlaceMentTaskItem.Color = "Lime";
+            }
+            return color;
         }
 
         public void DropTask(TaskItem draggedTaskItem, object dropTarget)
@@ -299,7 +306,7 @@ namespace Planning.ViewModel
         {
             var window = new EmployeeSelectionWindow();
             // var viewModel = new EmployeeSelectionViewModel(_groupAdmin.GetEmployeesOnDuty(SelectedGroup,SelectedDate),window);  // TODO dette burde være det rigtige
-            var viewModel = new EmployeeSelectionViewModel(_groupAdmin.GetEmployeeClipBoard(),window);    // Workaround
+            var viewModel = new EmployeeSelectionViewModel(_groupAdmin.GetAllEmployeesInGroup(SelectedGroup),window);    // Workaround
 
             window.DataContext = viewModel;
             window.ShowDialog();

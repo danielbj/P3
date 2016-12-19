@@ -5,17 +5,25 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Planning.View"
       mc:Ignorable="d" d:DesignWidth="400"
-      Title="NewEmployeeWindow" Height="224.862">
-    <Grid Margin="10,10,10,10" Height="300" Width="300">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="65*"/>
-            <ColumnDefinition Width="65*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Vertical" Grid.ColumnSpan="2" Margin="0,0,0,0">
-            <TextBox x:Name="EmployeeFirstname" Background="White" Margin="2" Text="{Binding Path=Firstname, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBox x:Name="EmployeeLastname" Background="White" Margin="2" Text="{Binding Path=Lastname, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBox x:Name="EmployeeNotes" Background="White" Height="50" Margin="2" Text="{Binding Path=Notes, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBox x:Name="EmployeePhonenumber"  Background="White" Margin="2" Text="{Binding Path=PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
+      Title="NewEmployeeWindow" Height="250">
+    <Grid Margin="10">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0,0,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <TextBlock>Fornavn:</TextBlock>
+                <TextBox x:Name="EmployeeFirstname" Width="200" Background="White" Margin="2" Text="{Binding Path=Firstname, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <TextBlock>Efternavn: </TextBlock>
+                <TextBox x:Name="EmployeeLastname" Width="200" Background="White" Margin="2" Text="{Binding Path=Lastname, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <TextBlock>Noter:</TextBlock>
+                <TextBox x:Name="EmployeeNotes" Width="200" Background="White" Height="50" Margin="2" Text="{Binding Path=Notes, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <TextBlock>Telefonnummer:</TextBlock>
+                <TextBox x:Name="EmployeePhonenumber" Width="200" Background="White" Margin="2" Text="{Binding Path=PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" >
                 <TextBox x:Name="EmployeeStartime" Margin="2" Background="White" Text="{Binding Path=StartTime, UpdateSourceTrigger=PropertyChanged}" Height="18" Width="50"></TextBox>
                 <TextBox Text="-" Margin="2"/>

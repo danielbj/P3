@@ -278,17 +278,31 @@ namespace Planning.ViewModel
                 {
                     if (taskItemList[i] != taskItem)
                     {
-                        if (i != 0)
+                        if (selectedDate.Date == DateTime.Today)
                         {
-                            tempValue = CompareRoutes(taskItem, taskItemList[i - 1].TaskDescription.Citizen.GetAddress(selectedDate), taskItemList[i].TaskDescription.Citizen.GetAddress(selectedDate), selectedDate);
-                        }
-                        else
-                        {
-                            tempValue = CompareRoutes(taskItem, group.GroupAddress, taskItemList[i].TaskDescription.Citizen.GetAddress(selectedDate), selectedDate);
-                        }
 
-                        if (tempValue < tempItem.Item1)
-                            tempItem = new Tuple<double, TaskItem>(tempValue, taskItemList[i]);
+                            if (i != 0)
+                            {
+                                if (taskItemList[i - 1].TimePeriod.StartTime > DateTime.Now.TimeOfDay)
+                                {
+                                    tempValue = CompareRoutes(taskItem, taskItemList[i - 1].TaskDescription.Citizen.GetAddress(selectedDate), taskItemList[i].TaskDescription.Citizen.GetAddress(selectedDate), selectedDate);
+                                }
+                                else
+                                    tempValue = double.MaxValue;
+                            }
+                            else
+                            {
+                                if (taskItemList[i].TimePeriod.StartTime > DateTime.Now.TimeOfDay)
+                                {
+                                    tempValue = CompareRoutes(taskItem, group.GroupAddress, taskItemList[i].TaskDescription.Citizen.GetAddress(selectedDate), selectedDate);
+                                }
+                                else
+                                    tempValue = double.MaxValue;
+                            }
+
+                            if (tempValue < tempItem.Item1)
+                                tempItem = new Tuple<double, TaskItem>(tempValue, taskItemList[i]); 
+                        }
                     }
                 }
             }

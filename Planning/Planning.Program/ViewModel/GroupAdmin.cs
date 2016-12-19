@@ -23,7 +23,7 @@ namespace Planning.ViewModel
             }
         }
 
-        GroupContainer _groupContainer;
+        public GroupContainer _groupContainer;
         List<Employee> _employeeClipBoard;  
         private DatabaseControl DatabaseControl = new DatabaseControl();
 
@@ -42,6 +42,7 @@ namespace Planning.ViewModel
             _groupContainer = groupContainer;
             _employeeClipBoard = new List<Employee>();
             _instance = this;
+            
         }
 
         /// <summary>

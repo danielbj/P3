@@ -28,7 +28,6 @@
                 </ComboBox>
             </StackPanel>
             <ScrollViewer Grid.Row="1" Margin="3">
-
                 <ItemsControl x:Name="EmployeePanel" ItemsSource="{Binding Groups}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>

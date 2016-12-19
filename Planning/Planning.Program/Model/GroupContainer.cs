@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,12 +9,17 @@ namespace Planning.Model
 {
     public class GroupContainer
     {
-        public List<Group> Groups { get; private set; }
+        public List<Group> Groups 
+        {
+            get;
+            private set;
+        }
 
         public GroupContainer()
         {
             Groups = new List<Group>();
         }
+
 
         public void AddGroup(Group group)
         {
