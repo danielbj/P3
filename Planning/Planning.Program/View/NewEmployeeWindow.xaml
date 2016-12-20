@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Planning.View"
       mc:Ignorable="d" d:DesignWidth="300"
-      Title="NewEmployeeWindow" Height="300" Width="350" WindowStartupLocation="CenterScreen">
+      Title="NewEmployeeWindow" Height="350" Width="350" WindowStartupLocation="CenterScreen">
     <Grid Margin="10">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0,0,0,0">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
@@ -13,7 +13,7 @@
                 <TextBox x:Name="EmployeeFirstname" Width="200" Background="White" Margin="2" Text="{Binding Path=Firstname, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
-                <TextBlock>Efternavn: </TextBlock>
+                <TextBlock>Efternavn:</TextBlock>
                 <TextBox x:Name="EmployeeLastname" Width="200" Background="White" Margin="2" Text="{Binding Path=Lastname, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
@@ -30,9 +30,17 @@
                 <TextBox x:Name="EmployeeEndtime" Text="{Binding Path=EndTime, UpdateSourceTrigger=PropertyChanged}" Margin="2" Background="White" Height="18" Width="50"/>
                 <ComboBox x:Name="GroupComboBox" Margin="3" Width ="160" ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}" SelectedIndex="0"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
-                <Button Name="CancelButton" Content="Anuller" Margin="2" Height="20" Width="50" Command="{Binding CancelCommand}"></Button>
-                <Button Name="CreateButton" Content="Opret" Margin="2" Height="20" Width="50" Command="{Binding CreateButtonClicked}" ></Button>
+            <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
+                <TextBlock Text="Vælg eksisterende employee:" Margin="2"/>
+                <ComboBox Width="200" ItemsSource="{Binding Employees}" 
+                          Margin="2" Height="20"
+                          ToolTip="Vælg hvilken gruppe medarbejderen skal tilføjes til oven over"
+                          SelectedItem="{Binding SelectedEmployee, UpdateSourceTrigger=PropertyChanged}">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right">
+                <Button Name="CancelButton" Content="Anuller" Margin="2" Height="20" Width="50" Command="{Binding CancelCommand}" RenderTransformOrigin="1.881,0.594"/>
+                <Button Name="CreateButton" Content="Opret" Margin="2" Height="20" Width="50" Command="{Binding CreateButtonClicked}"/>
             </StackPanel>
         </StackPanel>
     </Grid>
