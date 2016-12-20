@@ -91,7 +91,20 @@
                 </ToggleButton>
                 <Slider x:Name="UISlider" Margin="2" Padding="2" Maximum="10" Minimum="0.5" Orientation="Horizontal" Width="200" Value="1"/>
                 <DockPanel Width="150">
-                    <Button x:Name="SaveButton" Content="Gem" Width="50" Padding="2" Margin="2" Command="{Binding FlushToDatabase}" HorizontalAlignment="Right"/>
+                    <Button x:Name="SaveButton" Content="Gem" Width="50" Padding="2" Margin="2" Command="{Binding FlushToDatabase}" HorizontalAlignment="Right">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=UnplannedTaskListBox, Path=Items.Count, Converter={ StaticResource GreaterThanZero}}" Value="true">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=UnplannedTaskListBox, Path=Items.Count, Converter={ StaticResource GreaterThanZero}}" Value="false">
+                                        <Setter Property="IsEnabled" Value="True"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
                 </DockPanel>
             </StackPanel>
         </Border>

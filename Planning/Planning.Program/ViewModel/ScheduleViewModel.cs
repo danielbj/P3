@@ -340,7 +340,8 @@ namespace Planning.ViewModel
         {
             _databaseControl.EraseDatabaseContent();
 
-            foreach (Group g in _groupAdmin.GetAllGroups()) {
+            List<Group> tempGroupList = _groupAdmin.GetAllGroups();
+            foreach (Group g in tempGroupList) {
                 _databaseControl.AddGroup(g);
                 //Store Daily Schedules 
                 //foreach (KeyValuePair<string, GroupSchedule> KVgs in g.TemplateSchedules) { 
@@ -355,15 +356,23 @@ namespace Planning.ViewModel
             //    _databaseControl.AddEmployeeSchedule(es);
             //}
 
-            //foreach (TaskItem ti in _scheduleAdmin.GetTaskClipBoard()) {
-            //    _databaseControl.AddTaskItem(ti);
+            //List<TaskItem> tempTaskItems = _scheduleAdmin.GetTaskClipBoard();
+            //foreach (TaskItem ti in tempTaskItems)
+            //{
+            //    Citizen thisCitizen = ti.TaskDescription.Citizen;
+            //    if (thisCitizen.Tasks.All(t => t.TaskItems.All(a => a.State == TaskItem.Status.Unplanned)))
+            //    {
+            //        _databaseControl.AddTaskItem(ti);
+            //    }
             //}
 
-            foreach (Employee em in _groupAdmin.GetEmployeeClipBoard()) {
+            List<Employee> tempEmployeelist = _groupAdmin.GetEmployeeClipBoard();
+            foreach (Employee em in tempEmployeelist) {
                 _databaseControl.AddEmployee(em);
             }
 
-            foreach (RouteItem ri in RouteCalculator.GetAllRouteItems()) {
+            List<RouteItem> tempRoutelist = RouteCalculator.GetAllRouteItems();
+            foreach (RouteItem ri in tempRoutelist) {
                 _databaseControl.AddRouteItem(ri);
             }
 
