@@ -78,7 +78,7 @@ namespace Planning.ViewModel
                 citizen.Tasks.ForEach(td => tdList.Add(td));
             }
 
-            foreach (TaskDescription td in tdList) {
+            foreach (TaskDescription td in tdList.Take(5).ToList()) {
                 change = new TaskDurationChange(td, TimeSpan.FromMinutes(60), "Ændredede visiteret varighed");
                 _messageAdmin.AddMessage(change, "Hej planlæggere, her er en ændring til varighed. God jul!");
                 td.AddChange(change);

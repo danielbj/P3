@@ -1,0 +1,738 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Planning.Program.App" Collapsed="true">
+    <Position X="30" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.Program.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="38.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Planning.View.GreaterThanZeroConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\GreaterThanZeroConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Planning.View.MinutesToHeightConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="28.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\MinutesToHeightConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Planning.View.StringToColorConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="33.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\StringToColorConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Planning.View.CitizenView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="38.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\CitizenView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Planning.View.ColorSelectionWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\ColorSelectionWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Planning.View.EmployeeDeleteWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="37" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\EmployeeDeleteWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Planning.View.EmployeeSelectionWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\EmployeeSelectionWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Planning.View.GroupDeleteWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="38.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\GroupDeleteWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Planning.View.GroupView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="28.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\GroupView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Planning.View.Mailbox" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="37" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Mailbox.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Planning.View.NewEmployeeWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="30" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\NewEmployeeWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Planning.View.NewGroupCreationWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="31.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\NewGroupCreationWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Planning.View.ScheduleView" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="28.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAIAAAAAAAAAgAAAAAAAAEAAAAAAAEAAAACAAAACgA=</HashCode>
+      <FileName>View\ScheduleView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Planning.View.TemplateSelectionWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="28.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\TemplateSelectionWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Planning.Model.Address" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="28.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAQEgAAIAAAAAAAAAIAAAAAAAEAAAAA=</HashCode>
+      <FileName>Model\Address.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Planning.Model.Change&lt;T, U&gt;" Collapsed="true">
+    <Position X="5.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAABAgAAAEACAAEACAAAAAAAAAAAAEAABAAAA=</HashCode>
+      <FileName>Model\Change.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Planning.Model.Citizen" Collapsed="true">
+    <Position X="33.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAFHAAAAAAAAAEgAAAAACAAAQAAIACAAAIABAAAAg=</HashCode>
+      <FileName>Model\Citizen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.Model.CitizenChange&lt;T&gt;" Collapsed="true">
+    <Position X="8.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\CitizenChange.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.Model.CitizenAddTaskChange" Collapsed="true">
+    <Position X="7.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\CitizenChange.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.Model.CitizenAddAddressChange" Collapsed="true">
+    <Position X="9.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\CitizenChange.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.Model.CitizenContainer" Collapsed="true">
+    <Position X="37" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAABAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\CitizenContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.Model.DataBaseMockUp" Collapsed="true">
+    <Position X="31.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAABAAAAAAAAAAAAAAAQAKMAAAAAAA=</HashCode>
+      <FileName>Model\DataBaseMockUp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.Model.Employee" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="35.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAEAAAAAgARQMgAAAQAgAAQAAAIAAAAAAAAECABA=</HashCode>
+      <FileName>Model\Employee.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Planning.Model.EmployeeSchedule" Collapsed="true">
+    <Position X="38.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAEAiIIAAACAAAgAAAAAABA=</HashCode>
+      <FileName>Model\EmployeeSchedule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.Model.Group" Collapsed="true">
+    <Position X="31.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEQEAAAAgAAEwACAIAQACAAAQIAAAABAAAAAAgA=</HashCode>
+      <FileName>Model\Group.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.Model.GroupContainer" Collapsed="true">
+    <Position X="35.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAgAAAEAAAAAABAAAA=</HashCode>
+      <FileName>Model\GroupContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.Model.GroupSchedule" Collapsed="true">
+    <Position X="26.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAIACAAAAAAAEAAAIAAQAEAACAAADAAAAAAAAAAA=</HashCode>
+      <FileName>Model\GroupSchedule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.Model.RouteItem" Collapsed="true">
+    <Position X="35.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACBAAUgAAAAgAAAAAAAIAAAAgAQAAAAAA=</HashCode>
+      <FileName>Model\RouteItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.Model.TaskChange" Collapsed="true">
+    <Position X="37" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Model\TaskChange.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.Model.TaskDescription" Collapsed="true">
+    <Position X="38.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IBEAAAAABAAiAAAEAAAAAAAAAIAAgAAQAAAEAUAIAiA=</HashCode>
+      <FileName>Model\TaskDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.Model.TaskDescriptionChange&lt;T&gt;" Collapsed="true">
+    <Position X="3" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\TaskDescriptionChange.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Planning.Model.TaskDurationChange" Collapsed="true">
+    <Position X="0.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\TaskDescriptionChange.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.Model.TaskDescriptionstringChange" Collapsed="true">
+    <Position X="3" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\TaskDescriptionChange.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.Model.TaskFrequencyChange" Collapsed="true">
+    <Position X="5.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\TaskDescriptionChange.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.Model.TaskItem" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAoAAAIAAAEIEAAAAAAgAIAAAAAAAgAhAAAABA=</HashCode>
+      <FileName>Model\TaskItem.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Planning.Model.TimePeriod" Collapsed="true">
+    <Position X="30" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAIAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\TimePeriod.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.Address" Collapsed="true">
+    <Position X="26.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAIAAAAAAAAIAAAAAAIgggAAAAAAAAAAAAQCAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.BirdseyeMetadata" Collapsed="true">
+    <Position X="3.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.BoundingBox" Collapsed="true">
+    <Position X="31.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAgAQAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.Detail" Collapsed="true">
+    <Position X="33.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAABgAAAAIIAAAAAAAQIAAIAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.Generalization" Collapsed="true">
+    <Position X="28.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.Hint" Collapsed="true">
+    <Position X="30" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.ImageryMetadata" Collapsed="true">
+    <Position X="4.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAwAAEAAAABAAAAgAIAAAABAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.Instruction" Collapsed="true">
+    <Position X="31.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.ItineraryItem" Collapsed="true">
+    <Position X="33.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAQABABoAAQAAAEABMAAIAIAAAgIAAACEAAAQA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.Line" Collapsed="true">
+    <Position X="35.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.Location" Collapsed="true">
+    <Position X="17" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAoAAQAQIACAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.QueryParseValue" Collapsed="true">
+    <Position X="37" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAQAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.PinInfo" Collapsed="true">
+    <Position X="33.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAEAAAQAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.Pixel" Collapsed="true">
+    <Position X="35.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.Point" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAIAAAAAAAAQEAAAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.Resource" Collapsed="true">
+    <Position X="9" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.ResourceSet" Collapsed="true">
+    <Position X="28.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.Response" Collapsed="true">
+    <Position X="30" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABCAAgABBAAAAAEAAAAAAAAAAAAAAAIAIAAAAAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.RoadShield" Collapsed="true">
+    <Position X="31.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.Route" Collapsed="true">
+    <Position X="12.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAACAAAAAAAAgIAAAAAAAAgAAAAAAAAAAAAEAAAAAQA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.RouteLeg" Collapsed="true">
+    <Position X="37" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAQIAAAAAgAAAAAAIEAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.RoutePath" Collapsed="true">
+    <Position X="38.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.Shape" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.Shield" Collapsed="true">
+    <Position X="31.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.StaticMapMetadata" Collapsed="true">
+    <Position X="5.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAEAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.TrafficIncident" Collapsed="true">
+    <Position X="1.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAQCAggAACAAAAAAICAACAAAAAAQCABAQCAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.TransitLine" Collapsed="true">
+    <Position X="31.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAIAAAAAAAAQAAAIAAAAAEQIAAAAAAAAAAEAAQA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.Warning" Collapsed="true">
+    <Position X="35.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.CompressedPointList" Collapsed="true">
+    <Position X="8" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.ElevationData" Collapsed="true">
+    <Position X="10.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BingMapsRESTService.Common.JSON.SeaLevelData" Collapsed="true">
+    <Position X="14.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\JSONDataContracts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.Program.Properties.Resources" Collapsed="true">
+    <Position X="26.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.Program.Properties.Settings" Collapsed="true">
+    <Position X="30" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.CitizenAdmin" Collapsed="true">
+    <Position X="35.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAQAAAAAQAAAEAAAACE=</HashCode>
+      <FileName>ViewModel\CitizenAdmin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.CitizenOverviewViewModel" Collapsed="true">
+    <Position X="1.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAARAAAAAAAAAg=</HashCode>
+      <FileName>ViewModel\CitizenOverviewViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.ColorSelectionWindowViewModel" Collapsed="true">
+    <Position X="8.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAIAAAAAAAAAAgAAAAAAAAIQAAAgAAAAAA=</HashCode>
+      <FileName>ViewModel\ColorSelectionWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.DatabaseContext" Collapsed="true">
+    <Position X="28.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAkACAAEAAAIAAAAAAAAAAAAAAAAAAAEAAAACAAIAAg=</HashCode>
+      <FileName>ViewModel\DatabaseContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.DatabaseControl" Collapsed="true">
+    <Position X="30" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAcAggABAAAAEEAAAAAAAgAAgBgAIAQJAIACAjAQ=</HashCode>
+      <FileName>ViewModel\DatabaseControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.EmployeeCreationViewModel" Collapsed="true">
+    <Position X="12.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAExAEBBYgAAACCYAAEAQAAAIAAgABAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\EmployeeCreationViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.EmployeeDeleteViewModel" Collapsed="true">
+    <Position X="15" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>SAAAAABIQggQAAAQAAAAAIAAAAAAAJAAAAAAAAAgAEA=</HashCode>
+      <FileName>ViewModel\EmployeeDeleteViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.EmployeeOverviewViewModel" Collapsed="true">
+    <Position X="17.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAQAEIAACAAABAAAAAAACAAYACAoIAAAAAAAAEAAAA=</HashCode>
+      <FileName>ViewModel\EmployeeOverviewViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.EmployeeSelectionViewModel" Collapsed="true">
+    <Position X="19.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>SAAAAQAAQgAAAAAAAAAABAAACAAAAIAAAAAAQAAgAAA=</HashCode>
+      <FileName>ViewModel\EmployeeSelectionViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.GroupAdmin" Collapsed="true">
+    <Position X="33.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAIEEAAAAAAAwAAAEAAAAgBEAAQACEAAAAABE=</HashCode>
+      <FileName>ViewModel\GroupAdmin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.GroupCreationViewModel" Collapsed="true">
+    <Position X="37" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAIGBAQgAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>ViewModel\GroupCreationViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.GroupDeleteViewModel" Collapsed="true">
+    <Position X="24" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAABAQggQAAAQAAAAAIAAAAAAABAAAAAAAAAAAEA=</HashCode>
+      <FileName>ViewModel\GroupDeleteViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.GroupViewModel" Collapsed="true">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAIEJAAAIAAAAAAAAAAICAQAAAAIAAAABAABAAABA=</HashCode>
+      <FileName>ViewModel\GroupViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.MailboxViewModel" Collapsed="true">
+    <Position X="10.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAACAAEAAAAAAAAAAgEAAAAQAAigE=</HashCode>
+      <FileName>ViewModel\MailboxViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.Message" Collapsed="true">
+    <Position X="1.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgBAAEAEAAAAEAAAAAAAAAABAAAIAAAAAAA=</HashCode>
+      <FileName>ViewModel\Message.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.TaskDescriptionMessage" Collapsed="true">
+    <Position X="0.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\Message.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.CitizenMessage" Collapsed="true">
+    <Position X="2.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\Message.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.MessageAdmin" Collapsed="true">
+    <Position X="26.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>ViewModel\MessageAdmin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.RelayCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="38.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAACAAQAAEAAAAAACAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>ViewModel\RelayCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Planning.ViewModel.RouteCalculator" Collapsed="true">
+    <Position X="33.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAiACACQAEACBAQEABAABgAAAAAEAQBAQEAAAAAAAAQ=</HashCode>
+      <FileName>ViewModel\RouteCalculator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.ScheduleAdmin" Collapsed="true">
+    <Position X="26.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>4AgAAAAQBAABAgwAAABAQACEMAAAAABAAAAIBAAIQAE=</HashCode>
+      <FileName>ViewModel\ScheduleAdmin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.ScheduleViewModel" Collapsed="true">
+    <Position X="21.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABIkGhAFWAYAkIQAAQAUAAACAEAhBEiQAABAACAQAQ=</HashCode>
+      <FileName>ViewModel\ScheduleViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.TaskAdmin" Collapsed="true">
+    <Position X="35.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABACAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\TaskAdmin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.TemplateSelectionViewModel" Collapsed="true">
+    <Position X="6" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAQAAUkAAAAgAIAAAAAAABAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\TemplateSelectionViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planning.ViewModel.ViewModelBase" Collapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Planning.ViewModel.Visitator" Collapsed="true">
+    <Position X="33.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAQAQBAAAAAAAAIAAAIAAAAiBAAAAAAAMDAEIAAAAA=</HashCode>
+      <FileName>ViewModel\Visitator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Planning.Model.IChange" Collapsed="true">
+    <Position X="6.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAABAgAAAAAAAAAAAAAAAAAAAAAAAEAABAAAA=</HashCode>
+      <FileName>Model\IChange.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Planning.Model.ITaskdescritpionChange" Collapsed="true">
+    <Position X="5.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\IChange.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Planning.Model.ICitizenChange" Collapsed="true">
+    <Position X="7.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\IChange.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Planning.Model.IGroup" Collapsed="true">
+    <Position X="26.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAACAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\IGroup.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Delegate Name="Planning.Model.CitizenContainerCitizenChangeHandler" Collapsed="true">
+    <Position X="26.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\CitizenContainer.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

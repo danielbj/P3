@@ -298,7 +298,7 @@ namespace Planning.ViewModel
                                                             .Include("DailySchedules.EmployeeSchedules.TaskItems.TaskDescription.Citizen._addresses")
                                     .Include(g => g.Employees)
                                     .Include(g=> g.GroupAddress)
-                                    .Include(g => g.TaskDescriptions)
+                                    //.Include(g => g.TaskDescriptions)
                                     .Include(g => g.TemplateSchedules
                                                     .Select(gs => gs.EmployeeSchedules
                                                         .Select(es => es.TaskItems

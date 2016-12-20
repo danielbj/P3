@@ -14,7 +14,7 @@ namespace Planning.Model
         public List<GroupSchedule> TemplateSchedules { get; set; }
         public Address GroupAddress{ get; set; } 
         public string Name{ get; set; }        
-        public List<TaskDescription> TaskDescriptions { get; private set; }
+        //public List<TaskDescription> TaskDescriptions { get; private set; }
 
         [Obsolete("Only needed for serialization and materialization in Entity Framework", true)]
         public Group() {    }
@@ -26,7 +26,7 @@ namespace Planning.Model
             TemplateSchedules = new List<GroupSchedule>();
             Name = name;
             GroupAddress = new Address(address, DateTime.Today);
-            TaskDescriptions = new List<TaskDescription>();
+            //TaskDescriptions = new List<TaskDescription>();
 
         }
 

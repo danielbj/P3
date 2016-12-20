@@ -86,6 +86,7 @@ namespace Planning.Model
             clone.TimePeriod.StartTime = TimeSpan.FromSeconds(this.TimePeriod.StartTime.TotalSeconds);
             clone.Route = this.Route;
             clone.Color = this.Color;
+            clone.State = this.State;
             clone.Locked = this.Locked;
             this.TaskDescription.TaskItems.Add(clone); // New
             return clone;

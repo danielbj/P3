@@ -355,9 +355,9 @@ namespace Planning.ViewModel
             //    _databaseControl.AddEmployeeSchedule(es);
             //}
 
-            foreach (TaskItem ti in _scheduleAdmin.GetTaskClipBoard()) {
-                _databaseControl.AddTaskItem(ti);
-            }
+            //foreach (TaskItem ti in _scheduleAdmin.GetTaskClipBoard()) {
+            //    _databaseControl.AddTaskItem(ti);
+            //}
 
             foreach (Employee em in _groupAdmin.GetEmployeeClipBoard()) {
                 _databaseControl.AddEmployee(em);
