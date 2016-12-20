@@ -16,8 +16,6 @@ namespace Planning.ViewModel
     public class GroupViewModel : ViewModelBase
     {
 
-        public delegate void GroupsUpdatedHandler();
-        public event GroupsUpdatedHandler GroupChange;
         private Employee _selectedEmployee;
         public Employee SelectedEmployee
         {
@@ -33,7 +31,11 @@ namespace Planning.ViewModel
         }
 
         #region Properties
-        public List<Group> Groups { get; set; }
+        
+        private List<Group> _groups;
+        public List<Group> Groups {
+            get { return _groups.OrderBy(g => g.Name).ToList(); }
+        }
         #endregion
 
         #region Fields
@@ -51,7 +53,7 @@ namespace Planning.ViewModel
         public GroupViewModel()
         {
             _groupAdmin = GroupAdmin.Instance;
-            Groups = _groupAdmin.GetAllGroups();
+            _groups = _groupAdmin.GetAllGroups();
             
 
             NewEmployeeCommand = new RelayCommand(p => CreateNewEmployee());
@@ -67,6 +69,8 @@ namespace Planning.ViewModel
             var viewModel = new EmployeeCreationViewModel(window);
             window.DataContext = viewModel;
             window.ShowDialog();
+
+            OnPropertyChanged(nameof(Groups));
         }
         private void DeleteEmployee()
         {
@@ -75,7 +79,7 @@ namespace Planning.ViewModel
             window.DataContext = viewModel;
             window.ShowDialog();
 
-            GroupChange?.Invoke();
+            OnPropertyChanged(nameof(Groups));
         }
 
         private void CreateNewGroup()
@@ -84,8 +88,8 @@ namespace Planning.ViewModel
             var viewModel = new GroupCreationViewModel(window);
             window.DataContext = viewModel;
             window.ShowDialog();
-            
-            GroupChange?.Invoke();
+
+            OnPropertyChanged(nameof(Groups));
         }
 
 
@@ -96,7 +100,7 @@ namespace Planning.ViewModel
             window.DataContext = viewModel;
             window.ShowDialog();
 
-            GroupChange?.Invoke();
+            OnPropertyChanged(nameof(Groups));
         }
     }
 }

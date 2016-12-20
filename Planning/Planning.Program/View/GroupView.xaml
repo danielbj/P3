@@ -7,13 +7,6 @@
              xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600">
-    <UserControl.Resources>
-        <CollectionViewSource x:Key="cvsGroupAlphabetic" Source="{Binding Groups}">
-            <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="Name" Direction="Ascending"/>
-            </CollectionViewSource.SortDescriptions>
-        </CollectionViewSource>
-    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -26,7 +19,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <ScrollViewer Grid.Row="1" Margin="3">
-                <ItemsControl x:Name="EmployeePanel" ItemsSource="{Binding Source={StaticResource cvsGroupAlphabetic}}">
+                <ItemsControl x:Name="EmployeePanel" ItemsSource="{Binding Groups}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Height="auto" Width="auto" HorizontalAlignment="Stretch"/>
@@ -78,19 +71,19 @@
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="NewGroupButton" Margin="3" Width="110" Command="{Binding NewGroupCommand}">Opret Gruppe</Button>
                     <!--<Button x:Name="EditGroupButton" Margin="3" Width="120">  Rediger Gruppe  </Button>-->
-                    <Button x:Name="DeleteGroupButton" Margin="3" Width="95" Command="{Binding DeleteGroupCommand}">  Slet Gruppe  </Button>
+                    <Button x:Name="DeleteGroupButton" Margin="3" Width="95" Command="{Binding DeleteGroupCommand}">Slet Gruppe</Button>
                 </StackPanel>
+            </StackPanel>
             <StackPanel Grid.Row="1" Margin="3">
                 <Label Content="Navn:"/>
                 <Label Name="NameDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedEmployee}"/>
-                
+
                 <Label Content="Telefon nummer:"/>
                 <Label Name="PhoneNumberDecriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedEmployee.PhoneNumber}"/>
-                
+
                 <Label Content="Noter"/>
                 <Label Name="GroupNameDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedEmployee.Notes}"/>
             </StackPanel>
-
         </Grid>
     </Grid>
 </UserControl>

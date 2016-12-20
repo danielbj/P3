@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Planning.View"
         mc:Ignorable="d"
-        Title="GroupDeleteWindow" Height="100" Width="300">
+        Title="GroupDeleteWindow" Height="100" Width="300" WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <ComboBox x:Name="GroupComboBox" Margin="3" Width ="160" ItemsSource="{Binding GroupList}"  SelectedItem="{Binding SelectedGroup}" SelectedIndex="0"></ComboBox>

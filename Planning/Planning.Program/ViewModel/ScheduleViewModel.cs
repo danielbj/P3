@@ -375,6 +375,8 @@ namespace Planning.ViewModel
             var window = new ColorSelectionWindow();
             var viewModel = new ColorSelectionWindowViewModel(window);
 
+            
+
             window.DataContext = viewModel;
             window.ShowDialog();
 
