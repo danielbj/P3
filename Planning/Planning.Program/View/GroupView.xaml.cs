@@ -21,17 +21,10 @@ namespace Planning.View
     /// </summary>
     public partial class GroupView : UserControl
     {
-        GroupViewModel VM;
         public GroupView()
         {
             InitializeComponent();
-            DataContext = VM = new GroupViewModel();
-            //VM.GroupChange += VM_GroupChangeHandler;   
+            DataContext = new GroupViewModel();
         }
-        
-        //private void VM_GroupChangeHandler()
-        //{           
-        //    EmployeePanel.Items.Refresh();
-        //}
     }
 }

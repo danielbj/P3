@@ -27,7 +27,7 @@ namespace Planning.Model
             Notes = notes;
             DateHired = dateHired;
             PhoneNumber = phoneNumber;
-            _workhours = new Dictionary<DateTime, TimePeriod>();           
+            _workhours = new Dictionary<DateTime, TimePeriod>();          
         }
 
         public Employee(string firstname, string lastname, DateTime dateHired, string phoneNumber)

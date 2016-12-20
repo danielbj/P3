@@ -90,13 +90,15 @@ namespace Planning.UnitTest.Model
             Assert.AreEqual("testPhoneNumber", newEmployee.PhoneNumber);
         }
 
-        [TestCase("testFirstname", "testLastname", "2016-12-21", "testNote", "testPhoneNumber")]
+        [TestCase("testFirstname", "testLastname", "2016-12-21", "testPhoneNumber")]
         [Category("Constructor")]
-        public void NewEmployee_EmployeeCreated_WorkHoursSetToDefeult(string firstname, string lastname, DateTime dateHired, string notes, string phoneNumber)
+        public void NewEmployee_EmployeeCreated_WorkHoursSetToDefeult(string firstname, string lastname, DateTime dateHired, string phoneNumber)
         {
-            Employee newEmployee = new Employee(firstname, lastname, dateHired, notes, phoneNumber, new TimeSpan(6, 0, 0), new TimeSpan(12, 0, 0));
+            Employee newEmployee = new Employee(firstname, lastname, dateHired, phoneNumber);
+            newEmployee.SetWorkhours(DateTime.Today, new TimePeriod(TimeSpan.FromHours(6)));
 
-            TimeSpan actual = newEmployee.GetWorkHours(dateHired).Duration;
+
+            TimeSpan actual = newEmployee.GetWorkHours(DateTime.Today).Duration;
             TimeSpan expected = new TimeSpan(6, 0, 0);
 
             Assert.AreEqual(expected, actual);
