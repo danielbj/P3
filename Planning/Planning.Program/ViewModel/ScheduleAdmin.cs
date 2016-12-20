@@ -15,9 +15,8 @@ namespace Planning.ViewModel
         
         public ScheduleAdmin()
         {
-            //_unplannedTaskClipBoard = DatabaseControl.ReadClipboardTaskItems();
-            _unplannedTaskClipBoard = DataBaseMockUp.LoadTaskItems();
-            //_cancelledTaskClipBoard = DatabaseControl.ReadCancelledClipboardTaskItems();
+            _unplannedTaskClipBoard = new List<TaskItem>();
+            
             _cancelledTaskClipBoard = new List<TaskItem>();
         }
 
