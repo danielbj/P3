@@ -13,11 +13,24 @@ using System.ComponentModel;
 
 namespace Planning.ViewModel
 {
-    class GroupViewModel : ViewModelBase
+    public class GroupViewModel : ViewModelBase
     {
 
         public delegate void GroupsUpdatedHandler();
         public event GroupsUpdatedHandler GroupChange;
+        private Employee _selectedEmployee;
+        public Employee SelectedEmployee
+        {
+            get
+            {
+                return _selectedEmployee;
+            }
+            set
+            {
+                _selectedEmployee = value;
+                OnPropertyChanged(nameof(SelectedEmployee));
+            }
+        }
 
         #region Properties
         public List<Group> Groups { get; set; }

@@ -4,8 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Planning.View"
+             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="600">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="cvsAlphabetic" Source="{Binding Citizens}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="FirstName" Direction="Ascending"/>
+                <scm:SortDescription PropertyName="LastName" Direction="Ascending"/>
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -18,7 +27,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <ScrollViewer Grid.Row="1" Margin="3">
-                <ItemsControl x:Name="CitizenPanel" ItemsSource="{Binding Citizens}">
+                <ItemsControl x:Name="CitizenPanel" ItemsSource="{Binding Source={StaticResource cvsAlphabetic}}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Height="auto" Width="auto" HorizontalAlignment="Stretch"/>
@@ -27,7 +36,11 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Expander Margin="3" Header="{Binding}">
-                                <ListBox x:Name="TaskList" ItemsSource="{Binding Path=Tasks}" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SelectedTask, Mode=TwoWay}">
+                                <ListBox x:Name="TaskList" 
+                                         ItemsSource="{Binding Path=Tasks}" 
+                                         SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, 
+                                                                Path=DataContext.SelectedTask, 
+                                                                Mode=TwoWay}">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding}"/>
@@ -51,15 +64,15 @@
             <ScrollViewer Grid.Row="1" Margin="3">
                 <StackPanel>
                     <Label Content="Service:"/>
-                    <Label Name="ServiceDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedTask.Assignment}"/>
+                    <Label Name="ServiceDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedTask.AssignmentType}"/>
                     <Label Content="Borger:"/>
                     <Label Name="NameDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedTask.Citizen}"/>
                     <Label Content="Addresse"/>
-                    <Label Name="AddressDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedTask.Address}"/>
+                    <Label Name="AddressDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedTask.Citizen.Address}"/>
                     <Label Content="Tid"/>
                     <Label Name="TimeDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedTask.Duration}"/>
                     <Label Content="Hyppighed"/>
-                    <Label Name="FrequencyDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedTask.Description}"/>
+                    <Label Name="FrequencyDescriptionLabel" Margin="20,0,0,0" Content="{Binding Path=SelectedTask.Frequency}"/>
                     <Label Content="Beskrivelse"/>
                     <TextBlock Name="DescriptionLabel" Margin="20,0,0,0"  TextWrapping="Wrap" Text="{Binding Path=SelectedTask.Description}"/>
                     <Label Content="Noter"/>
