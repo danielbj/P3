@@ -17,6 +17,8 @@ namespace Planning.ViewModel
 
         public ObservableCollection<Group> Groups { get; set; }
 
+        public List<Employee> Employees { get; set; }
+
         private string _firstname;
         public string Firstname
         {
@@ -111,9 +113,17 @@ namespace Planning.ViewModel
             }
         }
 
+        private Employee _selectedEmployee;
+
+        public Employee SelectedEmployee
+        {
+            get { return _selectedEmployee; }
+            set { _selectedEmployee = value; }
+        }
+
+
         public RelayCommand CreateButtonClicked { get; }
         public RelayCommand CancelCommand { get; }
-
 
         private NewEmployeeWindow _window;
 
@@ -121,11 +131,14 @@ namespace Planning.ViewModel
         {
             _groupAdmin = GroupAdmin.Instance;
 
+            Employees = _groupAdmin.GetEmployeeClipBoard();
+
             Groups = new ObservableCollection<Group>(_groupAdmin.GetAllGroups());
 
             SelectedGroup = Groups[0];
 
             CreateButtonClicked = new RelayCommand(p => CreateEmployee(), p => true);
+
             CancelCommand = new RelayCommand(p => Cancel(), p => true);
 
             _window = window;
@@ -133,7 +146,11 @@ namespace Planning.ViewModel
 
         public void CreateEmployee()
         {
-            _groupAdmin.NewEmployee(Firstname, Lastname, Notes, PhoneNumber, SelectedGroup, StartTime, EndTime);
+            if (SelectedEmployee == null)
+                _groupAdmin.NewEmployee(Firstname, Lastname, Notes, PhoneNumber, SelectedGroup, StartTime, EndTime);
+            else
+                _groupAdmin.AssignEmployeeToGroup(SelectedGroup, SelectedEmployee);
+
             _window.Close();
         }
         public void Cancel()
