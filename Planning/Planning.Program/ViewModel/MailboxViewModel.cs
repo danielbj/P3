@@ -48,11 +48,13 @@ namespace Planning.ViewModel
         #region Fields
         MessageAdmin _messageAdmin;
         GroupAdmin _groupAdmin;
+        CitizenAdmin _citizenAdmin;
         #endregion
 
         public MailboxViewModel() {
             _messageAdmin = new MessageAdmin();
             _groupAdmin = GroupAdmin.Instance;
+            _citizenAdmin = CitizenAdmin.Instance;
             MakeMessagesMockup();
 
             Messages = _messageAdmin.GetAllMessages();
@@ -63,12 +65,17 @@ namespace Planning.ViewModel
 
         public void MakeMessagesMockup() {
             List<TaskDescription> tdList = new List<TaskDescription>();
-            List<EmployeeSchedule> empSchList;
+            //List<EmployeeSchedule> empSchList;
             ITaskdescritpionChange change;
-            empSchList = _groupAdmin.GetAllGroups().FirstOrDefault().TemplateSchedules.FirstOrDefault().EmployeeSchedules.Take(4).ToList();
+            //empSchList = _groupAdmin.GetAllGroups().FirstOrDefault().TemplateSchedules.FirstOrDefault().EmployeeSchedules.Take(4).ToList();
 
-            foreach (EmployeeSchedule empSch in empSchList) {
-                empSch.TaskItems.Take(2).ToList().ForEach(t => tdList.Add(t.TaskDescription));
+            //foreach (EmployeeSchedule empSch in empSchList) {
+            //    empSch.TaskItems.Take(2).ToList().ForEach(t => tdList.Add(t.TaskDescription));
+            //}
+
+            foreach (var citizen in _citizenAdmin.GetCitizens())
+            {
+                citizen.Tasks.ForEach(td => tdList.Add(td));
             }
 
             foreach (TaskDescription td in tdList) {

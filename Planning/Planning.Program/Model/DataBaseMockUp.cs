@@ -10,6 +10,7 @@ namespace Planning.Model
     public class DataBaseMockUp
     {
         static List<Citizen> Citizens = new List<Citizen>();
+        static List<TaskItem> Tasks = new List<TaskItem>();
 
         public static CitizenContainer LoadCitizens()
         {
@@ -62,7 +63,7 @@ namespace Planning.Model
             List<string> Opgaver = new List<string> { "Toilet", "Rengøring", "Medicin", "Stå op", "Mad", "Bad", "Vaskes" };
             List<int> Tider = new List<int> { 30, 10, 20, 5, 20, 10, 20, 10, 40, 30, 10, 20 };
             Random rnd = new Random();
-            List<TaskItem> Tasks = new List<TaskItem>();
+            
 
             //Addresses
             #region 
@@ -253,40 +254,66 @@ namespace Planning.Model
             {
                 int opgave = rnd.Next(Opgaver.Count);
                 int tid = rnd.Next(Tider.Count);
+                int frekvens = rnd.Next(1, 4);
 
-                TaskDescription tempTaskDesc = new TaskDescription(Tider[tid], "opgave", citizen, new TimePeriod(TimeSpan.FromHours(8)), DateTime.Today, Opgaver[opgave], tid);
+                TaskDescription tempTaskDesc = new TaskDescription(Tider[tid], "opgave", citizen, new TimePeriod(TimeSpan.FromHours(8)), DateTime.Today, Opgaver[opgave], frekvens);
 
                 tempTaskDesc.TaskItems.ForEach(t => Tasks.Add(t));
                 citizen.Tasks.Add(tempTaskDesc);
             }
 
-            int ran = 0;
-            foreach (Group group in Groups)
-            {
-                foreach (GroupSchedule template in group.TemplateSchedules)
-                {
-                    foreach (EmployeeSchedule schedule in template.EmployeeSchedules)
-                    {
-                        for (int i = 0; i < 5; i++)
-                        {
-                            ran = rnd.Next(Tasks.Count);
-                            schedule.TaskItems.Add(Tasks[ran].Clone());
+            //int ran = 0;
+            //foreach (Group group in Groups)
+            //{
+            //    foreach (GroupSchedule template in group.TemplateSchedules)
+            //    {
+            //        foreach (EmployeeSchedule schedule in template.EmployeeSchedules)
+            //        {
+            //            for (int i = 0; i < 5; i++)
+            //            {
+            //                ran = rnd.Next(Tasks.Count);
+            //                schedule.TaskItems.Add(Tasks[ran].Clone());
 
-                            //if (i > 0)
-                            //{
-                            //    schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.GetRouteItem(schedule.TaskItems[i - 1].TaskDescription.Citizen.GetAddress(DateTime.Today), schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today)).Duration;
-                            //}
+            //                //if (i > 0)
+            //                //{
+            //                //    schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.GetRouteItem(schedule.TaskItems[i - 1].TaskDescription.Citizen.GetAddress(DateTime.Today), schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today)).Duration;
+            //                //}
 
-                            //else if (i == 0)
-                            //{
-                            //    schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.GetRouteItem(new Address("Kærvej 3, 7752, Snedsted, Denmark",DateTime.Now), schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today)).Duration;
-                            //}
-                        }
-                    }
-                }
-            }
+            //                //else if (i == 0)
+            //                //{
+            //                //    schedule.TaskItems[i].Route.TimePeriod.Duration = RouteCalculator.GetRouteItem(new Address("Kærvej 3, 7752, Snedsted, Denmark", DateTime.Now), schedule.TaskItems[i].TaskDescription.Citizen.GetAddress(DateTime.Today)).Duration;
+            //                //}
+            //            }
+            //        }
+            //    }
+            //}
             
             return container;
+        }
+
+        public static List<TaskItem> LoadTaskItems()
+        {
+            List<TaskItem> tiList = new List<TaskItem>();
+            foreach (var c in Citizens)
+            {
+                c.Tasks.ForEach(t => t.TaskItems.ForEach(ti => tiList.Add(ti)));
+            }
+            for (int i = 0; i < tiList.Count; i++)
+            {
+                if (i == 0)
+                {
+                    tiList[i].Route.TimePeriod.Duration = RouteCalculator.GetRouteItem(new Address("Kærvej 3, 7752, Snedsted, Denmark", DateTime.Now), tiList[i].TaskDescription.Citizen.GetAddress(DateTime.Today)).Duration;
+                }
+
+                else
+                {
+                    tiList[i].Route.TimePeriod.Duration = RouteCalculator.GetRouteItem(tiList[i - 1].TaskDescription.Citizen.GetAddress(DateTime.Today), tiList[i].TaskDescription.Citizen.GetAddress(DateTime.Today)).Duration;
+                }
+
+            }
+
+            return tiList;
+
         }
 
         public static List<Message> LoadMessages() {

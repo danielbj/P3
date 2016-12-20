@@ -161,7 +161,7 @@
                                         <Button Grid.Column="0" 
                                                 VerticalAlignment="Stretch" 
                                                 HorizontalAlignment="Stretch" 
-                                                Content="{Binding}" Visibility="{Binding EmployeeButtonVisibility}"
+                                                Content="{Binding}"
                                                 Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ChangeEmployeeCommand}"
                                                 CommandParameter="{Binding}" 
                                                 />

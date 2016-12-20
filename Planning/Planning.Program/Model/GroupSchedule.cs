@@ -61,6 +61,7 @@ namespace Planning.Model
             {
                 clone.EmployeeSchedules.Add(item.Clone());
             }
+            clone.Name = null;
 
             return clone;       
         }

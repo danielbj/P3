@@ -45,8 +45,8 @@ namespace Planning.ViewModel
         #endregion
 
         static RouteCalculator() {
-            //DatabaseControl databaseControl = new DatabaseControl();
-            //RouteItems = databaseControl.ReadRouteItems();
+            DatabaseControl databaseControl = new DatabaseControl();
+            RouteItems = databaseControl.ReadRouteItems();
         }
         //public static TimeSpan CalculateRouteDuration(string address1, string address2)
         //{

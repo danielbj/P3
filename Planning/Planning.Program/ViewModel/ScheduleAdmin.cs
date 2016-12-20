@@ -16,7 +16,7 @@ namespace Planning.ViewModel
         public ScheduleAdmin()
         {
             //_unplannedTaskClipBoard = DatabaseControl.ReadClipboardTaskItems();
-            _unplannedTaskClipBoard = new List<TaskItem>();
+            _unplannedTaskClipBoard = DataBaseMockUp.LoadTaskItems();
             //_cancelledTaskClipBoard = DatabaseControl.ReadCancelledClipboardTaskItems();
             _cancelledTaskClipBoard = new List<TaskItem>();
         }
@@ -278,33 +278,29 @@ namespace Planning.ViewModel
                 {
                     if (taskItemList[i] != taskItem)
                     {
-                        if (selectedDate.Date == DateTime.Today)
+                        if (i != 0)
                         {
-
-                            if (i != 0)
+                            if (selectedDate.Date > DateTime.Today || (selectedDate.Date == DateTime.Today && taskItemList[i - 1].TimePeriod.StartTime > DateTime.Now.TimeOfDay))
                             {
-                                if (taskItemList[i - 1].TimePeriod.StartTime > DateTime.Now.TimeOfDay)
-                                {
-                                    tempValue = CompareRoutes(taskItem, taskItemList[i - 1].TaskDescription.Citizen.GetAddress(selectedDate), taskItemList[i].TaskDescription.Citizen.GetAddress(selectedDate), selectedDate);
-                                }
-                                else
-                                    tempValue = double.MaxValue;
+                                tempValue = CompareRoutes(taskItem, taskItemList[i - 1].TaskDescription.Citizen.GetAddress(selectedDate), taskItemList[i].TaskDescription.Citizen.GetAddress(selectedDate), selectedDate);
                             }
                             else
+                                tempValue = double.MaxValue;
+                        }
+                        else
+                        {
+                            if (selectedDate.Date > DateTime.Today || (selectedDate.Date == DateTime.Today && taskItemList[i - 1].TimePeriod.StartTime > DateTime.Now.TimeOfDay))
                             {
-                                if (taskItemList[i].TimePeriod.StartTime > DateTime.Now.TimeOfDay)
-                                {
-                                    tempValue = CompareRoutes(taskItem, group.GroupAddress, taskItemList[i].TaskDescription.Citizen.GetAddress(selectedDate), selectedDate);
-                                }
-                                else
-                                    tempValue = double.MaxValue;
+                                tempValue = CompareRoutes(taskItem, group.GroupAddress, taskItemList[i].TaskDescription.Citizen.GetAddress(selectedDate), selectedDate);
                             }
+                            else
+                                tempValue = double.MaxValue;
+                        }
 
-                            if (tempValue < tempItem.Item1)
-                                tempItem = new Tuple<double, TaskItem>(tempValue, taskItemList[i]); 
+                        if (tempValue < tempItem.Item1)
+                            tempItem = new Tuple<double, TaskItem>(tempValue, taskItemList[i]); 
                         }
                     }
-                }
             }
 
             return tempItem.Item2;
