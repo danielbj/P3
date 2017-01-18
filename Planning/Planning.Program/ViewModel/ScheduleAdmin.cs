@@ -18,6 +18,11 @@ namespace Planning.ViewModel
             _unplannedTaskClipBoard = new List<TaskItem>();
             
             _cancelledTaskClipBoard = new List<TaskItem>();
+
+
+            //_unplannedTaskClipBoard = DatabaseControl.ReadClipboardTaskItems(); 
+            _unplannedTaskClipBoard = DataBaseMockUp.LoadTaskItems();
+            //_cancelledTaskClipBoard = DatabaseControl.ReadCancelledClipboardTaskItems();
         }
 
         //new
